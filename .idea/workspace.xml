@@ -82,6 +82,8 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -155,5 +157,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="thêm file border_radius&#10;color" />
     <option name="LAST_COMMIT_MESSAGE" value="thêm file border_radius&#10;color" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="553" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636378870883">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="553" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636378870883" />
   </component>
 </project>
