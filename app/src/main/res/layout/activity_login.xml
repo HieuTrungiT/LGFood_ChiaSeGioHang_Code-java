@@ -9,20 +9,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background=""
+
         android:layout_height="60dp"
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/back"
+            android:src="@drawable/ic_back_orage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="10dp"
+            android:background="@drawable/broder_radius_xanhduong_nhe"/>
+
 
         <TextView
             android:id="@+id/login_tv_btn_SignUp"
@@ -101,8 +104,8 @@
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:text="Đăng Nhâp"
+                        android:layout_marginRight="30dp"
+                        android:text="Đăng Nhập"
                         android:textColor="@color/black"
                         android:textSize="38sp"
                         tools:layout_editor_absoluteX="473dp"
@@ -175,32 +178,39 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="45dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="400dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
 
                 <LinearLayout
-                    android:layout_width="120dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/broder_radius_cam2_thuonghieu">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/broder_radius_cam3_thuonghieu">
 
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_gg"
+                        android:padding="10dp"
+                        android:background="@drawable/broder_radius_xanhduong_nhe"/>
 
                     <TextView
-                        android:layout_width="60dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_width="70dp"
+                        android:layout_marginTop="8dp"
                         android:text="Google"
                         android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="40dp"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="10dp"
                         android:textColor="@color/white"
                         android:layout_height="30dp">
 
@@ -208,20 +218,28 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="120dp"
-                    android:layout_marginTop="-50dp"
-                    android:layout_marginLeft="180dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/broder_radius_cam2_thuonghieu">
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/broder_radius_cam3_thuonghieu">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_phone"
+                        android:padding="10dp"
+                        android:background="@drawable/broder_radius_xanhduong_nhe"/>
 
 
                     <TextView
-                        android:layout_width="60dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_width="70dp"
+                        android:layout_marginTop="8dp"
                         android:text="Phone"
                         android:textStyle="bold"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="40dp"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="15dp"
                         android:textColor="@color/white"
                         android:layout_height="30dp">
 

@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Them_San_Pham_Vao_Kho_Hang_Activity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/themSuaXoaSanPham_img_btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_back_orage"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="10dp"
+            android:background="@drawable/broder_radius_xanhduong_nhe"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="Thêm Sản Phẩm Kho"
+            android:textColor="@color/lf_orange"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha="0.5"
+        android:background="@color/lf_orange" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="600dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout14"
+                            android:layout_width="match_parent"
+                            android:layout_height="115dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <FrameLayout
+                                    android:layout_width="90dp"
+                                    android:layout_height="90dp"
+                                    android:background="@drawable/broder_stroke_black">
+
+
+                                    <ImageView
+                                        android:id="@+id/themSuaXoaSanPham_img_showImgV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/broder_stroke_cam1"
+                                        android:padding="10dp"
+                                        android:src="@drawable/gai"
+                                         />
+
+
+                                </FrameLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="80dp"
+                                android:layout_gravity="center"
+                                android:background="@color/lf_orange" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/themSuaXoaSanPham_tv_btn_moThuMucAnh"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/broder_radius_cam_thuonghieu"
+                                    android:paddingLeft="20dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingRight="20dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="IMG"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Tên sản phẩm"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_tenSanPham"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                        <LinearLayout
+
+                            android:id="@+id/linearLayout17"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="80dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Giá Nhập"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_giaNhap"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linearLayout18"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="140dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Giá Bán"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_giaBan"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="200dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Giảm Giá"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_giamGia"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="260dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Số Lượng"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_soLuong"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="320dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="NSX"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_NSX"
+                                android:layout_width="180dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="-35dp"
+                                android:layout_marginLeft="310dp"
+                                android:src="@drawable/icon_note"
+                                >
+
+                            </ImageView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout22"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="380dp"
+                            android:layout_marginRight="50dp"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="2dp"
+                                android:layout_marginTop="12dp"
+                                android:text="Xuất Xứ"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/themSuaXoaSanPham_edt_xuatSu"
+                                android:layout_width="230dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="-25dp"
+                                android:layout_marginLeft="110dp"
+                                android:background="@drawable/broder_stroke_black"
+                                android:padding="5dp"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/linearLayout17"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="50dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginRight="50dp"-->
+<!--                            android:orientation="vertical"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/linearLayout16">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:padding="2dp"-->
+<!--                                android:text="Giá sản phẩm"-->
+<!--                                android:textSize="14sp" />-->
+
+<!--                            <EditText-->
+<!--                                android:id="@+id/themSuaXoaSanPham_edt_giaSanPham"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="35dp"-->
+<!--                                android:background="@drawable/broder_stroke_black"-->
+<!--                                android:padding="5dp"-->
+<!--                                android:textSize="14sp" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/linearLayout18"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="50dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginRight="50dp"-->
+<!--                            android:orientation="vertical"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/linearLayout17">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:padding="2dp"-->
+<!--                                android:text="Xuất xứ"-->
+<!--                                android:textSize="14sp" />-->
+
+<!--                            <EditText-->
+<!--                                android:id="@+id/themSuaXoaSanPham_edt_xuatXuSanPham"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="35dp"-->
+<!--                                android:background="@drawable/broder_stroke_black"-->
+<!--                                android:padding="5dp"-->
+<!--                                android:textSize="14sp" />-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/linearLayout19"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginLeft="50dp"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginRight="50dp"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintHorizontal_bias="0"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toBottomOf="@+id/linearLayout18">-->
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginRight="10dp"-->
+<!--                                android:layout_weight="2"-->
+<!--                                android:orientation="vertical"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintHorizontal_bias="0"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/linearLayout19">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:padding="2dp"-->
+<!--                                    android:text="Ngày nhập SP"-->
+<!--                                    android:textSize="14sp" />-->
+
+<!--                                <EditText-->
+<!--                                    android:id="@+id/themSuaXoaSanPham_edt_ngayNhapSanPham"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="35dp"-->
+<!--                                    android:background="@drawable/broder_stroke_black"-->
+<!--                                    android:hint="dd/mm/yyyyy"-->
+<!--                                    android:padding="5dp"-->
+<!--                                    android:textSize="14sp" />-->
+
+
+<!--                            </LinearLayout>-->
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginLeft="10dp"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:orientation="vertical"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintHorizontal_bias="0"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/linearLayout18">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:padding="2dp"-->
+<!--                                    android:text="Loại SP"-->
+<!--                                    android:textSize="14sp" />-->
+
+<!--                                <EditText-->
+<!--                                    android:id="@+id/themSuaXoaSanPham_edt_loaiSanPham"-->
+<!--                                    android:layout_width="match_parent"-->
+<!--                                    android:layout_height="35dp"-->
+<!--                                    android:background="@drawable/broder_stroke_black"-->
+<!--                                    android:padding="5dp"-->
+<!--                                    android:textSize="14sp" />-->
+
+<!--                            </LinearLayout>-->
+
+
+<!--                        </LinearLayout>-->
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </ScrollView>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="20dp"
+
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/themSuaXoaSanPham_llout_btn_themSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/broder_radius_cam_thuonghieu"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="12dp"
+                        android:text="Thêm Sản Phẩm"
+                        android:textColor="@color/white"
+
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>
