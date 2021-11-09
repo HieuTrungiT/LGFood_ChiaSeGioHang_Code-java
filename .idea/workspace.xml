@@ -27,19 +27,27 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="thêm file border_radius&#10;color">
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="cactrung">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Cactoan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_API_28.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_XL_API_26.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -140,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636364385195</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cactrung">
+      <created>1636379246912</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1636379246912</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,15 +168,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="thêm file border_radius&#10;color" />
-    <option name="LAST_COMMIT_MESSAGE" value="thêm file border_radius&#10;color" />
+    <MESSAGE value="cactrung" />
+    <option name="LAST_COMMIT_MESSAGE" value="cactrung" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="553" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636378870883">
+    <state x="553" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636379254117">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="553" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636378870883" />
+    <state x="553" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636379254117" />
   </component>
 </project>
