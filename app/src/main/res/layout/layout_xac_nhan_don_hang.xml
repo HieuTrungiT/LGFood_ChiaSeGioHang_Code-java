@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ddd">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_xacNhan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Xác nhận đơn hàng"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_xacNhan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/toolbar_xacNhan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.729" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#DDDDDDDD"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:src="@drawable/back" />
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/Viewline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/toolbar_xacNhan"
+        android:background="#F0A23C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_xacNhan" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="215dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Viewline">
+
+        <TextView
+            android:id="@+id/txt_hoTenKhachHang_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="19dp"
+            android:text="Tên:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_tenKhachHang_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/txt_hoTenKhachHang_xacNhan"
+            android:text="Lê Nguyễn Quang Thái"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_diaChi_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_hoTenKhachHang_xacNhan"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="5dp"
+            android:text="Địa chỉ:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_diaChiKhachHang_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_tenKhachHang_xacNhan"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/txt_diaChi_xacNhan"
+            android:text="305 Hà Huy Tập, Phường Tân Lợi,TP Buôn Ma Thuột"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_sdt_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_diaChi_xacNhan"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="25dp"
+            android:text="Số điện thoại:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_sdtKhachHang_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_diaChiKhachHang_xacNhan"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/txt_sdt_xacNhan"
+            android:text="0989464966"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txt_gmail_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_sdt_xacNhan"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="5dp"
+            android:text="Gmail:"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txt_gmailKhachHang_xacNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_sdtKhachHang_xacNhan"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/txt_gmail_xacNhan"
+            android:text="thailnqpk01787@fpt.edu.vn"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@+id/txt_gmailKhachHang_xacNhan"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="#F0A23C"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="THAY ĐỔI THÔNG TIN"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+        <View
+            android:id="@+id/Viewline1"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="#F0A23C" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_below="@+id/Viewline1"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="11dp">
+
+            <TextView
+                android:id="@+id/txt_ten_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:text="Tên:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/txt_tenKhachHang_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/txt_ten_xacNhan_item"
+                android:text="Hiếu Trung ăn cứt"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/txt_sdt_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_ten_xacNhan_item"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:text="SĐt:"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/txt_sdtKhachHang_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_tenKhachHang_xacNhan_item"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/txt_sdt_xacNhan_item"
+                android:text="0989464966"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txt_diaChi_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_sdt_xacNhan_item"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:text="Địa chỉ:"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_sdt_xacNhan_item"
+                android:layout_marginStart="3dp"
+                android:layout_toEndOf="@+id/txt_diaChi_xacNhan_item"
+                android:text="305 Hà Huy Tập, Phường Tân Lợi,
+                 TP Buôn Ma Thuột"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txt_date_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="70dp"
+                android:layout_toEndOf="@+id/txt_tenKhachHang_xacNhan_item"
+                android:text="Date:"
+                android:textColor="@color/lf_gray"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txt_dateKhachHang_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="-1dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/txt_date_xacNhan_item"
+                android:text="12/12/2021"
+                android:textColor="@color/lf_gray"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/txt_tinhTrang_xacNhan_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_dateKhachHang_xacNhan_item"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="-1dp"
+                android:layout_toEndOf="@+id/txt_tenKhachHang_xacNhan_item"
+                android:text="Đang xử lý đơn hàng"
+                android:textColor="@color/lf_green"
+                android:textSize="11sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_tinhTrang_xacNhan_item"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="275dp"
+                android:layout_marginTop="53dp"
+                android:text="đ200.000"
+                android:textColor="@color/lf_orange"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/txt_donHang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Đơn hàng:"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/lf_gray"/>
+
+            <TextView
+                android:id="@+id/txt_tienDonGia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="209dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/txt_donHang"
+                android:text="đ300.000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txt_giamGia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_donHang"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="9dp"
+                android:text="Giảm giá:"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/lf_gray"/>
+
+            <TextView
+                android:id="@+id/txt_tienGiamGia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_tienDonGia"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="221dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/txt_giamGia"
+                android:text="đ10.000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txt_phiVanChuyen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_giamGia"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="9dp"
+                android:text="Phí vận chuyển:"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/lf_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_tienGiamGia"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="221dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toEndOf="@+id/txt_giamGia"
+                android:text="đ30.000"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginBottom="-1dp">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="đ320.000"
+                    android:textSize="22sp"
+                    android:textColor="@color/lf_gray"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="35dp"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    app:cardBackgroundColor="#F0A23C"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    android:layout_marginRight="15dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="XÁC NHẬN"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:gravity="center_vertical|center_horizontal"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
