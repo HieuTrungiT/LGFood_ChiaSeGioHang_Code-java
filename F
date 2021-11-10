@@ -1,39 +1,15 @@
-[33mcommit 1e2ff2ccc045a45ea69e1ed1afe13a73aa0c9939[m[33m ([m[1;36mHEAD -> [m[1;32mHieu_Trung[m[33m, [m[1;31morigin/Hieu_Trung[m[33m)[m
-Author: Vu Hieu Trung <vuhieutrung05102001@gmail.com>
-Date:   Tue Nov 9 11:53:50 2021 +0700
-
-    thêm icon gg, thêm nút buttom gg
-
-[33mcommit e7cb53e3f2509fb73797cd6de7e29b347cdb5323[m
-Author: Vu Hieu Trung <vuhieutrung05102001@gmail.com>
-Date:   Tue Nov 9 11:53:11 2021 +0700
-
-    thêm icon gg, thêm nút buttom gg
-
-[33mcommit 7b3ffc476e47a103d4b8dc1cbe7509a09751d9d6[m
-Author: Vu Hieu Trung <vuhieutrung05102001@gmail.com>
-Date:   Tue Nov 9 09:40:49 2021 +0700
-
-    sửa file
-
-[33mcommit fc6a93b311d6e6f17fff582b2a199806cc507899[m
+[33mcommit 21fde3b7cf3f9689f8c0bc6a4580aaea2116e66a[m[33m ([m[1;36mHEAD -> [m[1;32mdanhtoan[m[33m, [m[1;31morigin/danhtoan[m[33m)[m
 Author: daocongdanhtoan <75972168+daocongdanhtoan@users.noreply.github.com>
 Date:   Tue Nov 9 21:36:14 2021 -0800
 
     cun đã adđ 1
 
-[33mcommit e40eb488d0a3880efac58792cd6b6c42842abe4f[m
-Author: Vu Hieu Trung <vuhieutrung05102001@gmail.com>
-Date:   Tue Nov 9 09:40:49 2021 +0700
+[33mcommit d8a41b23b2755d8219984d25c35162a7380774c4[m
+Merge: 4e86987 1c01ca0
+Author: daocongdanhtoan <75972168+daocongdanhtoan@users.noreply.github.com>
+Date:   Tue Nov 9 21:24:04 2021 -0800
 
-    sửa file
-
-[33mcommit 1061bb63d5cce271b52e0f841d0e2b4590c8a461[m
-Merge: 1c01ca0 4e86987
-Author: Vu Hieu Trung <vuhieutrung05102001@gmail.com>
-Date:   Tue Nov 9 09:23:43 2021 +0700
-
-    Merge branch 'danhtoan' into Hieu_Trung
+    Merge branch 'Hieu_Trung' into danhtoan
 
 [33mcommit 4e8698740bf6faae9b5b6801b7c458feaf2e8ef3[m
 Author: daocongdanhtoan <75972168+daocongdanhtoan@users.noreply.github.com>
