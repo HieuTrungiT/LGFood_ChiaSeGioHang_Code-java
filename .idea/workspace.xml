@@ -24,21 +24,59 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="sửa file">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam3_thuonghieu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_exifinterface_exifinterface_1_2_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_airbnb_android_lottie_4_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_exifinterface_27_1_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_27_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_annotations_4_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_disklrucache_4_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_gifdecoder_4_12_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_bumptech_glide_glide_4_12_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_14_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_17_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/thongTinTaiKhoan_Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_topleft_topright_white.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_white.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_addtocart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_back_black2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_btn_love_red.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_btn_love_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_caidat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_camera.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_giam.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_menu_bar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_show_chitietsanpham.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_them.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_thongke.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_thongtinnguoidung.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_timkiem.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/img_anhmau1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/img_panner.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/img_showitem.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_dat_nhanh.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/LGFood_duan1.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/LGFood_duan1.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/broder_stroke_green.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +89,41 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -62,16 +135,30 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
     </key>
+    <key name="android.template.249616794">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
     </key>
   </component>
@@ -83,7 +170,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="LGFood_duan1.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -196,9 +283,41 @@
     <option name="LAST_COMMIT_MESSAGE" value="sửa file" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="395" y="95" key="#Inspections/0.0.1536.816@0.0.1536.816" timestamp="1636509893833" />
+    <state x="286" y="162" key="#PSD" timestamp="1636509423353">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
+    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636472930720">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1636472930720" />
+    <state x="112" y="52" width="1336" height="616" key="AVDManager" timestamp="1636509751640">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="112" y="52" width="1336" height="616" key="AVDManager/0.0.1536.816@0.0.1536.816" timestamp="1636509751640" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog" timestamp="1636507920125">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636507920125" />
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636509767772">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636509767772" />
     <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636425652463">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
+    <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636512465561">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636512465561" />
+    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1636485721067">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1636485721067" />
   </component>
 </project>
