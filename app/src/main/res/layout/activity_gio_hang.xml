@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/xacNhanThongTinDatHang_img_btn_back"
+            android:id="@+id/gioHang_img_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
@@ -37,8 +37,8 @@
             android:layout_width="0dp"
             android:background="@drawable/border_black"
             android:layout_height="30dp"
-            app:layout_constraintEnd_toStartOf="@+id/xacNhanThongTinDatHang_tv_nameUserTop"
-            app:layout_constraintStart_toEndOf="@+id/xacNhanThongTinDatHang_img_btn_back"
+            app:layout_constraintEnd_toStartOf="@+id/gioHang_tv_name"
+            app:layout_constraintStart_toEndOf="@+id/gioHang_img_back"
             app:layout_constraintTop_toTopOf="parent">
             <androidx.cardview.widget.CardView
                 android:layout_width="20dp"
@@ -53,7 +53,7 @@
             <TextView
                 android:paddingLeft="2dp"
                 android:textSize="10sp"
-
+                android:id="@+id/gioHang_tv_diaChi"
                 android:gravity="center_vertical"
                 android:textStyle="bold|italic"
                 android:text="123 Nguyễn Tát Thành,Hẻm 2,TP BMT"
@@ -65,7 +65,7 @@
 
 
         <TextView
-            android:id="@+id/xacNhanThongTinDatHang_tv_nameUserTop"
+            android:id="@+id/gioHang_tv_name"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,22 +102,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view">
+
         <LinearLayout
 
+            android:id="@+id/linearLayout12"
             android:layout_width="match_parent"
             android:layout_height="130dp"
             tools:ignore="MissingConstraints">
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_margin="11dp"
-                android:weightSum="2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="11dp"
+                android:orientation="vertical"
+                android:weightSum="2">
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -136,43 +141,48 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="10dp"
+                        android:id="@+id/gioHang_llout_btn_shareCart"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="@drawable/border_share_cart"
-                        android:layout_weight="1">
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_share_cart">
 
                         <androidx.cardview.widget.CardView
 
 
                             android:layout_width="41dp"
-                            android:layout_marginTop="2dp"
-                            app:cardCornerRadius="12dp"
+                            android:layout_height="41dp"
                             android:layout_marginLeft="1dp"
-                            android:layout_height="41dp">
+                            android:layout_marginTop="2dp"
+                            app:cardCornerRadius="12dp">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/icons8_share_90" />
                         </androidx.cardview.widget.CardView>
+
                         <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:textStyle="bold"
+                            android:background="@drawable/border_share_cart"
+                            android:text="Share cart"
                             android:textColor="@color/white"
                             android:textSize="15dp"
-                            android:layout_width="match_parent"
-                            android:text="Share cart"
-                            android:background="@drawable/border_share_cart"
-                            android:layout_height="wrap_content"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
                     <TextView
                         android:id="@+id/txtDonChuaXN"
                         android:layout_width="match_parent"
@@ -189,8 +199,24 @@
 
         </LinearLayout>
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="130dp"
+            android:id="@+id/gioHang_lv_showGioHang"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+        </ListView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:background="@drawable/boder_bottom"
@@ -207,49 +233,53 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
-                    android:text="Tổng tiền"
-                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
-                    android:textStyle="bold"
-                    android:textSize="23sp"
+                    android:padding="5dp"
+                    android:text="Tổng tiền"
                     android:textColor="#000"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
 
+            <LinearLayout
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="8dp"
-                    android:text="300.000đ"
-                    android:textStyle="bold"
-                    android:padding="5dp"
-                    android:gravity="right"
-                    android:textSize="23sp"
-                    android:textColor="#000"
+                    android:id="@+id/gioHang_tv_tongTien"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="right"
+                    android:padding="5dp"
+                    android:text="300.000đ"
+                    android:textColor="#000"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="73dp"
+            android:orientation="horizontal"
             android:weightSum="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -257,21 +287,22 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <LinearLayout
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="11dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <Button
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="11dp">
 
+                <Button
+                    android:id="@+id/gioHang_btn_datHang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_button"
                     android:text="Đặt hàng"
                     android:textColor="#FEFFFD"
-                    android:layout_width="match_parent"
-                    android:textStyle="bold"
                     android:textSize="17sp"
-                    android:background="@drawable/border_button"
-                    android:layout_height="match_parent"/>
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 

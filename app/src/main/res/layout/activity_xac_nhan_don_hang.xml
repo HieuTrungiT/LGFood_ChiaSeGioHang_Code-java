@@ -17,29 +17,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ImageView
-            android:id="@+id/xacNhanThongTinDatHang_img_btn_back"
+            android:id="@+id/xacNhanDonHang_img_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
 
         <TextView
-            android:id="@+id/xacNhanThongTinDatHang_tv_nameUserTop"
+            android:id="@+id/xacNhanDonHang_tv_name"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginRight="40dp"
+            android:layout_marginEnd="40dp"
+
+
             android:gravity="center"
-
-
             android:text="Quản lý đơn hàng Admin"
             android:textColor="#F0A23c"
             android:textSize="13sp"
@@ -94,7 +95,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/txtDonChuaXN"
+                            android:id="@+id/xacNhanDonHang_tv_donChuaXacNhan"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -113,6 +114,8 @@
                         android:layout_weight="1">
 
                         <Button
+                            android:id="@+id/xacNhanDonHang_btn_donDaXacNhan"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border_button"
@@ -129,7 +132,8 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txtDonHang"
+                        android:id="@+id/xacNhanDonHang_tv_donHang"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -146,6 +150,7 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/xacNhanDonHang_lv_hienDanhSachDonHangAdmin"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
