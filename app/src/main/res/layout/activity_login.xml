@@ -205,6 +205,7 @@
                         android:background="@drawable/broder_radius_xanhduong_nhe"/>
 
                     <TextView
+                        android:id="@+id/login_tv_google"
                         android:layout_width="70dp"
                         android:layout_marginTop="8dp"
                         android:text="Google"
@@ -234,6 +235,7 @@
 
 
                     <TextView
+                        android:id="@+id/login_tv_Phone"
                         android:layout_width="70dp"
                         android:layout_marginTop="8dp"
                         android:text="Phone"
