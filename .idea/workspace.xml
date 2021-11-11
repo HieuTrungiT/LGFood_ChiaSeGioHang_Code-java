@@ -29,6 +29,18 @@
   <component name="ChangeListManager">
     <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="sửa file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/thongTinTaiKhoan_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/thongTinTaiKhoan_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/trangChu_SanPham_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/trangChu_SanPham_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam2_thuonghieu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam2_thuonghieu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam3_thuonghieu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam3_thuonghieu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam_thuonghieu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_cam_thuonghieu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_xanhduong_nhe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/broder_radius_xanhduong_nhe.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_dat_nhanh.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_dat_nhanh.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +102,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -100,21 +112,21 @@
     <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
+      <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
+    </key>
     <key name="android.template.451040553">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
+    <key name="android.template.249616794">
       <recent name="com.example.lgfood_duan1" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
-    </key>
-    <key name="android.template.249616794">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
-      <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
     </key>
   </component>
   <component name="RunManager">
@@ -238,41 +250,45 @@
     <option name="LAST_COMMIT_MESSAGE" value="sửa file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
+    <state x="395" y="95" key="#Inspections" timestamp="1636613157025">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="395" y="95" key="#Inspections/0.0.1536.816@0.0.1536.816" timestamp="1636509893833" />
+    <state x="395" y="95" key="#Inspections/0.0.1536.816@0.0.1536.816" timestamp="1636613157025" />
     <state x="286" y="162" key="#PSD" timestamp="1636509423353">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
-    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636472930720">
+    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636616040879">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1636472930720" />
+    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1636616040879" />
     <state x="112" y="52" width="1336" height="616" key="AVDManager" timestamp="1636509751640">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="112" y="52" width="1336" height="616" key="AVDManager/0.0.1536.816@0.0.1536.816" timestamp="1636509751640" />
-    <state x="349" y="163" key="AndroidCreateResourceFileDialog" timestamp="1636507920125">
+    <state x="431" y="166" key="AndroidCreateResourceDirectoryDialog" timestamp="1636613284818">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636507920125" />
-    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636553071688">
+    <state x="431" y="166" key="AndroidCreateResourceDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636613284818" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog" timestamp="1636612969690">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636553071688" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636612969690" />
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636615709201">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636615709201" />
     <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636425652463">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636512465561">
+    <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636615698155">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636512465561" />
-    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1636485721067">
+    <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636615698155" />
+    <state x="418" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1636620431861">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1636485721067" />
+    <state x="418" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1636620431861" />
   </component>
 </project>
