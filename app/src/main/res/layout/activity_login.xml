@@ -14,7 +14,7 @@
         android:layout_gravity="center">
 
         <ImageView
-            android:id="@+id/thongTinTaiKhoan_img_btn_thoat"
+            android:id="@+id/login_tv_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@drawable/broder_radius_xanhduong_nhe"
