@@ -138,7 +138,7 @@
                     android:textColor="#616161"
                     android:textSize="14sp" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/login_edt_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     android:textColor="#616161"
                     android:textSize="14sp" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:inputType="textPassword"
                     android:id="@+id/login_edt_password"
                     android:layout_width="match_parent"
