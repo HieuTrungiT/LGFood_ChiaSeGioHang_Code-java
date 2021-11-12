@@ -14,17 +14,15 @@
 
         <ImageView
             android:id="@+id/themSuaXoaSanPham_img_btn_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/broder_radius_xanhduong_nhe"
+            android:padding="5dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:src="@drawable/ic_back_orage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="10dp"
-            android:background="@drawable/broder_radius_xanhduong_nhe"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,16 +50,19 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="70dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="550dp">
+                        android:layout_height="match_parent">
 
                         <LinearLayout
                             android:id="@+id/linearLayout14"
@@ -91,8 +92,7 @@
                                         android:layout_gravity="center"
                                         android:background="@drawable/broder_stroke_cam1"
                                         android:padding="10dp"
-                                        android:src="@drawable/gai"
-                                         />
+                                        android:src="@drawable/gai" />
 
 
                                 </FrameLayout>
@@ -130,286 +130,284 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/linearLayout16"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginRight="50dp"
                             android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14"
+                            app:layout_constraintVertical_bias="0.0">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Tên sản phẩm"
-                                android:textSize="14sp" />
+                            <LinearLayout
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_tenSanPham"
-                                android:layout_width="230dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Tên sản phẩm"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_tenSanPham"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Giá Nhập"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_giaNhap"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Giá Bán"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_giaBan"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout16"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Giảm Giá"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_giamGia"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Số lượng"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_soLuong"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="NSX"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_NSX"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="4"
+                                    android:background="@drawable/broder_stroke_black"
+                                    android:textSize="14sp" />
+
+                                <ImageView
+                                    android:id="@+id/themSuaXoaSanPham_img_btn_lich"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="5dp"
+                                    android:src="@drawable/ic_lich" />
+                            </LinearLayout>
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Xuất xứ"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/themSuaXoaSanPham_edt_xuatSu"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="5"
+                                    android:background="@drawable/broder_stroke_black"
+
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:gravity="center|start"
+                                    android:text="Xuất xứ"
+                                    android:textSize="14sp" />
+
+                                <Spinner
+                                    android:id="@+id/themSuaXoaSanPham_spn_LoaiSP"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:spinnerMode="dropdown"
+                                    android:background="@drawable/broder_stroke_black"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:layout_width="0dp"
+
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="TT"
+                                    android:textSize="14sp" />
+
+                                <Spinner
+                                    android:id="@+id/themSuaXoaSanPham_spn_TinhTrang"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/broder_stroke_black"
+                                    android:spinnerMode="dropdown"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout
-
-                            android:id="@+id/linearLayout17"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="70dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Giá Nhập"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_giaNhap"
-                                android:layout_width="230dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/linearLayout18"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="120dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Giá Bán"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_giaBan"
-                                android:layout_width="230dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout19"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="170dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Giảm Giá"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_giamGia"
-                                android:layout_width="230dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout20"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="220dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Số Lượng"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_soLuong"
-                                android:layout_width="230dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout21"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="270dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="NSX"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_NSX"
-                                android:layout_width="180dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                            <ImageView
-                                android:id="@+id/themSuaXoaSanPham_edt_LichSX"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginTop="-35dp"
-                                android:layout_marginLeft="310dp"
-                                android:src="@drawable/icon_note"
-                                >
-
-                            </ImageView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout22"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="320dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Xuất Xứ"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/themSuaXoaSanPham_edt_xuatSu"
-                                android:layout_width="230dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout23"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="370dp"
-                            android:layout_marginRight="50dp"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginTop="12dp"
-                                android:text="Loại"
-                                android:textSize="14sp" />
-
-                            <Spinner
-                                android:id="@+id/themSuaXoaSanPham_edt_LoaiTen"
-                                android:layout_width="130dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-25dp"
-                                android:layout_marginLeft="110dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="2dp"
-                                android:layout_marginLeft="250dp"
-                                android:layout_marginTop="-30dp"
-                                android:text="Loại"
-                                android:textSize="14sp" />
-
-                            <Spinner
-                                android:id="@+id/themSuaXoaSanPham_edt_LoaiGia"
-                                android:layout_width="50dp"
-                                android:layout_height="35dp"
-                                android:layout_marginTop="-28dp"
-                                android:layout_marginLeft="290dp"
-                                android:background="@drawable/broder_stroke_black"
-                                android:padding="5dp"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
+
             </ScrollView>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

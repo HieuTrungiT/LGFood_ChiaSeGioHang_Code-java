@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity {
@@ -34,8 +37,15 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity {
             ThemSuaXoaSanPham_edt_NSX,
             ThemSuaXoaSanPham_edt_xuatSu;
     private Spinner
-            ThemSuaXoaSanPham_edt_LoaiTen,
-            ThemSuaXoaSanPham_edt_LoaiGia;
+            ThemSuaXoaSanPham_spn_LoaiSP,
+            ThemSuaXoaSanPham_spn_TinhTrang;
+
+    //Tạo một mảng dữ liệu giả
+    String arr[]={
+            "Hàng điện tử",
+            "Hàng hóa chất",
+            "Hàng gia dụng"};
+    TextView selection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +87,8 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity {
         ThemSuaXoaSanPham_edt_NSX = findViewById(R.id.themSuaXoaSanPham_edt_NSX);
         ThemSuaXoaSanPham_edt_xuatSu = findViewById(R.id.themSuaXoaSanPham_edt_xuatSu);
 //       Spinner
-        ThemSuaXoaSanPham_edt_LoaiTen  = findViewById(R.id.themSuaXoaSanPham_edt_LoaiTen);
-        ThemSuaXoaSanPham_edt_LoaiGia = findViewById(R.id.themSuaXoaSanPham_edt_LoaiGia);
+        ThemSuaXoaSanPham_spn_LoaiSP  = findViewById(R.id.themSuaXoaSanPham_spn_LoaiSP);
+        ThemSuaXoaSanPham_spn_TinhTrang = findViewById(R.id.themSuaXoaSanPham_spn_TinhTrang);
 
     }
 }

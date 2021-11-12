@@ -28,20 +28,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="sửa file">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Login_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Login_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Sin_Up_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Sin_Up_Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Them_San_Pham_Vao_Kho_Hang_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Them_San_Pham_Vao_Kho_Hang_Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sin_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sin_up.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_them_san_pham_vao_kho_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_them_san_pham_vao_kho_hang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_gio_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_gio_hang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_thong_tin_tai_khoan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_thongtin_gio_hang2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_thongtin_gio_hang2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_xac_nhan_don_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_xac_nhan_don_hang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_xac_nhan_don_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_xac_nhan_don_hang.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_xu_ly_don_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_xu_ly_don_hang.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\CUN\.android\avd\cun_dep_trai.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_API_28.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -96,7 +102,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../asm_Java_NangCao1" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -106,7 +112,7 @@
     <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.368583246">
+    <key name="android.template.451040553">
       <recent name="com.example.lgfood_duan1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -114,15 +120,15 @@
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
     </key>
-    <key name="android.template.451040553">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
     <key name="android.template.249616794">
       <recent name="com.example.lgfood_duan1" />
     </key>
+    <key name="android.template.368583246">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
     </key>
   </component>
@@ -151,8 +157,6 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -257,6 +261,10 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser" timestamp="1636685228699">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1636685228698" />
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636572104985">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -269,10 +277,10 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636507920125" />
-    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636604767378">
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636701030818">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636604767378" />
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636701030818" />
     <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1636606150018">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -297,6 +305,10 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636512465561" />
+    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1636684845739">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636684845739" />
     <state x="417" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1636701367288">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
