@@ -27,16 +27,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="sửa file">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Xac_Nhan_DH_Activity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_xac_nhan_dh.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
+    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Xu_Li_Don_Hang_Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_xu_li_don_hang.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_xac_nhan_don_hang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_xac_nhan_don_hang.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_xu_ly_don_hang.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +123,9 @@
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
+    </key>
+    <key name="android.template.-1926911839">
+      <recent name="com.example.lgfood_duan1" />
     </key>
     <key name="android.template.451040553">
       <recent name="com.example.lgfood_duan1" />
@@ -221,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636425649296</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái">
+      <created>1636944147204</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1636944147204</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,7 +258,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="thêm file border_radius&#10;color" />
     <MESSAGE value="sửa file" />
-    <option name="LAST_COMMIT_MESSAGE" value="sửa file" />
+    <MESSAGE value="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái" />
+    <option name="LAST_COMMIT_MESSAGE" value="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
@@ -262,10 +270,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
-    <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636572104985">
-      <screen x="0" y="0" width="1536" height="816" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636944097166">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1636572104985" />
+    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.834@0.0.1536.834" timestamp="1636944097166" />
     <state x="112" y="52" width="1336" height="616" key="AVDManager" timestamp="1636509751640">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -298,10 +307,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636425652463">
-      <screen x="0" y="0" width="1536" height="816" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1636944149025">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636944149025" />
     <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636512465561">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -314,14 +324,14 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="93" y="93" width="1350" height="648" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1636943366665" />
-    <state x="762" y="0" width="781" height="840" key="dock-window-1" timestamp="1636943883396">
+    <state x="774" y="0" width="765" height="826" key="dock-window-1" timestamp="1636959878147">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="762" y="0" width="781" height="840" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1636943883396" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup" timestamp="1636943872423">
+    <state x="774" y="0" width="765" height="826" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1636959878147" />
+    <state x="418" y="140" width="672" height="693" key="search.everywhere.popup" timestamp="1636944049343">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1636701367288" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1636943872423" />
+    <state x="418" y="140" width="672" height="693" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1636944049343" />
   </component>
 </project>
