@@ -132,7 +132,7 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:id="@+id/signUp_edt_tenDangNhap"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:id="@+id/signUp_edt_gmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -188,8 +188,8 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/signUp_edt_MatKhau"
+                    <EditText
+                        android:id="@+id/signUp_edt_diaChiNguoiDung"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
@@ -216,8 +216,8 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/signUp_edt_NhapLaiMatKhau"
+                    <EditText
+                        android:id="@+id/signUp_edt_soDienThoai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
@@ -244,16 +244,15 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:inputType="textPassword"
-                        android:id="@+id/signUp_edt_DiaChi"
+                        android:id="@+id/signUp_edt_matKhau"
                         android:layout_width="210dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
                         android:padding="10dp" />
 
                     <ImageView
-                        android:id="@+id/singUp_Im_ViTri"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="250dp"
@@ -282,9 +281,9 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
                         android:inputType="textPassword"
-                        android:id="@+id/signUp_edt_SDT"
+                        android:id="@+id/signUp_edt_xacNhanMatKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
