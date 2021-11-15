@@ -3,19 +3,19 @@
 
 
 
-        <item
-            android:title="Profile">
+    <item
+        android:title="Profile">
 
-            <menu>
-                <group android:checkableBehavior="single">
-<!--      ❤💕  đọc kĩ hướng dẫn trước khi sử dụng  ❤💕 -->
+        <menu>
+            <group android:checkableBehavior="single">
+                <!--      ❤💕  đọc kĩ hướng dẫn trước khi sử dụng  ❤💕 -->
 
-<!--           chưa add icon                          -->
+                <!--           chưa add icon                          -->
 
-<!--           nếu muốn add icon thì sử dụng cú pháp như sau
-               android:icon="@drawable/cái hình mày muốn cho vào :D"
-               bỏ vào thẻ item nhé mấy bae
-               cảm ơn đã đọc 👍👍    -->
+                <!--           nếu muốn add icon thì sử dụng cú pháp như sau
+                               android:icon="@drawable/cái hình mày muốn cho vào :D"
+                               bỏ vào thẻ item nhé mấy bae
+                               cảm ơn đã đọc 👍👍    -->
                 <item
                     android:id="@+id/drawer_nav_login"
                     android:title="Login"/>
@@ -27,9 +27,9 @@
                 <item
                     android:id="@+id/drawer_nav_logout"
                     android:title="Logout"/>
-                </group>
-            </menu>
-        </item>
+            </group>
+        </menu>
+    </item>
 
 
 
@@ -37,7 +37,7 @@
 
         <menu>
 
-<!--            cái này cũng như thế     -->
+            <!--            cái này cũng như thế     -->
 
             <item
                 android:id="@+id/drawer_nav_share"
