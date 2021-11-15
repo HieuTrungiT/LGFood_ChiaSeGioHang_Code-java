@@ -17,10 +17,9 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
             xuLi_cardView_formXacNhan,
             xuLi_cardView_minus,
             xuLi_cardView_plus,
-            xuLi_cardView_heartItem;
-
-
-    private Button XuLi_btn_btnXacNhan;
+            xuLi_cardView_heartItem,
+            xuLi_cardView_message,
+            xuLi_cardView_btnXacNhan;
     private TextView
             xuLi_txt_tenKhachHang,
             xuLi_txt_sdtKhachHang,
@@ -36,6 +35,8 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
     private ImageView
             xuLi_img_anhItem,
             xuLi_img_anhItem2;
+    private Button
+            XuLi_btn_btnXacNhan;
     private LinearLayout XuLi_llout_btn_chat;
 
     @Override
@@ -69,5 +70,14 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
         xuLi_txt_tongTienFomXacNhan = findViewById(R.id.xuLi_txt_tongTienFomXacNhan);
         xuLi_img_anhItem = findViewById(R.id.xuLi_img_anhItem);
         xuLi_img_anhItem2 = findViewById(R.id.xuLi_img_anhItem2);
+
+        xuLi_cardView_backItem = findViewById(R.id.xuLi_cardView_backItem);
+
+
+        xuLi_cardView_formXacNhan = findViewById(R.id.xuLi_cardView_formXacNhan);
+
+        xuLi_txt_tongTienFomXacNhan = findViewById(R.id.xuLi_txt_tongTienFomXacNhan);
+
+
     }
 }
