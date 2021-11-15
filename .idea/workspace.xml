@@ -24,16 +24,18 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Thaiiiiiii" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Xu_Li_Don_Hang_Activity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_xu_li_don_hang.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
+    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="addActivity Xu_Li_Don_Hang_Activity&#10;xóa layout layout_xu_ly_don_hang.xml&#10;thái">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_xu_ly_don_hang.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Sin_Up_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Sin_Up_Activity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +97,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FPT-Learning/2021/fall_2021/Androi_Nang_Cao/loginphonenumber" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -228,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636944147204</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="addActivity Xu_Li_Don_Hang_Activity&#10;xóa layout layout_xu_ly_don_hang.xml&#10;thái">
+      <created>1636959909738</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636959909738</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,7 +251,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="Thaiiiiiii" />
                       </list>
                     </value>
                   </entry>
@@ -259,7 +268,8 @@
     <MESSAGE value="thêm file border_radius&#10;color" />
     <MESSAGE value="sửa file" />
     <MESSAGE value="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái" />
-    <option name="LAST_COMMIT_MESSAGE" value="addActivity Xac_Nhan_DH_Activity&#10;xóa layout layout_xac_nhan_don_hang.xml&#10;thái" />
+    <MESSAGE value="addActivity Xu_Li_Don_Hang_Activity&#10;xóa layout layout_xu_ly_don_hang.xml&#10;thái" />
+    <option name="LAST_COMMIT_MESSAGE" value="addActivity Xu_Li_Don_Hang_Activity&#10;xóa layout layout_xu_ly_don_hang.xml&#10;thái" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
@@ -270,6 +280,10 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
+    <state x="115" y="172" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1636960485366">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="115" y="172" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1536.834@0.0.1536.834" timestamp="1636960485366" />
     <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636944097166">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -287,10 +301,11 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="559" y="164" key="AndroidProcessChooserDialog/0.0.1536.834@0.0.1536.834" timestamp="1636943350477" />
-    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636604767378">
-      <screen x="0" y="0" width="1536" height="816" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1636959976690">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636604767378" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1636959976690" />
     <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1636606150018">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -307,11 +322,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1636944149025">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1636959912395">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636944149025" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1636959912395" />
     <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636512465561">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
