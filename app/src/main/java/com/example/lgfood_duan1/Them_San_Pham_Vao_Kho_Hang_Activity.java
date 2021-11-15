@@ -152,33 +152,19 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                     mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-
+                            // datetime hiện tại
+                            SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
+                            Date reaDate = new Date(System.currentTimeMillis());
 //                        //      myRef chỉ con trỏ tại vị trí ""
                             myRef = database.getReference("khoHang");
 //
 //                        //      kiểm tra điều kiện nếu như có ảnh trên storage thì lưu có định dạng không thì rỗng
-                            listSanPham = new model_SanPham(uuid.toString(), moTaSanPham,tenSanPham,ngaySanXuatSanPham,xuatXuSanPham,loaiSanPham,tinhTrangSanPham,uri.toString(),soLuongSanPham,giamGiaSanPham,giaNhapSanPham,giaBanSanPham);
+
+                            listSanPham = new model_SanPham(uuid.toString(), moTaSanPham,tenSanPham,ngaySanXuatSanPham,xuatXuSanPham,loaiSanPham,tinhTrangSanPham,uri.toString(),formatter.format(reaDate).toString(),soLuongSanPham,giamGiaSanPham,giaNhapSanPham,giaBanSanPham);
 //
 //                        //        add giá trị
                             myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
                             Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-
-//                            idSanPham,
-//                                    moTaSanPham,
-//                                    tenSanPham,
-//                                    ngaySanXuatSanPham,
-//                                    xuatXuSanPham,
-//                                    loaiSanPham,
-//                                    tinhTrangSanPham,
-//                                    anhSanPham;
-//
-//                            private int
-//                                    soLuongSanPham,
-//                                    giamGiaSanPham;
-//
-//                            private double
-//                                    giaNhapSanPham,
-//                                    giaBanSanPham;
 
                         }
                     });
