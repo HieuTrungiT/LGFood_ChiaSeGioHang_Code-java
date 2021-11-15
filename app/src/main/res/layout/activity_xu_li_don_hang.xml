@@ -92,7 +92,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/xacNhan_txt_tenKhachHang"
+            android:id="@+id/xuLi_txt_tenKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/xacNhan_txt_ten"
@@ -130,7 +130,7 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/xacNhan_txt_diaChiKhachHang"
+                android:id="@+id/xuLi_txt_diaChiKhachHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
@@ -155,7 +155,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout15" />
 
         <TextView
-            android:id="@+id/xacNhan_txt_sdtKhachHang_xacNhan"
+            android:id="@+id/xuLi_txt_sdtKhachHang_xacNhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/xacNhan_txt_sdt"
@@ -183,7 +183,7 @@
             app:layout_constraintTop_toBottomOf="@+id/xacNhan_txt_ten" />
 
         <TextView
-            android:id="@+id/xacNhan_txt_gmailKhachHang"
+            android:id="@+id/xuLi_txt_gmailKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/xacNhan_txt_gmail"
@@ -205,9 +205,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/xuLi_cardView_formItem1"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="130dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
@@ -586,12 +586,12 @@
                 android:layout_alignTop="@+id/xuLi_txt_tongTien"
                 android:layout_alignBottom="@+id/xuLi_txt_tongTien"
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="15dp"
                 android:layout_toEndOf="@+id/xuLi_txt_tongTien"
                 android:text="đ320.000"
                 android:textColor="#F0A23C"
                 android:textSize="20dp"
                 android:textStyle="bold|normal"
-                android:layout_marginRight="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/xuLi_txt_tongTien"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/xuLi_txt_tongTien" />
@@ -631,21 +631,23 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
+                android:id="@+id/xuLi_llout_btn_chat"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:background="@drawable/broder_radius_xanhduong_nhe">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/ic_chat"
-    android:padding="10dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_chat" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/datNhanh_btn_themSanPhamVaoGioHang"
+                android:id="@+id/xuLi_btn_btnXacNhan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
