@@ -129,7 +129,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_tenDangNhap"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:padding="10dp" />
                 </LinearLayout>
@@ -157,7 +157,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_gmail"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:padding="10dp" />
                 </LinearLayout>
@@ -185,7 +185,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_MatKhau"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:padding="10dp" />
                 </LinearLayout>
@@ -213,7 +213,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_NhapLaiMatKhau"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:padding="10dp" />
                 </LinearLayout>
@@ -289,7 +289,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_SDT"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:inputType="textPassword"
                         android:padding="10dp" />
