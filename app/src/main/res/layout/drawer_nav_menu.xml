@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/lf_orange_2"
+    android:padding="10dp"
+    android:layout_height="150dp">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/trangChuSanPham_img_iconMenu"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:src="@drawable/ic_drawer_menu_white" />
+
+    <ImageView
+        android:id="@+id/trangChuSanPham_img_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/trangChuSanPham_img_iconMenu"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_chat" />
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+        <item
+            android:title="Profile">
+
+            <menu>
+                <group android:checkableBehavior="single">
+<!--      ❤💕  đọc kĩ hướng dẫn trước khi sử dụng  ❤💕 -->
+
+<!--           chưa add icon                          -->
+
+<!--           nếu muốn add icon thì sử dụng cú pháp như sau
+               android:icon="@drawable/cái hình mày muốn cho vào :D"
+               bỏ vào thẻ item nhé mấy bae
+               cảm ơn đã đọc 👍👍    -->
+                <item
+                    android:id="@+id/drawer_nav_login"
+                    android:title="Login"/>
+
+                <item
+                    android:id="@+id/drawer_nav_profile"
+                    android:title="Profile"/>
+
+                <item
+                    android:id="@+id/drawer_nav_logout"
+                    android:title="Logout"/>
+                </group>
+            </menu>
+        </item>
+
+
+
+    <item android:title="Communicate">
+
+        <menu>
+
+<!--            cái này cũng như thế     -->
+
+            <item
+                android:id="@+id/drawer_nav_share"
+                android:title="Share"/>
+
+            <item
+                android:id="@+id/drawer_nav_rate"
+                android:title="Rate Us"/>
+
+        </menu>
+
+    </item>
+</menu>
