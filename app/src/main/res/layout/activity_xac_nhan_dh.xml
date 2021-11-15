@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
+    android:background="#E6E5E5"
     tools:context=".Xac_Nhan_DH_Activity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,12 +14,9 @@
         android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -27,9 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginRight="15dp"
         android:text="Xác nhận đơn hàng"
         android:textColor="@color/lf_orange"
-        android:layout_marginRight="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/xacNhan_view_line"
         app:layout_constraintEnd_toEndOf="@+id/xacNhan_toolbar"
@@ -161,8 +158,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/xacNhan_txt_sdt"
             android:layout_alignBottom="@+id/xacNhan_txt_sdt"
-            android:layout_toEndOf="@+id/xacNhan_txt_sdt"
             android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/xacNhan_txt_sdt"
             android:text="0989464966"
             android:textColor="@color/black"
             android:textSize="15sp"
@@ -208,11 +205,11 @@
             android:layout_below="@+id/xacNhan_txt_gmailKhachHang"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
             app:cardBackgroundColor="#F0A23C"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
-            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -400,10 +397,11 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/xacNhan_cardView_formHoaDon"
         android:layout_width="match_parent"
         android:layout_height="185dp"
+        android:background="@drawable/broder_radius_topleft_topright_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -547,5 +545,5 @@
             </LinearLayout>
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
