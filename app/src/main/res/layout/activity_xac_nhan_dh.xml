@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ddd">
+    tools:context=".Xac_Nhan_DH_Activity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_xacNhan"
+        android:id="@+id/xacNhan_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -20,35 +20,35 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/xacNhan_textView_nameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:text="Xác nhận đơn hàng"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_xacNhan"
+        app:layout_constraintBottom_toBottomOf="@+id/xacNhan_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar_xacNhan"
+        app:layout_constraintStart_toStartOf="@+id/xacNhan_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.729" />
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/xacNhan_cardView_backItem"
         android:layout_width="23dp"
         android:layout_height="23dp"
         android:layout_marginTop="20dp"
-        app:cardBackgroundColor="#DDDDDDDD"
+        app:cardBackgroundColor="@color/lf_light_blue"
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/xacNhan_textView_nameLayout"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/xacNhan_img_back"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="center_horizontal|center_vertical"
@@ -56,28 +56,28 @@
     </androidx.cardview.widget.CardView>
 
     <View
-        android:id="@+id/Viewline"
+        android:id="@+id/xacNhan_view_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/toolbar_xacNhan"
+        android:layout_below="@+id/xacNhan_toolbar"
         android:background="#F0A23C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_xacNhan" />
+        app:layout_constraintTop_toBottomOf="@+id/xacNhan_toolbar" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
+        android:id="@+id/xacNhan_relative_thongTinKhachHang"
         android:layout_width="match_parent"
         android:layout_height="215dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Viewline">
+        app:layout_constraintTop_toBottomOf="@+id/xacNhan_view_line">
 
         <TextView
-            android:id="@+id/txt_hoTenKhachHang_xacNhan"
+            android:id="@+id/xacNhan_txt_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -90,23 +90,25 @@
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_tenKhachHang_xacNhan"
+            android:id="@+id/xacNhan_txt_tenKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/xacNhan_txt_ten"
+            android:layout_alignBottom="@+id/xacNhan_txt_ten"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/txt_hoTenKhachHang_xacNhan"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="-1dp"
+            android:layout_toEndOf="@+id/xacNhan_txt_ten"
             android:text="Lê Nguyễn Quang Thái"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_diaChi_xacNhan"
+            android:id="@+id/xacNhan_txt_diaChi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_hoTenKhachHang_xacNhan"
+            android:layout_below="@+id/xacNhan_txt_ten"
             android:layout_alignParentStart="true"
             android:layout_marginStart="17dp"
             android:layout_marginTop="5dp"
@@ -116,23 +118,25 @@
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_diaChiKhachHang_xacNhan"
+            android:id="@+id/xacNhan_txt_diaChiKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_tenKhachHang_xacNhan"
+            android:layout_alignTop="@+id/xacNhan_txt_diaChi"
+            android:layout_alignBottom="@+id/xacNhan_txt_diaChi"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/txt_diaChi_xacNhan"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="-1dp"
+            android:layout_toEndOf="@+id/xacNhan_txt_diaChi"
             android:text="305 Hà Huy Tập, Phường Tân Lợi,TP Buôn Ma Thuột"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_sdt_xacNhan"
+            android:id="@+id/xacNhan_txt_sdt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_diaChi_xacNhan"
+            android:layout_below="@+id/xacNhan_txt_diaChi"
             android:layout_alignParentStart="true"
             android:layout_marginStart="17dp"
             android:layout_marginTop="6dp"
@@ -142,22 +146,24 @@
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_sdtKhachHang_xacNhan"
+            android:id="@+id/xacNhan_txt_sdtKhachHang_xacNhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_diaChiKhachHang_xacNhan"
+            android:layout_alignTop="@+id/xacNhan_txt_sdt"
+            android:layout_alignBottom="@+id/xacNhan_txt_sdt"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/txt_sdt_xacNhan"
+            android:layout_marginTop="-2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@+id/xacNhan_txt_sdt"
             android:text="0989464966"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/txt_gmail_xacNhan"
+            android:id="@+id/xacNhan_txt_gmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_sdt_xacNhan"
+            android:layout_below="@+id/xacNhan_txt_sdt"
             android:layout_alignParentStart="true"
             android:layout_marginStart="17dp"
             android:layout_marginTop="5dp"
@@ -167,22 +173,24 @@
             android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/txt_gmailKhachHang_xacNhan"
+            android:id="@+id/xacNhan_txt_gmailKhachHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_sdtKhachHang_xacNhan"
+            android:layout_alignTop="@+id/xacNhan_txt_gmail"
+            android:layout_alignBottom="@+id/xacNhan_txt_gmail"
             android:layout_marginStart="9dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/txt_gmail_xacNhan"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/xacNhan_txt_gmail"
             android:text="thailnqpk01787@fpt.edu.vn"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
         <androidx.cardview.widget.CardView
-
+            android:id="@+id/xacNhan_cardView_btnThayDoiThongTin"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_below="@+id/txt_gmailKhachHang_xacNhan"
+            android:layout_below="@+id/xacNhan_txt_gmailKhachHang"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
@@ -194,6 +202,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                android:id="@+id/xacNhan_txt_thayDoiThongTin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
@@ -206,16 +215,16 @@
 
     <RelativeLayout
         android:layout_marginTop="10dp"
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/xacNhan_relative_layoutItem"
         android:layout_width="match_parent"
         android:layout_height="142dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        app:layout_constraintTop_toBottomOf="@+id/xacNhan_relative_thongTinKhachHang">
 
         <View
-            android:id="@+id/Viewline1"
+            android:id="@+id/xacNhan_view_lineItem"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:layout_alignParentStart="true"
@@ -226,12 +235,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="112dp"
-            android:layout_below="@+id/Viewline1"
+            android:layout_below="@+id/xacNhan_view_lineItem"
             android:layout_alignParentEnd="true"
             android:layout_margin="11dp">
 
             <TextView
-                android:id="@+id/txt_ten_xacNhan_item"
+                android:id="@+id/xacNhan_txt_ten_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -244,22 +253,25 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/txt_tenKhachHang_xacNhan_item"
+                android:id="@+id/xacNhan_txt_tenKhachHang_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/xacNhan_txt_ten_item"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="5dp"
-                android:layout_toEndOf="@+id/txt_ten_xacNhan_item"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/xacNhan_txt_ten_item"
                 android:text="Hiếu Trung ăn cứt"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/txt_sdt_xacNhan_item"
+                android:id="@+id/xacNhan_txt_sdt_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_ten_xacNhan_item"
+                android:layout_below="@+id/xacNhan_txt_ten_item"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
@@ -269,23 +281,25 @@
                 android:textStyle="bold|italic" />
 
             <TextView
-                android:id="@+id/txt_sdtKhachHang_xacNhan_item"
+                android:id="@+id/xacNhan_txt_sdtKhachHang_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tenKhachHang_xacNhan_item"
+                android:layout_alignTop="@+id/xacNhan_txt_sdt_item"
+                android:layout_alignBottom="@+id/xacNhan_txt_sdt_item"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/txt_sdt_xacNhan_item"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/xacNhan_txt_sdt_item"
                 android:text="0989464966"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/txt_diaChi_xacNhan_item"
+                android:id="@+id/xacNhan_txt_diaChi_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_sdt_xacNhan_item"
+                android:layout_below="@+id/xacNhan_txt_sdt_item"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="0dp"
                 android:text="Địa chỉ:"
@@ -294,11 +308,15 @@
                 android:textStyle="bold|italic" />
 
             <TextView
+                android:id="@+id/xacNhan_diaChiKhachHang_item"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_sdt_xacNhan_item"
+                android:layout_alignTop="@+id/xacNhan_txt_diaChi_item"
+                android:layout_alignBottom="@+id/xacNhan_txt_diaChi_item"
                 android:layout_marginStart="3dp"
-                android:layout_toEndOf="@+id/txt_diaChi_xacNhan_item"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="-15dp"
+                android:layout_toEndOf="@+id/xacNhan_txt_diaChi_item"
                 android:text="305 Hà Huy Tập, Phường Tân Lợi,
                  TP Buôn Ma Thuột"
                 android:textColor="@color/black"
@@ -311,14 +329,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="70dp"
-                android:layout_toEndOf="@+id/txt_tenKhachHang_xacNhan_item"
+                android:layout_toEndOf="@+id/xacNhan_txt_tenKhachHang_item"
                 android:text="Date:"
                 android:textColor="@color/lf_gray"
                 android:textSize="11sp"
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/txt_dateKhachHang_xacNhan_item"
+                android:id="@+id/xacNhan_txt_dateKhachHang_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -331,22 +349,23 @@
                 android:textStyle="italic" />
 
             <TextView
-                android:id="@+id/txt_tinhTrang_xacNhan_item"
+                android:id="@+id/xacNhan_txt_tinhTrang_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_dateKhachHang_xacNhan_item"
+                android:layout_below="@+id/xacNhan_txt_dateKhachHang_item"
                 android:layout_marginStart="52dp"
                 android:layout_marginTop="-1dp"
-                android:layout_toEndOf="@+id/txt_tenKhachHang_xacNhan_item"
+                android:layout_toEndOf="@+id/xacNhan_txt_tenKhachHang_item"
                 android:text="Đang xử lý đơn hàng"
                 android:textColor="@color/lf_green"
                 android:textSize="11sp"
                 android:textStyle="italic" />
 
             <TextView
+                android:id="@+id/xacNhan_gia_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tinhTrang_xacNhan_item"
+                android:layout_below="@+id/xacNhan_txt_tinhTrang_item"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
@@ -360,22 +379,24 @@
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/xacNhan_cardView_formHoaDon"
         android:layout_width="match_parent"
         android:layout_height="185dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/xacNhan_relative_layoutItem"
         app:layout_constraintVertical_bias="1.0">
 
         <RelativeLayout
+            android:id="@+id/xacNhan_relative_formHoaDon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
 
             <TextView
-                android:id="@+id/txt_donHang"
+                android:id="@+id/xacNhan_txt_donHang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -388,23 +409,25 @@
                 android:textColor="@color/lf_gray"/>
 
             <TextView
-                android:id="@+id/txt_tienDonGia"
+                android:id="@+id/xacNhan_txt_tienDonGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/xacNhan_txt_donHang"
+                android:layout_alignBottom="@+id/xacNhan_txt_donHang"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="209dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_toEndOf="@+id/txt_donHang"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/xacNhan_txt_donHang"
                 android:text="đ300.000"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/txt_giamGia"
+                android:id="@+id/xacNhan_txt_giamGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_donHang"
+                android:layout_below="@+id/xacNhan_txt_donHang"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="9dp"
@@ -414,23 +437,26 @@
                 android:textColor="@color/lf_gray"/>
 
             <TextView
-                android:id="@+id/txt_tienGiamGia"
+                android:id="@+id/xacNhan_txt_tienGiamGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tienDonGia"
+
+                android:layout_below="@+id/xacNhan_txt_donHang"
+                android:layout_alignBottom="@+id/xacNhan_txt_giamGia"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="221dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
-                android:layout_toEndOf="@+id/txt_giamGia"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="-1dp"
+                android:layout_toEndOf="@+id/xacNhan_txt_giamGia"
                 android:text="đ10.000"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/txt_phiVanChuyen"
+                android:id="@+id/xacNhan_txt_phiVanChuyen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_giamGia"
+                android:layout_below="@+id/xacNhan_txt_giamGia"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="9dp"
@@ -440,18 +466,23 @@
                 android:textColor="@color/lf_gray"/>
 
             <TextView
+                android:id="@+id/xacNhan_txt_giaPhiVanChuyen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tienGiamGia"
+                android:layout_alignTop="@+id/xacNhan_txt_phiVanChuyen"
+                android:layout_alignBottom="@+id/xacNhan_txt_phiVanChuyen"
+
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="221dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                android:layout_toEndOf="@+id/txt_giamGia"
+                android:layout_marginTop="-1dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginEnd="30dp"
+
+                android:layout_toEndOf="@+id/xacNhan_txt_phiVanChuyen"
                 android:text="đ30.000"
                 android:textSize="17sp" />
 
             <LinearLayout
+                android:id="@+id/xacNhan_linear_formXacNhan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -462,6 +493,7 @@
                 android:layout_marginBottom="-1dp">
 
                 <TextView
+                    android:id="@+id/xacNhan_txt_giaDonHang"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -472,6 +504,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginLeft="35dp"/>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/xacNhan_cardView_btnXacNhan"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -492,6 +525,4 @@
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
