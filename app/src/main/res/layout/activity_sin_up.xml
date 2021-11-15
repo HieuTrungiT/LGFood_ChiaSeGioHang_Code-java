@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
- >
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,27 +13,24 @@
         android:layout_gravity="center">
 
         <ImageView
-            android:id="@+id/login_tv_back"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:id="@+id/thongTinTaiKhoan_img_btn_thoat"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/broder_radius_xanhduong_nhe"
+            android:padding="5dp"
             android:src="@drawable/ic_back_orage"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:padding="10dp"
-            android:background="@drawable/broder_radius_xanhduong_nhe"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
+            android:background="@drawable/broder_radius_cam_thuonghieu"
             android:gravity="center"
             android:padding="10dp"
-            android:background="@drawable/broder_radius_cam_thuonghieu"
             android:text="Sign up"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -48,10 +44,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:background="@drawable/broder_stroke_green"
             android:padding="10dp"
             android:text="Login"
-            android:textColor="#8C8C8C"
+            android:textColor="@color/lf_orange"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -91,11 +86,11 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_marginRight="30dp"
-
                         android:id="@+id/textView3"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
                         android:text="Đăng Kí"
                         android:textColor="#000000"
                         android:textSize="38sp"
@@ -109,7 +104,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="750dp">
-
 
 
                 <LinearLayout
@@ -132,7 +126,7 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_tenDangNhap"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,7 +154,7 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_gmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -188,8 +182,8 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/signUp_edt_diaChiNguoiDung"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/signUp_edt_MatKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
@@ -216,8 +210,8 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:id="@+id/signUp_edt_soDienThoai"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/signUp_edt_NhapLaiMatKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
@@ -244,22 +238,33 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:inputType="textPassword"
-                        android:id="@+id/signUp_edt_matKhau"
-                        android:layout_width="210dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/broder_stroke_cam"
-                        android:padding="10dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="250dp"
-                        android:layout_marginTop="-50dp"
-                        android:src="@drawable/gps">
 
-                    </ImageView>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/signUp_edt_DiaChi"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="10"
+                            android:background="@drawable/broder_stroke_cam"
+                            android:inputType="textPassword"
+                            android:padding="10dp" />
+
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            android:id="@+id/singUp_Im_ViTri"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+
+                            android:layout_weight="2"
+                            android:src="@drawable/gps" />
+
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -281,12 +286,12 @@
                         android:textColor="#616161"
                         android:textSize="14sp" />
 
-                    <EditText
-                        android:inputType="textPassword"
-                        android:id="@+id/signUp_edt_xacNhanMatKhau"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/signUp_edt_SDT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/broder_stroke_cam"
+                        android:inputType="textPassword"
                         android:padding="10dp" />
 
 
@@ -306,59 +311,60 @@
 
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/broder_radius_cam3_thuonghieu">
 
                         <ImageView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:src="@drawable/ic_gg"
+                            android:background="@drawable/broder_radius_xanhduong_nhe"
                             android:padding="10dp"
-                            android:background="@drawable/broder_radius_xanhduong_nhe"/>
+                            android:src="@drawable/ic_gg" />
 
                         <TextView
                             android:id="@+id/login_tv_google"
                             android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="8dp"
                             android:text="Google"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_marginLeft="10dp"
                             android:textColor="@color/white"
-                            android:layout_height="30dp">
+                            android:textSize="20dp"
+                            android:textStyle="bold">
 
                         </TextView>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_weight="1"
                         android:layout_width="0dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/broder_radius_cam3_thuonghieu">
+
                         <ImageView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:src="@drawable/ic_phone"
+                            android:background="@drawable/broder_radius_xanhduong_nhe"
                             android:padding="10dp"
-                            android:background="@drawable/broder_radius_xanhduong_nhe"/>
+                            android:src="@drawable/ic_phone" />
 
 
                         <TextView
                             android:id="@+id/login_tv_Phone"
                             android:layout_width="70dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="15dp"
                             android:layout_marginTop="8dp"
                             android:text="Phone"
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            android:layout_marginLeft="15dp"
                             android:textColor="@color/white"
-                            android:layout_height="30dp">
+                            android:textSize="20dp"
+                            android:textStyle="bold">
 
                         </TextView>
                     </LinearLayout>

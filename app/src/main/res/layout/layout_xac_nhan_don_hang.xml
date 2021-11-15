@@ -24,36 +24,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/lf_orange"
         android:text="Xác nhận đơn hàng"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_xacNhan"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/toolbar_xacNhan"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView2"
         app:layout_constraintVertical_bias="0.729" />
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="20dp"
-        app:cardBackgroundColor="#DDDDDDDD"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:src="@drawable/back" />
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/cardView2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/broder_radius_xanhduong_nhe"
+        android:padding="5dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/ic_back_orage"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_xacNhan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <View
         android:id="@+id/Viewline"
@@ -335,8 +329,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_dateKhachHang_xacNhan_item"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="52dp"
                 android:layout_marginTop="-1dp"
+                android:layout_marginEnd="1295dp"
                 android:layout_toEndOf="@+id/txt_tenKhachHang_xacNhan_item"
                 android:text="Đang xử lý đơn hàng"
                 android:textColor="@color/lf_green"
@@ -390,12 +386,15 @@
             <TextView
                 android:id="@+id/txt_tienDonGia"
                 android:layout_width="wrap_content"
+                android:gravity="center|end"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/txt_donHang"
+                android:layout_alignBottom="@+id/txt_donHang"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="209dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="0dp"
                 android:layout_toEndOf="@+id/txt_donHang"
                 android:text="đ300.000"
                 android:textSize="17sp" />
@@ -417,11 +416,14 @@
                 android:id="@+id/txt_tienGiamGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tienDonGia"
+                android:layout_below="@+id/txt_donHang"
+                android:gravity="center|end"
+                android:layout_alignBottom="@+id/txt_giamGia"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="221dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="0dp"
                 android:layout_toEndOf="@+id/txt_giamGia"
                 android:text="đ10.000"
                 android:textSize="17sp" />
@@ -442,11 +444,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_tienGiamGia"
+                android:layout_alignTop="@+id/txt_phiVanChuyen"
+                android:layout_alignBottom="@+id/txt_phiVanChuyen"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="221dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="-1dp"
+                android:gravity="center|end"
                 android:layout_marginEnd="20dp"
+                android:layout_marginBottom="1dp"
                 android:layout_toEndOf="@+id/txt_giamGia"
                 android:text="đ30.000"
                 android:textSize="17sp" />

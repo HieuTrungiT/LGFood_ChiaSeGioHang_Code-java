@@ -19,12 +19,12 @@
 
         <ImageView
             android:id="@+id/thongTinGioHang_img_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/broder_radius_xanhduong_nhe"
+            android:padding="5dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_arrow_back"
+            android:src="@drawable/ic_back_orage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -142,7 +142,7 @@
                     <Button
                         android:id="@+id/thongTinGioHang_btn_thayDoiThongTin"
 
-                        android:layout_width="350dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:background="@drawable/border_button2"
