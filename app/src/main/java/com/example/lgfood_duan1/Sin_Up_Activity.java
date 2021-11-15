@@ -67,7 +67,6 @@ public class Sin_Up_Activity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (currentUser!=null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }

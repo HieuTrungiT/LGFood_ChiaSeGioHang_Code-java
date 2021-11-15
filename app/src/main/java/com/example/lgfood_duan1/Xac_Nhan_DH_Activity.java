@@ -16,12 +16,12 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
             xacNhan_txt_diaChiKhachHang,
             xacNhan_txt_sdtKhachHang_xacNhan,
             xacNhan_txt_gmailKhachHang,
-            xacNhan_txt_tenKhachHang_item,
-            xacNhan_txt_dateKhachHang_item,
-            xacNhan_txt_tinhTrang_item,
-            xacNhan_gia_item,
-            xacNhan_txt_sdtKhachHang_item,
-            xacNhan_diaChiKhachHang_item,
+//            xacNhan_txt_tenKhachHang_item,
+//            xacNhan_txt_dateKhachHang_item,
+//            xacNhan_txt_tinhTrang_item,
+//            xacNhan_gia_item,
+//            xacNhan_txt_sdtKhachHang_item,
+//            xacNhan_diaChiKhachHang_item,
             xacNhan_txt_tienDonGia,
             xacNhan_txt_tienGiamGia,
             xacNhan_txt_giaPhiVanChuyen,
@@ -43,12 +43,12 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                 xacNhan_txt_diaChiKhachHang=findViewById(R.id.xacNhan_txt_diaChiKhachHang);
                 xacNhan_txt_sdtKhachHang_xacNhan=findViewById(R.id.xacNhan_txt_sdtKhachHang_xacNhan);
                 xacNhan_txt_gmailKhachHang=findViewById(R.id.xacNhan_txt_gmailKhachHang);
-                xacNhan_txt_tenKhachHang_item=findViewById(R.id.xacNhan_txt_tenKhachHang_item);
-                xacNhan_txt_dateKhachHang_item=findViewById(R.id.xacNhan_txt_dateKhachHang_item);
-                xacNhan_txt_tinhTrang_item=findViewById(R.id.xacNhan_txt_tinhTrang_item);
-                xacNhan_gia_item=findViewById(R.id.xacNhan_gia_item);
-                xacNhan_txt_sdtKhachHang_item=findViewById(R.id.xacNhan_txt_sdtKhachHang_item);
-                xacNhan_diaChiKhachHang_item=findViewById(R.id.xacNhan_diaChiKhachHang_item);
+//                xacNhan_txt_tenKhachHang_item=findViewById(R.id.xacNhan_txt_tenKhachHang_item);
+//                xacNhan_txt_dateKhachHang_item=findViewById(R.id.xacNhan_txt_dateKhachHang_item);
+//                xacNhan_txt_tinhTrang_item=findViewById(R.id.xacNhan_txt_tinhTrang_item);
+//                xacNhan_gia_item=findViewById(R.id.xacNhan_gia_item);
+//                xacNhan_txt_sdtKhachHang_item=findViewById(R.id.xacNhan_txt_sdtKhachHang_item);
+//                xacNhan_diaChiKhachHang_item=findViewById(R.id.xacNhan_diaChiKhachHang_item);
                 xacNhan_txt_tienDonGia=findViewById(R.id.xacNhan_txt_tienDonGia);
                 xacNhan_txt_tienGiamGia=findViewById(R.id.xacNhan_txt_tienGiamGia);
                 xacNhan_txt_giaPhiVanChuyen=findViewById(R.id.xacNhan_txt_giaPhiVanChuyen);
