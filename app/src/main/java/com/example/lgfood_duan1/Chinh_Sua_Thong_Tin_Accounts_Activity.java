@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ChinhSuaThongTinAccount extends AppCompatActivity {
+public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
