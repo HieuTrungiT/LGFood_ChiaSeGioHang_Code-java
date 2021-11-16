@@ -247,7 +247,7 @@
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/signUp_edt_DiaChi"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="10"
                             android:background="@drawable/broder_stroke_cam"
                             android:inputType="textPassword"
