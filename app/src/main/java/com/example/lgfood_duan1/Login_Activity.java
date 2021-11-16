@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
 
 public class Login_Activity extends AppCompatActivity {
@@ -23,9 +21,9 @@ public class Login_Activity extends AppCompatActivity {
             Login_tv_btn_SignUpText,
             Login_tv_username,
             Login_tv_password,
-            Login_tv_Phone,
-            Login_tv_google;
-    private TextInputLayout
+            login_tv_Phone,
+            login_tv_google;
+    private EditText
             Login_edt_username,
             Login_edt_password;
     private LinearLayout
@@ -63,13 +61,13 @@ public class Login_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Login_tv_google.setOnClickListener(new View.OnClickListener() {
+        login_tv_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        Login_tv_Phone.setOnClickListener(new View.OnClickListener() {
+        login_tv_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -99,8 +97,8 @@ public class Login_Activity extends AppCompatActivity {
         Login_tv_btn_SignUpText = findViewById(R.id.login_tv_btn_SignUpText);
         Login_tv_username = findViewById(R.id.login_tv_username);
         Login_tv_password = findViewById(R.id.login_tv_password);
-        Login_tv_google = findViewById(R.id.login_tv_google);
-        Login_tv_Phone= findViewById(R.id.login_tv_Phone);
+        login_tv_google = findViewById(R.id.login_tv_google);
+        login_tv_Phone= findViewById(R.id.login_tv_Phone);
 
 
 //        EditText

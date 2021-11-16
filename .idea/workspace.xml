@@ -27,41 +27,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e739704-3d38-4f8f-a421-b1dad67a28ec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/color/nav_color.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded.xml" afterDir="false" />
+    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="sửa file">
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_exifinterface_27_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_27_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_annotations_13_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_72.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_72.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/LGFood_duan1.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/LGFood_duan1.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/trangChu_SanPham_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/trangChu_SanPham_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/bottom_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottom_navigation.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Model/model_SanPham.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Model/model_SanPham.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Them_San_Pham_Vao_Kho_Hang_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Them_San_Pham_Vao_Kho_Hang_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_sort_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_sort_down.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\CUN\.android\avd\cun_dep_trai.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_API_28.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -99,7 +81,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -117,7 +99,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Meow_Bottom_Navigation_Bar-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -127,24 +109,24 @@
     <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.368583246">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
+      <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
+    </key>
     <key name="android.template.451040553">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
+    <key name="android.template.249616794">
       <recent name="com.example.lgfood_duan1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
       <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
       <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
-    </key>
-    <key name="android.template.249616794">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
-    <key name="android.template.368583246">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\layout" />
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
-      <recent name="F:\LGFood_duan1\app\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager">
@@ -172,8 +154,6 @@
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -217,7 +197,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0e739704-3d38-4f8f-a421-b1dad67a28ec" name="Default Changelist" comment="" />
+      <changelist id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="" />
       <created>1636335170924</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -270,62 +250,66 @@
     <option name="LAST_COMMIT_MESSAGE" value="sửa file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="395" y="95" key="#Inspections" timestamp="1636930028215">
+    <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="395" y="95" key="#Inspections/0.0.1536.816@0.0.1536.816" timestamp="1636930028215" />
+    <state x="395" y="95" key="#Inspections/0.0.1536.816@0.0.1536.816" timestamp="1636509893833" />
     <state x="286" y="162" key="#PSD" timestamp="1636509423353">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
-    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser" timestamp="1636685228699">
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser" timestamp="1636956915894">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1636685228698" />
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1636956915894" />
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636572104985">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.816@0.0.1536.816" timestamp="1636572104985" />
-    <state x="112" y="52" width="1336" height="616" key="AVDManager" timestamp="1636909860275">
+    <state x="112" y="52" width="1336" height="616" key="AVDManager" timestamp="1636509751640">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="112" y="52" width="1336" height="616" key="AVDManager/0.0.1536.816@0.0.1536.816" timestamp="1636909860275" />
-    <state x="698" y="172" key="AndroidCreateResourceDirectoryDialog" timestamp="1636932086480">
+    <state x="112" y="52" width="1336" height="616" key="AVDManager/0.0.1536.816@0.0.1536.816" timestamp="1636509751640" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog" timestamp="1636507920125">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="698" y="172" key="AndroidCreateResourceDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636932086480" />
-    <state x="566" y="326" key="AndroidCreateResourceFileDialog" timestamp="1636932105316">
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636507920125" />
+    <state x="93" y="93" width="1350" height="630" key="DiffContextDialog" timestamp="1636957915725">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="566" y="326" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636932105316" />
-    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636927045174">
+    <state x="93" y="93" width="1350" height="630" key="DiffContextDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1636705392162">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636927045174" />
-    <state width="1493" height="193" key="GridCell.Tab.0.bottom" timestamp="1636931497144">
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636705392162" />
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1636606150018">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="193" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1636931497144" />
-    <state width="1493" height="193" key="GridCell.Tab.0.center" timestamp="1636931497143">
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
+    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1636606150017">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="193" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1636931497143" />
-    <state width="1493" height="193" key="GridCell.Tab.0.left" timestamp="1636931497143">
+    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1636606150017" />
+    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1636606150017">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="193" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1636931497143" />
-    <state width="1493" height="193" key="GridCell.Tab.0.right" timestamp="1636931497143">
+    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1636606150017" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1636606150018">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="193" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1636931497143" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
     <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1636425652463">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636512465561">
+    <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636957907012">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636512465561" />
+    <state x="584" y="186" key="chooseDestDirectoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957907012" />
+    <state x="158" y="54" width="1350" height="575" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1636957915725">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="158" y="54" width="1350" height="575" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
     <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1636684845739">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
