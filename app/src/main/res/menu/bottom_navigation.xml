@@ -14,7 +14,7 @@
 
 
     <item  android:id="@+id/Home"
-        android:title=""
+        android:title="HOME"
         android:icon="@drawable/ic_home">
     </item>
 
