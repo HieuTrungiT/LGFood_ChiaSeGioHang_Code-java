@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".trangChu_SanPham_Activity"
+    tools:context=".Activity.trangChu_SanPham_Activity"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
@@ -386,7 +386,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemIconTint="@color/nav_color"
-            android:background="@drawable/rounded"
+            android:background="@drawable/broder_radius_cam2_thuonghieu"
             app:itemTextColor="@color/black"
             app:menu="@menu/bottom_navigation">
 
