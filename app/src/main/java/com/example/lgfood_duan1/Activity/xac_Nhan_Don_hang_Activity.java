@@ -1,4 +1,4 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.lgfood_duan1.R;
 
 public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
 

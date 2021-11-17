@@ -1,4 +1,4 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,12 +8,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.lgfood_duan1.R;
+
 public class thong_Tin_Gio_Hang_Activity extends AppCompatActivity {
     private ImageView
             ThongTinGioHang_img_back;
     private TextView
-            ThongTinGioHang_tv_name,
-            ThongTinGioHang_tv_ten,
+
+            ThongTinGioHang_tenKhachHang,
             ThongTinGioHang_tv_diaChi,
             ThongTinGioHang_tv_phone,
             ThongTinGioHang_tv_gmail,
@@ -48,11 +50,10 @@ public class thong_Tin_Gio_Hang_Activity extends AppCompatActivity {
     private void anhXa() {
 
 //        TextView
-        ThongTinGioHang_tv_name = findViewById(R.id.thongTinGioHang_tv_name);
-        ThongTinGioHang_tv_ten = findViewById(R.id.thongTinGioHang_tv_ten);
-        ThongTinGioHang_tv_diaChi = findViewById(R.id.thongTinGioHang_tv_diaChi);
-        ThongTinGioHang_tv_phone = findViewById(R.id.thongTinGioHang_tv_phone);
-        ThongTinGioHang_tv_gmail = findViewById(R.id.thongTinGioHang_tv_gmail);
+        ThongTinGioHang_tenKhachHang = findViewById(R.id.thongTinGioHang_tenKhachHang);
+        ThongTinGioHang_tv_diaChi = findViewById(R.id.thongTinGioHang_tv_diaChiKhachHang);
+        ThongTinGioHang_tv_phone = findViewById(R.id.thongTinGioHang_tv_sdtKhachHang_xacNhan);
+        ThongTinGioHang_tv_gmail = findViewById(R.id.thongTinGioHang_tv_gmailKhachHang);
         ThongTinGioHang_tv_tienDonHang = findViewById(R.id.thongTinGioHang_tv_tienDonHang);
         ThongTinGioHang_tv_tienGiamGia = findViewById(R.id.thongTinGioHang_tv_tienGiamGia);
         ThongTinGioHang_tv_tongTien = findViewById(R.id.thongTinGioHang_tv_tongTien);
@@ -65,7 +66,7 @@ public class thong_Tin_Gio_Hang_Activity extends AppCompatActivity {
 //      Button
 
         ThongTinGioHang_btn_thayDoiThongTin = findViewById(R.id.thongTinGioHang_btn_thayDoiThongTin);
-        ThongTinGioHang_btn_xacNhan = findViewById(R.id.thongTinGioHang_btn_thayDoiThongTin);
+        ThongTinGioHang_btn_xacNhan = findViewById(R.id.thongTinGioHang_btn_xacNhan);
 
 //        ListView
         ThongTinGioHang_lv_xacNhanDonHang = findViewById(R.id.thongTinGioHang_lv_xacNhanDonHang);

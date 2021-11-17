@@ -1,18 +1,15 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.lgfood_duan1.R;
 
 public class Login_Activity extends AppCompatActivity {
 

@@ -1,10 +1,12 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ChinhSuaThongTinAccount extends AppCompatActivity {
+import com.example.lgfood_duan1.R;
+
+public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

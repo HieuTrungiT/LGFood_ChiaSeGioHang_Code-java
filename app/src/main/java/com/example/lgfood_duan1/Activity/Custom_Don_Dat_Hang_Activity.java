@@ -1,8 +1,10 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.lgfood_duan1.R;
 
 public class Custom_Don_Dat_Hang_Activity extends AppCompatActivity {
 

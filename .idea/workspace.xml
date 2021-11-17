@@ -33,25 +33,26 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="login xong, &#10;thái">
+    <list default="true" id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_chinh_sua_thong_tin_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_chinh_sua_thong_tin_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showNgang_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showNgang_adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_XL_API_26.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\ADMIN\.android\avd\Pixel_4_API_28_1.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -120,27 +121,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../asm_Java_NangCao1" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
-    <key name="android.template.1000876631">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
-      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
-      <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
-    </key>
-    <key name="android.template.368583246">
-      <recent name="com.example.lgfood_duan1" />
-    </key>
     <key name="android.template.249616794">
       <recent name="com.example.lgfood_duan1" />
     </key>
@@ -151,6 +141,16 @@
     </key>
     <key name="android.template.451040553">
       <recent name="com.example.lgfood_duan1" />
+    </key>
+    <key name="android.template.368583246">
+      <recent name="com.example.lgfood_duan1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable-v24" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\color" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\ic_them2" />
+      <recent name="F:\Studen_FPT_Poly\AndroiDuAn\LGFood_duan1\app\src\main\res\drawable" />
+      <recent name="F:\LGFood_duan1\app\src\main\res\drawable-v24" />
     </key>
   </component>
   <component name="RunManager">
@@ -223,7 +223,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f98a5857-5334-4ab3-b360-51337d84e018" name="Default Changelist" comment="" />
+      <changelist id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="" />
       <created>1636335170924</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -264,14 +264,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636966979485</updated>
     </task>
-    <task id="LOCAL-00006" summary="login xong, &#10;thái">
-      <created>1637026287181</created>
+    <task id="LOCAL-00006" summary="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*">
+      <created>1637053277953</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1637026287181</updated>
+      <updated>1637053277953</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*">
+      <created>1637053773910</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1637053773910</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -302,8 +309,8 @@
     <MESSAGE value="thêm file border_radius&#10;color" />
     <MESSAGE value="sửa file" />
     <MESSAGE value="login normal&#10;add item custom&#10;thái" />
-    <MESSAGE value="login xong, &#10;thái" />
-    <option name="LAST_COMMIT_MESSAGE" value="login xong, &#10;thái" />
+    <MESSAGE value="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
@@ -314,15 +321,14 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="286" y="162" key="#PSD/0.0.1536.816@0.0.1536.816" timestamp="1636509423353" />
-    <state x="223" y="72" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636987501905">
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636961696862">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="223" y="72" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1636987501905" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1636988975648">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1636961696862" />
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser" timestamp="1637138393672">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1636956915894" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1636988975648" />
+    <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1637138393672" />
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636572104985">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -331,14 +337,10 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="112" y="52" width="1336" height="616" key="AVDManager/0.0.1536.816@0.0.1536.816" timestamp="1636509751640" />
-    <state x="0" y="175" key="AndroidCreateResourceDirectoryDialog" timestamp="1636988515617">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog" timestamp="1637135412491">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="0" y="175" key="AndroidCreateResourceDirectoryDialog/0.0.1536.834@0.0.1536.834" timestamp="1636988515617" />
-    <state x="349" y="167" key="AndroidCreateResourceFileDialog" timestamp="1636966253975">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1636507920125" />
+    <state x="349" y="163" key="AndroidCreateResourceFileDialog/0.0.1536.816@0.0.1536.816" timestamp="1637135412491" />
     <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.834@0.0.1536.834" timestamp="1636966253975" />
     <state x="614" y="207" key="AndroidCreateXmlResourceDialog" timestamp="1636961595259">
       <screen x="0" y="0" width="1536" height="834" />
@@ -348,40 +350,48 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="93" y="93" width="1350" height="630" key="DiffContextDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1636988323935">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1637127369836">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1636705392162" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1636988323935" />
-    <state width="1493" height="209" key="GridCell.Tab.0.bottom" timestamp="1636987513671">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1637127369836" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1636982658675" />
+    <state width="1132" height="178" key="GridCell.Tab.0.bottom" timestamp="1637138816182">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
-    <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1636987513671" />
-    <state width="1493" height="209" key="GridCell.Tab.0.center" timestamp="1636987513671">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1132" height="178" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
+    <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1636964412620" />
+    <state width="1132" height="178" key="GridCell.Tab.0.center" timestamp="1637138816182">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1636606150017" />
-    <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1636987513671" />
-    <state width="1493" height="209" key="GridCell.Tab.0.left" timestamp="1636987513671">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1132" height="178" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
+    <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1636964412620" />
+    <state width="1132" height="178" key="GridCell.Tab.0.left" timestamp="1637138816181">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1636606150017" />
-    <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1636987513671" />
-    <state width="1493" height="209" key="GridCell.Tab.0.right" timestamp="1636987513671">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1132" height="178" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1637138816181" />
+    <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1636964412619" />
+    <state width="1132" height="178" key="GridCell.Tab.0.right" timestamp="1637138816182">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1636606150018" />
-    <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1636987513671" />
+    <state width="1132" height="178" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
+    <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1636964412620" />
     <state x="407" y="179" key="MultipleFileMergeDialog" timestamp="1636966968495">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="407" y="179" key="MultipleFileMergeDialog/0.0.1536.834@0.0.1536.834" timestamp="1636966968495" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637026289612">
+    <state x="374" y="123" key="RollbackChangesDialog" timestamp="1637137038327">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="374" y="123" key="RollbackChangesDialog/0.0.1536.816@0.0.1536.816" timestamp="1637137038327" />
+    <state x="269" y="65" key="SettingsEditor" timestamp="1637116180310">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="269" y="65" key="SettingsEditor/0.0.1536.816@0.0.1536.816" timestamp="1637116180310" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637053776481">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637026289612" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637053776481" />
     <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636957907012">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -390,18 +400,24 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="158" y="54" width="1350" height="575" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
-    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1636684845739">
+    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1637028341205">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1636684845739" />
-    <state x="764" y="0" width="923" height="827" key="dock-window-1" timestamp="1636992433105">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1637028341205" />
+    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1637036962004">
+      <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="764" y="0" width="923" height="827" key="dock-window-1/0.0.1536.834@0.0.1536.834" timestamp="1636992433105" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup" timestamp="1637021546244">
-      <screen x="0" y="0" width="1536" height="834" />
-    </state>
-    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1636701367288" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1637021546244" />
+    <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1637036962004" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

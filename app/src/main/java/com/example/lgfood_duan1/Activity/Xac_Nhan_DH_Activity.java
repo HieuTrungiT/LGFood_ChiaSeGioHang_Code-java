@@ -1,10 +1,12 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.lgfood_duan1.R;
 
 public class Xac_Nhan_DH_Activity extends AppCompatActivity {
     private CardView
