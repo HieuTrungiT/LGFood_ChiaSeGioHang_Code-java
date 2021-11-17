@@ -16,7 +16,7 @@ import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
 
 import java.util.ArrayList;
-
+// Trung
 public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_showDoc_adapter.ViewHolder> {
     private ArrayList<model_SanPham> arrListSanPham;
     private trangChu_SanPham_Activity context;
