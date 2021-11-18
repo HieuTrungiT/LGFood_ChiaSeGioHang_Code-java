@@ -20,13 +20,18 @@ import java.util.ArrayList;
 public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_showDoc_adapter.ViewHolder> {
     private ArrayList<model_SanPham> arrListSanPham;
     private trangChu_SanPham_Activity context;
+//thai: onClickItem
+    private IClickListener mIClickListener;
 
-
-    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context) {
+    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, IClickListener mIClickListener) {
         this.arrListSanPham = arrListSanPham;
         this.context = context;
+        this.mIClickListener = mIClickListener;
     }
 
+    public interface IClickListener{
+        void onClickShowItem(model_SanPham sanPham);
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuttom_sanpham_trangchu_doc, parent, false);
@@ -35,7 +40,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 
     @Override
     public void onBindViewHolder(trangChu_showDoc_adapter.ViewHolder holder, int position) {
-
+        model_SanPham sanPham=arrListSanPham.get(position);
         Glide.with(context)
                 .load(arrListSanPham.get(position).getAnhSanPham())
                 .into(holder.ItemCuttomTrangChu_doc_imgShowAnhSanPham);
@@ -55,7 +60,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_img_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, arrListSanPham.get(position).getTenSanPham()+"", Toast.LENGTH_SHORT).show();
+                mIClickListener.onClickShowItem(sanPham);
             }
         });
     }
