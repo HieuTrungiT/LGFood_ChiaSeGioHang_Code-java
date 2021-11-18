@@ -70,6 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="31dp"
                         android:layout_marginRight="45dp"
+                        android:layout_marginLeft="15dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:hint="Search"
                         android:orientation="horizontal"
@@ -209,9 +210,10 @@
                                 android:layout_height="wrap_content">
 
                                 <TextView
-                                    android:id="@+id/trangChuSanPham_tv_showTatCaLoaiSanpham"
+                                    android:id="@+id/trangChuSanPham_tv_btn_showTatCaLoaiSanpham"
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
+                                    android:layout_marginLeft="12dp"
                                     android:layout_marginRight="12dp"
                                     android:background="@drawable/broder_radius_cam2_thuonghieu"
                                     android:gravity="center"

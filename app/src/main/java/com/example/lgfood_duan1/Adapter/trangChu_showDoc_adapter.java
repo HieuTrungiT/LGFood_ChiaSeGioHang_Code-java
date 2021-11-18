@@ -39,6 +39,9 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         Glide.with(context)
                 .load(arrListSanPham.get(position).getAnhSanPham())
                 .into(holder.ItemCuttomTrangChu_doc_imgShowAnhSanPham);
+
+     
+
         holder.ItemCuttomTrangChu_doc_tv_xuatXu.setText(arrListSanPham.get(position).getXuatXuSanPham());
         holder.ItemCuttomTrangChu_doc_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
         holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
