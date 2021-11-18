@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,7 +43,7 @@ public class Login_Activity extends AppCompatActivity {
 //thai: login
     DatabaseReference mData;
     FirebaseDatabase database;
-
+    CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,22 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
     }
+    //thai sharePreference
+    private void rememberUser(String user,String password,boolean status){
+        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        SharedPreferences.Editor editor=pref.edit();
+        if (!status){
+            editor.clear();
+        }else {
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putBoolean("REMEMBER",status);
+//            editor.putString("ADDRESS",);
+//            editor.putString("PHONENUMBER",);
+//            editor.putString("EMAIL",);
+        }
+        editor.commit();
+    }
 //thai login
     private void loginNormal() {
         String userName=Login_edt_username.getText().toString().trim();
@@ -125,6 +143,7 @@ public class Login_Activity extends AppCompatActivity {
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
                                 startActivity(intent);
+                                rememberUser(userName,password,checkBox.isChecked());
                                 return;
                             }else{
                                 Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
@@ -161,9 +180,13 @@ public class Login_Activity extends AppCompatActivity {
 //        EditText
         Login_edt_username = findViewById(R.id.login_edt_username);
         Login_edt_password = findViewById(R.id.login_edt_password);
-
+        checkBox=findViewById(R.id.login_checkBox);
 //        LinearLayout
         Login_llout_btn_submid = findViewById(R.id.login_llout_btn_submid);
-
+        //sharedPreference
+        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        Login_edt_username.setText(pref.getString("USERNAME",""));
+        Login_edt_password.setText(pref.getString("PASSWORD",""));
+        checkBox.setChecked(pref.getBoolean("REMEMBER",false));
      }
 }

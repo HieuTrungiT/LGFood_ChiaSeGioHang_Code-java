@@ -37,18 +37,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="hiện chi tiết sản phẩm,&#10;tăng giảm số lượng kèm tổng tiền&#10;thái">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="login thanh cong&#10;thai">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +117,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mmm/DuAn" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -290,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637164652852</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="login thanh cong&#10;thai">
+      <created>1637205720759</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1637205720759</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,7 +322,8 @@
     <MESSAGE value="login normal&#10;add item custom&#10;thái" />
     <MESSAGE value="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*" />
     <MESSAGE value="hiện chi tiết sản phẩm,&#10;tăng giảm số lượng kèm tổng tiền&#10;thái" />
-    <option name="LAST_COMMIT_MESSAGE" value="hiện chi tiết sản phẩm,&#10;tăng giảm số lượng kèm tổng tiền&#10;thái" />
+    <MESSAGE value="login thanh cong&#10;thai" />
+    <option name="LAST_COMMIT_MESSAGE" value="login thanh cong&#10;thai" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
@@ -365,11 +365,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="93" y="93" width="1350" height="630" key="DiffContextDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1637199102121">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1637240545575">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1637127369836" />
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1637199102121" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1637240545575" />
     <state width="725" height="206" key="GridCell.Tab.0.bottom" timestamp="1637204497159">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -418,11 +418,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="269" y="65" key="SettingsEditor/0.0.1536.816@0.0.1536.816" timestamp="1637116180310" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637164654398">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637205722428">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637164654398" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637205722428" />
     <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636957907012">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -454,7 +454,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java</url>
-          <line>110</line>
+          <line>128</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
