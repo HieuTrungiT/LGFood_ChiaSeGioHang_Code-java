@@ -38,15 +38,17 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showDoc_adapter.java" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showNgang_adapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Adapter/trangChu_showNgang_adapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_trang_chu_san_pham.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_doc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_cuttom_sanpham_trangchu_ngang.xml" afterDir="false" />
+>>>>>>> parent of a4d15b4 (sửa layout thông tin tài khoản)
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,10 +357,17 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="93" y="93" width="1350" height="630" key="DiffContextDialog/0.0.1536.816@0.0.1536.816" timestamp="1636957915725" />
+<<<<<<< HEAD
     <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1637160601247">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1637160601247" />
+=======
+    <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1637127369836">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1637127369836" />
+>>>>>>> parent of a4d15b4 (sửa layout thông tin tài khoản)
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1636982658675" />
     <state width="1209" height="204" key="GridCell.Tab.0.bottom" timestamp="1637199262094">
       <screen x="0" y="0" width="1536" height="816" />
@@ -424,11 +433,15 @@
     <state x="75" y="30" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1637199359235">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
+<<<<<<< HEAD
     <state x="75" y="30" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1637199359235" />
     <state x="425" y="185" key="run.anything.popup" timestamp="1637155715675">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="425" y="185" key="run.anything.popup/0.0.1536.816@0.0.1536.816" timestamp="1637155715675" />
+=======
+    <state x="93" y="93" width="1350" height="630" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.816@0.0.1536.816" timestamp="1637028341205" />
+>>>>>>> parent of a4d15b4 (sửa layout thông tin tài khoản)
     <state x="417" y="137" width="672" height="678" key="search.everywhere.popup" timestamp="1637036962004">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
