@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="name123123" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="idgioHang123" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -37,10 +37,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="login thanh cong&#10;thai">
+    <list default="true" id="d3df7f42-435c-48cc-a581-23acce66cef5" name="Default Changelist" comment="sharePrferance&#10;quang thaie">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Model/model_Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Sin_Up_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Sin_Up_Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,33 +72,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="LGFood_duan1" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -97,9 +82,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -289,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637205720759</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="sharePrferance&#10;quang thaie">
+      <created>1637241224411</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1637241224412</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,7 +315,8 @@
     <MESSAGE value="fix thành công lỗi&#10;Quá easy&#10;Thais depj dai :*" />
     <MESSAGE value="hiện chi tiết sản phẩm,&#10;tăng giảm số lượng kèm tổng tiền&#10;thái" />
     <MESSAGE value="login thanh cong&#10;thai" />
-    <option name="LAST_COMMIT_MESSAGE" value="login thanh cong&#10;thai" />
+    <MESSAGE value="sharePrferance&#10;quang thaie" />
+    <option name="LAST_COMMIT_MESSAGE" value="sharePrferance&#10;quang thaie" />
   </component>
   <component name="WindowStateProjectService">
     <state x="395" y="95" key="#Inspections" timestamp="1636509893833">
@@ -338,11 +331,11 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1636961696862" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1637152970748">
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1637243138814">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="574" y="115" key="#com.intellij.ide.util.MemberChooser/0.0.1536.816@0.0.1536.816" timestamp="1637138393672" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1637152970748" />
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1637243138814" />
     <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1637156683278">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -370,42 +363,42 @@
     </state>
     <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1637127369836" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1637240545575" />
-    <state width="725" height="206" key="GridCell.Tab.0.bottom" timestamp="1637204497159">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1637250594837">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1132" height="178" key="GridCell.Tab.0.bottom/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
-    <state width="725" height="206" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1637204497159" />
-    <state width="725" height="206" key="GridCell.Tab.0.center" timestamp="1637204497158">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1637250594837" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1637250594837">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1132" height="178" key="GridCell.Tab.0.center/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
-    <state width="725" height="206" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1637204497158" />
-    <state width="725" height="206" key="GridCell.Tab.0.left" timestamp="1637204497158">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1637250594837" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1637250594837">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1132" height="178" key="GridCell.Tab.0.left/0.0.1536.816@0.0.1536.816" timestamp="1637138816181" />
-    <state width="725" height="206" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1637204497158" />
-    <state width="725" height="206" key="GridCell.Tab.0.right" timestamp="1637204497159">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1637250594837" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1637250594837">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1132" height="178" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1637138816182" />
-    <state width="725" height="206" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1637204497159" />
-    <state width="724" height="215" key="GridCell.Tab.1.bottom" timestamp="1637202817877">
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1637250594837" />
+    <state width="1493" height="211" key="GridCell.Tab.1.bottom" timestamp="1637250594838">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="724" height="215" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1637202817877" />
-    <state width="724" height="215" key="GridCell.Tab.1.center" timestamp="1637202817877">
+    <state width="1493" height="211" key="GridCell.Tab.1.bottom/0.0.1536.834@0.0.1536.834" timestamp="1637250594838" />
+    <state width="1493" height="211" key="GridCell.Tab.1.center" timestamp="1637250594838">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="724" height="215" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1637202817877" />
-    <state width="724" height="215" key="GridCell.Tab.1.left" timestamp="1637202817876">
+    <state width="1493" height="211" key="GridCell.Tab.1.center/0.0.1536.834@0.0.1536.834" timestamp="1637250594838" />
+    <state width="1493" height="211" key="GridCell.Tab.1.left" timestamp="1637250594838">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="724" height="215" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1637202817876" />
-    <state width="724" height="215" key="GridCell.Tab.1.right" timestamp="1637202817877">
+    <state width="1493" height="211" key="GridCell.Tab.1.left/0.0.1536.834@0.0.1536.834" timestamp="1637250594838" />
+    <state width="1493" height="211" key="GridCell.Tab.1.right" timestamp="1637250594838">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="724" height="215" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1637202817877" />
+    <state width="1493" height="211" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1637250594838" />
     <state x="407" y="179" key="MultipleFileMergeDialog" timestamp="1636966968495">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -418,11 +411,11 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="269" y="65" key="SettingsEditor/0.0.1536.816@0.0.1536.816" timestamp="1637116180310" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637205722428">
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2" timestamp="1637241226648">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.816@0.0.1536.816" timestamp="1636425652463" />
-    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637205722428" />
+    <state x="361" y="144" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1637241226648" />
     <state x="584" y="186" key="chooseDestDirectoryDialog" timestamp="1636957907012">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -443,19 +436,34 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="44" y="191" width="672" height="677" key="run.anything.popup/0.0.1536.834@0.0.1536.834" timestamp="1637204068482" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup" timestamp="1637158619018">
+    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup" timestamp="1637241209580">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="417" y="137" width="672" height="678" key="search.everywhere.popup/0.0.1536.816@0.0.1536.816" timestamp="1637036962004" />
-    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1637158619018" />
+    <state x="417" y="140" width="672" height="693" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1637241209580" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/Login_Activity.java</url>
-          <line>128</line>
-          <option name="timeStamp" value="23" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java</url>
+          <line>220</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java</url>
+          <line>223</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/lgfood_duan1/Activity/trangChu_SanPham_Activity.java</url>
+          <line>225</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
