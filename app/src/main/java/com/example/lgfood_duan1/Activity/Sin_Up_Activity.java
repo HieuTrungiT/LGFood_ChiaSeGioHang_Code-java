@@ -47,7 +47,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
             SignUp_edt_MatKhau,
             SignUp_edt_NhapLaiMatKhau,
             SignUp_edt_DiaChi,
-            SignUp_edt_SDT;
+            SignUp_edt_SDT,
+            signUp_edt_TenDangNhapKH;
     private LinearLayout
             SignUp_lv_btn_submid;
     private ImageView
@@ -195,18 +196,21 @@ public class Sin_Up_Activity extends AppCompatActivity {
 
     private void checkValidateSet() {
 
+        String tenKH=signUp_edt_TenDangNhapKH.getText().toString().trim();
         String userName=SignUp_edt_tenDangNhap.getText().toString().trim();
         String email=SignUp_edt_gmail.getText().toString().trim();
         String password=SignUp_edt_MatKhau.getText().toString().trim();
         String repeatPassword=SignUp_edt_NhapLaiMatKhau.getText().toString().trim();
         String address=SignUp_edt_DiaChi.getText().toString().trim();
         String soDienThoai=SignUp_edt_SDT.getText().toString().trim();
-
-        if (userName.length()<6 || userName.length()>50)
+        if (tenKH.length()<6 || tenKH.length()>100)
+        {
+            signUp_edt_TenDangNhapKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
+        }
+        else if (userName.length()<6 || userName.length()>50)
         {
             SignUp_edt_tenDangNhap.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
-        }else
-        if (!email.matches(emailPattern))
+        }else if (!email.matches(emailPattern))
         {
             SignUp_edt_gmail.setError("Sai định dạng Email");
         }else if (password.isEmpty() || password.length()<6)
@@ -226,7 +230,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
             //    FirebaseStorage
             node=database.getReference("Accounts");
             UUID uuid=UUID.randomUUID();
-            model_account=new model_Account(uuid.toString(),userName,password,address,email,soDienThoai,uuid.toString(),"");
+            model_account=new model_Account(uuid.toString(),tenKH,userName,password,address,email,soDienThoai,uuid.toString(),"");
             node.child(model_account.getId()).setValue(model_account);
             Intent intent=new Intent(Sin_Up_Activity.this,Login_Activity.class);
             startActivity(intent);
@@ -256,7 +260,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
         SignUp_edt_NhapLaiMatKhau=  findViewById(R.id.signUp_edt_repeatMatKhau);
         SignUp_edt_DiaChi = findViewById(R.id.signUp_edt_DiaChiKhachHang);
         SignUp_edt_SDT = findViewById(R.id.signUp_edt_phoneNumber);
-
+        signUp_edt_TenDangNhapKH=findViewById(R.id.signUp_edt_TenDangNhapKH);
 //        LinearLayout
         SignUp_lv_btn_submid= findViewById(R.id.signUp_lv_btn_submid);
 

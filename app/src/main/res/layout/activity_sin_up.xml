@@ -132,7 +132,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/signUp_edt_tenDangNhap"
+                        android:id="@+id/signUp_edt_ten"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -144,21 +144,52 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
-                            android:hint="Tên đăng nhập"
+                            android:hint="Tên khách hàng"
                             android:maxLines="1"
                             android:textSize="18sp"
                             android:padding="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/signUp_edt_tenDangNhap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/signUp_edt_ten"
+                        >
 
-                    <!--                <com.google.android.material.textfield.TextInputLayout-->
-                    <!--                    android:id="@+id/signUp_edt_gmail"-->
-                    <!--                    android:layout_width="match_parent"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                    app:layout_constraintStart_toStartOf="parent">-->
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/signUp_edt_tenKhachHang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/broder_stroke_cam"
+                            android:hint="Tên đăng nhập"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <!--                </com.google.android.material.textfield.TextInputLayout>-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/signUp_edt_gmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/signUp_edt_tenDangNhap">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/signUp_edt_gmailKH"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/broder_stroke_cam"
+                            android:hint="Nhập gmail"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/signUp_edt_tenDangNhap"
+                            tools:layout_editor_absoluteX="2dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -167,7 +198,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/signUp_edt_gmailKH">
+                        app:layout_constraintTop_toBottomOf="@+id/signUp_edt_gmail">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/signUp_edt_matKhauKH"
@@ -327,17 +358,7 @@
                     </LinearLayout>
 
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signUp_edt_gmailKH"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/broder_stroke_cam"
-                        android:hint="Nhập gmail"
-                        android:maxLines="1"
-                        android:padding="10dp"
-                        app:layout_constraintTop_toBottomOf="@+id/signUp_edt_tenDangNhap"
-                        tools:layout_editor_absoluteX="2dp" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
