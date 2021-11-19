@@ -1,7 +1,9 @@
 package com.example.lgfood_duan1.Model;
 
 public class model_Account {
+
     private String id;
+    private String realName;
     private String name;
     private String password;
     private String address;
@@ -13,8 +15,9 @@ public class model_Account {
 
     }
 
-    public model_Account(String id, String name, String password, String address, String email, String phoneNumber, String idGioHang, String anhKhachHang) {
+    public model_Account(String id, String realName, String name, String password, String address, String email, String phoneNumber, String idGioHang, String anhKhachHang) {
         this.id = id;
+        this.realName = realName;
         this.name = name;
         this.password = password;
         this.address = address;
@@ -22,6 +25,14 @@ public class model_Account {
         this.phoneNumber = phoneNumber;
         this.idGioHang = idGioHang;
         this.anhKhachHang = anhKhachHang;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getId() {

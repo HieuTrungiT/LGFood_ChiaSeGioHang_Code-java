@@ -43,6 +43,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     private TextView
             ThemSuaXoaSanPham_tv_btn_moThuMucAnh;
 
+
     private LinearLayout
             ThemSuaXoaSanPham_llout_btn_themSanPham;
 
@@ -151,15 +152,15 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                         @Override
                         public void onSuccess(Uri uri) {
                             // datetime hiện tại
-                            SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
                             Date reaDate = new Date(System.currentTimeMillis());
 //                        //      myRef chỉ con trỏ tại vị trí ""
                             myRef = database.getReference("khoHang");
 //
 //                        //      kiểm tra điều kiện nếu như có ảnh trên storage thì lưu có định dạng không thì rỗng
 
-                            listSanPham = new model_SanPham(uuid.toString(), moTaSanPham,tenSanPham,ngaySanXuatSanPham,xuatXuSanPham,loaiSanPham,tinhTrangSanPham,uri.toString(),formatter.format(reaDate).toString(),soLuongSanPham,giamGiaSanPham,giaNhapSanPham,giaBanSanPham);
-//
+                            listSanPham = new model_SanPham(uuid.toString(), moTaSanPham, tenSanPham, ngaySanXuatSanPham, xuatXuSanPham, loaiSanPham, tinhTrangSanPham, uri.toString(), formatter.format(reaDate).toString(), soLuongSanPham, giamGiaSanPham, giaNhapSanPham, giaBanSanPham);
+
 //                        //        add giá trị
                             myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
                             Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -338,7 +339,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         });
     }
 
-//  Trung: lấy giá  trị nhập vào
+    //  Trung: lấy giá  trị nhập vào
     private void getValue() {
 //        random id
         uuid = UUID.randomUUID();
