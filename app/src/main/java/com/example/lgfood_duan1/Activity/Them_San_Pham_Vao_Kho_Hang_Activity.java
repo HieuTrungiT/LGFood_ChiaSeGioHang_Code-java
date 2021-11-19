@@ -121,6 +121,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             full = data.getData();
             ThemSuaXoaSanPham_img_showImgV.setImageURI(full);
             ThemSuaXoaSanPham_img_showImgV.setVisibility(View.VISIBLE);
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
