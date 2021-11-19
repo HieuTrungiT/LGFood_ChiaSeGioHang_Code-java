@@ -60,7 +60,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 //Login normal
     String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9])|(9[0-46-9]))(\\d)(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})?(\\d)$";
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";    DatabaseReference node;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    DatabaseReference node;
     FirebaseDatabase database;
     ProgressDialog progressDialog;
     model_Account model_account;
