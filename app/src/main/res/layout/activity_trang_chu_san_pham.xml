@@ -65,47 +65,116 @@
                     app:layout_constraintStart_toEndOf="@+id/trangChuSanPham_img_showMenu"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/sanPham_edt_search"
-                        android:layout_width="match_parent"
+                    <FrameLayout
+                        android:id="@+id/sanPham_f_search"
+                        android:layout_width="0dp"
                         android:layout_height="31dp"
-                        android:layout_marginRight="45dp"
                         android:layout_marginLeft="15dp"
+                        android:layout_marginRight="5dp"
                         android:background="@drawable/broder_stroke_cam"
                         android:hint="Search"
                         android:orientation="horizontal"
 
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/trangChuSanPham_img_btn_kieuLoaiSanPham"
+                        app:layout_constraintEnd_toStartOf="@+id/trangChuSanPham_frm_loai"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:padding="7dp"
-                            android:src="@drawable/ic_timkiem" />
-
-                        <EditText
-                            android:id="@+id/trangChuSanPham_edt_timKiemSanPham"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
-                            android:paddingRight="10dp" />
-                    </LinearLayout>
+                            android:layout_marginRight="40dp">
 
-                    <ImageView
-                        android:id="@+id/trangChuSanPham_img_btn_kieuLoaiSanPham"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:background="@drawable/broder_radius_xanhduong_nhe"
-                        android:padding="7dp"
-                        android:src="@drawable/ic_tuychinh"
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|start"
+                                android:padding="8dp"
+
+                                android:src="@drawable/ic_timkiem" />
+
+                            <EditText
+                                android:id="@+id/trangChuSanPham_edt_timKiemSanPham"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:paddingRight="10dp"
+                                android:textSize="10dp"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+
+
+                        <TextView
+
+                            android:id="@+id/trangChuSanPham_tv_loai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center|end"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:text="/TÊN"
+                            android:textSize="10dp"
+                            android:textStyle="" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/trangChuSanPham_frm_loai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/trangChuSanPham_llout_formChonLoai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingRight="40dp">
+
+                            <TextView
+                                android:id="@+id/trangChuSanPham_tv_btn_timTen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="T"
+                                android:textColor="@color/lf_orange"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/trangChuSanPham_tv_btn_timGia"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="G"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/trangChuSanPham_tv_btn_timLoai"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="4dp"
+                                android:text="L"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/trangChuSanPham_img_btn_kieuLoaiSanPham"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center|end"
+                            android:background="@drawable/broder_radius_xanhduong_nhe"
+                            android:padding="7dp"
+                            android:src="@drawable/ic_tuychinh" />
+                    </FrameLayout>
+
+                    />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <FrameLayout
@@ -362,8 +431,8 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
-                                android:layout_marginBottom="55dp"
                                 android:layout_marginRight="10dp"
+                                android:layout_marginBottom="55dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.0"
