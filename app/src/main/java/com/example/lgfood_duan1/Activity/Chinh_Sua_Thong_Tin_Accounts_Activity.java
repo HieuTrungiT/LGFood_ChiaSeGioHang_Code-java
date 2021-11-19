@@ -40,8 +40,9 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
             SuaThongTinNguoiDung_edt_gmail,
             SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung,
             SuaThongTinNguoiDung_edt_diaChi,
-            SuaThongTinNguoiDung_edt_matKhau,
-            SuaThongTinNguoiDung_edt_xacNhanMatKhau;
+            SuaThongTinNguoiDung_edt_matKhauCu,
+            SuaThongTinNguoiDung_edt_nhapMatKhauCu,
+            SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi;
 
     private LinearLayout
             SuaThongTinNguoiDung_llout_suaThongTin;
@@ -69,7 +70,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
     private UUID uuid;
     private model_Account listAccount;
     private ArrayList<model_Account> arrListAccount;
-    private String itIdUser, itNameUser, itPassWordUser, itAddRessUser, itEmailUser, itMIdGioHang, itPhoneNumberUser, itMAnhKhachHang;
+    private String itIdUser, itNameUser, itPassWordUser, itAddRessUser, itEmailUser, itMIdGioHang, itRealName, itPhoneNumberUser, itMAnhKhachHang;
 
 
     @Override
@@ -84,6 +85,10 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         batSuKien();
 
     }
+
+
+    //   BT : batSuKien
+
 
     private void batSuKien() {
 //        back về 1 trang
@@ -102,6 +107,8 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
             }
         });
     }
+
+    //   BT : firebaseData
 
 
     private void firebaseData() {
@@ -125,69 +132,67 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
     }
 
+    //   BT : checkValidateSet
+
+
     private void checkValidateSet() {
         firebaseData();
-
+        String realName = SuaThongTinNguoiDung_edt_tenNguoiDung.getText().toString().trim();
         String userName = SuaThongTinNguoiDung_edt_tenDangNhap.getText().toString().trim();
         String email = SuaThongTinNguoiDung_edt_gmail.getText().toString().trim();
-        String password = SuaThongTinNguoiDung_edt_matKhau.getText().toString().trim();
-        String repeatPassword = SuaThongTinNguoiDung_edt_xacNhanMatKhau.getText().toString().trim();
+        String password = SuaThongTinNguoiDung_edt_matKhauCu.getText().toString().trim();
+        String repeatPassword = SuaThongTinNguoiDung_edt_nhapMatKhauCu.getText().toString().trim();
         String address = SuaThongTinNguoiDung_edt_diaChi.getText().toString().trim();
         String soDienThoai = SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.getText().toString().trim();
+        String newPassword = SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi.getText().toString().trim();
+
         node = database.getReference().child("Accounts").child("7334e0b0-19d3-4095-a190-738c456eb883");
 
         UUID uuid = UUID.randomUUID();
 //            listAccount=new model_Account(uuid.toString(),userName,password,address,email,soDienThoai,uuid.toString(),"");
 //            node.child(listAccount.getId()).setValue(listAccount);
-//            node.child(itIdUser).child("nameUser").setValue(userName);
-        node.child("email").setValue(email);
-//        node.child(itIdUser).child("phoneNumber").setValue(soDienThoai);
-//        node.child(itIdUser).child("address").setValue(address);
-        Intent intent = new Intent(Chinh_Sua_Thong_Tin_Accounts_Activity.this, thongTinTaiKhoan_Activity.class);
-        startActivity(intent);
-        Toast.makeText(this, "success" , Toast.LENGTH_SHORT).show();
+
 
         if (userName.length() < 6 || userName.length() > 50) {
-//            SuaThongTinNguoiDung_edt_tenDangNhap.setError("");
+            SuaThongTinNguoiDung_edt_tenDangNhap.setError("Tên đăng nhập gồm 6 - 50 kí tự");
         } else if (!email.matches(emailPattern)) {
             SuaThongTinNguoiDung_edt_gmail.setError("Sai định dạng Email");
-        } else if (password.isEmpty() || password.length() < 6) {
-//            SuaThongTinNguoiDung_edt_matKhau.setError("");
-        } else if (!password.equals(repeatPassword)) {
-//            SuaThongTinNguoiDung_edt_xacNhanMatKhau.setError("");
+
+        } else if (realName.length() < 2 || realName.length() >50) {
+            SuaThongTinNguoiDung_edt_tenNguoiDung.setError("Tên người dùng phải trên 2 kí tự");
+
         } else if (!(soDienThoai.length() == 10 || !soDienThoai.matches(reg))) {
             SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.setError("Nhập sai định dạng số điện thoại");
 
+        }else if (!(repeatPassword.equals(password))) {
+            SuaThongTinNguoiDung_edt_nhapMatKhauCu.setError("Sai mật khẩu! vui lòng nhập lại");
+
+        }else if (newPassword.isEmpty() || newPassword.length()<6) {
+            SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi.setError("Mật khẩu đang trống hoặc bé hơn 6 kí tự");
         } else if (address.length() < 6 || address.length() > 150) {
             SuaThongTinNguoiDung_edt_diaChi.setError("Địa Chỉ lớn hơn 6 và  không quá 100 kí tự");
         } else {
 
-
+            node.child("realName").setValue(realName);
+            node.child("name").setValue(userName);
+            node.child("email").setValue(email);
+            node.child("phoneNumber").setValue(soDienThoai);
+            node.child("address").setValue(address);
+            node.child("password").setValue(newPassword);
+            Intent intent = new Intent(Chinh_Sua_Thong_Tin_Accounts_Activity.this, thongTinTaiKhoan_Activity.class);
+            startActivity(intent);
+            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private boolean checkTaiKhoanTrungLap() {
-        boolean check = false;
 
-        for (int i = 0; i < arrListAccount.size(); i = i + 1) {
-            String userNameFirebase = arrListAccount.get(i).getEmail();
-            if (SuaThongTinNguoiDung_edt_gmail.equals(userNameFirebase)) {
-                check = true;
-            }
-//            if (SignUp_edt_gmail.equals(userNameShr)) {
-//                check = false;
-//            }
-        }
-
-        return check;
-
-    }
 
     //   BToàn:get Intent
     private void getIt() {
         Bundle bundle = getIntent().getExtras();
         itIdUser = bundle.getString("idUser", "");
+        itRealName = bundle.getString("realNameUse", "");
         itNameUser = bundle.getString("nameUser", "");
         itPassWordUser = bundle.getString("passWordUser", "");
         itAddRessUser = bundle.getString("addRessUser", "");
@@ -201,14 +206,19 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
     //    BT : SetValues
     private void setValue() {
 
-        SuaThongTinNguoiDung_edt_tenNguoiDung.setText(itNameUser.toString());
-
+        SuaThongTinNguoiDung_edt_tenNguoiDung.setText(itRealName.toString());
+        SuaThongTinNguoiDung_edt_tenDangNhap.setText(itNameUser.toString());
         SuaThongTinNguoiDung_edt_gmail.setText(itEmailUser.toString());
         SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.setText(itPhoneNumberUser.toString());
         SuaThongTinNguoiDung_edt_diaChi.setText(itAddRessUser.toString());
+        SuaThongTinNguoiDung_edt_matKhauCu.setText(itPassWordUser.toString());
 
 
     }
+
+
+    //    BT : ánh xạ
+
 
     private void anhXa() {
 
@@ -219,8 +229,9 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         SuaThongTinNguoiDung_edt_gmail = findViewById(R.id.suaThongTinNguoiDung_edt_gmail);
         SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung = findViewById(R.id.suaThongTinNguoiDung_edt_soDienThoaiNguoiDung);
         SuaThongTinNguoiDung_edt_diaChi = findViewById(R.id.suaThongTinNguoiDung_edt_diaChi);
-        SuaThongTinNguoiDung_edt_matKhau = findViewById(R.id.suaThongTinNguoiDung_edt_matKhau);
-        SuaThongTinNguoiDung_edt_xacNhanMatKhau = findViewById(R.id.suaThongTinNguoiDung_edt_xacNhanMatKhau);
+        SuaThongTinNguoiDung_edt_matKhauCu = findViewById(R.id.suaThongTinNguoiDung_edt_matKhauCu);
+        SuaThongTinNguoiDung_edt_nhapMatKhauCu = findViewById(R.id.suaThongTinNguoiDung_edt_nhapMatKhauCu);
+        SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi = findViewById(R.id.suaThongTinNguoiDung_edt_xacNhanMatKhauMoi);
 
 //        LinearLayout
         SuaThongTinNguoiDung_llout_suaThongTin = findViewById(R.id.suaThongTinNguoiDung_llout_suaThongTin);

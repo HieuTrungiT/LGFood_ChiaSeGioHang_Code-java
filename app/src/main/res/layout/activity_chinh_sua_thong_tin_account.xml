@@ -225,7 +225,8 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/suaThongTinNguoiDung_edt_matKhau"
+
+            android:id="@+id/suaThongTinNguoiDung_edt_matKhauCu"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/broder_stroke_cam"
@@ -235,7 +236,36 @@
             android:textSize="14sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout24"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="Nhập lại Mật khẩu cũ"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/suaThongTinNguoiDung_edt_nhapMatKhauCu"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/broder_stroke_cam"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -245,17 +275,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout24">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Xác nhận mới"
+            android:text="Nhập mật khẩu mới"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/suaThongTinNguoiDung_edt_xacNhanMatKhau"
+            android:id="@+id/suaThongTinNguoiDung_edt_xacNhanMatKhauMoi"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/broder_stroke_cam"
