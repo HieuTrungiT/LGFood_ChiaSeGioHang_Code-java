@@ -74,7 +74,6 @@
                         android:background="@drawable/broder_stroke_cam"
                         android:hint="Search"
                         android:orientation="horizontal"
-
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/trangChuSanPham_frm_loai"
@@ -113,25 +112,19 @@
                             android:layout_gravity="center|end"
                             android:layout_marginRight="10dp"
                             android:gravity="center"
+                            android:textColor="@color/lf_orange_3"
                             android:text="/TÊN"
+
                             android:textSize="10dp"
-                            android:textStyle="" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:id="@+id/trangChuSanPham_frm_loai"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
+                            android:textStyle="bold" />
                         <LinearLayout
                             android:id="@+id/trangChuSanPham_llout_formChonLoai"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:paddingRight="40dp">
+                            android:layout_gravity="end"
+                            android:visibility="invisible"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center|end">
 
                             <TextView
                                 android:id="@+id/trangChuSanPham_tv_btn_timTen"
@@ -163,6 +156,17 @@
 
 
                         </LinearLayout>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/trangChuSanPham_frm_loai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
 
                         <ImageView
                             android:id="@+id/trangChuSanPham_img_btn_kieuLoaiSanPham"
