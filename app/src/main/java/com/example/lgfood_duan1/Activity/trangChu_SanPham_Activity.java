@@ -10,12 +10,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -23,10 +28,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Adapter.trangChu_showDoc_adapter;
 import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
+import com.example.lgfood_duan1.Model.model_Account;
+import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.navigation.NavigationView;
@@ -37,6 +46,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class trangChu_SanPham_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -494,12 +504,18 @@ String idGioHang;
         TrangChuSanPham_rscV_showSanPhamDoc.setLayoutManager(new GridLayoutManager(this, 2));
         TrangChuSanPham_rscV_showSanPhamDoc.setItemAnimator(new DefaultItemAnimator());
         //        Initilize
-        TrangChu_showDoc_adapter = new trangChu_showDoc_adapter(arrListSp, trangChu_SanPham_Activity.this);
+        TrangChu_showDoc_adapter = new trangChu_showDoc_adapter(arrListSp, trangChu_SanPham_Activity.this, new trangChu_showDoc_adapter.IClickListener() {
+            @Override
+            public void onClickShowItem(model_SanPham sanPham) {
+                showItemChiTietSanPham(sanPham);
+            }
+        });
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
     }
 
     //Trung: lấy dữ liệu sản phẩm trên firebase về
     private void getDataFirebase() {
+        Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size()+"", Toast.LENGTH_SHORT).show();
 
         dataSanPhamRef = dataSanPham.getReference().child("khoHang");
         dataSanPhamRef.addValueEventListener(new ValueEventListener() {
@@ -513,6 +529,8 @@ String idGioHang;
                     arrSanPham = child.getValue(model_SanPham.class);
                     arrListSanPham.add(arrSanPham);
                 }
+
+                Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.get(1).getTenSanPham()+"", Toast.LENGTH_SHORT).show();
                 showListProduc_Vartical(arrListSanPham);
                 TrangChu_showNgang_adapter.notifyDataSetChanged();
             }
@@ -644,7 +662,6 @@ return;
         @Override
         public void onClick(View v) {
             String idProduct=sanPham.getIdSanPham();
-            dataSanPhamRef = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Accounts");
             dataSanPhamRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -682,6 +699,7 @@ return;
         arrListSanPham = new ArrayList<model_SanPham>();
 
         //Firebase
+        dataSanPhamRef = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Accounts");
         dataSanPham = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
         TrangChuSanPham_img_showMenu = findViewById(R.id.trangChuSanPham_img_showMenu);
