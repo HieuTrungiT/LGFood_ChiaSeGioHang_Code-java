@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.R;
-import com.example.lgfood_duan1.khoHang_Activity;
+import com.example.lgfood_duan1.Activity.khoHang_Activity;
 
 import java.util.ArrayList;
 import java.util.List;
