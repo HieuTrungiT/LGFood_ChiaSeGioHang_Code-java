@@ -613,6 +613,46 @@
                 </LinearLayout>
 
 
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/themSuaXoaSanPham_llout_btn_xoaSanPham"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/broder_radius_cam_thuonghieu"-->
+<!--                    android:gravity="center"-->
+<!--                    android:visibility="invisible">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="Xóa"-->
+<!--                        android:textColor="#E85243"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/themSuaXoaSanPham_llout_btn_suaSanPham"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/broder_radius_cam_thuonghieu"-->
+<!--                    android:gravity="center"-->
+<!--                    android:visibility="invisible">-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="Sửa"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="19sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+
+
             </FrameLayout>
 
         </FrameLayout>

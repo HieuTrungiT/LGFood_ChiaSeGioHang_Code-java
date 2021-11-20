@@ -49,7 +49,6 @@
         android:layout_height="1dp"
         android:alpha="0.5"
         android:background="@color/lf_orange"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chinhSua_toolBar" />

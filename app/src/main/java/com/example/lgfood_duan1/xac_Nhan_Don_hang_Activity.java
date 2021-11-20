@@ -1,12 +1,17 @@
 package com.example.lgfood_duan1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
 
@@ -26,6 +31,37 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xac_nhan_don_hang);
         anhXa();
+
+        BottomNavigationView navigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+        navigationView.setSelectedItemId(R.id.cart);
+        navigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart:
+                        startActivity(new Intent(getApplicationContext(),
+                                gio_Hang_Activity.class));
+                        overridePendingTransition(0,0);
+                        return;
+                    case R.id.Like:
+                        return;
+                    case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(),
+                                trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0,0);
+                        return;
+                    case R.id.Paid:
+
+                    case R.id.Use:
+                        startActivity(new Intent(getApplicationContext(),
+                                Chinh_Sua_Thong_Tin_Accounts_Activity.class));
+                        overridePendingTransition(0,0);
+                        return;
+                }
+                return ;
+            }
+        });
+
     }
 
 //    Bảo Toàn: kiểm tra dữ liệu đầu vào
