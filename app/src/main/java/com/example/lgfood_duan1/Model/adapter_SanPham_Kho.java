@@ -24,14 +24,29 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
 
 
     private khoHang_Activity context;
+    private IClickLinstenr iClickLinstenr;
 
-    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
-        this.arrListSanPham = arrListSanPham;
-        this.context = context;
-    }
+
+
+   public interface IClickLinstenr{
+       void onClickCHinhSuaItem (model_SanPham sanPham);
+
+   }
+
+
+//    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
+//        this.arrListSanPham = arrListSanPham;
+//        this.context = context;
+//    }
 
     public adapter_SanPham_Kho(khoHang_Activity khoHang_activity, int item_custom2, ArrayList<model_SanPham> arrayList) {
 
+    }
+
+    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context, IClickLinstenr iClickLinstenr) {
+        this.arrListSanPham = arrListSanPham;
+        this.context = context;
+        this.iClickLinstenr = iClickLinstenr;
     }
 
     @Override
@@ -45,6 +60,7 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
     @Override
     public void onBindViewHolder(@NonNull  adapter_SanPham_Kho.ViewHolder holder, int position) {
 
+        model_SanPham sanPham=arrListSanPham.get(position);
         Glide.with(context)
                 .load(arrListSanPham.get(position).getAnhSanPham())
                 .into(holder.imageView);
@@ -64,22 +80,17 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
         });
 
 
+
+
         holder.XuLi_relative_formItem2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //             chuyển dữ liệu quá trang kho hàng add vô bule
-                String idSanPham = arrListSanPham.get(position).getIdSanPham();
-                String anhSanPham = arrListSanPham.get(position).getAnhSanPham();
-                String tenSanPham = arrListSanPham.get(position).getTenSanPham();
-                String giaNhapSanPham = String.valueOf( arrListSanPham.get(position).getGiaNhapSanPham()) ;
-                String giaSanPham = String.valueOf(arrListSanPham.get(position).getGiaBanSanPham());
-                String giamGiaSanPham =String.valueOf( arrListSanPham.get(position).getGiamGiaSanPham());
-                String soLuongSanPham = String.valueOf(arrListSanPham.get(position).getSoLuongSanPham());
-                String xuatXu = arrListSanPham.get(position).getXuatXuSanPham();
-                String ngaySanXuat = String.valueOf(arrListSanPham.get(position).getNgaySanXuatSanPham());
-                String loaiSanPham = arrListSanPham.get(position).getLoaiSanPham();
 
-                context.setShowItem_gioHang(idSanPham, anhSanPham, tenSanPham, giaSanPham, giamGiaSanPham , soLuongSanPham, giaNhapSanPham ,xuatXu, ngaySanXuat, loaiSanPham);
+                iClickLinstenr.onClickCHinhSuaItem(sanPham);
+
+//                context.setShowItem_gioHang(idSanPham, anhSanPham, tenSanPham, giaSanPham,
+//                        giamGiaSanPham , soLuongSanPham, giaNhapSanPham ,xuatXu, ngaySanXuat, loaiSanPham);
             }
         });
 
