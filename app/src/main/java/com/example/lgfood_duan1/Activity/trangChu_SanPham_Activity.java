@@ -1,5 +1,6 @@
 package com.example.lgfood_duan1.Activity;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -103,11 +105,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 //    sp Slider
 
     SliderView sliderView;
-    int[] images_slider = { R.drawable.img_panner,R.drawable.img_panner,R.drawable.img_panner};
+    int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
 
     //Firebase
-    private DatabaseReference dataSanPhamRef;
-    private FirebaseDatabase dataSanPham;
+    private DatabaseReference dataRef,dataAccoutRef;
+    private FirebaseDatabase database;
     //    Model
     ArrayList<model_SanPham> arrListSanPham;
     model_SanPham arrSanPham;
@@ -117,9 +119,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     trangChu_showNgang_adapter TrangChu_showNgang_adapter;
 
     int timkiem = 0;
-//biến số lượng và id giỏ hàng
-int i=1;
-String idGioHang;
+    //biến số lượng và id giỏ hàng
+    int i = 1;
+    String idGioHang;
 
 
     @Override
@@ -137,6 +139,7 @@ String idGioHang;
 
     }
 
+//    BT: showSlider
     private void showSlider() {
         sliderView = findViewById(R.id.linearLayout2);
 
@@ -163,7 +166,7 @@ String idGioHang;
                 }
             }
             showListProduc_Vartical(arrListSanPhamTimKiem);
-            TrangChuSanPham_tv_loai.setText("/"+arrListSanPhamTimKiem.size()+"SP/TÊN");
+            TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/TÊN");
 
         }
 
@@ -183,7 +186,7 @@ String idGioHang;
                 }
             }
             showListProduc_Vartical(arrListSanPhamTimKiem);
-            TrangChuSanPham_tv_loai.setText("/"+arrListSanPhamTimKiem.size()+"SP/GIÁ");
+            TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/GIÁ");
 
         }
 
@@ -201,7 +204,7 @@ String idGioHang;
                     arrListSanPhamTimKiem.add(arrlSanPham.get(i));
                 }
             }
-            TrangChuSanPham_tv_loai.setText("/"+arrListSanPhamTimKiem.size()+"SP/LOẠI");
+            TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/LOẠI");
             showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
@@ -219,7 +222,7 @@ String idGioHang;
                     if (giaTriTimKiem.isEmpty()) {
                         TrangChuSanPham_edt_timKiemSanPham.setText("");
                         showListProduc_Vartical(arrListSanPham);
-                        TrangChuSanPham_tv_loai.setText("/"+arrListSanPham.size()+"SP/TÊN");
+                        TrangChuSanPham_tv_loai.setText("/" + arrListSanPham.size() + "SP/TÊN");
 
                     } else {
                         timKiemTen(arrListSanPham, giaTriTimKiem);
@@ -236,7 +239,7 @@ String idGioHang;
                     if (giaTriTimKiem.isEmpty()) {
                         TrangChuSanPham_edt_timKiemSanPham.setText("");
                         showListProduc_Vartical(arrListSanPham);
-                        TrangChuSanPham_tv_loai.setText("/"+arrListSanPham.size()+"SP/GIÁ");
+                        TrangChuSanPham_tv_loai.setText("/" + arrListSanPham.size() + "SP/GIÁ");
 
                     } else {
                         timKiemGia(arrListSanPham, giaTriTimKiem);
@@ -245,7 +248,7 @@ String idGioHang;
                     return false;
                 }
             });
-        } else if(timkiem == 2) {
+        } else if (timkiem == 2) {
             TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -253,7 +256,7 @@ String idGioHang;
                     if (giaTriTimKiem.isEmpty()) {
                         TrangChuSanPham_edt_timKiemSanPham.setText("");
                         showListProduc_Vartical(arrListSanPham);
-                        TrangChuSanPham_tv_loai.setText("/"+arrListSanPham.size()+"SP/LOẠI");
+                        TrangChuSanPham_tv_loai.setText("/" + arrListSanPham.size() + "SP/LOẠI");
 
                     } else {
                         timKiemLoai(arrListSanPham, giaTriTimKiem);
@@ -540,22 +543,21 @@ String idGioHang;
 
     //Trung: lấy dữ liệu sản phẩm trên firebase về
     private void getDataFirebase() {
-        Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size()+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size()+ "", Toast.LENGTH_SHORT).show();
 
-        dataSanPhamRef = dataSanPham.getReference().child("khoHang");
-        dataSanPhamRef.addValueEventListener(new ValueEventListener() {
+        dataRef = database.getReference().child("khoHang");
+        dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 arrListSanPham.clear();
-//                arrListSanPham.clear();
 //                Chạy vòng lặp kiểm tra dữ liệu
                 for (DataSnapshot child : snapshot.getChildren()) {
                     arrSanPham = child.getValue(model_SanPham.class);
                     arrListSanPham.add(arrSanPham);
                 }
 
-                Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.get(1).getTenSanPham()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.get(1).getTenSanPham() + "", Toast.LENGTH_SHORT).show();
                 showListProduc_Vartical(arrListSanPham);
                 TrangChu_showNgang_adapter.notifyDataSetChanged();
             }
@@ -598,6 +600,33 @@ String idGioHang;
     }
 
     @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.drawer_nav_login:
+
+                break;
+            case R.id.drawer_nav_logout:
+
+                break;
+
+            case R.id.drawer_nav_profile:
+                Intent intent = new Intent(trangChu_SanPham_Activity.this,thongTinTaiKhoan_Activity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.drawer_nav_rate:
+
+                break;
+
+            case R.id.drawer_nav_share:
+
+                break;
+        }
+        TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
+        return true;
+    }
+    @Override
     public void onBackPressed() {
         if (TrangChuSanPham_drawerllout_main.isDrawerVisible(GravityCompat.START)) {
             TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
@@ -608,114 +637,115 @@ String idGioHang;
     }
 
 
-//thai:onClickItemSanPham
-private void showItemChiTietSanPham(model_SanPham sanPham) {
-    final Dialog dialog = new Dialog(this);
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    dialog.setContentView(R.layout.layout_dat_nhanh);
+    //thai:onClickItemSanPham
+    private void showItemChiTietSanPham(model_SanPham sanPham) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dat_nhanh);
 
-    LinearLayout datNhanh_linear_turnOffDiaLog=dialog.findViewById(R.id.datNhanh_linear_turnOffDiaLog);
-   //thong tin san pham
-    ImageView datNhanh_img_showAnhSanPham=dialog.findViewById(R.id.datNhanh_img_showAnhSanPham);
-    TextView datNhanh_tv_xuatXuSanPham=dialog.findViewById(R.id.datNhanh_tv_xuatXuSanPham);
-    TextView datNhanh_tv_showTenSanPham=dialog.findViewById(R.id.datNhanh_tv_showTenSanPham);
-    TextView datNhanh_tv_giaSanPham=dialog.findViewById(R.id.datNhanh_tv_giaSanPham);
-    TextView datNhanh_tv_giamGiaSanPham=dialog.findViewById(R.id.datNhanh_tv_giamGiaSanPham);
-    TextView datNhanh_tv_ngaySanXuat=dialog.findViewById(R.id.datNhanh_tv_ngaySanXuat);
-    TextView datNhanh_tv_soLuongSanPhamTrongKho=dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
-    TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua=dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
-    TextView datNhanh_tv_moTaSanPham=dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
+        LinearLayout datNhanh_linear_turnOffDiaLog = dialog.findViewById(R.id.datNhanh_linear_turnOffDiaLog);
+        //thong tin san pham
+        ImageView datNhanh_img_showAnhSanPham = dialog.findViewById(R.id.datNhanh_img_showAnhSanPham);
+        TextView datNhanh_tv_xuatXuSanPham = dialog.findViewById(R.id.datNhanh_tv_xuatXuSanPham);
+        TextView datNhanh_tv_showTenSanPham = dialog.findViewById(R.id.datNhanh_tv_showTenSanPham);
+        TextView datNhanh_tv_giaSanPham = dialog.findViewById(R.id.datNhanh_tv_giaSanPham);
+        TextView datNhanh_tv_giamGiaSanPham = dialog.findViewById(R.id.datNhanh_tv_giamGiaSanPham);
+        TextView datNhanh_tv_ngaySanXuat = dialog.findViewById(R.id.datNhanh_tv_ngaySanXuat);
+        TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
+        TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
+        TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
 
-   //tang giam so luong sp
-    ImageView datNhanh_img_btn_giamSoLuongSanPham=dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
-    TextView datNhanh_tv_SoLuongSanpham=dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
-    ImageView datNhanh_img_btn_tangSoLuongSanPham=dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
+        //tang giam so luong sp
+        ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
+        TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
+        ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
 
-    Button datNhanh_btn_themSanPhamVaoGioHang=dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
-    Glide.with(trangChu_SanPham_Activity.this)
-            .load(sanPham.getAnhSanPham())
-            .into(datNhanh_img_showAnhSanPham);
-    datNhanh_tv_xuatXuSanPham.setText(sanPham.getXuatXuSanPham());
-    datNhanh_tv_showTenSanPham.setText(sanPham.getTenSanPham());
-    datNhanh_tv_giaSanPham.setText(sanPham.getGiaBanSanPham()+"00đ");
-    datNhanh_tv_giamGiaSanPham.setText("   -"+sanPham.getGiamGiaSanPham());
-    datNhanh_tv_ngaySanXuat.setText(sanPham.getNgaySanXuatSanPham());
-    datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(sanPham.getSoLuongSanPham()));
+        Glide.with(trangChu_SanPham_Activity.this)
+                .load(sanPham.getAnhSanPham())
+                .into(datNhanh_img_showAnhSanPham);
+        datNhanh_tv_xuatXuSanPham.setText(sanPham.getXuatXuSanPham());
+        datNhanh_tv_showTenSanPham.setText(sanPham.getTenSanPham());
+        datNhanh_tv_giaSanPham.setText(sanPham.getGiaBanSanPham() + "00đ");
+        datNhanh_tv_giamGiaSanPham.setText("   -" + sanPham.getGiamGiaSanPham());
+        datNhanh_tv_ngaySanXuat.setText(sanPham.getNgaySanXuatSanPham());
+        datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(sanPham.getSoLuongSanPham()));
 //        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
-    datNhanh_tv_moTaSanPham.setText(sanPham.getMoTaSanPham());
+        datNhanh_tv_moTaSanPham.setText(sanPham.getMoTaSanPham());
 
-    //giam so luong san pham
-    datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            i--;
-            if (i<=1){
-                i=1;
-                datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-                datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i*sanPham.getGiaBanSanPham()));
-return;
-            }else {
-                datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-                datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i*sanPham.getGiaBanSanPham()));
+        //giam so luong san pham
+        datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i--;
+                if (i <= 1) {
+                    i = 1;
+                    datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+                    return;
+                } else {
+                    datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+                }
+
+
             }
+        });
+        //tang so luong san pham
+        datNhanh_img_btn_tangSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+            }
+        });
+        //turn off dialog
+        datNhanh_linear_turnOffDiaLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                i = 1;
+            }
+        });
 
 
-        }
-    });
-    //tang so luong san pham
-    datNhanh_img_btn_tangSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            i++;
-            datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-            datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i*sanPham.getGiaBanSanPham()));
-        }
-    });
-    //turn off dialog
-    datNhanh_linear_turnOffDiaLog.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            dialog.dismiss();
-            i=1;
-        }
-    });
-
-
-    //add to cart
-    datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String idProduct=sanPham.getIdSanPham();
-            dataSanPhamRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                        model_Account account=dataSnapshot.getValue(model_Account.class);
-                        idGioHang=String.valueOf(account.getIdGioHang());
+        //add to cart
+        datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String idProduct = sanPham.getIdSanPham();
+                dataRef = database.getReference("Accounts");
+                dataRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            model_Account account = dataSnapshot.getValue(model_Account.class);
+                            idGioHang = String.valueOf(account.getIdGioHang());
+                        }
+                        UUID uuid = UUID.randomUUID();
+                        String idChiTietSanPham = String.valueOf(uuid);
+                        model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
+                        dataRef = database.getReference("GioHangs");
+                        dataRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
                     }
-                    UUID uuid=UUID.randomUUID();
-                    String idChiTietSanPham=String.valueOf(uuid);
-                    model_Cart cart=new model_Cart(idChiTietSanPham,idProduct,i+"");
-                    dataSanPhamRef=dataSanPham.getReference("GioHangs");
-                    dataSanPhamRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-        }
-    });
+                    }
+                });
+            }
+        });
 
-    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
-    dialog.getWindow().setGravity(Gravity.BOTTOM);
-    dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
 
-}
+    }
 
 
     //     Ánh xạ
@@ -724,8 +754,7 @@ return;
         arrListSanPham = new ArrayList<model_SanPham>();
 
         //Firebase
-        dataSanPhamRef = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("Accounts");
-        dataSanPham = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
         TrangChuSanPham_img_showMenu = findViewById(R.id.trangChuSanPham_img_showMenu);
         TrangChuSanPham_img_btn_thongBao = findViewById(R.id.trangChuSanPham_img_btn_thongBao);
@@ -779,32 +808,6 @@ return;
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.drawer_nav_login:
-
-                break;
-            case R.id.drawer_nav_logout:
-
-                break;
-
-            case R.id.drawer_nav_profile:
-
-                break;
-
-            case R.id.drawer_nav_rate:
-
-                break;
-
-            case R.id.drawer_nav_share:
-
-                break;
-        }
-        TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
 
 
