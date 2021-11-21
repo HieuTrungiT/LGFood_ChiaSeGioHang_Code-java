@@ -575,7 +575,7 @@ String idGioHang;
         TrangChuSanPham_drawerllout_main.addDrawerListener(toggle);
         toggle.syncState();
 
-        TrangChuSanPham_nav_drawer.setNavigationItemSelectedListener(this);
+        TrangChuSanPham_nav_drawer.setNavigationItemSelectedListener(trangChu_SanPham_Activity.this);
         TrangChuSanPham_nav_drawer.bringToFront();
         TrangChuSanPham_nav_drawer.setCheckedItem(R.id.drawer_nav_login);
         /*           Phần quyền đăng nhập           */
@@ -754,7 +754,7 @@ return;
         //        LinearLayout
         TrangChuSanPham_llout_formChonLoai = findViewById(R.id.trangChuSanPham_llout_formChonLoai);
         //        NavigationView
-//        TrangChuSanPham_nav_drawer = findViewById(R.id.trangChuSanPham_nav_drawer);
+        TrangChuSanPham_nav_drawer = findViewById(R.id.trangChuSanPham_nav_drawer);
         //  EditText
         TrangChuSanPham_edt_timKiemSanPham = findViewById(R.id.trangChuSanPham_edt_timKiemSanPham);
         //       layout datnhanh
