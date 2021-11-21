@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.lgfood_duan1.Adapter.showSlider_adaper;
 import com.example.lgfood_duan1.Adapter.trangChu_showDoc_adapter;
 import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
@@ -44,6 +45,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -95,6 +99,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             DatNhanh_btn_themSanPhamVaoGioHang;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
+
+//    sp Slider
+
+    SliderView sliderView;
+    int[] images_slider = { R.drawable.img_panner,R.drawable.img_panner,R.drawable.img_panner};
+
     //Firebase
     private DatabaseReference dataSanPhamRef;
     private FirebaseDatabase dataSanPham;
@@ -105,6 +115,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     trangChu_showDoc_adapter TrangChu_showDoc_adapter;
 
     trangChu_showNgang_adapter TrangChu_showNgang_adapter;
+
     int timkiem = 0;
 //biến số lượng và id giỏ hàng
 int i=1;
@@ -122,6 +133,20 @@ String idGioHang;
         getDataFirebase();
         showListProduc_Horizoltal();
         timKiem();
+        showSlider();
+
+    }
+
+    private void showSlider() {
+        sliderView = findViewById(R.id.linearLayout2);
+
+        showSlider_adaper showSliderAdaper = new showSlider_adaper(images_slider);
+
+        sliderView.setSliderAdapter(showSliderAdaper);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        sliderView.startAutoCycle();
+
 
     }
 
@@ -729,7 +754,7 @@ return;
         //        LinearLayout
         TrangChuSanPham_llout_formChonLoai = findViewById(R.id.trangChuSanPham_llout_formChonLoai);
         //        NavigationView
-        TrangChuSanPham_nav_drawer = findViewById(R.id.trangChuSanPham_nav_drawer);
+//        TrangChuSanPham_nav_drawer = findViewById(R.id.trangChuSanPham_nav_drawer);
         //  EditText
         TrangChuSanPham_edt_timKiemSanPham = findViewById(R.id.trangChuSanPham_edt_timKiemSanPham);
         //       layout datnhanh
@@ -737,6 +762,8 @@ return;
         DatNhanh_img_showAnhSanPham = findViewById(R.id.datNhanh_img_showAnhSanPham);
         DatNhanh_img_btn_giamSoLuongSanPham = findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
         DatNhanh_img_btn_tangSoLuongSanPham = findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
+
+
         //        TextView
         DatNhanh_tv_showTenSanPham = findViewById(R.id.datNhanh_tv_showTenSanPham);
         DatNhanh_tv_giaSanPham = findViewById(R.id.datNhanh_tv_giaSanPham);

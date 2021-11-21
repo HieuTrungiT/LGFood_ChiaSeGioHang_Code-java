@@ -253,20 +253,33 @@
                         android:layout_height="wrap_content">
 
 
-                        <LinearLayout
+                        <com.smarteist.autoimageslider.SliderView
                             android:id="@+id/linearLayout2"
                             android:layout_width="match_parent"
                             android:layout_height="215dp"
+                            app:sliderAnimationDuration="600"
+                            app:sliderAutoCycleDirection="back_and_forth"
+                            app:sliderAutoCycleEnabled="true"
+                            app:sliderIndicatorAnimationDuration="600"
+                            app:sliderIndicatorGravity="center_horizontal|bottom"
+                            app:sliderIndicatorMargin="15dp"
+                            app:sliderIndicatorOrientation="horizontal"
+                            app:sliderIndicatorPadding="3dp"
+                            app:sliderIndicatorRadius="2dp"
+                            app:sliderIndicatorSelectedColor="#5A5A5A"
+                            app:sliderIndicatorUnselectedColor="#fff"
+                            app:sliderScrollTimeInSec="2"
+                            app:sliderStartAutoCycle="true"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/img_panner" />
-                        </LinearLayout>
+<!--                            <ImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:scaleType="fitXY"-->
+<!--                                android:src="@drawable/img_panner" />-->
+                        </com.smarteist.autoimageslider.SliderView>
 
                         <HorizontalScrollView
                             android:id="@+id/horizontalScrollView"
