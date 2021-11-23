@@ -17,6 +17,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -545,7 +546,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private void getDataFirebase() {
         Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size()+ "", Toast.LENGTH_SHORT).show();
 
-        dataRef = database.getReference().child("khoHang");
+        dataRef = database.getReference("khoHang");
+        Log.d("data",dataRef+"");
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -754,7 +756,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         arrListSanPham = new ArrayList<model_SanPham>();
 
         //Firebase
-        database = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
         TrangChuSanPham_img_showMenu = findViewById(R.id.trangChuSanPham_img_showMenu);
         TrangChuSanPham_img_btn_thongBao = findViewById(R.id.trangChuSanPham_img_btn_thongBao);
