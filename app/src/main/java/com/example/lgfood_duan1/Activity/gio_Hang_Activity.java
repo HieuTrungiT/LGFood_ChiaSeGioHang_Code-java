@@ -1,8 +1,11 @@
 package com.example.lgfood_duan1.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.lgfood_duan1.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class gio_Hang_Activity extends AppCompatActivity {
     private ImageView
@@ -66,6 +70,40 @@ public class gio_Hang_Activity extends AppCompatActivity {
 //        ListView
 
         GioHang_lv_showGioHang = findViewById(R.id.gioHang_lv_showGioHang);
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.cart);
+
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart:
+
+                        return;
+                    case R.id.Like:
+//                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+//                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Paid:
+//                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+//                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Use:
+                        startActivity(new Intent(getApplicationContext(),Chinh_Sua_Thong_Tin_Accounts_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                }
+            }
+        });
+
 
     }
 

@@ -96,6 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -200,13 +201,13 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/gioHang_lv_showGioHang"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="130dp"
-            android:id="@+id/gioHang_lv_showGioHang"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
         </ListView>
@@ -277,6 +278,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/CACTHAI"
             android:layout_width="match_parent"
             android:layout_height="73dp"
             android:orientation="horizontal"
@@ -307,5 +309,28 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
+        tools:ignore="MissingConstraints,NotSibling">
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/trangChuSanPham_bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded"
+            app:itemIconTint="@color/nav_color"
+            app:itemTextColor="@color/black"
+            app:menu="@menu/bottom_navigation">
+            <!--            android:layout_alignParentBottom="true">-->
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
