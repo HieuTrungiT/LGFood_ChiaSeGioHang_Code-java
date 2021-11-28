@@ -760,7 +760,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         arrListSanPham = new ArrayList<model_SanPham>();
 
         //Firebase
-        database = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
         TrangChuSanPham_img_showMenu = findViewById(R.id.trangChuSanPham_img_showMenu);
         TrangChuSanPham_img_btn_thongBao = findViewById(R.id.trangChuSanPham_img_btn_thongBao);

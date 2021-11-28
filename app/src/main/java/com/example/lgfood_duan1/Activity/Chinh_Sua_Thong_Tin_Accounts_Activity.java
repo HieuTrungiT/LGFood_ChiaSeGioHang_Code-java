@@ -114,7 +114,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
     private void firebaseData() {
 
         //         Gán giá trị trong firebase
-        database = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         myRef = database.getReference().child("Accounts").child("7334e0b0-19d3-4095-a190-738c456eb883");
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -242,7 +242,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 //        Firebase auth
         mAuth = FirebaseAuth.getInstance();
 //        Firebase realtime
-        database.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
 }
