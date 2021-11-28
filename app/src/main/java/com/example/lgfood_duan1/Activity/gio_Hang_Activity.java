@@ -6,14 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class gio_Hang_Activity extends AppCompatActivity {
     private ImageView
@@ -33,7 +41,12 @@ public class gio_Hang_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
         anhXa();
+
+
     }
+
+
+
 
     //    Bảo Toàn: kiểm tra dữ liệu đầu vào
     private void checkValidateSet(){
@@ -44,6 +57,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private void batSuKien(){
 
     }
+
+
+
 
 
     //     Ánh xạ đây nè :D
