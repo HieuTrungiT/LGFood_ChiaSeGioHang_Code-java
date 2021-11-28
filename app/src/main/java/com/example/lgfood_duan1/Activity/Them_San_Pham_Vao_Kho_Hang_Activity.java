@@ -516,7 +516,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
     private void anhXa() {
         //    Firebase
-        database = FirebaseDatabase.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //    FirebaseStorage
         storage = FirebaseStorage.getInstance("gs://duan1-lgfood.appspot.com");
         //    Date hiện tại
