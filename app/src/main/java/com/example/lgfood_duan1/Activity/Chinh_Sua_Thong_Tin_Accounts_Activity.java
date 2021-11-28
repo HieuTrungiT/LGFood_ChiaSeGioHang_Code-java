@@ -242,7 +242,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 //        Firebase auth
         mAuth = FirebaseAuth.getInstance();
 //        Firebase realtime
-        database.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database.getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 
 }
