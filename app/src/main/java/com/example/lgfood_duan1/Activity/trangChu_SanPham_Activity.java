@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -42,16 +43,15 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-//import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-//import com.smarteist.autoimageslider.SliderAnimations;
-//import com.smarteist.autoimageslider.SliderView;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -106,8 +106,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
 //    sp Slider
 
-//    SliderView sliderView;
-//    int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
+    SliderView sliderView;
+    int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
 
     //Firebase
     private DatabaseReference dataRef,dataAccoutRef;
@@ -137,55 +137,23 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         getDataFirebase();
         showListProduc_Horizoltal();
         timKiem();
-//        showSlider();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
-
-        bottomNavigationView.setSelectedItemId(R.id.Home);
-
-
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Like:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Home:
-
-                        return;
-                    case R.id.Paid:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Use:
-                        startActivity(new Intent(getApplicationContext(),Chinh_Sua_Thong_Tin_Accounts_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                }
-            }
-        });
+        showSlider();
 
     }
 
 //    BT: showSlider
-//    private void showSlider() {
-//        sliderView = findViewById(R.id.linearLayout2);
-//
-//        showSlider_adaper showSliderAdaper = new showSlider_adaper(images_slider);
-//
-////        sliderView.setSliderAdapter(showSliderAdaper);
-////        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-////        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
-////        sliderView.startAutoCycle();
-//
-//
-//    }
+    private void showSlider() {
+        sliderView = findViewById(R.id.linearLayout2);
+
+        showSlider_adaper showSliderAdaper = new showSlider_adaper(images_slider);
+
+        sliderView.setSliderAdapter(showSliderAdaper);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
+        sliderView.startAutoCycle();
+
+
+    }
 
     //Trung Tìm kiếm tên
     private void timKiemTen(ArrayList<model_SanPham> arrlSanPham, String value) {
@@ -642,12 +610,17 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 break;
             case R.id.drawer_nav_logout:
-
+                SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+                Intent intent2 = new Intent(trangChu_SanPham_Activity.this,Login_Activity.class);
+                startActivity(intent2);
                 break;
 
             case R.id.drawer_nav_profile:
-                Intent intent = new Intent(trangChu_SanPham_Activity.this,thongTinTaiKhoan_Activity.class);
-                startActivity(intent);
+                Intent intent3 = new Intent(trangChu_SanPham_Activity.this,thongTinTaiKhoan_Activity.class);
+                startActivity(intent3);
                 break;
 
             case R.id.drawer_nav_rate:

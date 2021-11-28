@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +43,6 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
             SuaThongTinNguoiDung_edt_matKhauCu,
             SuaThongTinNguoiDung_edt_nhapMatKhauCu,
             SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi;
-
 
     private LinearLayout
             SuaThongTinNguoiDung_llout_suaThongTin;
@@ -86,38 +83,6 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         setValue();
 //        checkValidateSet();
         batSuKien();
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
-
-        bottomNavigationView.setSelectedItemId(R.id.Use);
-
-
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Like:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Home:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Paid:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Use:
-
-                        return;
-                }
-            }
-        });
 
     }
 
