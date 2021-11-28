@@ -226,7 +226,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
             SignUp_edt_DiaChi.setError("Địa Chỉ lớn hơn 6 và  không quá 100 kí tự");
         }
         else{
-            database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
             //    FirebaseStorage
             node=database.getReference("Accounts");
             UUID uuid=UUID.randomUUID();
@@ -270,6 +270,6 @@ public class Sin_Up_Activity extends AppCompatActivity {
 //        Firebase auth
         mAuth = FirebaseAuth.getInstance();
 //        Firebase realtime
-        database.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
     }
 }
