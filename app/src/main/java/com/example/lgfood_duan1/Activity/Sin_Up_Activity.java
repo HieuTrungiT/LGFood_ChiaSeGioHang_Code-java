@@ -42,13 +42,13 @@ public class Sin_Up_Activity extends AppCompatActivity {
             Login_tv_Phone,
             Login_tv_google;
     private EditText
-            SignUp_edt_tenDangNhap,
+            signUp_edt_teDangNhapKhachHang,
             SignUp_edt_gmail,
             SignUp_edt_MatKhau,
             SignUp_edt_NhapLaiMatKhau,
             SignUp_edt_DiaChi,
             SignUp_edt_SDT,
-            signUp_edt_TenDangNhapKH;
+            signUp_edt_TenKH;
     private LinearLayout
             SignUp_lv_btn_submid;
     private ImageView
@@ -196,8 +196,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
 
     private void checkValidateSet() {
 
-        String tenKH=signUp_edt_TenDangNhapKH.getText().toString().trim();
-        String userName=SignUp_edt_tenDangNhap.getText().toString().trim();
+        String tenKH=signUp_edt_TenKH.getText().toString().trim();
+        String userName=signUp_edt_teDangNhapKhachHang.getText().toString().trim();
         String email=SignUp_edt_gmail.getText().toString().trim();
         String password=SignUp_edt_MatKhau.getText().toString().trim();
         String repeatPassword=SignUp_edt_NhapLaiMatKhau.getText().toString().trim();
@@ -205,11 +205,11 @@ public class Sin_Up_Activity extends AppCompatActivity {
         String soDienThoai=SignUp_edt_SDT.getText().toString().trim();
         if (tenKH.length()<6 || tenKH.length()>100)
         {
-            signUp_edt_TenDangNhapKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
+            signUp_edt_TenKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
         }
         else if (userName.length()<6 || userName.length()>50)
         {
-            SignUp_edt_tenDangNhap.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
+            signUp_edt_teDangNhapKhachHang.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
         }else if (!email.matches(emailPattern))
         {
             SignUp_edt_gmail.setError("Sai định dạng Email");
@@ -254,13 +254,13 @@ public class Sin_Up_Activity extends AppCompatActivity {
 
 
 //        EditText
-        SignUp_edt_tenDangNhap = findViewById(R.id.signUp_edt_TenDangNhapKH);
+        signUp_edt_teDangNhapKhachHang = findViewById(R.id.signUp_edt_teDangNhapKhachHang);
         SignUp_edt_gmail = findViewById(R.id.signUp_edt_gmailKH);
         SignUp_edt_MatKhau = findViewById(R.id.signUp_edt_matKhauKH);
         SignUp_edt_NhapLaiMatKhau=  findViewById(R.id.signUp_edt_repeatMatKhau);
         SignUp_edt_DiaChi = findViewById(R.id.signUp_edt_DiaChiKhachHang);
         SignUp_edt_SDT = findViewById(R.id.signUp_edt_phoneNumber);
-        signUp_edt_TenDangNhapKH=findViewById(R.id.signUp_edt_TenDangNhapKH);
+        signUp_edt_TenKH=findViewById(R.id.signUp_edt_TenKH);
 //        LinearLayout
         SignUp_lv_btn_submid= findViewById(R.id.signUp_lv_btn_submid);
 

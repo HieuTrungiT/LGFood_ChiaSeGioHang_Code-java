@@ -199,17 +199,17 @@
 
         </LinearLayout>
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="130dp"
-            android:id="@+id/gioHang_lv_showGioHang"
+            android:id="@+id/gioHang_rv_showGioHang"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
