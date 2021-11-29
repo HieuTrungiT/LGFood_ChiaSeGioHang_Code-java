@@ -6,10 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Adapter.addToGioHangAdapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
@@ -112,10 +121,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                             mData= database
                                     .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                                     .getReference("newCarts");
-                            modelAddToCart=new model_addToCart(sanPham.getIdSanPham(),sanPham.getAnhSanPham(),sanPham.getTenSanPham(),sanPham.getXuatXuSanPham(),String.valueOf(sanPham.getGiaBanSanPham()),modelCartArrayList.get(i).getSoLuong());
+                            modelAddToCart=new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),Integer.parseInt(modelCartArrayList.get(i).getSoLuong()),sanPham.getGiamGiaSanPham() ,sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG","")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
-                            Log.d("itemmmmm",sanPham.getTenSanPham());
-
+                            Log.d("itemmmmm",modelCartArrayList.get(i).getSoLuong());
                         }
                     }
 
@@ -146,33 +154,181 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 onClickPlusItemAddToCart(cart);
 
             }
+
+            @Override
+            public void onLongClickDelete(model_addToCart cart) {
+                onLongClickDeleteItem(cart);
+            }
+
+            @Override
+            public void onClickShowItem(model_addToCart cart) {
+                onClickShowItemChiTiet(cart);
+            }
         });
 
 
         GioHang_rv_showGioHang.setAdapter(cartAdapter);
     }
+
+    private void onClickShowItemChiTiet(model_addToCart cart) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_dat_nhanh);
+
+        LinearLayout datNhanh_linear_turnOffDiaLog = dialog.findViewById(R.id.datNhanh_linear_turnOffDiaLog);
+        //thong tin san pham
+        ImageView datNhanh_img_showAnhSanPham = dialog.findViewById(R.id.datNhanh_img_showAnhSanPham);
+        TextView datNhanh_tv_xuatXuSanPham = dialog.findViewById(R.id.datNhanh_tv_xuatXuSanPham);
+        TextView datNhanh_tv_showTenSanPham = dialog.findViewById(R.id.datNhanh_tv_showTenSanPham);
+        TextView datNhanh_tv_giaSanPham = dialog.findViewById(R.id.datNhanh_tv_giaSanPham);
+        TextView datNhanh_tv_giamGiaSanPham = dialog.findViewById(R.id.datNhanh_tv_giamGiaSanPham);
+        TextView datNhanh_tv_ngaySanXuat = dialog.findViewById(R.id.datNhanh_tv_ngaySanXuat);
+        TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
+        TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
+        TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
+
+        //tang giam so luong sp
+        ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
+        TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
+        ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
+
+        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+
+        Glide.with(gio_Hang_Activity.this)
+                .load(cart.getAnhSp())
+                .into(datNhanh_img_showAnhSanPham);
+        datNhanh_tv_xuatXuSanPham.setText(cart.getXuatXuSp());
+        datNhanh_tv_showTenSanPham.setText(cart.getTenSp());
+        datNhanh_tv_giaSanPham.setText(cart.getGiaBanSp() + "00đ");
+        datNhanh_tv_giamGiaSanPham.setText("   -" + cart.getGiamGiaSp());
+        datNhanh_tv_ngaySanXuat.setText(cart.getNgaySanXuatSp());
+        datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(cart.getSoLuongSp()));
+//        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
+        datNhanh_tv_moTaSanPham.setText(cart.getMoTaSp());
+
+        //giam so luong san pham
+        datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i--;
+                if (i <= 1) {
+                    i = 1;
+                    datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * cart.getGiaBanSp()));
+                    return;
+                } else {
+                    datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * cart.getGiaBanSp()));
+                }
+
+
+            }
+        });
+        //tang so luong san pham
+        datNhanh_img_btn_tangSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+                datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * cart.getGiaBanSp()));
+            }
+        });
+        //turn off dialog
+        datNhanh_linear_turnOffDiaLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                i = 1;
+            }
+        });
+
+
+//        //add to cart
+//        datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String idProduct = sanPham.getIdSanPham();
+//                dataRef = database.getReference("Accounts");
+//                dataRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                            model_Account account = dataSnapshot.getValue(model_Account.class);
+//                            idGioHang = String.valueOf(account.getIdGioHang());
+//                        }
+//                        UUID uuid = UUID.randomUUID();
+//                        String idChiTietSanPham = String.valueOf(uuid);
+//                        model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
+//                        dataRef = database.getReference("GioHangs");
+//                        dataRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+//            }
+//        });
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+
+
+    }
+
+    private void onLongClickDeleteItem(model_addToCart cart) {
+
+        new AlertDialog.Builder(gio_Hang_Activity.this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage("Bạn chắc chắn muốn xóa item này không?")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        database=FirebaseDatabase
+                                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                        mData=database.getReference("newCarts");
+
+                        mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError error, DatabaseReference ref) {
+
+                                Toast.makeText(gio_Hang_Activity.this, "Delete item success", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
+                })
+
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
     //giam so luong san pham: thai
     private void onClickMinusItemAddToCart(model_addToCart cart) {
         mData= database
                 .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("newCarts");
-        i= Integer.parseInt(cart.getSoLuong());
+        i= cart.getSoLuongSp();
         i--;
         if (i <= 1) {
             i = 1;
-            cart.setSoLuong(i+"");
+            cart.setSoLuongSp(i);
             mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
             return;
         } else {
-            cart.setSoLuong(i+"");
+            cart.setSoLuongSp(i);
             mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
         }
     }
     //tang so luong san pham:thai
     private void onClickPlusItemAddToCart(model_addToCart cart) {
-        i= Integer.parseInt(cart.getSoLuong());
+        i= cart.getSoLuongSp();
         i++;
-        cart.setSoLuong(i+"");
+        cart.setSoLuongSp(i);
         mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
 //        datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
 //        datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
@@ -191,11 +347,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 if (cart != null) {
                     cartArrayList
                             .add(new model_addToCart(cart.getIdSp(),
-                                    cart.getAnhSp()
-                                    , cart.getTenSp()
-                                    , cart.getXuatXu()
-                                    , cart.getGiaSp()
-                                    , cart.getSoLuong()));
+                                    cart.getMoTaSp(),
+                                    cart.getTenSp(),
+                                    cart.getNgaySanXuatSp(),
+                                    cart.getXuatXuSp(),
+                                    cart.getLoaiSp(),
+                                    cart.getTinhTrangSp(),
+                                    cart.getAnhSp(),
+                                    cart.getNgayNhapSp(),
+                                    cart.getSoLuongSp(),
+                                    cart.getGiamGiaSp(),
+                                    cart.getGiaNhapSp(),
+                                    cart.getGiaBanSp()));
                     cartAdapter.notifyDataSetChanged();
 
                 }
@@ -217,7 +380,17 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                model_addToCart cart=snapshot.getValue(model_addToCart.class);
+                if (cart==null || cartArrayList==null || cartArrayList.isEmpty()){
+                    return;
+                }
+                for (int i =0; i<cartArrayList.size();i++){
+                    if (cart.getIdSp()==cartArrayList.get(i).getIdSp()){
+                        cartArrayList.remove(cartArrayList.get(i));
+                        break;
+                    }
+                }
+                cartAdapter.notifyDataSetChanged();
             }
 
             @Override

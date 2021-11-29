@@ -3,23 +3,41 @@ package com.example.lgfood_duan1.Model;
 public class model_addToCart {
     private String
             idSp,
-    anhSp,
-    tenSp,
-    xuatXu,
-    giaSp,
-    soLuong;
+            moTaSp,
+            tenSp,
+            ngaySanXuatSp,
+            xuatXuSp,
+            loaiSp,
+            tinhTrangSp,
+            anhSp,
+            ngayNhapSp;
+
+    private int
+            soLuongSp,
+            giamGiaSp;
+
+    private double
+            giaNhapSp,
+            giaBanSp;
 
     public model_addToCart(){
 
     }
 
-    public model_addToCart(String idSp, String anhSp, String tenSp, String xuatXu, String giaSp, String soLuong) {
+    public model_addToCart(String idSp, String moTaSp, String tenSp, String ngaySanXuatSp, String xuatXuSp, String loaiSp, String tinhTrangSp, String anhSp, String ngayNhapSp, int soLuongSp, int giamGiaSp, double giaNhapSp, double giaBanSp) {
         this.idSp = idSp;
-        this.anhSp = anhSp;
+        this.moTaSp = moTaSp;
         this.tenSp = tenSp;
-        this.xuatXu = xuatXu;
-        this.giaSp = giaSp;
-        this.soLuong = soLuong;
+        this.ngaySanXuatSp = ngaySanXuatSp;
+        this.xuatXuSp = xuatXuSp;
+        this.loaiSp = loaiSp;
+        this.tinhTrangSp = tinhTrangSp;
+        this.anhSp = anhSp;
+        this.ngayNhapSp = ngayNhapSp;
+        this.soLuongSp = soLuongSp;
+        this.giamGiaSp = giamGiaSp;
+        this.giaNhapSp = giaNhapSp;
+        this.giaBanSp = giaBanSp;
     }
 
     public String getIdSp() {
@@ -30,12 +48,12 @@ public class model_addToCart {
         this.idSp = idSp;
     }
 
-    public String getAnhSp() {
-        return anhSp;
+    public String getMoTaSp() {
+        return moTaSp;
     }
 
-    public void setAnhSp(String anhSp) {
-        this.anhSp = anhSp;
+    public void setMoTaSp(String moTaSp) {
+        this.moTaSp = moTaSp;
     }
 
     public String getTenSp() {
@@ -46,27 +64,83 @@ public class model_addToCart {
         this.tenSp = tenSp;
     }
 
-    public String getXuatXu() {
-        return xuatXu;
+    public String getNgaySanXuatSp() {
+        return ngaySanXuatSp;
     }
 
-    public void setXuatXu(String xuatXu) {
-        this.xuatXu = xuatXu;
+    public void setNgaySanXuatSp(String ngaySanXuatSp) {
+        this.ngaySanXuatSp = ngaySanXuatSp;
     }
 
-    public String getGiaSp() {
-        return giaSp;
+    public String getXuatXuSp() {
+        return xuatXuSp;
     }
 
-    public void setGiaSp(String giaSp) {
-        this.giaSp = giaSp;
+    public void setXuatXuSp(String xuatXuSp) {
+        this.xuatXuSp = xuatXuSp;
     }
 
-    public String getSoLuong() {
-        return soLuong;
+    public String getLoaiSp() {
+        return loaiSp;
     }
 
-    public void setSoLuong(String soLuong) {
-        this.soLuong = soLuong;
+    public void setLoaiSp(String loaiSp) {
+        this.loaiSp = loaiSp;
+    }
+
+    public String getTinhTrangSp() {
+        return tinhTrangSp;
+    }
+
+    public void setTinhTrangSp(String tinhTrangSp) {
+        this.tinhTrangSp = tinhTrangSp;
+    }
+
+    public String getAnhSp() {
+        return anhSp;
+    }
+
+    public void setAnhSp(String anhSp) {
+        this.anhSp = anhSp;
+    }
+
+    public String getNgayNhapSp() {
+        return ngayNhapSp;
+    }
+
+    public void setNgayNhapSp(String ngayNhapSp) {
+        this.ngayNhapSp = ngayNhapSp;
+    }
+
+    public int getSoLuongSp() {
+        return soLuongSp;
+    }
+
+    public void setSoLuongSp(int soLuongSp) {
+        this.soLuongSp = soLuongSp;
+    }
+
+    public int getGiamGiaSp() {
+        return giamGiaSp;
+    }
+
+    public void setGiamGiaSp(int giamGiaSp) {
+        this.giamGiaSp = giamGiaSp;
+    }
+
+    public double getGiaNhapSp() {
+        return giaNhapSp;
+    }
+
+    public void setGiaNhapSp(double giaNhapSp) {
+        this.giaNhapSp = giaNhapSp;
+    }
+
+    public double getGiaBanSp() {
+        return giaBanSp;
+    }
+
+    public void setGiaBanSp(double giaBanSp) {
+        this.giaBanSp = giaBanSp;
     }
 }
