@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,12 +28,15 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
     }
 
     public interface IClickListener{
+        void onCLickMinusItem(model_addToCart cart);
 
+        void onClickPlusItem(model_addToCart cart);
     }
 
-    public addToGioHangAdapter(Context mContext, ArrayList<model_addToCart> cartArrayList) {
+    public addToGioHangAdapter(Context mContext, ArrayList<model_addToCart> cartArrayList, IClickListener mIClickListener) {
         this.mContext = mContext;
         this.cartArrayList = cartArrayList;
+        this.mIClickListener = mIClickListener;
     }
 
     @NonNull
@@ -56,13 +60,18 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
         Glide.with(mContext)
                 .load(cart.getAnhSp())
                 .into(holder.xuLi_img_anhItem);
-
-//        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mIClickListener.onClickDeleteItem(product);
-//            }
-//        });
+        holder.xuLi_cardView_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIClickListener.onCLickMinusItem(cart);
+            }
+        });
+        holder.xuLi_cardView_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIClickListener.onClickPlusItem(cart);
+            }
+        });
 
     }
 
@@ -74,7 +83,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
     public static class myViewHolder extends RecyclerView.ViewHolder{
         ImageView xuLi_img_anhItem;
         TextView xuLi_txt_tenItem,xuLi_txt_xuatXuItem,xuLi_txt_giaItem,xuLi_txt_soLuong;
-
+        CardView xuLi_cardView_minus,xuLi_cardView_plus;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             xuLi_img_anhItem=itemView.findViewById(R.id.xuLi_img_anhItem);
@@ -82,6 +91,9 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
             xuLi_txt_xuatXuItem=itemView.findViewById(R.id.xuLi_txt_xuatXuItem);
             xuLi_txt_giaItem=itemView.findViewById(R.id.xuLi_txt_giaItem);
             xuLi_txt_soLuong=itemView.findViewById(R.id.xuLi_txt_soLuong);
+            xuLi_cardView_minus=itemView.findViewById(R.id.xuLi_cardView_minus);
+            xuLi_cardView_plus=itemView.findViewById(R.id.xuLi_cardView_plus);
+
 
         }
     }

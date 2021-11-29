@@ -2,6 +2,7 @@ package com.example.lgfood_duan1.Model;
 
 public class model_addToCart {
     private String
+            idSp,
     anhSp,
     tenSp,
     xuatXu,
@@ -12,12 +13,21 @@ public class model_addToCart {
 
     }
 
-    public model_addToCart(String anhSp, String tenSp, String xuatXu, String giaSp, String soLuong) {
+    public model_addToCart(String idSp, String anhSp, String tenSp, String xuatXu, String giaSp, String soLuong) {
+        this.idSp = idSp;
         this.anhSp = anhSp;
         this.tenSp = tenSp;
         this.xuatXu = xuatXu;
         this.giaSp = giaSp;
         this.soLuong = soLuong;
+    }
+
+    public String getIdSp() {
+        return idSp;
+    }
+
+    public void setIdSp(String idSp) {
+        this.idSp = idSp;
     }
 
     public String getAnhSp() {
