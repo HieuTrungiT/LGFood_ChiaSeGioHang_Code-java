@@ -133,9 +133,9 @@ public class OTP extends AppCompatActivity {
                             }
                             else{
                                 //    FirebaseStorage
-                                UUID id = UUID.randomUUID();
-                                model_Account account = new model_Account(id.toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,id.toString(),"");
-                                node.child(id.toString()).setValue(account);
+
+                                model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
+                                node.child(account.getId()).setValue(account);
 
 
                                 Intent homeIntent = new Intent(OTP.this, MainActivity.class);

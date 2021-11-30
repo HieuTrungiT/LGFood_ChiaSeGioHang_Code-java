@@ -323,7 +323,8 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     //**** xóa sản phẩm
     private void xoaSanPhamKho() {
         myRef = database.getReference("khoHang");
-        myRef.child(idSanPhamit).removeValue();
+        Toast.makeText(this, BdIdsanPham+"", Toast.LENGTH_SHORT).show();
+        myRef.child(BdIdsanPham).removeValue();
         Intent intent = new Intent(Them_San_Pham_Vao_Kho_Hang_Activity.this, khoHang_Activity.class);
         startActivity(intent);
     }

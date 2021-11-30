@@ -42,6 +42,7 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -270,6 +271,41 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
+//        bắt sự kiện chuyển trang navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.Use);
+
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Like:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Paid:
+                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                        overridePendingTransition(0, 0);
+
+                        return;
+                    case R.id.Use:
+                        startActivity(new Intent(getApplicationContext(),thongTinTaiKhoan_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                }
+            }
+        });
+//        bắt sự kiện tìm kiếm
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {

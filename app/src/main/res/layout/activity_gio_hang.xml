@@ -11,6 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="60dp"
         android:layout_gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +57,7 @@
                 android:id="@+id/gioHang_tv_diaChi"
                 android:gravity="center_vertical"
                 android:textStyle="bold|italic"
-                android:text="123 Nguyễn Tát Thành,Hẻm 2,TP BMT"
+                android:text=""
                 android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
@@ -104,10 +105,13 @@
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <LinearLayout
-
+android:background="@color/white"
             android:id="@+id/linearLayout12"
             android:layout_width="match_parent"
             android:layout_height="130dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <LinearLayout
@@ -120,6 +124,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -146,8 +151,9 @@
                         android:id="@+id/gioHang_llout_btn_shareCart"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="30dp"
-                        android:layout_marginTop="10dp"
+
                         android:layout_weight="1"
                         android:background="@drawable/border_share_cart">
 
@@ -166,11 +172,11 @@
                                 android:src="@drawable/icons8_share_90" />
                         </androidx.cardview.widget.CardView>
 
-                        <Button
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_height="match_parent"
                             android:background="@drawable/border_share_cart"
+                            android:gravity="center"
                             android:text="Share cart"
                             android:textColor="@color/white"
                             android:textSize="15dp"
