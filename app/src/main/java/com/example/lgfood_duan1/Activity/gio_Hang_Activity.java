@@ -117,7 +117,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 for (DataSnapshot ds:snapshot.getChildren()){
                     model_SanPham sanPham=ds.getValue(model_SanPham.class);
                     for (int i=0;i<modelCartArrayList.size();i++){
-                        if (sanPham.getIdSanPham()==(modelCartArrayList.get(i).getIdSanPham())) {
+                        if (sanPham.getIdSanPham().matches(modelCartArrayList.get(i).getIdSanPham())) {
                             mData= database
                                     .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                                     .getReference("newCarts");
