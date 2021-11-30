@@ -183,7 +183,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         } else if (!(soDienThoai.length() == 10 || !soDienThoai.matches(reg))) {
             SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.setError("Nhập sai định dạng số điện thoại");
 
-        } else if (repeatPassword != password) {
+        } else if (!repeatPassword.equals(password)) {
             SuaThongTinNguoiDung_edt_nhapMatKhauCu.setError("Sai mật khẩu ! vui lòng nhập lại");
 
         } else if (newPassword.isEmpty() || password.length() < 6) {
