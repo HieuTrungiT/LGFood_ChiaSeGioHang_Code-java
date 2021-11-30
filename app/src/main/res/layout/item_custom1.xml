@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -86,13 +86,11 @@
                 android:id="@+id/xuLi_txt_xuatXuItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/xuLi_txt_tenItem"
-                android:layout_alignBottom="@+id/xuLi_txt_tenItem"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
-                android:layout_toEndOf="@+id/xuLi_txt_tenItem"
-                android:layout_toRightOf="@+id/xuLi_txt_tenItem"
+                android:layout_alignTop="@+id/xuLi_txt_xuatXu"
+                android:layout_alignBottom="@+id/xuLi_txt_xuatXu"
+                android:layout_marginStart="0dp"
+                android:paddingLeft="5dp"
+                android:layout_toEndOf="@+id/xuLi_txt_xuatXu"
                 android:text="Đà lạt"
                 android:textSize="11sp"
                 android:textStyle="italic" />

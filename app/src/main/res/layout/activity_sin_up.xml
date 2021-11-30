@@ -140,7 +140,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_TenDangNhapKH"
+                            android:id="@+id/signUp_edt_TenKH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -160,7 +160,7 @@
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_tenKhachHang"
+                            android:id="@+id/signUp_edt_teDangNhapKhachHang"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
