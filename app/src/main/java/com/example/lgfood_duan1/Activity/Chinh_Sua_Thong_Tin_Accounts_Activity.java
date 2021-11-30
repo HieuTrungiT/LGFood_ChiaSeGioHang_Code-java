@@ -61,7 +61,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
     private SharedPreferences shareAcout;
 
-
+    String idSharePre;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseStorage storage;
@@ -70,7 +70,12 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
     private UUID uuid;
     private model_Account listAccount;
     private ArrayList<model_Account> arrListAccount;
+
+    //    getdata intent
     private String itIdUser, itNameUser, itPassWordUser, itAddRessUser, itEmailUser, itMIdGioHang, itRealName, itPhoneNumberUser, itMAnhKhachHang;
+//    getdata edittext
+
+    private String realName, userName, email, password, repeatPassword, address, soDienThoai, newPassword;
 
 
     @Override
@@ -78,6 +83,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chinh_sua_thong_tin_account);
         anhXa();
+
         getIt();
 
         setValue();
@@ -108,14 +114,23 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         });
     }
 
+    //        BT : getSharedPreFerences
+
+    private void getSharedPre() {
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+
+        idSharePre = shareAcout.getString("IDUSRE", "");
+    }
+
+
     //   BT : firebaseData
 
 
     private void firebaseData() {
-
+        getSharedPre();
         //         Gán giá trị trong firebase
         database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
-        myRef = database.getReference().child("Accounts").child("7334e0b0-19d3-4095-a190-738c456eb883");
+        myRef = database.getReference().child("Accounts").child(idSharePre);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,22 +146,26 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         });
 
     }
+//  anh Bảo toàn getdata
 
+
+    private void getData() {
+        firebaseData();
+        realName = SuaThongTinNguoiDung_edt_tenNguoiDung.getText().toString().trim();
+        userName = SuaThongTinNguoiDung_edt_tenDangNhap.getText().toString().trim();
+        email = SuaThongTinNguoiDung_edt_gmail.getText().toString().trim();
+        password = SuaThongTinNguoiDung_edt_matKhauCu.getText().toString().trim();
+        repeatPassword = SuaThongTinNguoiDung_edt_nhapMatKhauCu.getText().toString().trim();
+        address = SuaThongTinNguoiDung_edt_diaChi.getText().toString().trim();
+        soDienThoai = SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.getText().toString().trim();
+        newPassword = SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi.getText().toString().trim();
+    }
     //   BT : checkValidateSet
 
 
     private void checkValidateSet() {
-        firebaseData();
-        String realName = SuaThongTinNguoiDung_edt_tenNguoiDung.getText().toString().trim();
-        String userName = SuaThongTinNguoiDung_edt_tenDangNhap.getText().toString().trim();
-        String email = SuaThongTinNguoiDung_edt_gmail.getText().toString().trim();
-        String password = SuaThongTinNguoiDung_edt_matKhauCu.getText().toString().trim();
-        String repeatPassword = SuaThongTinNguoiDung_edt_nhapMatKhauCu.getText().toString().trim();
-        String address = SuaThongTinNguoiDung_edt_diaChi.getText().toString().trim();
-        String soDienThoai = SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.getText().toString().trim();
-        String newPassword = SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi.getText().toString().trim();
+        getData();
 
-        node = database.getReference().child("Accounts").child("7334e0b0-19d3-4095-a190-738c456eb883");
 
         UUID uuid = UUID.randomUUID();
 //            listAccount=new model_Account(uuid.toString(),userName,password,address,email,soDienThoai,uuid.toString(),"");
@@ -158,34 +177,44 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         } else if (!email.matches(emailPattern)) {
             SuaThongTinNguoiDung_edt_gmail.setError("Sai định dạng Email");
 
-        } else if (realName.length() < 2 || realName.length() >50) {
-            SuaThongTinNguoiDung_edt_tenNguoiDung.setError("Tên người dùng phải trên 2 kí tự");
+        } else if (realName.length() < 2 || realName.length() > 50) {
+            SuaThongTinNguoiDung_edt_tenNguoiDung.setError("Tên người dùng phải lớn hơn 2 kí tự");
 
         } else if (!(soDienThoai.length() == 10 || !soDienThoai.matches(reg))) {
             SuaThongTinNguoiDung_edt_soDienThoaiNguoiDung.setError("Nhập sai định dạng số điện thoại");
 
-        }else if (!(repeatPassword.equals(password))) {
-            SuaThongTinNguoiDung_edt_nhapMatKhauCu.setError("Sai mật khẩu! vui lòng nhập lại");
+        } else if (repeatPassword != password) {
+            SuaThongTinNguoiDung_edt_nhapMatKhauCu.setError("Sai mật khẩu ! vui lòng nhập lại");
 
-        }else if (newPassword.isEmpty() || newPassword.length()<6) {
+        } else if (newPassword.isEmpty() || password.length() < 6) {
             SuaThongTinNguoiDung_edt_xacNhanMatKhauMoi.setError("Mật khẩu đang trống hoặc bé hơn 6 kí tự");
         } else if (address.length() < 6 || address.length() > 150) {
             SuaThongTinNguoiDung_edt_diaChi.setError("Địa Chỉ lớn hơn 6 và  không quá 100 kí tự");
         } else {
+            getData();
+            database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            node = database.getReference().child("Accounts");
+            node.child(idSharePre).child("realName").setValue(realName);
+            node.child(idSharePre).child("name").setValue(userName);
+            node.child(idSharePre).child("email").setValue(email);
+            node.child(idSharePre).child("phoneNumber").setValue(soDienThoai);
+            node.child(idSharePre).child("address").setValue(address);
+            node.child(idSharePre).child("password").setValue(newPassword);
 
-            node.child("realName").setValue(realName);
-            node.child("name").setValue(userName);
-            node.child("email").setValue(email);
-            node.child("phoneNumber").setValue(soDienThoai);
-            node.child("address").setValue(address);
-            node.child("password").setValue(newPassword);
+            shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+            SharedPreferences.Editor editor = shareAcout.edit();
+            editor.putString("PASSWORD", newPassword);
+            editor.putString("USERNAME", "");
+            editor.putBoolean("REMEMBER", false);
+            editor.apply();
+
+
             Intent intent = new Intent(Chinh_Sua_Thong_Tin_Accounts_Activity.this, thongTinTaiKhoan_Activity.class);
             startActivity(intent);
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sữa thành công", Toast.LENGTH_SHORT).show();
         }
 
     }
-
 
 
     //   BToàn:get Intent
@@ -202,6 +231,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         itMAnhKhachHang = bundle.getString("mAnhKhachHang", "");
 
     }
+
 
     //    BT : SetValues
     private void setValue() {
