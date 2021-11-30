@@ -33,7 +33,6 @@ import java.util.UUID;
 
 public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
-
     private EditText
             SuaThongTinNguoiDung_edt_tenNguoiDung,
             SuaThongTinNguoiDung_edt_tenDangNhap,
@@ -114,7 +113,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
     private void firebaseData() {
 
         //         Gán giá trị trong firebase
-        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         myRef = database.getReference().child("Accounts").child("7334e0b0-19d3-4095-a190-738c456eb883");
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -122,7 +121,6 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 listAccount = snapshot.getValue(model_Account.class);
-
             }
 
             @Override

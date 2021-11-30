@@ -159,8 +159,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         if (!value.equals("")) {
             ArrayList<model_SanPham> arrListSanPhamTimKiem = new ArrayList<>();
             for (int i = 0; i < arrlSanPham.size(); i = i + 1) {
-                String valueArr = arrlSanPham.get(i).getTenSanPham().toUpperCase();
-                String valueTimKiem = value.toUpperCase().toString();
+                String valueArr = (arrlSanPham.get(i).getTenSanPham());
+                String valueTimKiem = value;
                 if (valueArr.contains(valueTimKiem)) {
 
                     arrListSanPhamTimKiem.add(arrlSanPham.get(i));
@@ -509,7 +509,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private ArrayList<model_SanPham> kiemTraLoaiSanPham(String loaiSP, ArrayList<model_SanPham> arrListSP) {
         ArrayList<model_SanPham> arrListLoaiSanPham = new ArrayList<>();
         for (int i = 0; i < arrListSP.size(); i = i + 1) {
-            if (arrListSP.get(i).getLoaiSanPham().trim().equals(loaiSP)) {
+            if (loaiSP.equals(arrListSP.get(i).getLoaiSanPham())) {
                 arrListLoaiSanPham.add(arrListSP.get(i));
             }
         }
@@ -570,7 +570,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         });
     }
 
-    //    Toàn: show menu Drawer
+    //    BToàn: show menu Drawer
     private void NavigationDrawer() {
         /*           NavigationView Drawer Menu           */
 

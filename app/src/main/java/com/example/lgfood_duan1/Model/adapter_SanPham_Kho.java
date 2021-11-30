@@ -65,7 +65,7 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
                 .into(holder.imageView);
         holder.txtTen.setText(arrListSanPham.get(position).getTenSanPham());
         holder.txtXuatXu.setText(arrListSanPham.get(position).getXuatXuSanPham());
-        holder.txtGia.setText(arrListSanPham.get(position).getGiaBanSanPham()+"");
+        holder.txtGia.setText(arrListSanPham.get(position).getGiaBanSanPham()+"00đ");
         holder.txtSoLuong.setText(arrListSanPham.get(position).getSoLuongSanPham()+"");
 
         holder.ItemkhoHang_imgBtn_xoaItem.setOnLongClickListener(new View.OnLongClickListener() {
