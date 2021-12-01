@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,6 +34,7 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xac_nhan_don_hang);
         anhXa();
+        batSuKien();
 
         BottomNavigationView navigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
         navigationView.setSelectedItemId(R.id.cart);
@@ -73,6 +75,7 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
 
 //    Bắt sự kiện buttom
     private void batSuKien(){
+
 
     }
 
