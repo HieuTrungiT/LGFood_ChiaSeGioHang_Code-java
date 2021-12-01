@@ -99,7 +99,7 @@ public class Login_Activity extends AppCompatActivity {
         });
     }
     //thai sharePreference
-    private void rememberUser(String user,String password,boolean status){
+    private void rememberUser(String user,String password,boolean status,String idGioHang){
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
         if (!status){
@@ -108,6 +108,7 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
             editor.putBoolean("REMEMBER",status);
+            editor.putString("IDGIOHANG",idGioHang);
 //            editor.putString("ADDRESS",);
 //            editor.putString("PHONENUMBER",);
 //            editor.putString("EMAIL",);
@@ -124,7 +125,7 @@ public class Login_Activity extends AppCompatActivity {
             Login_edt_password.setError("Mật khẩu đang trống!");
         }else{
             mData= database
-                .getInstance("https://duan1-lgfood-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Accounts");
             mData.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -143,7 +144,8 @@ public class Login_Activity extends AppCompatActivity {
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
                                 startActivity(intent);
-                                rememberUser(userName,password,checkBox.isChecked());
+                                String idGioHang=account.getIdGioHang();
+                                rememberUser(userName,password,checkBox.isChecked(),idGioHang);
                                 return;
                             }else{
                                 Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();

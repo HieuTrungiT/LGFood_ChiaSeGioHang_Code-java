@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "136267308371",
-    "firebase_url": "https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "duan1lgfood",
-    "storage_bucket": "duan1lgfood.appspot.com"
+    "project_number": "939976720023",
+    "project_id": "duan-lgfood1",
+    "storage_bucket": "duan-lgfood1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:136267308371:android:807ee2fd14ba4a190995a6",
+        "mobilesdk_app_id": "1:939976720023:android:392529103a58c74e6733d2",
         "android_client_info": {
-          "package_name": "com.example.lgfood_duan1.Activity"
+          "package_name": "com.example.lgfood_duan1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "136267308371-fia1o6hdpatvl06bh3vss35bitp0kq00.apps.googleusercontent.com",
+          "client_id": "939976720023-dfbl3ibgqmo5l47c44783lfhjp70upbs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEgLJ4gHQN33vtQak34-IKELw5LSD6x9w"
+          "current_key": "AIzaSyDrB7Fwx7n_WQfwHIyIz76-j2wxunSi4v0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "136267308371-fia1o6hdpatvl06bh3vss35bitp0kq00.apps.googleusercontent.com",
+              "client_id": "939976720023-dfbl3ibgqmo5l47c44783lfhjp70upbs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
