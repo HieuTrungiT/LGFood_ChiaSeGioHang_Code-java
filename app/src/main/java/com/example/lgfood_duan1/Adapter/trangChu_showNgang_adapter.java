@@ -21,11 +21,17 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
     private ArrayList<model_SanPham> arrListSanPham;
     private trangChu_SanPham_Activity context;
 
-    public trangChu_showNgang_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context) {
+    private IClickListener mIClickListener;
+
+    public trangChu_showNgang_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, trangChu_showNgang_adapter.IClickListener mIClickListener) {
         this.arrListSanPham = arrListSanPham;
         this.context = context;
+        this.mIClickListener = mIClickListener;
     }
 
+    public interface IClickListener{
+        void onClickAdd(model_SanPham sanPham);
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuttom_sanpham_trangchu_ngang, parent, false);
@@ -34,10 +40,11 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
 
     @Override
     public void onBindViewHolder(trangChu_showNgang_adapter.ViewHolder holder, int position) {
+        model_SanPham sanPham=arrListSanPham.get(position);
         holder.ItemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich.setText("0");
-        holder.ItemCuttomTrangChu_ngang_tv_xuatXuSanPham.setText(arrListSanPham.get(position).getXuatXuSanPham());
-        holder.ItemCuttomTrangChu_ngang_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
-        holder.ItemCuttomTrangChu_ngang_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
+        holder.ItemCuttomTrangChu_ngang_tv_xuatXuSanPham.setText(sanPham.getXuatXuSanPham());
+        holder.ItemCuttomTrangChu_ngang_tv_tenSanPham.setText(sanPham.getTenSanPham());
+        holder.ItemCuttomTrangChu_ngang_tv_giaSanPham.setText(Double.parseDouble(sanPham.getGiaBanSanPham() + "") + "00đ");
 
         Glide.with(context).load(arrListSanPham.get(position).getAnhSanPham())
                 .into(holder.ItemCuttomTrangChu_ngang_img_showAnhSanPham);
@@ -56,8 +63,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
             @Override
             public void onClick(View view) {
 //                        code thêm sản phẩm vào giỏ hàng
-                Toast.makeText(context, arrListSanPham.get(position).getTenSanPham() + "", Toast.LENGTH_SHORT).show();
-
+                mIClickListener.onClickAdd(sanPham);
             }
         });
     }
