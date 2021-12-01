@@ -104,7 +104,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
 //             getLocation();
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
                 @Override
-                public void onComplete( Task<Location> task) {
+                public void onComplete(Task<Location> task) {
                     Location location = task.getResult();
                     if (location != null) {
 
@@ -127,6 +127,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         }
 
     }
+
     //thai
     private void itemAddToCart() {
 
@@ -166,15 +167,16 @@ public class gio_Hang_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     model_SanPham sanPham = ds.getValue(model_SanPham.class);
+
                     for (int i = 0; i < modelCartArrayList.size(); i++) {
-                        Toast.makeText(gio_Hang_Activity.this, modelCartArrayList.size()+"", Toast.LENGTH_SHORT).show();
-                        if ((sanPham.getIdSanPham()) == (modelCartArrayList.get(i).getIdSanPham())) {
+
+                        if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             mData = database
                                     .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                                     .getReference("newCarts");
-//                            modelAddToCart=new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),Integer.parseInt(modelCartArrayList.get(i).getSoLuong()),sanPham.getGiamGiaSanPham() ,sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
-//                            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
-//                            Log.d("itemmmmm",modelCartArrayList.get(i).getSoLuong());
+                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), Integer.parseInt(modelCartArrayList.get(i).getSoLuong()), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
+                            Log.d("itemmmmm", modelCartArrayList.get(i).getSoLuong());
                         }
                     }
 
@@ -295,34 +297,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
             }
         });
 
-
-//        //add to cart
-//        datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String idProduct = sanPham.getIdSanPham();
-//                dataRef = database.getReference("Accounts");
-//                dataRef.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                            model_Account account = dataSnapshot.getValue(model_Account.class);
-//                            idGioHang = String.valueOf(account.getIdGioHang());
-//                        }
-//                        UUID uuid = UUID.randomUUID();
-//                        String idChiTietSanPham = String.valueOf(uuid);
-//                        model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
-//                        dataRef = database.getReference("GioHangs");
-//                        dataRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//            }
-//        });
 
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -463,12 +437,11 @@ public class gio_Hang_Activity extends AppCompatActivity {
         GioHang_img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(gio_Hang_Activity.this,trangChu_SanPham_Activity.class);
+                Intent intent = new Intent(gio_Hang_Activity.this, trangChu_SanPham_Activity.class);
                 startActivity(intent);
             }
         });
     }
-
 
 
     //    Bắt sự kiện buttom

@@ -103,7 +103,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             DatNhanh_btn_themSanPhamVaoGioHang;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
-
+    private SharedPreferences shareAcout;
+    String idSharePre;
 //    sp Slider
 
     SliderView sliderView;
@@ -681,6 +682,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //thai:onClickItemSanPham
     private void showItemChiTietSanPham(model_SanPham sanPham) {
+        anhXa();
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dat_nhanh);
@@ -752,20 +754,20 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             }
         });
 
-
+getSharedPre();
         //add to cart
         datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String idProduct = sanPham.getIdSanPham();
-                dataRef = database.getReference("Accounts");
+                dataRef = database.getReference("Accounts").child(idSharePre);
                 dataRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            model_Account account = dataSnapshot.getValue(model_Account.class);
+
+                            model_Account account = snapshot.getValue(model_Account.class);
                             idGioHang = String.valueOf(account.getIdGioHang());
-                        }
+
                         UUID uuid = UUID.randomUUID();
                         String idChiTietSanPham = String.valueOf(uuid);
                         model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
@@ -789,6 +791,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
+    private void getSharedPre(){
+//        get accout
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        idSharePre = shareAcout.getString("IDUSRE","");
+    }
 
     //     Ánh xạ
     private void anhXa() {
