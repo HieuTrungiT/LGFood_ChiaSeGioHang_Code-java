@@ -2,6 +2,7 @@ package com.example.lgfood_duan1.Activity;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -18,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -52,6 +54,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -105,7 +109,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             TrangChuSanPham_edt_timKiemSanPham;
     private SharedPreferences shareAcout;
     String idSharePre;
-//    sp Slider
+    String idGioHangShare;
+    //    sp Slider
 
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
@@ -126,6 +131,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int i = 1;
     String idGioHang;
 
+    ArrayList<model_Cart> model_cartArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -561,9 +567,43 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_rscV_showSanPhamNgang.setLayoutManager(linearLayoutManager);
         TrangChuSanPham_rscV_showSanPhamNgang.setItemAnimator(new DefaultItemAnimator());
 //        Initilize
-        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this);
+        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this, new trangChu_showNgang_adapter.IClickListener() {
+            @Override
+            public void onClickAdd(model_SanPham sanPham) {
+
+//                onCLickAddToCart(sanPham);
+
+
+            }
+        });
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
     }
+
+//    private void onCLickAddToCart(model_SanPham sanPham) {
+//        String ii ="mot";
+//        if (){
+//            dataRef=database.getReference("GioHangs");
+//            UUID uuid = UUID.randomUUID();
+//            String idChiTietSanPham = String.valueOf(uuid);
+//
+//
+//            model_Cart cart = new model_Cart(idChiTietSanPham, sanPham.getIdSanPham(),  "1");
+//
+//            dataRef.child(idGioHangShare).child(idChiTietSanPham).setValue(cart);
+//            model_cartArrayList.add(cart);
+//            for (int i = 0; i < model_cartArrayList.size(); i++) {
+//                if (sanPham.getIdSanPham() == model_cartArrayList.get(i).getIdSanPham()) {
+//                    model_cartArrayList.remove(model_cartArrayList.get(i));
+//                    ii.ge
+//                    break;
+//                }
+//            }
+//        }else{
+//            Toast.makeText(this, "san pham da dc them", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//    }
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
@@ -754,7 +794,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             }
         });
 
-getSharedPre();
         //add to cart
         datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -789,12 +828,6 @@ getSharedPre();
         dialog.getWindow().setGravity(Gravity.BOTTOM);
         dialog.show();
 
-    }
-
-    private void getSharedPre(){
-//        get accout
-        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        idSharePre = shareAcout.getString("IDUSRE","");
     }
 
     //     Ánh xạ
@@ -855,6 +888,12 @@ getSharedPre();
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
         //        Button
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        idSharePre = shareAcout.getString("IDUSRE","");
+        idGioHangShare=shareAcout.getString("IDGIOHANG","");
+        model_cartArrayList = new ArrayList<>();
+
     }
 
 }

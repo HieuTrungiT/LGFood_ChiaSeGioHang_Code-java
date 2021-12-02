@@ -327,6 +327,15 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                             }
                         });
+                        database = FirebaseDatabase
+                                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                        mData = database.getReference("GioHangs");
+                        mData.child(sharedPreferences.getString("IDGIOHANG","")).removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
+
+                            }
+                        });
                     }
                 })
 
