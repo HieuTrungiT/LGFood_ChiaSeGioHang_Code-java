@@ -34,10 +34,10 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
    }
 
 
-//    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
-//        this.arrListSanPham = arrListSanPham;
-//        this.context = context;
-//    }
+    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
+        this.arrListSanPham = arrListSanPham;
+        this.context = context;
+    }
 
     public adapter_SanPham_Kho(ArrayList<model_SanPham> khoHang_activity, Xac_Nhan_DH_Activity item_custom2, IClickLinstenr arrayList) {
 
@@ -97,7 +97,17 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
 
 
     }
-
+    public ArrayList<model_SanPham> getListCard() {
+        return null;
+    }
+    public Double getTotalFee() {
+        ArrayList<model_SanPham> listFood2 = getListCard();
+        double fee = 0;
+        for (int i = 0; i < listFood2.size(); i++) {
+            fee = fee + (listFood2.get(i).getGiamGiaSanPham() * listFood2.get(i).getsoLuongSanPham());
+        }
+        return fee;
+    }
     @Override
     public int getItemCount() {
         if (arrListSanPham  != null ){

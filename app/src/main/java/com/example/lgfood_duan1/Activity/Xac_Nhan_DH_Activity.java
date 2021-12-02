@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -54,10 +55,14 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
             xacNhan_txt_giaDonHang;
     private DatabaseReference dataSanPhamRef;
     private FirebaseDatabase dataSanPham;
+    private SharedPreferences sharedPreferences;
+
+    double tien;
 
 
+    adapter_SanPham_Kho adapter_sanPham_kho;
     adapter_DanhSachGioHang adapter_danhSachGioHang;
-    ArrayList<model_SanPham> arrListSanPham;
+    ArrayList<model_Cart> arrListgioHang;
     model_SanPham arrSanPham;
 
 
@@ -68,12 +73,10 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
 
         anhXa();
         batsukien();
-//        getDataFirebase();
-//        XacNhan_rscV_danhsachSanPham = findViewById(R.id.xacNhan_rscV_danhsachSanPham);
-//        arrListSanPham = new ArrayList<>();
-//        adapter_danhSachGioHang= new adapter_DanhSachGioHang(Xac_Nhan_DH_Activity.this,R.layout.item_custom3,arrListSanPham);
-//
-//        XacNhan_rscV_danhsachSanPham.setAdapter(adapter_danhSachGioHang);
+        showsanpham();
+        tongtien();
+        LuuHoaDon();
+
 
     }
 
@@ -93,63 +96,64 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
     }
 
 
-//    private void getDataFirebase() {
-//
-//
-//        dataSanPhamRef = dataSanPham.getReference().child("khoHang");
-//        dataSanPhamRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                arrListSanPham.clear();
-////                arrListSanPham.clear();
-////                Chạy vòng lặp kiểm tra dữ liệu
-//                for (DataSnapshot child : snapshot.getChildren()) {
-//                    arrSanPham = child.getValue(model_SanPham.class);
-//                    arrListSanPham.add(arrSanPham);
-//                }
-//                Toast.makeText(Xac_Nhan_DH_Activity.this, arrListSanPham.size() + "", Toast.LENGTH_SHORT).show();
-//                showListProduc_Vartical(arrListSanPham);
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//
-//
-//        });
-//    }
+private void LuuHoaDon(){
+    dataSanPhamRef= dataSanPham
+            .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
+
+    dataSanPhamRef.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            if (arrListgioHang!=null){
+                arrListgioHang.clear();
+            }
+            for (DataSnapshot ds: snapshot.getChildren()){
+                model_Cart cart=ds.getValue(model_Cart.class);
+                arrListgioHang.add(cart);
+            }
+            LuuHoaDon();
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull  DatabaseError error) {
+
+        }
+    });
 
 
 
-//    public void setTongGiaSanPham(double tongTien) {
-//        String stGia = String.format(tongTien + "");
-//
-//        if (stGia.length() > 6) {
-//
-//            xacNhan_txt_giaDonHang.setText(stGia.substring(0, 6) + "00vnđ");
-//        } else if (tongTien == 0) {
-//            xacNhan_txt_giaDonHang.setText(tongTien + "vnđ");
-//
-//        } else {
-//            xacNhan_txt_giaDonHang.setText(tongTien + "00vnđ");
-//        }
-//
-//
-//    }
+}
+
+
+
+
+
+    private void tongtien() {
+        double phiVanCHuyen = 30.000;
+        double giamGia = 10;
+
+        tien = Math.round((adapter_sanPham_kho.getTotalFee() * phiVanCHuyen) * 100.0) / 100.0;
+        double total = Math.round((adapter_sanPham_kho.getTotalFee() + tien + giamGia) * 100.0) / 100.0;
+        double itemTotal = Math.round(adapter_sanPham_kho.getTotalFee() * 100.0) / 100.0;
+
+        xacNhan_txt_tienDonGia.setText("$" + itemTotal);
+        xacNhan_txt_giaPhiVanChuyen.setText("$" + tien);
+        xacNhan_txt_tienGiamGia.setText("$" + giamGia);
+        xacNhan_txt_giaDonHang.setText("$" + total);
+    }
 
 
     /********************Show thông tin ra kiểu dọc**********************/
-//    private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
-//        XacNhan_rscV_danhsachSanPham.setLayoutManager(new GridLayoutManager(this, 1));
-//        XacNhan_rscV_danhsachSanPham.setItemAnimator(new DefaultItemAnimator());
-//        //        Initilize
-////        Adapter_SanPham_Kho = new adapter_SanPham_Kho(arrListSp, khoHang_Activity.this,new adapter_SanPham_Kho.IClickLinstenr());
-//
-//
-//        XacNhan_rscV_danhsachSanPham.setAdapter(adapter_danhSachGioHang);
-//    }
+    private void showsanpham() {
+        XacNhan_rscV_danhsachSanPham.setLayoutManager(new GridLayoutManager(this, 1));
+        XacNhan_rscV_danhsachSanPham.setItemAnimator(new DefaultItemAnimator());
+        adapter_danhSachGioHang = new adapter_DanhSachGioHang(arrListgioHang, Xac_Nhan_DH_Activity.this);
+
+        XacNhan_rscV_danhsachSanPham.setAdapter(adapter_danhSachGioHang);
+
+
+    }
 
 
 
@@ -157,7 +161,7 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
 
     private void anhXa() {
 
-        arrListSanPham = new ArrayList<model_SanPham>();
+        arrListgioHang = new ArrayList<model_Cart>();
 
         dataSanPham = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
@@ -180,4 +184,6 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                 xacNhan_txt_giaDonHang=findViewById(R.id.xacNhan_txt_giaDonHang);
                 XacNhan_txt_thayDoiThongTin=findViewById(R.id.xacNhan_txt_thayDoiThongTin);
     }
+
+
 }

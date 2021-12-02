@@ -14,17 +14,21 @@ import com.example.lgfood_duan1.Activity.Xac_Nhan_DH_Activity;
 import com.example.lgfood_duan1.Activity.khoHang_Activity;
 import com.example.lgfood_duan1.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class adapter_DanhSachGioHang extends  RecyclerView.Adapter<adapter_DanhSachGioHang.gioHangHolder> {
 
     private List<model_SanPham> mListSanPham;
-    public adapter_DanhSachGioHang(Xac_Nhan_DH_Activity xac_nhan_dh_activity, int item_custom3, List<model_SanPham> mListSanPham){
-        this.mListSanPham = mListSanPham;
-    }
+
 
 
     private khoHang_Activity context;
+
+    public adapter_DanhSachGioHang(ArrayList<model_Cart> arrListSanPham, Xac_Nhan_DH_Activity xac_nhan_dh_activity) {
+    }
+
     @NonNull
 
     @Override
@@ -77,4 +81,5 @@ public class adapter_DanhSachGioHang extends  RecyclerView.Adapter<adapter_DanhS
 
         }
     }
+
 }
