@@ -134,7 +134,7 @@ public class OTP extends AppCompatActivity {
                             else{
                                 //    FirebaseStorage
 
-                                model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
+                                model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
                                 node.child(account.getId()).setValue(account);
 
 

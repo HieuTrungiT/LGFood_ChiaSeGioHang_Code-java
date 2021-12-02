@@ -29,7 +29,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +38,7 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
+import com.example.lgfood_duan1.Model.model_viTri;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,7 +54,9 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -74,28 +76,73 @@ public class gio_Hang_Activity extends AppCompatActivity {
             GioHang_rv_showGioHang;
     //thai
     private ArrayList<model_Cart> modelCartArrayList;
-    DatabaseReference mData;
+    DatabaseReference mData,dataRef;
     FirebaseDatabase database;
-    SharedPreferences sharedPreferences;
+    //model
     private ArrayList<model_addToCart> cartArrayList;
+    private model_addToCart modelAddToCart;
+    private model_viTri arrViTri;
+    List<Address> addresses;
+    // Adapter
     addToGioHangAdapter cartAdapter;
-    model_addToCart modelAddToCart;
+    //    ggmap
     FusedLocationProviderClient fusedLocationProviderClient;
+
+    //    sharePre
+    private SharedPreferences shareAcout;
+    SharedPreferences sharedPreferences;
+    //    Value
     int i;
+    //    user
+    String idUser, viTri, idViTri;
+    //random
+    UUID uuid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
         anhXa();
+
         //thai
         itemAddToCart();
         loadItemAddToCart();
         layTuFirebase();
-        getLocation();
+        getSharedPre();
         batSuKien();
     }
 
+
+    // harePre
+    private void getSharedPre() {
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        idUser = shareAcout.getString("IDUSRE", "");
+        viTri = shareAcout.getString("VITRI", "");
+        idViTri = shareAcout.getString("IDVITRI", "");
+        if (GioHang_tv_diaChi.getText().equals("")) {
+            GioHang_tv_diaChi.setText(viTri);
+        }
+    }
+
+    // Trung getDatafirebase
+//    private void firebaseData() {
+//        getSharedPre();
+//        //         Gán giá trị trong firebase
+//        mData = database.getReference("Accounts").child(idUser);
+//        mData.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                listAccount = snapshot.getValue(model_Account.class);
+//                //         set vị trí user
+//                GioHang_tv_diaChi.setText(listAccount.getAddress());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//            }
+//        });
+//
+//    }
 
     //  Trung lấy vị trí
     private void getLocation() {
@@ -112,10 +159,25 @@ public class gio_Hang_Activity extends AppCompatActivity {
                             Geocoder geocoder = new Geocoder(
                                     gio_Hang_Activity.this, Locale.getDefault());
 
-                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                             GioHang_tv_diaChi.setText(Html.fromHtml("" + addresses.get(0).getAddressLine(0)));
+
+                            String viTri = GioHang_tv_diaChi.getText().toString();
+                            dataRef = database.getReference().child("location").child(idViTri);
+
+                            // datetime hiện tại
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
+                            Date reaDate = new Date(System.currentTimeMillis());
+//                            add lên firebase
+//                            random
+                            uuid = UUID.randomUUID();
+                            arrViTri = new model_viTri(uuid.toString(), viTri, addresses.get(0).getLatitude() , addresses.get(0).getLongitude() , false, formatter.format(reaDate), uuid.toString().substring(0, 6));
+                            Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude()+"", Toast.LENGTH_SHORT).show();
+                            dataRef.setValue(arrViTri);
+
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            Log.d("ddd", e + "");
                         }
                     }
                 }
@@ -128,12 +190,15 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     }
 
+    // lưu vị trí lên chia sẻ giỏ hàng
+    private void location_chiaSeGioHang() {
+
+    }
+
     //thai
     private void itemAddToCart() {
 
-        mData = database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG", ""));
+        mData = database.getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG", ""));
 
         mData.addValueEventListener(new ValueEventListener() {
             @Override
@@ -159,9 +224,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     //thai
     private void checkKhoHang() {
-        mData = database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("khoHang");
+        mData = database.getReference("khoHang");
         mData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -171,12 +234,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     for (int i = 0; i < modelCartArrayList.size(); i++) {
 
                         if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
-                            mData = database
-                                    .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                                    .getReference("newCarts");
+                            mData = database.getReference("newCarts");
                             modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), Integer.parseInt(modelCartArrayList.get(i).getSoLuong()), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
-                            Log.d("itemmmmm", modelCartArrayList.get(i).getSoLuong());
                         }
                     }
 
@@ -315,8 +375,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        database = FirebaseDatabase
-                                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
                         mData = database.getReference("newCarts");
 
                         mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
@@ -327,10 +385,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                             }
                         });
-                        database = FirebaseDatabase
-                                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+
                         mData = database.getReference("GioHangs");
-                        mData.child(sharedPreferences.getString("IDGIOHANG","")).removeValue(new DatabaseReference.CompletionListener() {
+                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).removeValue(new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
 
@@ -345,9 +402,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     //giam so luong san pham: thai
     private void onClickMinusItemAddToCart(model_addToCart cart) {
-        mData = database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("newCarts");
+
+        mData = database.getReference("newCarts");
         i = cart.getSoLuongSp();
         i--;
         if (i <= 1) {
@@ -373,9 +429,10 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     //thai: lay du lieu tu firebase
     private void layTuFirebase() {
-        mData = database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("newCarts").child(sharedPreferences.getString("IDGIOHANG", ""));
+
+
+//        lấy sản phẩm từ giỏ hàng
+        mData = database.getReference("newCarts").child(sharedPreferences.getString("IDGIOHANG", ""));
         mData.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -443,6 +500,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
     }
 
     private void batSuKien() {
+//        bắt sự kiện mở trang chia sẻ giỏ hàng
+        GioHang_llout_btn_shareCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLocation();
+                location_chiaSeGioHang();
+//                mở xin quyền chia sẻ vị trí
+                Intent intent = new Intent(gio_Hang_Activity.this, ChiaSeGioHang_Activity.class);
+                startActivity(intent);
+            }
+        });
+//        bắt sự kiện thoát trang giỏ hảng
         GioHang_img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -455,9 +524,10 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     //    Bắt sự kiện buttom
 
-
+    // set dữ liệu
     //     Ánh xạ đây nè :D
     private void anhXa() {
+        database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
 //        TextView
         GioHang_tv_diaChi = findViewById(R.id.gioHang_tv_diaChi);
