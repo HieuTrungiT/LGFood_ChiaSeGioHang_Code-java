@@ -2,6 +2,7 @@ package com.example.lgfood_duan1.Activity;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -18,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -42,6 +44,7 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +54,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -102,8 +107,10 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             DatNhanh_btn_themSanPhamVaoGioHang;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
-
-//    sp Slider
+    private SharedPreferences shareAcout;
+    String idSharePre;
+    String idGioHangShare;
+    //    sp Slider
 
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
@@ -124,6 +131,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int i = 1;
     String idGioHang;
 
+    ArrayList<model_Cart> model_cartArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,6 +278,41 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
+//        bắt sự kiện chuyển trang navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.Use);
+
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Like:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Paid:
+                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                        overridePendingTransition(0, 0);
+
+                        return;
+                    case R.id.Use:
+                        startActivity(new Intent(getApplicationContext(),thongTinTaiKhoan_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                }
+            }
+        });
+//        bắt sự kiện tìm kiếm
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -524,9 +567,43 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_rscV_showSanPhamNgang.setLayoutManager(linearLayoutManager);
         TrangChuSanPham_rscV_showSanPhamNgang.setItemAnimator(new DefaultItemAnimator());
 //        Initilize
-        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this);
+        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this, new trangChu_showNgang_adapter.IClickListener() {
+            @Override
+            public void onClickAdd(model_SanPham sanPham) {
+
+//                onCLickAddToCart(sanPham);
+
+
+            }
+        });
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
     }
+
+//    private void onCLickAddToCart(model_SanPham sanPham) {
+//        String ii ="mot";
+//        if (){
+//            dataRef=database.getReference("GioHangs");
+//            UUID uuid = UUID.randomUUID();
+//            String idChiTietSanPham = String.valueOf(uuid);
+//
+//
+//            model_Cart cart = new model_Cart(idChiTietSanPham, sanPham.getIdSanPham(),  "1");
+//
+//            dataRef.child(idGioHangShare).child(idChiTietSanPham).setValue(cart);
+//            model_cartArrayList.add(cart);
+//            for (int i = 0; i < model_cartArrayList.size(); i++) {
+//                if (sanPham.getIdSanPham() == model_cartArrayList.get(i).getIdSanPham()) {
+//                    model_cartArrayList.remove(model_cartArrayList.get(i));
+//                    ii.ge
+//                    break;
+//                }
+//            }
+//        }else{
+//            Toast.makeText(this, "san pham da dc them", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//    }
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
@@ -645,6 +722,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //thai:onClickItemSanPham
     private void showItemChiTietSanPham(model_SanPham sanPham) {
+        anhXa();
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dat_nhanh);
@@ -716,20 +794,19 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             }
         });
 
-
         //add to cart
         datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String idProduct = sanPham.getIdSanPham();
-                dataRef = database.getReference("Accounts");
+                dataRef = database.getReference("Accounts").child(idSharePre);
                 dataRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            model_Account account = dataSnapshot.getValue(model_Account.class);
+
+                            model_Account account = snapshot.getValue(model_Account.class);
                             idGioHang = String.valueOf(account.getIdGioHang());
-                        }
+
                         UUID uuid = UUID.randomUUID();
                         String idChiTietSanPham = String.valueOf(uuid);
                         model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
@@ -752,7 +829,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         dialog.show();
 
     }
-
 
     //     Ánh xạ
     private void anhXa() {
@@ -812,6 +888,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
         //        Button
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        idSharePre = shareAcout.getString("IDUSRE","");
+        idGioHangShare=shareAcout.getString("IDGIOHANG","");
+        model_cartArrayList = new ArrayList<>();
+
     }
 
 }

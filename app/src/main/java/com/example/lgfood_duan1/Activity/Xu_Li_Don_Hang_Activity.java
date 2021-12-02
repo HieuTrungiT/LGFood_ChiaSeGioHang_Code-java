@@ -56,7 +56,7 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
         xuLi_cardView_formXacNhan = findViewById(R.id.xuLi_cardView_formXacNhan);
         xuLi_cardView_minus = findViewById(R.id.xuLi_cardView_minus);
         xuLi_cardView_plus = findViewById(R.id.xuLi_cardView_plus);
-        xuLi_cardView_heartItem = findViewById(R.id.xuLi_cardView_heartItem);
+
         XuLi_llout_btn_chat = findViewById(R.id.xuLi_llout_btn_chat);
         XuLi_btn_btnXacNhan = findViewById(R.id.xuLi_btn_btnXacNhan);
         xuLi_txt_tenKhachHang = findViewById(R.id.xuLi_txt_tenKhachHang);

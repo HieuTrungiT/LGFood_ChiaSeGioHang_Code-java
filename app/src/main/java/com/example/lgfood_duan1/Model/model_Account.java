@@ -9,13 +9,15 @@ public class model_Account {
     private String address;
     private String email;
     private String phoneNumber;
-    private String idGioHang;
+    private String idGioHang,
+            idDanhSachYeuThich,
+            idDanhSachDonHang;
     private String anhKhachHang;
-    public model_Account(){
 
+    public model_Account() {
     }
 
-    public model_Account(String id, String realName, String name, String password, String address, String email, String phoneNumber, String idGioHang, String anhKhachHang) {
+    public model_Account(String id, String realName, String name, String password, String address, String email, String phoneNumber, String idGioHang, String idDanhSachYeuThich, String idDanhSachDonHang, String anhKhachHang) {
         this.id = id;
         this.realName = realName;
         this.name = name;
@@ -24,15 +26,9 @@ public class model_Account {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.idGioHang = idGioHang;
+        this.idDanhSachYeuThich = idDanhSachYeuThich;
+        this.idDanhSachDonHang = idDanhSachDonHang;
         this.anhKhachHang = anhKhachHang;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
     }
 
     public String getId() {
@@ -41,6 +37,14 @@ public class model_Account {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getName() {
@@ -89,6 +93,22 @@ public class model_Account {
 
     public void setIdGioHang(String idGioHang) {
         this.idGioHang = idGioHang;
+    }
+
+    public String getIdDanhSachYeuThich() {
+        return idDanhSachYeuThich;
+    }
+
+    public void setIdDanhSachYeuThich(String idDanhSachYeuThich) {
+        this.idDanhSachYeuThich = idDanhSachYeuThich;
+    }
+
+    public String getIdDanhSachDonHang() {
+        return idDanhSachDonHang;
+    }
+
+    public void setIdDanhSachDonHang(String idDanhSachDonHang) {
+        this.idDanhSachDonHang = idDanhSachDonHang;
     }
 
     public String getAnhKhachHang() {
