@@ -42,7 +42,7 @@ public class Login_Activity extends AppCompatActivity {
 
     private SharedPreferences shareAcout;
 
-    String idSharePre,passSharePre,userSharePre;
+    String idSharePre,passSharePre,userSharePre,idDanhSachyeuThich;
     boolean rememberSharePre;
 
 
@@ -110,6 +110,7 @@ public class Login_Activity extends AppCompatActivity {
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = shareAcout.edit();
 
+        idDanhSachyeuThich = shareAcout.getString("IDDanhSachYeuThich","");
         passSharePre = shareAcout.getString("PASSWORD","");
         userSharePre = shareAcout.getString("USERNAME","");
         rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
@@ -129,16 +130,17 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String user,String password,boolean status){
+    private void rememberUser(String idUser,String idDanhSachyeuThich,String user,String password,boolean status){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
         if (!status){
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
-
+            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
             editor.putString("IDUSRE",idUser);
         }else {
+            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
             editor.putBoolean("REMEMBER",status);
@@ -177,7 +179,7 @@ public class Login_Activity extends AppCompatActivity {
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),userName,password,checkBox.isChecked());
+                                rememberUser(account.getId(),account.getIdDanhSachYeuThich(),userName,password,checkBox.isChecked());
 
                                 return;
                             }else{

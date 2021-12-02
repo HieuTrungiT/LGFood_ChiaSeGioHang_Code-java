@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_sanPhamYeuThich;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -52,6 +54,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -110,8 +114,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
 
     //Firebase
-    private DatabaseReference dataRef,dataAccoutRef;
-    private FirebaseDatabase database;
+    private DatabaseReference dataRef,dataAccoutRef,dataSanPhamRef;
+    private FirebaseDatabase database,dataSanPham;
     //    Model
     ArrayList<model_SanPham> arrListSanPham;
     model_SanPham arrSanPham;
@@ -120,6 +124,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     trangChu_showNgang_adapter TrangChu_showNgang_adapter;
 
+//    danh sach yêu thích
+    String sharePreIdLike;
+    private SharedPreferences shareAcout;
+    ArrayList<model_sanPhamYeuThich> arrayListSanPhamYeuThich= new ArrayList<>();
+//    model_sanPhamYeuThich arrSanPhamYeuThich;
+//
     int timkiem = 0;
     //biến số lượng và id giỏ hàng
     int i = 1;
@@ -138,8 +148,42 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         showListProduc_Horizoltal();
         timKiem();
         showSlider();
+//        getDanhSachYeuThich();
 
     }
+//  BT getDanhSachYeuThich
+    /* private void getDanhSachYeuThich(){
+        dataSanPhamRef = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("sanPhamYeuThich");
+        shareAcout =  getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        sharePreIdLike = shareAcout.getString("IDDanhSachYeuThich","");
+//        dataSanPhamRef = dataSanPham.getReference().child("sanPhamYeuThich").child(sharePreIdLike);
+        dataSanPhamRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    model_sanPhamYeuThich arrSanPhamYeuThich = child.getValue(model_sanPhamYeuThich.class);
+                    Log.d("ddd", " "+arrSanPhamYeuThich);
+                    arrayListSanPhamYeuThich.add(arrSanPhamYeuThich);
+
+                }
+//                Toast.makeText(context, ""+arrayListSanPhamYeuThich.size(), Toast.LENGTH_SHORT).show();
+
+//                if(snapshot.child("idDanhSachYeuThich").exists()){
+//                    imgTim.setImageResource(R.drawable.ic_btn_love_red);
+//                    imgTim.setTag("Like");
+//                }else {
+//                    imgTim.setImageResource(R.drawable.ic_btn_love_white);
+//                    imgTim.setTag("UnLike");
+//                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    } */
 
 //    BT: showSlider
     private void showSlider() {
