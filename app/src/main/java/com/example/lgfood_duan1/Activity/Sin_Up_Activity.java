@@ -286,7 +286,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
             //    FirebaseStorage
             node = database.getReference("Accounts");
 
-            model_account = new model_Account(UUID.randomUUID().toString(), tenKH, userName, password, address, email, soDienThoai, UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(), "");
+            model_account = new model_Account(UUID.randomUUID().toString(), tenKH, userName, password, address, email, soDienThoai, UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(), "");
             node.child(model_account.getId()).setValue(model_account);
             Intent intent = new Intent(Sin_Up_Activity.this, Login_Activity.class);
             startActivity(intent);

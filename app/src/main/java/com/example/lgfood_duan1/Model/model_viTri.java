@@ -3,25 +3,30 @@ package com.example.lgfood_duan1.Model;
 public class model_viTri {
 
     private String idVitri;
-
+private String idGioHangTam;
     private String Vitri;
     private double Latitude;
     private double Longitude;
     private boolean tinhTrang;
     private String NgayTao;
     private String key;
+    private String anhUser;
+    private String nameUser;
 
     public model_viTri() {
     }
 
-    public model_viTri(String idVitri, String vitri, double latitude, double longitude, boolean tinhTrang, String ngayTao, String key) {
+    public model_viTri(String idVitri, String idGioHangTam, String vitri, double latitude, double longitude, boolean tinhTrang, String ngayTao, String key, String anhUser, String nameUser) {
         this.idVitri = idVitri;
+        this.idGioHangTam = idGioHangTam;
         Vitri = vitri;
         Latitude = latitude;
         Longitude = longitude;
         this.tinhTrang = tinhTrang;
         NgayTao = ngayTao;
         this.key = key;
+        this.anhUser = anhUser;
+        this.nameUser = nameUser;
     }
 
     public String getIdVitri() {
@@ -30,6 +35,14 @@ public class model_viTri {
 
     public void setIdVitri(String idVitri) {
         this.idVitri = idVitri;
+    }
+
+    public String getIdGioHangTam() {
+        return idGioHangTam;
+    }
+
+    public void setIdGioHangTam(String idGioHangTam) {
+        this.idGioHangTam = idGioHangTam;
     }
 
     public String getVitri() {
@@ -78,5 +91,21 @@ public class model_viTri {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getAnhUser() {
+        return anhUser;
+    }
+
+    public void setAnhUser(String anhUser) {
+        this.anhUser = anhUser;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 }

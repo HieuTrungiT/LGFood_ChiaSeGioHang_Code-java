@@ -42,7 +42,7 @@ public class Login_Activity extends AppCompatActivity {
 
     private SharedPreferences shareAcout;
 
-    String idSharePre,passSharePre,userSharePre,idShareGioHang;
+    String idSharePre,passSharePre,userSharePre,idShareGioHang,idGioHangTam;
     boolean rememberSharePre;
 
 
@@ -125,7 +125,7 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri){
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
@@ -136,6 +136,9 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("IDGIOHANG",idGioHang);
             editor.putString("VITRI",viTri);
             editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
 
         }else {
             editor.putString("USERNAME",user);
@@ -145,6 +148,10 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("IDGIOHANG",idGioHang);
             editor.putString("VITRI",viTri);
             editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+
 
         }
         editor.commit();
@@ -173,7 +180,7 @@ public class Login_Activity extends AppCompatActivity {
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri());
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang());
 
                                 return;
                             }else{

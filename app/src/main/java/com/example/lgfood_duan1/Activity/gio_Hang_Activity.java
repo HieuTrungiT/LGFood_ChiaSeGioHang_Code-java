@@ -94,9 +94,10 @@ public class gio_Hang_Activity extends AppCompatActivity {
     //    Value
     int i;
     //    user
-    String idUser, viTri, idViTri;
+    String idUser, viTri, idViTri,idGioHangTam,nameUser,anhUser;
     //random
     UUID uuid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,32 +120,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
         idUser = shareAcout.getString("IDUSRE", "");
         viTri = shareAcout.getString("VITRI", "");
         idViTri = shareAcout.getString("IDVITRI", "");
+        idGioHangTam = shareAcout.getString("IDGIOHANGTAM", "");
+        nameUser = shareAcout.getString("NAMEUSER","");
+        anhUser = shareAcout.getString("ANHUSER","");
+
         if (GioHang_tv_diaChi.getText().equals("")) {
             GioHang_tv_diaChi.setText(viTri);
         }
     }
 
-    // Trung getDatafirebase
-//    private void firebaseData() {
-//        getSharedPre();
-//        //         Gán giá trị trong firebase
-//        mData = database.getReference("Accounts").child(idUser);
-//        mData.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                listAccount = snapshot.getValue(model_Account.class);
-//                //         set vị trí user
-//                GioHang_tv_diaChi.setText(listAccount.getAddress());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//            }
-//        });
-//
-//    }
 
-    //  Trung lấy vị trí
+
+    //  Trung lấy vị trí lưu vị trí lên firebase location
     private void getLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(gio_Hang_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -172,7 +159,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 //                            add lên firebase
 //                            random
                             uuid = UUID.randomUUID();
-                            arrViTri = new model_viTri(uuid.toString(), viTri, addresses.get(0).getLatitude() , addresses.get(0).getLongitude() , false, formatter.format(reaDate), uuid.toString().substring(0, 6));
+
+                            arrViTri = new model_viTri(uuid.toString(),idGioHangTam, viTri, addresses.get(0).getLatitude() , addresses.get(0).getLongitude() , false, formatter.format(reaDate), uuid.toString().substring(0, 6),anhUser,nameUser);
                             Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude()+"", Toast.LENGTH_SHORT).show();
                             dataRef.setValue(arrViTri);
 
