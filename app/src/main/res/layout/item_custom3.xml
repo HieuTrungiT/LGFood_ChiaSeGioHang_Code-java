@@ -116,5 +116,23 @@
 
 
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/itemCuttomTrangChu_doc_llout_btn_showChiTietSanPham"
+
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="14dp"
+
+                android:layout_height="3dp"
+                android:src="@drawable/ic_show_chitietsanpham"
+                />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

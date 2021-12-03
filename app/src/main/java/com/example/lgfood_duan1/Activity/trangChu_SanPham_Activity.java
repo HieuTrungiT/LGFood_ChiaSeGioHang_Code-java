@@ -613,6 +613,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChu_showDoc_adapter = new trangChu_showDoc_adapter(arrListSp, trangChu_SanPham_Activity.this, new trangChu_showDoc_adapter.IClickListener() {
             @Override
             public void onClickShowItem(model_SanPham sanPham) {
+
                 showItemChiTietSanPham(sanPham);
             }
         });

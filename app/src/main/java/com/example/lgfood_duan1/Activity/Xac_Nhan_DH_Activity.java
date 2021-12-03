@@ -8,17 +8,30 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.lgfood_duan1.Adapter.trangChu_showDoc_adapter;
 import com.example.lgfood_duan1.Model.adapter_DanhSachGioHang;
 import com.example.lgfood_duan1.Model.adapter_SanPham_Kho;
+import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Xac_Nhan_DH_Activity extends AppCompatActivity {
     private CardView
@@ -35,7 +49,7 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
             XacNhan_cardView_btnThayDoiThongTin,
             xacNhan_cardView_btnXacNhan;
 
-    private RecyclerView
+    private adapter_DanhSachGioHang
             XacNhan_rscV_danhsachSanPham;
     private TextView
             XacNhan_txt_thayDoiThongTin,
@@ -59,11 +73,15 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
 
     double tien;
 
+    String idKhachHang;
+    String idGioHang;
 
     adapter_SanPham_Kho adapter_sanPham_kho;
     adapter_DanhSachGioHang adapter_danhSachGioHang;
     ArrayList<model_Cart> arrListgioHang;
-    model_SanPham arrSanPham;
+    ArrayList<model_addToCart>arrayListaddToCart;
+    model_Cart arrgiohang;
+    model_addToCart model_addToCart;
 
 
     @Override
@@ -74,13 +92,14 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         anhXa();
         batsukien();
         showsanpham();
-        tongtien();
+//        tongtien();
         LuuHoaDon();
 
 
     }
 
-
+    private void showsanpham() {
+    }
 
 
     private void batsukien(){
@@ -94,12 +113,21 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
             }
         });
     }
+    private void getSharedPre() {
+        sharedPreferences = getSharedPreferences("idSanPham", MODE_PRIVATE);
+
+        idKhachHang = sharedPreferences.getString("idUse", "");
+        idGioHang = sharedPreferences.getString("idGioHang", "");
+    }
 
 
 private void LuuHoaDon(){
-    dataSanPhamRef= dataSanPham
-            .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
+    getSharedPre();
+
+    //    hóa đơn:  id hóa đơn"Stirng ", id chi tiết hóa đơn,  tình trạng hóa đơn, id use, ngày tạo
+    //    chi tiết hóa đơn:  id sản phẩm, lấy giá sản phẩm, số lượng sản phẩm, id chi tiết hóa đơn
+// lấy id hóa đơn của use chill("hoadon").chill(idhoadon).setvalue(arrhoadon);
+    dataSanPhamRef= dataSanPham.getReference("newCarts").child(sharedPreferences.getString("IDGIOHANG", ""));
 
     dataSanPhamRef.addValueEventListener(new ValueEventListener() {
         @Override
@@ -114,7 +142,6 @@ private void LuuHoaDon(){
             LuuHoaDon();
 
         }
-
         @Override
         public void onCancelled(@NonNull  DatabaseError error) {
 
@@ -129,32 +156,64 @@ private void LuuHoaDon(){
 
 
 
-    private void tongtien() {
-        double phiVanCHuyen = 30.000;
-        double giamGia = 10;
-
-        tien = Math.round((adapter_sanPham_kho.getTotalFee() * phiVanCHuyen) * 100.0) / 100.0;
-        double total = Math.round((adapter_sanPham_kho.getTotalFee() + tien + giamGia) * 100.0) / 100.0;
-        double itemTotal = Math.round(adapter_sanPham_kho.getTotalFee() * 100.0) / 100.0;
-
-        xacNhan_txt_tienDonGia.setText("$" + itemTotal);
-        xacNhan_txt_giaPhiVanChuyen.setText("$" + tien);
-        xacNhan_txt_tienGiamGia.setText("$" + giamGia);
-        xacNhan_txt_giaDonHang.setText("$" + total);
-    }
+//    private void tongtien() {
+//        double phiVanCHuyen = 30.000;
+//        double giamGia = 10;
+//
+//        tien = Math.round((adapter_sanPham_kho.getTotalFee() * phiVanCHuyen) * 100.0) / 100.0;
+//        double total = Math.round((adapter_sanPham_kho.getTotalFee() + tien + giamGia) * 100.0) / 100.0;
+//        double itemTotal = Math.round(adapter_sanPham_kho.getTotalFee() * 100.0) / 100.0;
+//
+//        xacNhan_txt_tienDonGia.setText("$" + itemTotal);
+//        xacNhan_txt_giaPhiVanChuyen.setText("$" + tien);
+//        xacNhan_txt_tienGiamGia.setText("$" + giamGia);
+//        xacNhan_txt_giaDonHang.setText("$" + total);
+//    }
 
 
     /********************Show thông tin ra kiểu dọc**********************/
-    private void showsanpham() {
-        XacNhan_rscV_danhsachSanPham.setLayoutManager(new GridLayoutManager(this, 1));
+
+
+    private void showsanpham(ArrayList<model_SanPham> arrListSp) {
+        XacNhan_rscV_danhsachSanPham.setLayoutManager(new GridLayoutManager(this, 2));
         XacNhan_rscV_danhsachSanPham.setItemAnimator(new DefaultItemAnimator());
-        adapter_danhSachGioHang = new adapter_DanhSachGioHang(arrListgioHang, Xac_Nhan_DH_Activity.this);
+        //        Initilize
+        XacNhan_rscV_danhsachSanPham = new adapter_DanhSachGioHang(arrListSp, Xac_Nhan_DH_Activity.this, new adapter_DanhSachGioHang.IClickListener() {
+            @Override
+            public void onClickShowItem(model_SanPham sanPham) {
+                showItemChiTietSanPham(sanPham);
+            }
 
+        });
         XacNhan_rscV_danhsachSanPham.setAdapter(adapter_danhSachGioHang);
-
-
     }
 
+    private void showItemChiTietSanPham(model_SanPham sanPham) {
+        anhXa();
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_custom3);
+
+        //thong tin san pham
+        ImageView datNhanh_img_showAnhSanPham = dialog.findViewById(R.id.datNhanh_img_showAnhSanPham);
+        TextView datNhanh_tv_xuatXuSanPham = dialog.findViewById(R.id.datNhanh_tv_xuatXuSanPham);
+        TextView datNhanh_tv_showTenSanPham = dialog.findViewById(R.id.datNhanh_tv_showTenSanPham);
+        TextView datNhanh_tv_giaSanPham = dialog.findViewById(R.id.datNhanh_tv_giaSanPham);
+
+        Glide.with(Xac_Nhan_DH_Activity.this)
+                .load(sanPham.getAnhSanPham())
+                .into(datNhanh_img_showAnhSanPham);
+        datNhanh_tv_xuatXuSanPham.setText(sanPham.getXuatXuSanPham());
+        datNhanh_tv_showTenSanPham.setText(sanPham.getTenSanPham());
+        datNhanh_tv_giaSanPham.setText(sanPham.getGiaBanSanPham() + "00đ");
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.show();
+
+    }
 
 
 
