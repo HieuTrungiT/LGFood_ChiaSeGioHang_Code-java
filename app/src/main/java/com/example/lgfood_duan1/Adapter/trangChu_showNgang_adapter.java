@@ -76,7 +76,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView
                 ItemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich,
                 ItemCuttomTrangChu_ngang_tv_xuatXuSanPham,

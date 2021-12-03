@@ -53,7 +53,7 @@
             android:id="@+id/chiaSeGioHang_frlout_showListGgMap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -193,117 +193,177 @@
         <!--        rscv-->
         <FrameLayout
             android:id="@+id/chiaSeGioHang_frlout_showListRscv"
-            android:visibility="invisible"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chiaSeGioHang_rscv_showDanhSach"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <LinearLayout
-                android:id="@+id/chiaSeGioHang_llout_btn_rscv_phatTinHieu"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="90dp"
                 android:layout_gravity="bottom"
-                android:layout_margin="15dp"
-                android:background="@drawable/broder_radius_cam_thuonghieu" >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:gravity="center"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_gravity="center"
-                        android:text="PHÁT TÍN HIỆU"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
+                android:gravity="center">
 
-                </LinearLayout>
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:layout_height="match_parent">
-                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_phattinhieu"
-                    android:padding="10dp"/>
-
-                </LinearLayout>
-            </LinearLayout>
-        </FrameLayout>
-        <!--        navi top-->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.12"
-                android:background="@color/black" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:padding="15dp">
+                    android:alpha="0.5"
+                    android:background="@color/white" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="9">
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:gravity="center"
 
-                    <androidx.cardview.widget.CardView
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/chiaSeGioHang_llout_btn_rscv_phatTinHieu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="6dp"
-                        app:cardCornerRadius="10dp">
+                        android:layout_gravity="center"
 
-                        <EditText
-                            android:id="@+id/chiaSeGioHang_edt_timKiemKey"
-                            android:layout_width="match_parent"
+                        android:background="@drawable/broder_radius_cam_thuonghieu">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@null"
-                            android:hint="key:#"
-                            android:textSize="12sp" />
-                    </androidx.cardview.widget.CardView>
+                            android:layout_weight="3"
+                            android:gravity="center">
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="50dp"
+                                android:text="PHÁT TÍN HIỆU"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_phattinhieu" />
+
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
+            </FrameLayout>
+        </FrameLayout>
+        <!--        navi top-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="15dp">
+            <LinearLayout
+                android:id="@+id/chiaSeGioHang_llout_FormTop"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                tools:ignore="Suspicious0dp">
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/chiaSeGioHang_crv_btn_showTheo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="10dp">
 
-                        <ImageView
-                            android:id="@+id/chiaSeGioHang_img_btn_showTheo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_ggmap" />
-                    </androidx.cardview.widget.CardView>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.12"
+                        android:background="@color/black" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:gravity="center"
+                        android:padding="15dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="9">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="6dp"
+                                app:cardCornerRadius="10dp">
+
+                                <EditText
+                                    android:id="@+id/chiaSeGioHang_edt_timKiemKey"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@null"
+                                    android:hint="key:#"
+                                    android:textSize="12sp" />
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="15dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/chiaSeGioHang_crv_btn_showTheo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="10dp">
+
+                                <ImageView
+                                    android:id="@+id/chiaSeGioHang_img_btn_showTheo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:padding="10dp"
+                                    android:src="@drawable/ic_ggmap" />
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </FrameLayout>
             </LinearLayout>
 
-        </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/chiaSeGioHang_llout_btn_showFormTop"
+                    android:layout_width="100dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="50dp"
+
+                        android:layout_height="4dp"
+                        android:background="@drawable/broder_radius_cam_thuonghieu" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
     </FrameLayout>
 

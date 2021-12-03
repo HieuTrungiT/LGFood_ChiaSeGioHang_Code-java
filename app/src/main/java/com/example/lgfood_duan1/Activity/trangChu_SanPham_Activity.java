@@ -579,31 +579,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
     }
 
-//    private void onCLickAddToCart(model_SanPham sanPham) {
-//        String ii ="mot";
-//        if (){
-//            dataRef=database.getReference("GioHangs");
-//            UUID uuid = UUID.randomUUID();
-//            String idChiTietSanPham = String.valueOf(uuid);
-//
-//
-//            model_Cart cart = new model_Cart(idChiTietSanPham, sanPham.getIdSanPham(),  "1");
-//
-//            dataRef.child(idGioHangShare).child(idChiTietSanPham).setValue(cart);
-//            model_cartArrayList.add(cart);
-//            for (int i = 0; i < model_cartArrayList.size(); i++) {
-//                if (sanPham.getIdSanPham() == model_cartArrayList.get(i).getIdSanPham()) {
-//                    model_cartArrayList.remove(model_cartArrayList.get(i));
-//                    ii.ge
-//                    break;
-//                }
-//            }
-//        }else{
-//            Toast.makeText(this, "san pham da dc them", Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//    }
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
