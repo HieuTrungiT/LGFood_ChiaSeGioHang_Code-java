@@ -314,6 +314,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("newCarts");
         i= cart.getSoLuongSp();
+        int a;
         i--;
         for (int m=0;m<cartArrayList.size();m++){
             Tong= (int) (Tong + ((cartArrayList.get(m).getGiaBanSp() * i)));
