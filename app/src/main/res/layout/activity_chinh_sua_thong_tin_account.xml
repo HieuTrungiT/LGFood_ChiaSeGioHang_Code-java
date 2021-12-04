@@ -236,7 +236,6 @@
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/linearLayout24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -245,13 +244,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout24">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
-            android:text="Nhập lại Mật khẩu cũ"
+            android:text="Xạc nhận mật khẩu"
             android:textSize="14sp" />
 
         <EditText
@@ -266,6 +265,8 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/linearLayout24"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -274,7 +275,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout24">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
 
         <TextView
             android:layout_width="wrap_content"
@@ -328,26 +329,6 @@
 
     </FrameLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/CACCUN"
-        tools:ignore="MissingConstraints">
 
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/trangChuSanPham_bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@drawable/rounded"
-            app:itemIconTint="@color/nav_color"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/bottom_navigation">
-            <!--            android:layout_alignParentBottom="true">-->
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

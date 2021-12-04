@@ -2,10 +2,17 @@ package com.example.lgfood_duan1.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +28,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -31,6 +40,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class Sin_Up_Activity extends AppCompatActivity {
@@ -39,7 +53,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
             SignUp_tv_btn_Login,
             SignUp_tv_btn_loginText,
 
-            Login_tv_Phone,
+    Login_tv_Phone,
             Login_tv_google;
     private EditText
             signUp_edt_teDangNhapKhachHang,
@@ -54,24 +68,26 @@ public class Sin_Up_Activity extends AppCompatActivity {
     private ImageView
             Login_tv_back,
             SingUp_Im_ViTri;
-//Login with google
+    //Login with google
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
-//Login normal
+    //Login normal
     String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9])|(9[0-46-9]))(\\d)(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})?(\\d)$";
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     DatabaseReference node;
     FirebaseDatabase database;
     ProgressDialog progressDialog;
     model_Account model_account;
+    FusedLocationProviderClient fusedLocationProviderClient;
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser!=null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        if (currentUser != null) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
 
@@ -84,7 +100,41 @@ public class Sin_Up_Activity extends AppCompatActivity {
         processrequest();
         batSuKien();
     }
-//khai báo client của google
+
+    //  Trung lấy vị trí
+    private void getLocation() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(Sin_Up_Activity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//             getLocation();
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                @Override
+                public void onComplete(@NonNull @NotNull Task<Location> task) {
+                    Location location = task.getResult();
+                    if (location != null) {
+
+                        try {
+                            Geocoder geocoder = new Geocoder(
+                                    Sin_Up_Activity.this, Locale.getDefault());
+
+                            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                            SignUp_edt_DiaChi.setText(Html.fromHtml("" + addresses.get(0).getAddressLine(0)));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        } else {
+            ActivityCompat.requestPermissions(Sin_Up_Activity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+
+        }
+
+
+//                    GioHang_tv_diaChi
+    }
+
+    //khai báo client của google
     private void processrequest() {
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -94,12 +144,14 @@ public class Sin_Up_Activity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
     }
-//khi ấn nút login sẽ chạy vào hàm này
+
+    //khi ấn nút login sẽ chạy vào hàm này
     private void processLogin() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-//mở dialog tài khoản gg
+
+    //mở dialog tài khoản gg
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,7 +162,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
             handleSignInResult(task);
         }
     }
-//lay dữ liệu tài khoản
+
+    //lay dữ liệu tài khoản
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -121,7 +174,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
         }
     }
-//xử lí đăng nhập
+
+    //xử lí đăng nhập
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
@@ -132,8 +186,8 @@ public class Sin_Up_Activity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            if (user!=null){
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            if (user != null) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -144,7 +198,15 @@ public class Sin_Up_Activity extends AppCompatActivity {
                     }
                 });
     }
+
     private void batSuKien() {
+//        Lấy vị trí
+        SingUp_Im_ViTri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLocation();
+            }
+        });
 //        chuyển sang trang đăng kí tài khoản
         SignUp_tv_btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +232,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
         Login_tv_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Sin_Up_Activity.this,Nhap_SDT.class);
+                Intent intent = new Intent(Sin_Up_Activity.this, Nhap_SDT.class);
                 startActivity(intent);
             }
         });
@@ -197,43 +259,36 @@ public class Sin_Up_Activity extends AppCompatActivity {
 
     private void checkValidateSet() {
 
-        String tenKH=signUp_edt_TenKH.getText().toString().trim();
-        String userName=signUp_edt_teDangNhapKhachHang.getText().toString().trim();
-        String email=SignUp_edt_gmail.getText().toString().trim();
-        String password=SignUp_edt_MatKhau.getText().toString().trim();
-        String repeatPassword=SignUp_edt_NhapLaiMatKhau.getText().toString().trim();
-        String address=SignUp_edt_DiaChi.getText().toString().trim();
-        String soDienThoai=SignUp_edt_SDT.getText().toString().trim();
-        if (tenKH.length()<6 || tenKH.length()>100)
-        {
+        String tenKH = signUp_edt_TenKH.getText().toString().trim();
+        String userName = signUp_edt_teDangNhapKhachHang.getText().toString().trim();
+        String email = SignUp_edt_gmail.getText().toString().trim();
+        String password = SignUp_edt_MatKhau.getText().toString().trim();
+        String repeatPassword = SignUp_edt_NhapLaiMatKhau.getText().toString().trim();
+        String address = SignUp_edt_DiaChi.getText().toString().trim();
+        String soDienThoai = SignUp_edt_SDT.getText().toString().trim();
+        if (tenKH.length() < 6 || tenKH.length() > 100) {
             signUp_edt_TenKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
-        }
-        else if (userName.length()<6 || userName.length()>50)
-        {
+        } else if (userName.length() < 6 || userName.length() > 50) {
             signUp_edt_teDangNhapKhachHang.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
-        }else if (!email.matches(emailPattern))
-        {
+        } else if (!email.matches(emailPattern)) {
             SignUp_edt_gmail.setError("Sai định dạng Email");
-        }else if (password.isEmpty() || password.length()<6)
-        {
+        } else if (password.isEmpty() || password.length() < 6) {
             SignUp_edt_MatKhau.setError("Mật khẩu đang trống hoặc bé hơn 6 kí tự");
-        }else if (!password.equals(repeatPassword))
-        {
+        } else if (!password.equals(repeatPassword)) {
             SignUp_edt_NhapLaiMatKhau.setError("Mật khẩu không khớp");
-        }else if (!(soDienThoai.length() ==10 || !soDienThoai.matches(reg))){
+        } else if (!(soDienThoai.length() == 10 || !soDienThoai.matches(reg))) {
             SignUp_edt_SDT.setError("Nhập sai định dạng số điện thoại");
 
-        }else if (address.length()<6 || address.length()>150){
+        } else if (address.length() < 6 || address.length() > 150) {
             SignUp_edt_DiaChi.setError("Địa Chỉ lớn hơn 6 và  không quá 100 kí tự");
-        }
-        else{
+        } else {
             database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
             //    FirebaseStorage
-            node=database.getReference("Accounts");
-            UUID uuid=UUID.randomUUID();
-            model_account=new model_Account(uuid.toString(),tenKH,userName,password,address,email,soDienThoai,uuid.toString(),"");
+            node = database.getReference("Accounts");
+
+            model_account = new model_Account(UUID.randomUUID().toString(), tenKH, userName, password, address, email, soDienThoai, UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(), "");
             node.child(model_account.getId()).setValue(model_account);
-            Intent intent=new Intent(Sin_Up_Activity.this,Login_Activity.class);
+            Intent intent = new Intent(Sin_Up_Activity.this, Login_Activity.class);
             startActivity(intent);
             Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
@@ -247,23 +302,23 @@ public class Sin_Up_Activity extends AppCompatActivity {
 
 
 //        TextView
-        SignUp_tv_btn_Login= findViewById(R.id.signUp_tv_btn_Login);
+        SignUp_tv_btn_Login = findViewById(R.id.signUp_tv_btn_Login);
         SignUp_tv_btn_loginText = findViewById(R.id.signUp_tv_btn_loginText);
 
         Login_tv_google = findViewById(R.id.login_tv_google);
-        Login_tv_Phone= findViewById(R.id.login_tv_Phone);
+        Login_tv_Phone = findViewById(R.id.login_tv_Phone);
 
 
 //        EditText
         signUp_edt_teDangNhapKhachHang = findViewById(R.id.signUp_edt_teDangNhapKhachHang);
         SignUp_edt_gmail = findViewById(R.id.signUp_edt_gmailKH);
         SignUp_edt_MatKhau = findViewById(R.id.signUp_edt_matKhauKH);
-        SignUp_edt_NhapLaiMatKhau=  findViewById(R.id.signUp_edt_repeatMatKhau);
+        SignUp_edt_NhapLaiMatKhau = findViewById(R.id.signUp_edt_repeatMatKhau);
         SignUp_edt_DiaChi = findViewById(R.id.signUp_edt_DiaChiKhachHang);
         SignUp_edt_SDT = findViewById(R.id.signUp_edt_phoneNumber);
-        signUp_edt_TenKH=findViewById(R.id.signUp_edt_TenKH);
+        signUp_edt_TenKH = findViewById(R.id.signUp_edt_TenKH);
 //        LinearLayout
-        SignUp_lv_btn_submid= findViewById(R.id.signUp_lv_btn_submid);
+        SignUp_lv_btn_submid = findViewById(R.id.signUp_lv_btn_submid);
 
 //        Imgview
         Login_tv_back = findViewById(R.id.thongTinTaiKhoan_img_btn_thoat);
