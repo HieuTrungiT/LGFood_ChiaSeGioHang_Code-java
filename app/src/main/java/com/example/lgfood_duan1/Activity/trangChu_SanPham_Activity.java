@@ -41,6 +41,7 @@ import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -732,9 +733,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         }
                         UUID uuid = UUID.randomUUID();
                         String idChiTietSanPham = String.valueOf(uuid);
-                        model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
-                        dataRef = database.getReference("GioHangs");
-                        dataRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
+                        model_addToCart cart = new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(),sanPham.getGiamGiaSanPham(),sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
+                        dataRef = database.getReference("newCards");
+                        dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(cart);
                     }
 
                     @Override
