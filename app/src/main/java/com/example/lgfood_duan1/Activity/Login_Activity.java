@@ -40,6 +40,12 @@ public class Login_Activity extends AppCompatActivity {
     private LinearLayout
             Login_llout_btn_submid;
 
+    private SharedPreferences shareAcout;
+
+    String idSharePre,passSharePre,userSharePre,idDanhSachyeuThich;
+    boolean rememberSharePre;
+
+
 //thai: login
     DatabaseReference mData;
     FirebaseDatabase database;
@@ -50,7 +56,7 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         anhXa();
-
+        checkSavePass();
         batSuKien();
     }
 
@@ -98,20 +104,47 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void checkSavePass(){
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = shareAcout.edit();
+
+        idDanhSachyeuThich = shareAcout.getString("IDDanhSachYeuThich","");
+        passSharePre = shareAcout.getString("PASSWORD","");
+        userSharePre = shareAcout.getString("USERNAME","");
+        rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
+        idSharePre = shareAcout.getString("IDUSRE","");
+        if(rememberSharePre == true){
+            Intent intent= new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+            startActivity(intent);
+
+        }else{
+            editor.clear();
+            editor.commit();
+
+        }
+
+    }
+
+
     //thai sharePreference
-    private void rememberUser(String user,String password,boolean status,String idGioHang){
+
+    private void rememberUser(String idUser,String idDanhSachyeuThich,String user,String password,boolean status){
+
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
         if (!status){
-            editor.clear();
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
+            editor.putString("IDUSRE",idUser);
         }else {
+            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
             editor.putBoolean("REMEMBER",status);
-            editor.putString("IDGIOHANG",idGioHang);
-//            editor.putString("ADDRESS",);
-//            editor.putString("PHONENUMBER",);
-//            editor.putString("EMAIL",);
+            editor.putString("IDUSRE",idUser);
         }
         editor.commit();
     }
@@ -144,8 +177,10 @@ public class Login_Activity extends AppCompatActivity {
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
                                 startActivity(intent);
-                                String idGioHang=account.getIdGioHang();
-                                rememberUser(userName,password,checkBox.isChecked(),idGioHang);
+
+                        
+                                rememberUser(account.getId(),account.getIdDanhSachYeuThich(),userName,password,checkBox.isChecked());
+
                                 return;
                             }else{
                                 Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
