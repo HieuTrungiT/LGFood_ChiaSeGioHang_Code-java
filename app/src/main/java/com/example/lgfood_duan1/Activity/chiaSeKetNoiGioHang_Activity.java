@@ -1,4 +1,4 @@
-package com.example.lgfood_duan1;
+package com.example.lgfood_duan1.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,23 +9,19 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.lgfood_duan1.Activity.ChiaSeGioHang_Activity;
-import com.example.lgfood_duan1.Activity.gio_Hang_Activity;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_viTri;
+import com.example.lgfood_duan1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -163,6 +159,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                arrayListCartTam.clear();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     arrCartTam = child.getValue(model_Cart.class);
                     arrayListCartTam.add(arrCartTam);

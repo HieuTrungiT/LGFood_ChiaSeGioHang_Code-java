@@ -98,6 +98,12 @@ public class gio_Hang_Activity extends AppCompatActivity {
     //random
     UUID uuid;
 
+    @Override
+    protected void onStart() {
+        dataRef = database.getReference("location").child(idViTri);
+        dataRef.child("tinhTrang").setValue(false);
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
