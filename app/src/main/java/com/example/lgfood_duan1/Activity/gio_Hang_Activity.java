@@ -93,7 +93,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private SharedPreferences shareAcout;
     SharedPreferences sharedPreferences;
     //    Value
-    int i;
+    int i,tien, Tong=0;
+
     //    user
     String idUser, viTri, idViTri,idGioHangTam,nameUser,anhUser;
     //random
@@ -107,9 +108,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
     }
 
 
-    model_addToCart modelAddToCart;
-    int i,tien, Tong=0;
-    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
