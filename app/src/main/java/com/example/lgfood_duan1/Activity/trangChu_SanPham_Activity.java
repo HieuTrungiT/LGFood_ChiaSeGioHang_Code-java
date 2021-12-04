@@ -589,6 +589,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     }
 
     private void onClickHeartItem(model_SanPham sanPham) {
+
         String idYeuThich;
         UUID uuid=UUID.randomUUID();
         idYeuThich=String.valueOf(uuid);
@@ -596,8 +597,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         model_yeuThich yeuThich=new model_yeuThich(sanPham.getIdSanPham(),idYeuThich);
         dataRef=database.getReference("danhSachSanPhamYeuThich");
         dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich).setValue(yeuThich);
-
-
+        
     }
 
     //Trung: lấy dữ liệu sản phẩm trên firebase về

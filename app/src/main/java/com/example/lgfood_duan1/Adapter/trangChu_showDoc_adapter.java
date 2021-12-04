@@ -34,9 +34,10 @@ import java.util.UUID;
 public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_showDoc_adapter.ViewHolder> {
     private ArrayList<model_SanPham> arrListSanPham;
     private trangChu_SanPham_Activity context;
-
-
-
+    private DatabaseReference dataRef;
+    private FirebaseDatabase database;
+    private SharedPreferences sharedPreferences;
+    private ArrayList<model_yeuThich> yeuThichArrayList;
     //thai: onClickItem
     private IClickListener mIClickListener;
 
@@ -71,14 +72,37 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
         holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
         holder.ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich.setText("0");
-//        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.heart);
+        dataRef=database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH",""));
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    Toast.makeText(context, "chucmung3", Toast.LENGTH_SHORT).show();
 
+                    model_yeuThich yeuThich=ds.getValue(model_yeuThich.class);
+                    yeuThichArrayList.add(yeuThich);
+                    for (int i=0;i<yeuThichArrayList.size();i++){
+                        Toast.makeText(context, "chucmung2", Toast.LENGTH_SHORT).show();
+
+                        if (sanPham.getIdSanPham().equals(yeuThichArrayList.get(i).getIdSanPham())){
+                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.heart);
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 //     Thêm sản phẩm vào yêu thích sản phẩm
         holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mIClickListener.onClickHeart(sanPham);
-                
+
             }
         });
 
@@ -116,7 +140,9 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
             super(itemView);
 //            ánh xạ\
 //            ImgeView
-
+            database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+            sharedPreferences=itemView.getContext().getSharedPreferences("USER_FILE",Context.MODE_PRIVATE);
+            yeuThichArrayList=new ArrayList<>();
             ItemCuttomTrangChu_doc_imgShowAnhSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_imgShowAnhSanPham);
             ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_llout_btn_showChiTietSanPham);
             ItemCuttomTrangChu_doc_img_btn_chonYeuThich = itemView.findViewById(R.id.itemCuttomTrangChu_doc_img_btn_chonYeuThich);
