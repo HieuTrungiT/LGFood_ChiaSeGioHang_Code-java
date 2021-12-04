@@ -93,7 +93,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private SharedPreferences shareAcout;
     SharedPreferences sharedPreferences;
     //    Value
-    int i;
     //    user
     String idUser, viTri, idViTri,idGioHangTam,nameUser,anhUser;
     //random
@@ -107,9 +106,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
     }
 
 
-    model_addToCart modelAddToCart;
     int i,tien, Tong=0;
-    ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,7 +234,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                         if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             mData = database.getReference("newCarts");
-                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), Integer.parseInt(modelCartArrayList.get(i).getSoLuong()), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(), Integer.parseInt(modelCartArrayList.get(i).getSoLuong()), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
                         }
                     }
@@ -475,6 +473,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                                     cart.getTinhTrangSp(),
                                     cart.getAnhSp(),
                                     cart.getNgayNhapSp(),
+                                    cart.getSoLuongTrongKho(),
                                     cart.getSoLuongSp(),
                                     cart.getGiamGiaSp(),
                                     cart.getGiaNhapSp(),

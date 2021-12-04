@@ -42,7 +42,9 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
+import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -124,7 +126,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //biến số lượng và id giỏ hàng
     int i = 1;
     String idGioHang;
-
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,6 +273,39 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+
+        bottomNavigationView.setSelectedItemId(R.id.Use);
+
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Like:
+                        startActivity(new Intent(getApplicationContext(),favorite_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Home:
+                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                    case R.id.Paid:
+                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                        overridePendingTransition(0, 0);
+
+                        return;
+                    case R.id.Use:
+                        startActivity(new Intent(getApplicationContext(),thongTinTaiKhoan_Activity.class));
+                        overridePendingTransition(0, 0);
+                        return;
+                }
+            }
+        });
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -525,7 +560,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_rscV_showSanPhamNgang.setLayoutManager(linearLayoutManager);
         TrangChuSanPham_rscV_showSanPhamNgang.setItemAnimator(new DefaultItemAnimator());
 //        Initilize
-        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this);
+        TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this, new trangChu_showNgang_adapter.IClickListener() {
+            @Override
+            public void onClickAdd(model_SanPham sanPham) {
+
+            }
+        });
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
     }
 
@@ -549,7 +589,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     }
 
     private void onClickHeartItem(model_SanPham sanPham) {
-        
+        String idYeuThich;
+        UUID uuid=UUID.randomUUID();
+        idYeuThich=String.valueOf(uuid);
+
+        model_yeuThich yeuThich=new model_yeuThich(sanPham.getIdSanPham(),idYeuThich);
+        dataRef=database.getReference("danhSachSanPhamYeuThich");
+        dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich).setValue(yeuThich);
+
+
     }
 
     //Trung: lấy dữ liệu sản phẩm trên firebase về
@@ -821,6 +869,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
         //        Button
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+
+        sharedPreferences=getSharedPreferences("USER_FILE",MODE_PRIVATE);
     }
 
 }
