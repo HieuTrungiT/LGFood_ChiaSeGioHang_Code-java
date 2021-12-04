@@ -71,7 +71,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         anhXa();
         //thai
-//        itemAddToCart();
+        itemAddToCart();
         loadItemAddToCart();
         layTuFirebase();
     }
@@ -80,66 +80,66 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
 
 //thai
-//    private void itemAddToCart() {
-//
-//        mData= database
-//                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                .getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
-//
-//        mData.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (modelCartArrayList!=null){
-//                    modelCartArrayList.clear();
-//                }
-//                for (DataSnapshot ds: snapshot.getChildren()){
-//                    model_Cart cart=ds.getValue(model_Cart.class);
-//                             modelCartArrayList.add(cart);
-//                }
-//                checkKhoHang();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull  DatabaseError error) {
-//
-//            }
-//        });
-//
-//    }
-////thai
-//    private void checkKhoHang() {
-//        mData= database
-//                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                .getReference("khoHang");
-//        mData.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot ds:snapshot.getChildren()){
-//                    model_SanPham sanPham=ds.getValue(model_SanPham.class);
-//                    for (int i=0;i<modelCartArrayList.size();i++){
-//                        if (sanPham.getIdSanPham()==(modelCartArrayList.get(i).getIdSanPham())) {
-//                            mData= database
-//                                    .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//                                    .getReference("newCarts");
-//                            modelAddToCart=new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),Integer.parseInt(modelCartArrayList.get(i).getSoLuong()),sanPham.getGiamGiaSanPham() ,sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
-//                            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
-//                            Log.d("itemmmmm",modelCartArrayList.get(i).getSoLuong());
-//                        }
-//                    }
-//
-//                }
-//
-//            }
-//                @Override
-//                public void onCancelled(@NonNull  DatabaseError error) {
-//
-//                }
-//
-//            });
-//
-//
-//    }
+    private void itemAddToCart() {
+
+        mData= database
+                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
+
+        mData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (modelCartArrayList!=null){
+                    modelCartArrayList.clear();
+                }
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    model_Cart cart=ds.getValue(model_Cart.class);
+                             modelCartArrayList.add(cart);
+                }
+                checkKhoHang();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+
+            }
+        });
+
+    }
+//thai
+    private void checkKhoHang() {
+        mData= database
+                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("khoHang");
+        mData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    model_SanPham sanPham=ds.getValue(model_SanPham.class);
+                    for (int j=0;j<modelCartArrayList.size();j++){
+                        if (sanPham.getIdSanPham().equals(modelCartArrayList.get(j).getIdSanPham())) {
+                            mData= database
+                                    .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                                    .getReference("newCarts");
+                            modelAddToCart=new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(),Integer.parseInt(modelCartArrayList.get(j).getSoLuong()),sanPham.getGiamGiaSanPham() ,sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
+                            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
+                        }
+                        Log.d("arrrrrrasd",modelAddToCart+"");
+                    }
+
+                }
+
+            }
+                @Override
+                public void onCancelled(@NonNull  DatabaseError error) {
+
+                }
+
+            });
+
+
+    }
     //thai
     private void loadItemAddToCart() {
         GioHang_rv_showGioHang.setHasFixedSize(true);
@@ -203,7 +203,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         datNhanh_tv_giaSanPham.setText(cart.getGiaBanSp() + "00đ");
         datNhanh_tv_giamGiaSanPham.setText("   -" + cart.getGiamGiaSp());
         datNhanh_tv_ngaySanXuat.setText(cart.getNgaySanXuatSp());
-        datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(cart.getSoLuongSp()));
+        datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(cart.getSoLuongTrongKho()));
 //        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
         datNhanh_tv_moTaSanPham.setText(cart.getMoTaSp());
 
@@ -312,44 +312,51 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private void onClickMinusItemAddToCart(model_addToCart cart) {
         mData= database
                 .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("newCarts");
+                .getReference("GioHangs");
         i= cart.getSoLuongSp();
-        int a;
         i--;
-        for (int m=0;m<cartArrayList.size();m++){
-            Tong= (int) (Tong + ((cartArrayList.get(m).getGiaBanSp() * i)));
+            if (i <= 1) {
+                i = 1;
+                cart.setSoLuongSp(i);
 
-        }
-        if (i <= 1) {
-            i = 1;
-            cart.setSoLuongSp(i);
+                mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
+                mData= database
+                        .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("newCarts");
+                mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
 
-            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
-            GioHang_tv_tongTien.setText(String.valueOf(Tong));
+//                GioHang_tv_tongTien.setText(String.valueOf(i));
 
-            return;
-        } else {
-            cart.setSoLuongSp(i);
-            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
-            GioHang_tv_tongTien.setText(String.valueOf(Tong));
+                return;
+            } else {
+                cart.setSoLuongSp(i);
+                mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
+//                GioHang_tv_tongTien.setText(String.valueOf(i));
+                mData= database
+                        .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("newCarts");
+                mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
 
-        }
+
+            }
+
     }
     //tang so luong san pham:thai
     private void onClickPlusItemAddToCart(model_addToCart cart) {
         mData= database
                 .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("newCarts");
+                .getReference("GioHangs");
         i= cart.getSoLuongSp();
         i++;
-        for (int m=0;m<cartArrayList.size();m++){
-            Tong= (int) (Tong + ((cartArrayList.get(m).getGiaBanSp() * i)));
 
-        }
         tien= (int) (i*cart.getGiaBanSp());
         cart.setSoLuongSp(i);
         mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
-        GioHang_tv_tongTien.setText(String.valueOf(Tong));
+        mData= database
+                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("newCarts");
+        mData.child(sharedPreferences.getString("IDGIOHANG","")).child(cart.getIdSp()).setValue(cart);
+
 
     }
 
@@ -374,6 +381,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                                     cart.getTinhTrangSp(),
                                     cart.getAnhSp(),
                                     cart.getNgayNhapSp(),
+                                    cart.getSoLuongTrongKho(),
                                     cart.getSoLuongSp(),
                                     cart.getGiamGiaSp(),
                                     cart.getGiaNhapSp(),
@@ -389,9 +397,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 if (cart==null || cartArrayList==null ||cartArrayList.isEmpty()){
                     return;
                 }
-                for (int i=0;i<cartArrayList.size();i++){
-                    if (cart.getIdSp()==cartArrayList.get(i).getIdSp()){
-                        cartArrayList.set(i,cart);
+                for (int j=0;j<cartArrayList.size();j++){
+                    if (cart.getIdSp()==cartArrayList.get(j).getIdSp()){
+                        cartArrayList.set(j,cart);
                     }
                 }
                 cartAdapter.notifyDataSetChanged();
@@ -403,9 +411,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 if (cart==null || cartArrayList==null || cartArrayList.isEmpty()){
                     return;
                 }
-                for (int i =0; i<cartArrayList.size();i++){
-                    if (cart.getIdSp()==cartArrayList.get(i).getIdSp()){
-                        cartArrayList.remove(cartArrayList.get(i));
+                for (int j =0; j<cartArrayList.size();j++){
+                    if (cart.getIdSp()==cartArrayList.get(j).getIdSp()){
+                        cartArrayList.remove(cartArrayList.get(j));
                         break;
                     }
                 }

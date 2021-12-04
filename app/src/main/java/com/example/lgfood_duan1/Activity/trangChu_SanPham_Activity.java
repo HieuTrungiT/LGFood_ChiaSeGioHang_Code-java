@@ -539,8 +539,17 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             public void onClickShowItem(model_SanPham sanPham) {
                 showItemChiTietSanPham(sanPham);
             }
+
+            @Override
+            public void onClickHeart(model_SanPham sanPham) {
+                onClickHeartItem(sanPham);
+            }
         });
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
+    }
+
+    private void onClickHeartItem(model_SanPham sanPham) {
+        
     }
 
     //Trung: lấy dữ liệu sản phẩm trên firebase về
@@ -722,7 +731,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String idProduct = sanPham.getIdSanPham();
                 dataRef = database.getReference("Accounts");
                 dataRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -733,8 +741,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         }
                         UUID uuid = UUID.randomUUID();
                         String idChiTietSanPham = String.valueOf(uuid);
-                        model_addToCart cart = new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(),sanPham.getGiamGiaSanPham(),sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
-                        dataRef = database.getReference("newCards");
+                        model_Cart cart = new model_Cart(idChiTietSanPham,sanPham.getIdSanPham(),String.valueOf(i));
+                        dataRef = database.getReference("GioHangs");
                         dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(cart);
                     }
 

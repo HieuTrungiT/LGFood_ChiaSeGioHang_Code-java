@@ -27,10 +27,13 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         this.arrListSanPham = arrListSanPham;
         this.context = context;
         this.mIClickListener = mIClickListener;
+
     }
 
     public interface IClickListener{
         void onClickShowItem(model_SanPham sanPham);
+
+        void onClickHeart(model_SanPham sanPham);
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,7 +58,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Thích nè :>", Toast.LENGTH_SHORT).show();
+                mIClickListener.onClickHeart(sanPham);
             }
         });
 
