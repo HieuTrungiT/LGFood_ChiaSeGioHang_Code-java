@@ -128,7 +128,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     String sharePreIdLike;
     private SharedPreferences shareAcout;
     ArrayList<model_sanPhamYeuThich> arrayListSanPhamYeuThich= new ArrayList<>();
-//    model_sanPhamYeuThich arrSanPhamYeuThich;
+    model_sanPhamYeuThich arrSanPhamYeuThich;
 //
     int timkiem = 0;
     //biến số lượng và id giỏ hàng
@@ -148,42 +148,10 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         showListProduc_Horizoltal();
         timKiem();
         showSlider();
-//        getDanhSachYeuThich();
 
     }
 //  BT getDanhSachYeuThich
-    /* private void getDanhSachYeuThich(){
-        dataSanPhamRef = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("sanPhamYeuThich");
-        shareAcout =  getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        sharePreIdLike = shareAcout.getString("IDDanhSachYeuThich","");
-//        dataSanPhamRef = dataSanPham.getReference().child("sanPhamYeuThich").child(sharePreIdLike);
-        dataSanPhamRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot child : snapshot.getChildren()) {
-                    model_sanPhamYeuThich arrSanPhamYeuThich = child.getValue(model_sanPhamYeuThich.class);
-                    Log.d("ddd", " "+arrSanPhamYeuThich);
-                    arrayListSanPhamYeuThich.add(arrSanPhamYeuThich);
 
-                }
-//                Toast.makeText(context, ""+arrayListSanPhamYeuThich.size(), Toast.LENGTH_SHORT).show();
-
-//                if(snapshot.child("idDanhSachYeuThich").exists()){
-//                    imgTim.setImageResource(R.drawable.ic_btn_love_red);
-//                    imgTim.setTag("Like");
-//                }else {
-//                    imgTim.setImageResource(R.drawable.ic_btn_love_white);
-//                    imgTim.setTag("UnLike");
-//                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    } */
 
 //    BT: showSlider
     private void showSlider() {

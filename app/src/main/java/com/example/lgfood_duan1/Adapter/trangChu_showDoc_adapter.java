@@ -40,13 +40,14 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
     private FirebaseDatabase dataSanPham;
     private FirebaseStorage storage;
     private SharedPreferences shareAcout;
+    String sharePreIdLike;
 
     //thai: onClickItem
     private IClickListener mIClickListener;
-    String sharePreIdLike;
 //    model yêu thích
     ArrayList<model_sanPhamYeuThich> arrayListSanPhamYeuThich;
     model_sanPhamYeuThich arrSanPhamYeuThich;
+
 
 
 
@@ -79,12 +80,20 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
         holder.ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich.setText("0");
 //     Thêm sản phẩm vào yêu thích sản phẩm
+
+
+
         holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                isLike(arrListSanPham.get(position).getIdSanPham().toString());
+                isLike(arrListSanPham.get(position).getIdSanPham());
+                if(holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.getTag().equals("IDDanhSachYeuThich")){
+                    FirebaseDatabase.getInstance().getReference().child("sanPhamYeuThich").child(sharePreIdLike).setValue(true);
+                }else {
+                    FirebaseDatabase.getInstance().getReference().child("sanPhamYeuThich").child(sharePreIdLike).removeValue();
 
+                }
                 Toast.makeText(context, "Thích nè :>", Toast.LENGTH_SHORT).show();
             }
         });
@@ -106,7 +115,52 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 
         UUID uuid = UUID.randomUUID();
         arrSanPhamYeuThich = new model_sanPhamYeuThich(uuid.toString(),idSanPham);
-        dataSanPhamRef.child(sharePreIdLike).child(uuid.toString()).setValue(arrSanPhamYeuThich);
+        dataSanPhamRef.child(sharePreIdLike).child(arrSanPhamYeuThich.getIdYeuThich()).setValue(arrSanPhamYeuThich);
+
+    }
+
+    private void getDanhSachYeuThich(){
+        dataSanPham = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        shareAcout =  context.getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        sharePreIdLike = shareAcout.getString("IDDanhSachYeuThich","");
+        dataSanPhamRef = dataSanPham.getReference("sanPhamYeuThich").child(sharePreIdLike);
+        dataSanPhamRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    arrSanPhamYeuThich = child.getValue(model_sanPhamYeuThich.class);
+                    arrayListSanPhamYeuThich.add(arrSanPhamYeuThich);
+
+                }
+                for(int i = 0 ; i < arrayListSanPhamYeuThich.size(); i++){
+
+                    for (int j = 0; j < arrListSanPham.size();j++){
+                        if (arrayListSanPhamYeuThich.get(i).getIdSanPham().equals(arrListSanPham.get(j).getIdSanPham())){
+//                            imageView.setImageResource(R.drawable.ic_btn_love_red);
+                        }else {
+//                            imageView.setImageResource(R.drawable.ic_btn_love_white);
+                        }
+
+                    }
+
+                }
+
+//                if(snapshot.child("idDanhSachYeuThich").exists()){
+//                    imgTim.setImageResource(R.drawable.ic_btn_love_red);
+//                    imgTim.setTag("Like");
+//                }else {
+//                    imgTim.setImageResource(R.drawable.ic_btn_love_white);
+//                    imgTim.setTag("UnLike");
+//                }
+            }
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void checkLike(){
 
     }
 

@@ -4,14 +4,14 @@ public class model_sanPhamYeuThich {
     String idSanPham;
     String idYeuThich;
 
-    public void model_sanPhamYeuThich() {
-
+    public model_sanPhamYeuThich() {
     }
 
-    public model_sanPhamYeuThich(String idYeuThich, String idSanPham) {
-        this.idYeuThich = idYeuThich;
+    public model_sanPhamYeuThich(String idSanPham, String idYeuThich) {
         this.idSanPham = idSanPham;
+        this.idYeuThich = idYeuThich;
     }
+
 
     public String getIdYeuThich() {
         return idYeuThich;
