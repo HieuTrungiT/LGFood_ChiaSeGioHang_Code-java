@@ -111,8 +111,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private SharedPreferences shareAcout;
     String idSharePre;
     String idGioHangShare;
-    //    sp Slider
-
+    //    sp Slider\
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
 
@@ -120,13 +119,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
     //    Model
+    ArrayList<model_Cart> model_cartArrayList;
     ArrayList<model_SanPham> arrListSanPham;
     ArrayList<model_Cart> arrListCart;
     model_SanPham arrSanPham;
     model_Cart arrCart;
     // adapter
     trangChu_showDoc_adapter TrangChu_showDoc_adapter;
-
     trangChu_showNgang_adapter TrangChu_showNgang_adapter;
 
     int timkiem = 0;
@@ -134,7 +133,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int i = 1;
     String idGioHang;
 
-    ArrayList<model_Cart> model_cartArrayList;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +143,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         anhXa();
         batSuKien();
+        getDataFirebaseCart();
         NavigationDrawer();
         getDataFirebase();
         showListProduc_Horizoltal();
@@ -702,6 +703,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //thai:onClickItemSanPham
     private void showItemChiTietSanPham(model_SanPham sanPham) {
         anhXa();
+        getDataFirebaseCart();
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dat_nhanh);
@@ -778,13 +780,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             @Override
             public void onClick(View v) {
                 String idProduct = sanPham.getIdSanPham();
+                Log.d("eee", "idprduc" + idProduct);
                 dataRef = database.getReference("Accounts").child(idSharePre);
                 dataRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        boolean check =false;
+                        boolean check = false;
+                        String idCart = "";
                         int viTri = 0;
-                        dataRef = database.getReference("newCards");
+                        dataRef = database.getReference("newCarts");
                         model_Account account = snapshot.getValue(model_Account.class);
                         idGioHang = String.valueOf(account.getIdGioHang());
                         UUID uuid = UUID.randomUUID();
@@ -792,22 +796,23 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                         dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
 
-//                         kiem tra trong gioHangs đã có sản phẩm chưa
-                        getDataFirebaseCart();
-                        dataRef = database.getReference("GioHangs").child(idGioHang);
+//                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
 
-                        for (int i = 0; i < arrListCart.size(); i++) {
-                            if (arrListCart.get(i).getIdSanPham().equals(idProduct)) {
-                            check = true;
-                            viTri = i;
+                        dataRef = database.getReference("GioHangs").child(idGioHang);
+                        for (int j = 0; j < arrListCart.size(); j++) {
+                            if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
+                                check = true;
+                                idCart = arrListCart.get(j).getIdGioHang();
+                                viTri = j;
                             }
 
                         }
 
 
                         if (check == true) {
-                                    int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
-                                    dataRef.child(arrListCart.get(viTri).getIdGioHang()).child("soLuong").setValue(tong + "");
+                            int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                            dataRef.child(idCart).child("soLuong").setValue(tong + "");
+
                         } else {
                             model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
                             dataRef.child(cart.getIdGioHang()).setValue(cart);
@@ -831,31 +836,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     }
 
     private void getDataFirebaseCart() {
-        dataRef = database.getReference("GioHangs").child(idGioHang);
+        dataRef = database.getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-
+                arrListCart.clear();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     arrCart = child.getValue(model_Cart.class);
                     arrListCart.add(arrCart);
                 }
-
-
-////                                Toast.makeText(trangChu_SanPham_Activity.this,  arrListCart.get(1).getIdGioHang()+"", Toast.LENGTH_SHORT).show();
-//                                for (int i = 0; i < arrListCart.size(); i = i + 1) {
-////                                    if (arrListCart.get(i).getIdSanPham().equals(idProduct)) {
-////                                        check = true;
-////                                        viTri = i;
-////                                    }
-//                                }
-////
-//                                if (check == false) {
-//                                } else {
-//
-//                                }
-
             }
 
             @Override
@@ -867,6 +856,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //     Ánh xạ
     private void anhXa() {
+//        SharedPreferences
+        sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
 //        model
         arrListSanPham = new ArrayList<model_SanPham>();
         arrListCart = new ArrayList<model_Cart>();

@@ -36,7 +36,6 @@ public class chiaSeGioHang_showDoc_adapter extends RecyclerView.Adapter<chiaSeGi
     FirebaseDatabase database;
 
 
-
     public chiaSeGioHang_showDoc_adapter(ArrayList<model_viTri> arrayListViTri, ChiaSeGioHang_Activity context) {
         this.arrayListViTri = arrayListViTri;
         this.context = context;
@@ -51,24 +50,27 @@ public class chiaSeGioHang_showDoc_adapter extends RecyclerView.Adapter<chiaSeGi
     @Override
     public void onBindViewHolder(@NonNull chiaSeGioHang_showDoc_adapter.ViewHolder holder, int position) {
         model_viTri arrViTri = arrayListViTri.get(position);
-        holder.ItemChiaSeGioHang_tv_key.setText("key:#" + arrViTri.getKey());
-        Glide.with(context).load(arrayListViTri.get(position).getAnhUser())
-                .into(holder.ItemChiaSeGioHang_crimg_avata);
-        holder.ItemChiaSeGioHang_tv_nameUser.setText(arrViTri.getNameUser());
-        holder.ItemChiaSeGioHang_tv_diaChi.setText(arrViTri.getVitri());
-        holder.ItemChiaSeGioHang_llout_btn_chiaSeGioHang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+            holder.ItemChiaSeGioHang_tv_key.setText("key:#" + arrViTri.getKey());
+            Glide.with(context).load(arrayListViTri.get(position).getAnhUser())
+                    .into(holder.ItemChiaSeGioHang_crimg_avata);
+            holder.ItemChiaSeGioHang_tv_nameUser.setText(arrViTri.getNameUser());
+            holder.ItemChiaSeGioHang_tv_diaChi.setText(arrViTri.getVitri());
+            holder.ItemChiaSeGioHang_llout_btn_chiaSeGioHang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 //                1 lấy thông tin từ giỏ hàng người a
 
 //                idGioHang
 
 //                2 lấy id giỏ hàng tạm của người b
 //                chuyển arrlist giỏ hàng a qua giỏ hàng tạm b
+                    Toast.makeText(context, arrViTri.getIdGioHangTam() + "", Toast.LENGTH_SHORT).show();
 
-                context.nhanDuLieuAdapterItem( arrViTri.getIdGioHangTam());
-            }
-        });
+                    context.nhanDuLieuAdapterItem(arrViTri.getIdGioHangTam());
+                }
+            });
+
 
     }
 
@@ -79,7 +81,6 @@ public class chiaSeGioHang_showDoc_adapter extends RecyclerView.Adapter<chiaSeGi
         }
         return 0;
     }
-
 
 
     //thai: lay du lieu tu firebase

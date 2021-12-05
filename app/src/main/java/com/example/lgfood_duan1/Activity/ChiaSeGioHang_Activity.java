@@ -1,6 +1,7 @@
 package com.example.lgfood_duan1.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -14,6 +15,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +25,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Adapter.chiaSeGioHang_showDoc_adapter;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_viTri;
@@ -36,17 +40,23 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -56,7 +66,8 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
             ChiaSeGioHang_llout_btn_ggmap_phatTinNhieu,
             ChiaSeGioHang_llout_btn_rscv_phatTinHieu,
             ChiaSeGioHang_llout_FormTop,
-            ChiaSeGioHang_llout_btn_showFormTop;
+            ChiaSeGioHang_llout_btn_showFormTop,
+            ChiaSeGioHang_item_llout_btn_chiaSeGioHang;
     private RecyclerView
             ChiaSeGioHang_rscv_showDanhSach;
     private ImageView
@@ -64,15 +75,27 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
             ChiaSeGioHang_img_btn_showTheo,
             ChiaSeGioHang_img_phongTo,
             ChiaSeGioHang_img_thuNho,
-            ChiaSeGioHang_img_btn_timKiemKey;
+            ChiaSeGioHang_img_btn_timKiemKey,
+            ChiaSeGioHang_item_img_btn_xoaItem;
+
     private EditText
             ChiaSeGioHang_edt_timKiemKey;
     private CardView
             ChiaSeGioHang_crv_btn_showTheo,
-            ChiaSeGioHang_crv_btn_viTri;
+            ChiaSeGioHang_crv_btn_viTri,
+            ChiaSeGioHang_item_crview;
+
+
     private FrameLayout
             ChiaSeGioHang_frlout_showListGgMap,
             ChiaSeGioHang_frlout_showListRscv;
+    private CircleImageView
+            ChiaSeGioHang_item_crimg_avata;
+
+    private TextView
+            ChiaSeGioHang_item_tv_nameUser,
+            ChiaSeGioHang_item_tv_diaChi,
+            ChiaSeGioHang_item_tv_key;
     //    ggmap
     private Location currentLocation;
     private FusedLocationProviderClient client;
@@ -109,12 +132,13 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chia_se_gio_hang);
         anhXa();
-        batSuKien();
-        getDataFirebaseViTri();
-
-//        chia sẻ giỏ hàng
         client = LocationServices.getFusedLocationProviderClient(ChiaSeGioHang_Activity.this);
         fetchLastLocation();
+        getDataFirebaseViTri();
+        batSuKien();
+
+
+//        chia sẻ giỏ hàng
         getSharedPre();
         getDataGioHang();
         ChiaSeGioHang_img_btn_timKiemKey.setOnKeyListener(new View.OnKeyListener() {
@@ -152,6 +176,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     private void getDataFirebaseViTri() {
 
         dataRef = database.getReference("location");
+
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -176,7 +201,17 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     }
 
     private void batSuKien() {
+//                    bắt sự kiện tắt item poup
+        ChiaSeGioHang_item_img_btn_xoaItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
+                ChiaSeGioHang_item_crview.setAnimation(animation);
+                ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.INVISIBLE);
+                ChiaSeGioHang_item_crview.setVisibility(View.INVISIBLE);
+            }
+        });
 //      Tìm kiếm vị trí user bằng key
         ChiaSeGioHang_img_btn_timKiemKey.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,7 +241,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
                         }
                     });
-                }else{
+                } else {
                     getDataFirebaseViTri();
                 }
             }
@@ -277,6 +312,11 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                     ChiaSeGioHang_img_btn_showTheo.setImageResource(R.drawable.ic_ggmap);
                     ChiaSeGioHang_frlout_showListGgMap.setVisibility(View.INVISIBLE);
                     ChiaSeGioHang_frlout_showListRscv.setVisibility(View.VISIBLE);
+                    Animation animationout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
+                    ChiaSeGioHang_item_crview.setAnimation(animationout);
+                    ChiaSeGioHang_item_img_btn_xoaItem.setAnimation(animationout);
+                    ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.INVISIBLE);
+                    ChiaSeGioHang_item_crview.setVisibility(View.INVISIBLE);
                     checkOnclick = true;
                 }
             }
@@ -303,10 +343,15 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     // lấy xong dữ liệu giỏ hàng a thì bắt đầu chuyển chia sẻ qua giỏ hàng tạm b
     private void setDataChiaSeGioHang(String idGioHangTamB) {
         dataRef = database.getReference("gioHangTam");
+//        xóa dữ liệu trong giỏ hàng tạm trước khi add mưới vô
+        dataRef.child(idGioHangTamB).removeValue();
+// chạy vòng for để add tát cả sản phẩm vô mảng tạm
         for (int i = 0; i < arrListCart.size(); i++) {
             arrCartTam = new model_Cart(UUID.randomUUID().toString(), arrListCart.get(i).getIdSanPham(), arrListCart.get(i).getSoLuong());
+//            nếu báo lỗi thì check lại cấp quyền gps
             dataRef.child(idGioHangTamB).child(arrCartTam.getIdGioHang()).setValue(arrCartTam);
         }
+        Toast.makeText(this, "Đã gửi giỏ hàng", Toast.LENGTH_SHORT).show();
     }
 
     // lấy dữ liệu từ giỏ hàng
@@ -361,25 +406,83 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     //Trung show gg map
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        getDataFirebaseViTri();
 
-        for (int i = 0; i < arrayList.size(); i++) {
-            LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-            Toast.makeText(this, arrayList.get(i) + "", Toast.LENGTH_SHORT).show();
+        if (arrListViTri != null) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                int finalI = i;
 
-            MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i))
-                    .title(arrayList.get(i) + "");
-            googleMap.animateCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arrayList.get(i), 20));
 
-            googleMap.addMarker(markerOptions);
-//                mMap = googleMap;
-//
-//            mMap.addMarker(new MarkerOptions().position().title("Marker"));
-//            mMap
-//
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+//                    set giá trị cho item sử lý bắt sự kiện
+                        try {
+
+                            ChiaSeGioHang_item_tv_key.setText("key:#" + arrListViTri.get(finalI).getKey());
+                            Glide.with(ChiaSeGioHang_Activity.this).load(arrListViTri.get(finalI).getAnhUser())
+                                    .into(ChiaSeGioHang_item_crimg_avata);
+                            ChiaSeGioHang_item_tv_nameUser.setText(arrListViTri.get(finalI).getNameUser());
+                            ChiaSeGioHang_item_tv_diaChi.setText(arrListViTri.get(finalI).getVitri());
+
+                            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_bottom);
+                            ChiaSeGioHang_item_crview.setAnimation(animation);
+                            ChiaSeGioHang_item_img_btn_xoaItem.setAnimation(animation);
+                            ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.VISIBLE);
+                            ChiaSeGioHang_item_crview.setVisibility(View.VISIBLE);
+                        } catch (Exception e) {
+                            Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                        return false;
+                    }
+                });
+
+                try {
+                    //                MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i));
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arrayList.get(i), 20));
+                    String nameUsser = arrListViTri.get(finalI).getNameUser().toUpperCase();
+                    String key = arrListViTri.get(finalI).getKey();
+                    MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i))
+                            .title(nameUsser + "/key:#" + key);
+//                    bắt sự kiện chia sẻ giỏ hàng
+                    ChiaSeGioHang_item_llout_btn_chiaSeGioHang.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+//                                nếu như có user thì gửi idgiohaang
+                                nhanDuLieuAdapterItem(arrListViTri.get(finalI).getIdGioHangTam());
+                            }catch (Exception e){
+//                                nếu như không có bắt lỗi tắt item và thông báo
+                                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
+                                ChiaSeGioHang_item_crview.setAnimation(animation);
+                                ChiaSeGioHang_item_img_btn_xoaItem.setAnimation(animation);
+                                ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.INVISIBLE);
+                                ChiaSeGioHang_item_crview.setVisibility(View.INVISIBLE);
+                                Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+                    googleMap.addMarker(markerOptions);
+                } catch (Exception e) {
+                    Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        } else {
+            arrayList.clear();
         }
+
     }
+
 
     // Trung bắt sự kiện xin quyền location
     @Override
@@ -410,6 +513,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
         ChiaSeGioHang_llout_btn_ggmap_phatTinNhieu = findViewById(R.id.chiaSeGioHang_llout_btn_ggmap_phatTinNhieu);
         ChiaSeGioHang_llout_btn_rscv_phatTinHieu = findViewById(R.id.chiaSeGioHang_llout_btn_rscv_phatTinHieu);
         ChiaSeGioHang_llout_btn_showFormTop = findViewById(R.id.chiaSeGioHang_llout_btn_showFormTop);
+        ChiaSeGioHang_item_llout_btn_chiaSeGioHang = findViewById(R.id.chiaSeGioHang_item_llout_btn_chiaSeGioHang);
 //         RecyclerView
         ChiaSeGioHang_rscv_showDanhSach = findViewById(R.id.chiaSeGioHang_rscv_showDanhSach);
 //         ImageView
@@ -418,15 +522,23 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
         ChiaSeGioHang_img_phongTo = findViewById(R.id.chiaSeGioHang_img_phongTo);
         ChiaSeGioHang_img_thuNho = findViewById(R.id.chiaSeGioHang_img_thuNho);
         ChiaSeGioHang_img_btn_timKiemKey = findViewById(R.id.chiaSeGioHang_img_btn_timKiemKey);
+        ChiaSeGioHang_item_img_btn_xoaItem = findViewById(R.id.chiaSeGioHang_item_img_btn_xoaItem);
 //         EditText
         ChiaSeGioHang_edt_timKiemKey = findViewById(R.id.chiaSeGioHang_edt_timKiemKey);
 //         CardView
         ChiaSeGioHang_crv_btn_showTheo = findViewById(R.id.chiaSeGioHang_crv_btn_showTheo);
         ChiaSeGioHang_crv_btn_viTri = findViewById(R.id.chiaSeGioHang_crv_btn_viTri);
+        ChiaSeGioHang_item_crview = findViewById(R.id.chiaSeGioHang_item_crview);
 //         FrameLayout
         ChiaSeGioHang_frlout_showListGgMap = findViewById(R.id.chiaSeGioHang_frlout_showListGgMap);
         ChiaSeGioHang_frlout_showListRscv = findViewById(R.id.chiaSeGioHang_frlout_showListRscv);
         ChiaSeGioHang_llout_FormTop = findViewById(R.id.chiaSeGioHang_llout_FormTop);
+//        CircleImageView
+        ChiaSeGioHang_item_crimg_avata = findViewById(R.id.chiaSeGioHang_item_crimg_avata);
+//                        Texview
+        ChiaSeGioHang_item_tv_nameUser = findViewById(R.id.chiaSeGioHang_item_tv_nameUser);
+        ChiaSeGioHang_item_tv_diaChi = findViewById(R.id.chiaSeGioHang_item_tv_diaChi);
+        ChiaSeGioHang_item_tv_key = findViewById(R.id.chiaSeGioHang_item_tv_key);
     }
 
 }

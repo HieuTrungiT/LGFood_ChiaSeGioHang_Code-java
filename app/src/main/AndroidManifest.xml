@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.Nhap_SDT" />
+        <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />
         <activity android:name=".Activity.khoHang_Activity" />
         <activity android:name=".Activity.thong_Tin_Gio_Hang_Activity" />
