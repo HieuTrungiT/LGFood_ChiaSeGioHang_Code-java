@@ -29,13 +29,13 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
     }
 
     public interface IClickListener {
-        void onCLickMinusItem(model_Cart cart);
+        void onCLickMinusItem(model_Cart cart, model_addToCart newCart);
 
-        void onClickPlusItem(model_Cart cart);
+        void onClickPlusItem(model_Cart cart, model_addToCart newCart);
 
         void onLongClickDelete(model_addToCart cart);
 
-        void onClickShowItem(model_addToCart cart,model_Cart arrGioHangs,int viTri);
+        void onClickShowItem(model_addToCart cart, model_Cart arrGioHangs, int viTri);
     }
 
     public addToGioHangAdapter(Context mContext, ArrayList<model_addToCart> cartArrayList, ArrayList<model_Cart> arrListGioHangs, IClickListener mIClickListener) {
@@ -61,7 +61,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
         model_Cart arrGioHangs = arrListGioHangs.get(position);
 
         holder.xuLi_txt_tenItem.setText(cart.getTenSp());
-        holder.xuLi_txt_giaItem.setText(String.valueOf(cart.getGiaBanSp())+"00vnđ");
+        holder.xuLi_txt_giaItem.setText(String.valueOf(cart.getGiaBanSp()) + "00vnđ");
         holder.xuLi_txt_soLuong.setText(String.valueOf(arrGioHangs.getSoLuong()));
         holder.xuLi_txt_xuatXuItem.setText(cart.getXuatXuSp());
         Glide.with(mContext)
@@ -70,7 +70,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
         holder.xuLi_img_anhItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIClickListener.onClickShowItem(cart,arrGioHangs,position);
+                mIClickListener.onClickShowItem(cart, arrGioHangs, position);
             }
         });
         holder.xuLi_cardView_formItem1.setOnLongClickListener(new View.OnLongClickListener() {
@@ -85,18 +85,27 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
             public void onClick(View v) {
                 holder.soLuong = Integer.parseInt(arrGioHangs.getSoLuong());
                 holder.soLuong = holder.soLuong - 1;
-                holder.xuLi_txt_soLuong.setText(String.valueOf(holder.soLuong));
-                mIClickListener.onCLickMinusItem(arrGioHangs);
+                if (holder.soLuong > 0) {
+
+                    holder.xuLi_txt_soLuong.setText(String.valueOf(holder.soLuong));
+                    mIClickListener.onCLickMinusItem(arrGioHangs, cart);
+                }else{
+                    holder.xuLi_cardView_minus.setAlpha((float) 0.2);
+                    holder.xuLi_img_giaItem.setAlpha((float) 0.3);
+                    holder.soLuong = 1;
+                }
+
             }
         });
         holder.xuLi_cardView_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                holder.xuLi_img_giaItem.setAlpha((float) 1);
+                holder.xuLi_cardView_minus.setAlpha((float) 1);
                 holder.soLuong = Integer.parseInt(arrGioHangs.getSoLuong());
                 holder.soLuong = holder.soLuong + 1;
                 holder.xuLi_txt_soLuong.setText(String.valueOf(holder.soLuong));
-                mIClickListener.onClickPlusItem(arrGioHangs);
+                mIClickListener.onClickPlusItem(arrGioHangs, cart);
             }
         });
 
@@ -110,12 +119,13 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
 
     public static class myViewHolder extends RecyclerView.ViewHolder {
         int soLuong = 0;
-        ImageView xuLi_img_anhItem;
+        ImageView xuLi_img_anhItem,xuLi_img_giaItem;
         TextView xuLi_txt_tenItem, xuLi_txt_xuatXuItem, xuLi_txt_giaItem, xuLi_txt_soLuong;
         CardView xuLi_cardView_minus, xuLi_cardView_plus, xuLi_cardView_formItem1;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
+            xuLi_img_giaItem= itemView.findViewById(R.id.xuLi_img_giaItem);
             xuLi_img_anhItem = itemView.findViewById(R.id.xuLi_img_anhItem);
             xuLi_txt_tenItem = itemView.findViewById(R.id.xuLi_txt_tenItem);
             xuLi_txt_xuatXuItem = itemView.findViewById(R.id.xuLi_txt_xuatXuItem);

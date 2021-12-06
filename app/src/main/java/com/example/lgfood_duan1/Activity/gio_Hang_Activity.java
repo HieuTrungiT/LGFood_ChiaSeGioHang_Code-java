@@ -75,10 +75,11 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private RecyclerView
             GioHang_rv_showGioHang;
     //thai
-    private ArrayList<model_Cart> modelCartArrayList;
-    DatabaseReference mData,dataRef;
+
+    DatabaseReference mData, dataRef;
     FirebaseDatabase database;
-    //model
+    //model\
+    private ArrayList<model_Cart> modelCartArrayList;
     private ArrayList<model_addToCart> cartArrayList;
     private model_addToCart modelAddToCart;
     private model_viTri arrViTri;
@@ -93,11 +94,12 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private SharedPreferences shareAcout;
     SharedPreferences sharedPreferences;
     //    Value
-    int i,tien;
-    double TongTien =0;
+    int i, tien;
+    double TongTien = 0;
     private static final int REQUEST_CODE = 101;
     //    user
-    String idUser, viTri, idViTri,idGioHangTam,nameUser,anhUser;
+    String idUser, viTri, idViTri, idGioHangTam, nameUser, anhUser;
+
     //random
     UUID uuid;
 
@@ -107,7 +109,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
         dataRef.child("tinhTrang").setValue(false);
         super.onStart();
     }
-
 
 
     @Override
@@ -120,8 +121,10 @@ public class gio_Hang_Activity extends AppCompatActivity {
         itemAddToCart();
         loadItemAddToCart();
         layTuFirebase();
+
         getSharedPre();
         batSuKien();
+
     }
 
 
@@ -132,14 +135,13 @@ public class gio_Hang_Activity extends AppCompatActivity {
         viTri = shareAcout.getString("VITRI", "");
         idViTri = shareAcout.getString("IDVITRI", "");
         idGioHangTam = shareAcout.getString("IDGIOHANGTAM", "");
-        nameUser = shareAcout.getString("NAMEUSER","");
-        anhUser = shareAcout.getString("ANHUSER","");
+        nameUser = shareAcout.getString("NAMEUSER", "");
+        anhUser = shareAcout.getString("ANHUSER", "");
 
         if (GioHang_tv_diaChi.getText().equals("")) {
             GioHang_tv_diaChi.setText(viTri);
         }
     }
-
 
 
     //  Trung lấy vị trí lưu vị trí lên firebase location
@@ -172,8 +174,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 //                            random
                             uuid = UUID.randomUUID();
 
-                            arrViTri = new model_viTri(uuid.toString(),idGioHangTam, viTri, addresses.get(0).getLatitude() , addresses.get(0).getLongitude() , false, formatter.format(reaDate), uuid.toString().substring(0, 6),anhUser,nameUser);
-                            Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude()+"", Toast.LENGTH_SHORT).show();
+                            arrViTri = new model_viTri(uuid.toString(), idGioHangTam, viTri, addresses.get(0).getLatitude(), addresses.get(0).getLongitude(), false, formatter.format(reaDate), uuid.toString().substring(0, 6), anhUser, nameUser);
+                            Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude() + "", Toast.LENGTH_SHORT).show();
                             dataRef.setValue(arrViTri);
 
                         } catch (IOException e) {
@@ -198,6 +200,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
             return;
         }
     }
+
     // Trung bắt sự kiện xin quyền location
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -210,6 +213,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 break;
         }
     }
+
     //thai
     private void itemAddToCart() {
 
@@ -272,20 +276,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
     private void loadItemAddToCart() {
         GioHang_rv_showGioHang.setHasFixedSize(true);
         GioHang_rv_showGioHang.setLayoutManager(new LinearLayoutManager(this));
-        cartAdapter = new addToGioHangAdapter(this, cartArrayList,modelCartArrayList, new addToGioHangAdapter.IClickListener() {
+
+        cartAdapter = new addToGioHangAdapter(this, cartArrayList, modelCartArrayList, new addToGioHangAdapter.IClickListener() {
 
 
             @Override
-            public void onCLickMinusItem(model_Cart cart) {
-                onClickMinusItemAddToCart(cart);
-
-
+            public void onCLickMinusItem(model_Cart cart, model_addToCart newCart) {
+                onClickMinusItemAddToCart(cart, newCart);
             }
 
             @Override
-            public void onClickPlusItem(model_Cart cart) {
-                onClickPlusItemAddToCart(cart);
-
+            public void onClickPlusItem(model_Cart cart, model_addToCart newCart) {
+                onClickPlusItemAddToCart(cart, newCart);
             }
 
             @Override
@@ -294,8 +296,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
             }
 
             @Override
-            public void onClickShowItem(model_addToCart cart, model_Cart arrGioHangs,int viTri) {
-                onClickShowItemChiTiet(cart,arrGioHangs,viTri);
+            public void onClickShowItem(model_addToCart cart, model_Cart arrGioHangs, int viTri) {
+                onClickShowItemChiTiet(cart, arrGioHangs, viTri);
             }
 
 
@@ -305,7 +307,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         GioHang_rv_showGioHang.setAdapter(cartAdapter);
     }
 
-    private void onClickShowItemChiTiet(model_addToCart cart, model_Cart arrGioHang,int viTri) {
+    private void onClickShowItemChiTiet(model_addToCart cart, model_Cart arrGioHang, int viTri) {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dat_nhanh);
@@ -342,7 +344,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         datNhanh_tv_moTaSanPham.setText(cart.getMoTaSp());
 
         datNhanh_tv_SoLuongSanpham.setText(String.valueOf(arrGioHang.getSoLuong()));
-        Toast.makeText(this, arrGioHang.getSoLuong()+"", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, arrGioHang.getSoLuong() + "", Toast.LENGTH_SHORT).show();
         //giam so luong san pham
         datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -352,25 +354,21 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 i = Integer.parseInt(arrGioHang.getSoLuong());
                 int a;
                 i--;
-                for (int m=0;m<cartArrayList.size();m++){
-                    TongTien = (double) (TongTien + ((cartArrayList.get(m).getGiaBanSp() * i)));
 
-                }
                 if (i <= 1) {
                     i = 1;
-                    arrGioHang.setSoLuong(i+"");
-                    mData.child(sharedPreferences.getString("IDGIOHANG","")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
-                    GioHang_tv_tongTien.setText(String.valueOf(TongTien));
+                    arrGioHang.setSoLuong(i + "");
+                    mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
+
 
                     return;
                 } else {
-                    arrGioHang.setSoLuong(i+"");
-                    mData.child(sharedPreferences.getString("IDGIOHANG","")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
-                    GioHang_tv_tongTien.setText(String.valueOf(TongTien));
+                    arrGioHang.setSoLuong(i + "");
+
 
                 }
 
-                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong()+"");
+                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
 
 
             }
@@ -384,18 +382,14 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 i = Integer.parseInt(arrGioHang.getSoLuong());
 
                 i++;
-                for (int m=0;m<cartArrayList.size();m++){
-                    TongTien= (double) (TongTien + ((cartArrayList.get(m).getGiaBanSp() * i)));
 
-                }
 
 //        tien= (int) (i*cart.getGiaBanSp());
 
-                arrGioHang.setSoLuong(i+"");
-                mData.child(sharedPreferences.getString("IDGIOHANG","")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
-                GioHang_tv_tongTien.setText(String.valueOf(TongTien));
+                arrGioHang.setSoLuong(i + "");
+                mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
 
-                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong()+"");
+                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
             }
         });
         //turn off dialog
@@ -451,52 +445,68 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 .show();
     }
 
-    //giam so luong san pham: thai
-    private void onClickMinusItemAddToCart(model_Cart modelCartArrayList) {
+    //    tinh tong gia tien san pham
+    private void getTongTien() {
+        tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+    }
 
+
+
+    private void tinhTongGiaTienSanPham(ArrayList<model_Cart> arrListGioHangs, ArrayList<model_addToCart> arrListNewCart) {
+        Log.d("ddd", "size" + arrListGioHangs.size());
+        Log.d("ddd", "size" + arrListNewCart.size());
+        TongTien = 0;
+        for (int i = 0; i < arrListGioHangs.size(); i++) {
+            for (int j = 0; j < arrListNewCart.size(); j++) {
+                if (arrListGioHangs.get(i).getIdSanPham().equals(arrListNewCart.get(j).getIdSp())) {
+                    //        lấy được giá item và số lương
+
+//            số lượng
+                    int soLuongSanPham = Integer.parseInt(arrListGioHangs.get(i).getSoLuong());
+//            giá tiền
+                    double giaSanPham = arrListNewCart.get(j).getGiaBanSp();
+
+//            tính tổng giả tiền
+                    TongTien = TongTien + (giaSanPham * soLuongSanPham);
+                }
+            }
+        }
+        GioHang_tv_tongTien.setText(TongTien + "00vnđ");
+    }
+
+    //giam so luong san pham: thai
+    private void onClickMinusItemAddToCart(model_Cart modelCartArrayList, model_addToCart modelNewCarts) {
 
         mData = database.getReference("GioHangs");
         i = Integer.parseInt(modelCartArrayList.getSoLuong());
         int a;
         i--;
-        for (int m=0;m<cartArrayList.size();m++){
-            TongTien= (double) (TongTien + ((cartArrayList.get(m).getGiaBanSp() * i)));
-        }
         if (i <= 1) {
             i = 1;
-            modelCartArrayList.setSoLuong(i+"");
 
-            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-            GioHang_tv_tongTien.setText(String.valueOf(TongTien));
+            modelCartArrayList.setSoLuong(i + "");
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
 
             return;
         } else {
-            modelCartArrayList.setSoLuong(i+"");
-            mData.child(sharedPreferences.getString("IDGIOHANG","")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-            GioHang_tv_tongTien.setText(String.valueOf(TongTien));
+            modelCartArrayList.setSoLuong(i + "");
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
 
         }
+        getTongTien();
+
     }
 
     //tang so luong san pham:thai
-    private void onClickPlusItemAddToCart(model_Cart modelCartArrayList) {
-
+    private void onClickPlusItemAddToCart(model_Cart modelCartArrayList, model_addToCart modelNewCarts) {
+        TongTien = 0;
         mData = database.getReference("GioHangs");
         i = Integer.parseInt(modelCartArrayList.getSoLuong());
-
         i++;
-        for (int m=0;m<cartArrayList.size();m++){
-            TongTien= (double) (TongTien + ((cartArrayList.get(m).getGiaBanSp() * i)));
 
-        }
-//        tien= (int) (i*cart.getGiaBanSp());
-
-        modelCartArrayList.setSoLuong(i+"");
-
-        mData.child(sharedPreferences.getString("IDGIOHANG","")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-        GioHang_tv_tongTien.setText(String.valueOf(TongTien));
-
-
+        modelCartArrayList.setSoLuong(i + "");
+        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+        getTongTien();
     }
 
     //thai: lay du lieu tu firebase
@@ -526,7 +536,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                                     cart.getGiaNhapSp(),
                                     cart.getGiaBanSp()));
                     cartAdapter.notifyDataSetChanged();
-
+                    tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
                 }
             }
 
@@ -541,7 +551,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                         cartArrayList.set(i, cart);
                     }
                 }
+
                 cartAdapter.notifyDataSetChanged();
+                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
             }
 
             @Override
@@ -557,16 +569,17 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     }
                 }
                 cartAdapter.notifyDataSetChanged();
+                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
+                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
             }
         });
     }
@@ -576,7 +589,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         GioHang_btn_datHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(gio_Hang_Activity.this,Xac_Nhan_DH_Activity.class);
+                Intent intent = new Intent(gio_Hang_Activity.this, Xac_Nhan_DH_Activity.class);
                 startActivity(intent);
             }
         });

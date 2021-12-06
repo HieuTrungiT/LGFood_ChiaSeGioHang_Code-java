@@ -218,7 +218,7 @@ android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="@+id/xuLi_cardView_plus" />
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/xuLi_img_giaItem"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical|center_horizontal"
