@@ -40,7 +40,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
     private ArrayList<model_yeuThich> yeuThichArrayList;
     //thai: onClickItem
     private IClickListener mIClickListener;
-
+    private boolean check=true;
     public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, IClickListener mIClickListener) {
         this.arrListSanPham = arrListSanPham;
         this.context = context;
@@ -77,16 +77,11 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot ds:snapshot.getChildren()){
-                    Toast.makeText(context, "chucmung3", Toast.LENGTH_SHORT).show();
-
                     model_yeuThich yeuThich=ds.getValue(model_yeuThich.class);
                     yeuThichArrayList.add(yeuThich);
                     for (int i=0;i<yeuThichArrayList.size();i++){
-                        Toast.makeText(context, "chucmung2", Toast.LENGTH_SHORT).show();
-
                         if (sanPham.getIdSanPham().equals(yeuThichArrayList.get(i).getIdSanPham())){
-                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.heart);
-
+                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
                         }
                     }
                 }
@@ -101,8 +96,20 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIClickListener.onClickHeart(sanPham);
+                if (check==true){
+                    mIClickListener.onClickHeart(sanPham);
+                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                    check=false;
+                    return;
+                }
 
+                if (check==false){
+                    Toast.makeText(context, "tuyet voi", Toast.LENGTH_SHORT).show();
+                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
+
+                    check=true;
+                    return;
+                }
             }
         });
 
