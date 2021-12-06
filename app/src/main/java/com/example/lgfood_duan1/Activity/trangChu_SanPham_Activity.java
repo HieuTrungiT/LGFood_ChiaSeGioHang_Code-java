@@ -1,5 +1,17 @@
 package com.example.lgfood_duan1.Activity;
 
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,18 +31,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Adapter.showSlider_adaper;
@@ -294,7 +298,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         overridePendingTransition(0, 0);
                         return;
                     case R.id.Like:
-                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
                         overridePendingTransition(0, 0);
                         return;
                     case R.id.Home:
@@ -804,13 +808,14 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         model_Account account = snapshot.getValue(model_Account.class);
                         idGioHang = String.valueOf(account.getIdGioHang());
                         UUID uuid = UUID.randomUUID();
+                        String idProduct = sanPham.getIdSanPham();
                         String idChiTietSanPham = String.valueOf(uuid);
                         model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                         dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
 
 //                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
 
-                        dataRef = database.getReference("GioHangs").child(idGioHang);
+                         dataRef = database.getReference("GioHangs").child(idGioHang);
                         for (int j = 0; j < arrListCart.size(); j++) {
                             if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
                                 check = true;
