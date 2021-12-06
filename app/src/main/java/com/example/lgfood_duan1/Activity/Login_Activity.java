@@ -125,7 +125,7 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser){
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
@@ -139,7 +139,7 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("IDGIOHANGTAM",idGioHangTam);
             editor.putString("NAMEUSER",nameUser);
             editor.putString("ANHUSER",anhUser);
-
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
         }else {
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
@@ -151,6 +151,7 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("IDGIOHANGTAM",idGioHangTam);
             editor.putString("NAMEUSER",nameUser);
             editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
 
 
         }
@@ -180,7 +181,7 @@ public class Login_Activity extends AppCompatActivity {
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang());
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich());
 
                                 return;
                             }else{

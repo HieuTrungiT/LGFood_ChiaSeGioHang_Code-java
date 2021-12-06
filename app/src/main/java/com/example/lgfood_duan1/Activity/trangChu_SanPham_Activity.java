@@ -1,17 +1,5 @@
 package com.example.lgfood_duan1.Activity;
 
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,10 +19,18 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Adapter.showSlider_adaper;
@@ -44,6 +40,7 @@ import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
+import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -594,10 +591,25 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             public void onClickShowItem(model_SanPham sanPham) {
                 showItemChiTietSanPham(sanPham);
             }
+
+            @Override
+            public void onClickHeart(model_SanPham sanPham) {
+                onClickHeartItem(sanPham);
+            }
         });
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
     }
+    private void onClickHeartItem(model_SanPham sanPham) {
 
+        String idYeuThich;
+        UUID uuid=UUID.randomUUID();
+        idYeuThich=String.valueOf(uuid);
+
+        model_yeuThich yeuThich=new model_yeuThich(sanPham.getIdSanPham(),idYeuThich);
+        dataRef=database.getReference("danhSachSanPhamYeuThich");
+        dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich).setValue(yeuThich);
+
+    }
     //Trung: lấy dữ liệu sản phẩm trên firebase về
     private void getDataFirebase() {
         Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size() + "", Toast.LENGTH_SHORT).show();
@@ -923,5 +935,4 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     }
 
 }
-
 

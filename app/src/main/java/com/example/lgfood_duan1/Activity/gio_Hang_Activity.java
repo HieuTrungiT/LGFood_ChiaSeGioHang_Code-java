@@ -458,7 +458,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                    arrListGioHangSCapNhat.clear();
+                arrListGioHangSCapNhat.clear();
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     model_Cart cart = ds.getValue(model_Cart.class);
