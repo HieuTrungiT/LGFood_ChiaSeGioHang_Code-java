@@ -79,7 +79,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
     DatabaseReference mData, dataRef;
     FirebaseDatabase database;
     //model\
-    private ArrayList<model_Cart> modelCartArrayList;
+    private ArrayList<model_Cart> modelCartArrayList,arrListGioHangSCapNhat;
     private ArrayList<model_addToCart> cartArrayList;
     private model_addToCart modelAddToCart;
     private model_viTri arrViTri;
@@ -353,20 +353,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                 i = Integer.parseInt(arrGioHang.getSoLuong());
                 int a;
-                i--;
 
-                if (i <= 1) {
-                    i = 1;
+
+                if (i >= 1) {
+                    i--;
                     arrGioHang.setSoLuong(i + "");
                     mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
-
-
+                    tinhTongGiaTienSanPham(cartArrayList);
                     return;
                 } else {
                     arrGioHang.setSoLuong(i + "");
-
-
                 }
+
 
                 datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
 
@@ -383,11 +381,11 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                 i++;
 
-
 //        tien= (int) (i*cart.getGiaBanSp());
 
                 arrGioHang.setSoLuong(i + "");
                 mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
+                tinhTongGiaTienSanPham(cartArrayList);
 
                 datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
             }
@@ -446,32 +444,52 @@ public class gio_Hang_Activity extends AppCompatActivity {
     }
 
     //    tinh tong gia tien san pham
-    private void getTongTien() {
-        tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
-    }
 
 
 
-    private void tinhTongGiaTienSanPham(ArrayList<model_Cart> arrListGioHangs, ArrayList<model_addToCart> arrListNewCart) {
-        Log.d("ddd", "size" + arrListGioHangs.size());
+
+    private void tinhTongGiaTienSanPham(ArrayList<model_addToCart> arrListNewCart) {
+
         Log.d("ddd", "size" + arrListNewCart.size());
-        TongTien = 0;
-        for (int i = 0; i < arrListGioHangs.size(); i++) {
-            for (int j = 0; j < arrListNewCart.size(); j++) {
-                if (arrListGioHangs.get(i).getIdSanPham().equals(arrListNewCart.get(j).getIdSp())) {
-                    //        lấy được giá item và số lương
+
+
+        dataRef = database.getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG", ""));
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                    arrListGioHangSCapNhat.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    model_Cart cart = ds.getValue(model_Cart.class);
+                    arrListGioHangSCapNhat.add(cart);
+                }
+                TongTien = 0;
+                for (int i = 0; i < arrListGioHangSCapNhat.size(); i++) {
+                    for (int j = 0; j < arrListNewCart.size(); j++) {
+                        if (arrListGioHangSCapNhat.get(i).getIdSanPham().equals(arrListNewCart.get(j).getIdSp())) {
+                            //        lấy được giá item và số lương
 
 //            số lượng
-                    int soLuongSanPham = Integer.parseInt(arrListGioHangs.get(i).getSoLuong());
+                            int soLuongSanPham = Integer.parseInt(arrListGioHangSCapNhat.get(i).getSoLuong());
 //            giá tiền
-                    double giaSanPham = arrListNewCart.get(j).getGiaBanSp();
-
+                            double giaSanPham = arrListNewCart.get(j).getGiaBanSp();
 //            tính tổng giả tiền
-                    TongTien = TongTien + (giaSanPham * soLuongSanPham);
+                            TongTien = TongTien + (giaSanPham * soLuongSanPham);
+                        }
+                    }
                 }
+                GioHang_tv_tongTien.setText(TongTien + "00vnđ");
             }
-        }
-        GioHang_tv_tongTien.setText(TongTien + "00vnđ");
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
 
     //giam so luong san pham: thai
@@ -486,27 +504,27 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
             modelCartArrayList.setSoLuong(i + "");
             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-
+            tinhTongGiaTienSanPham(cartArrayList);
             return;
         } else {
             modelCartArrayList.setSoLuong(i + "");
             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-
+            tinhTongGiaTienSanPham(cartArrayList);
         }
-        getTongTien();
+
 
     }
 
     //tang so luong san pham:thai
     private void onClickPlusItemAddToCart(model_Cart modelCartArrayList, model_addToCart modelNewCarts) {
-        TongTien = 0;
+
         mData = database.getReference("GioHangs");
         i = Integer.parseInt(modelCartArrayList.getSoLuong());
         i++;
 
         modelCartArrayList.setSoLuong(i + "");
         mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
-        getTongTien();
+        tinhTongGiaTienSanPham(cartArrayList);
     }
 
     //thai: lay du lieu tu firebase
@@ -536,7 +554,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                                     cart.getGiaNhapSp(),
                                     cart.getGiaBanSp()));
                     cartAdapter.notifyDataSetChanged();
-                    tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+                    tinhTongGiaTienSanPham(cartArrayList);
                 }
             }
 
@@ -553,7 +571,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 }
 
                 cartAdapter.notifyDataSetChanged();
-                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+//                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
             }
 
             @Override
@@ -569,17 +587,17 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     }
                 }
                 cartAdapter.notifyDataSetChanged();
-                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                tinhTongGiaTienSanPham(modelCartArrayList, cartArrayList);
+
             }
         });
     }
@@ -620,6 +638,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
     // set dữ liệu
     //     Ánh xạ đây nè :D
     private void anhXa() {
+        arrListGioHangSCapNhat = new ArrayList<>();
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
 //        TextView
