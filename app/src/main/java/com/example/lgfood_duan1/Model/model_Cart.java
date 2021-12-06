@@ -6,6 +6,9 @@ public class model_Cart {
     idSanPham,
     soLuong;
 
+    public model_Cart(){
+
+    }
     public model_Cart(String idGioHang, String idSanPham, String soLuong) {
         this.idGioHang = idGioHang;
         this.idSanPham = idSanPham;

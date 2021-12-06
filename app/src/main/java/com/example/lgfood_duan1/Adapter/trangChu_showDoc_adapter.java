@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         });
 
 //      Show chi tiết sản phẩm
-        holder.ItemCuttomTrangChu_doc_img_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
+        holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mIClickListener.onClickShowItem(sanPham);
@@ -80,8 +81,8 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         //        gán kiểu dữ liệu
         ImageView
                 ItemCuttomTrangChu_doc_img_btn_chonYeuThich,
-                ItemCuttomTrangChu_doc_imgShowAnhSanPham,
-                ItemCuttomTrangChu_doc_img_btn_showChiTietSanPham;
+                ItemCuttomTrangChu_doc_imgShowAnhSanPham;
+        LinearLayout ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham;
         TextView
                 ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich,
                 ItemCuttomTrangChu_doc_tv_xuatXu,
@@ -94,7 +95,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 //            ánh xạ\
 //            ImgeView
             ItemCuttomTrangChu_doc_imgShowAnhSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_imgShowAnhSanPham);
-            ItemCuttomTrangChu_doc_img_btn_showChiTietSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_img_btn_showChiTietSanPham);
+            ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_llout_btn_showChiTietSanPham);
             ItemCuttomTrangChu_doc_img_btn_chonYeuThich = itemView.findViewById(R.id.itemCuttomTrangChu_doc_img_btn_chonYeuThich);
             //            Textview
             ItemCuttomTrangChu_doc_tv_xuatXu = itemView.findViewById(R.id.itemCuttomTrangChu_doc_tv_xuatXu);
