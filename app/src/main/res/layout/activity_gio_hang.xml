@@ -158,15 +158,15 @@ android:background="@color/white"
                         android:background="@drawable/border_share_cart">
 
                         <androidx.cardview.widget.CardView
-
-
-                            android:layout_width="41dp"
-                            android:layout_height="41dp"
-                            android:layout_marginLeft="1dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_width="40dp"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_height="match_parent"
+                           android:layout_marginTop="2.5dp"
+                            android:layout_marginBottom="2.5dp"
                             app:cardCornerRadius="12dp">
 
                             <ImageView
+                                android:padding="7dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/icons8_share_90" />

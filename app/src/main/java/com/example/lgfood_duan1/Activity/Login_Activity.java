@@ -42,7 +42,7 @@ public class Login_Activity extends AppCompatActivity {
 
     private SharedPreferences shareAcout;
 
-    String idSharePre,passSharePre,userSharePre,idDanhSachyeuThich;
+    String idSharePre,passSharePre,userSharePre,idShareGioHang,idGioHangTam;
     boolean rememberSharePre;
 
 
@@ -109,12 +109,7 @@ public class Login_Activity extends AppCompatActivity {
     private void checkSavePass(){
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = shareAcout.edit();
-
-        idDanhSachyeuThich = shareAcout.getString("IDDanhSachYeuThich","");
-        passSharePre = shareAcout.getString("PASSWORD","");
-        userSharePre = shareAcout.getString("USERNAME","");
         rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
-        idSharePre = shareAcout.getString("IDUSRE","");
         if(rememberSharePre == true){
             Intent intent= new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
             startActivity(intent);
@@ -130,21 +125,35 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idDanhSachyeuThich,String user,String password,boolean status){
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
         if (!status){
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
-            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
             editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
         }else {
-            editor.putString("IDDanhSachYeuThich",idDanhSachyeuThich);
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
             editor.putBoolean("REMEMBER",status);
             editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+
+
         }
         editor.commit();
     }
@@ -165,21 +174,14 @@ public class Login_Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds: snapshot.getChildren()){
                         model_Account account=ds.getValue(model_Account.class);
-//                        if (userName.equals(account.getName()+"")){
-//                            Toast.makeText(Login_Activity.this, "rong", Toast.LENGTH_SHORT).show();
-//                            Login_edt_username.setError("Không tìm thấy tên đăng nhập");
-//                            return;
-//                        }else if (!password.matches(account.getPassword()+"")){
-//                            Login_edt_password.setError("Mật khẩu sai");
-//                            return;
-//                        }else{
+
                             if (userName.matches(account.getName()+"") && password.matches(account.getPassword()+"")){
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),account.getIdDanhSachYeuThich(),userName,password,checkBox.isChecked());
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich());
 
                                 return;
                             }else{
@@ -203,8 +205,6 @@ public class Login_Activity extends AppCompatActivity {
 
 
     private void anhXa() {
-
-
 //        TextView
         Login_tv_btn_SignUp = findViewById(R.id.login_tv_btn_SignUp);
         Login_tv_btn_SignUpText = findViewById(R.id.login_tv_btn_SignUpText);
