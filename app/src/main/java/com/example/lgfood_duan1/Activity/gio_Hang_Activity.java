@@ -79,7 +79,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
     DatabaseReference mData, dataRef;
     FirebaseDatabase database;
     //model\
-    private ArrayList<model_Cart> modelCartArrayList,arrListGioHangSCapNhat;
+    private ArrayList<model_Cart> modelCartArrayList, arrListGioHangSCapNhat;
     private ArrayList<model_addToCart> cartArrayList;
     private model_addToCart modelAddToCart;
     private model_viTri arrViTri;
@@ -446,8 +446,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
     //    tinh tong gia tien san pham
 
 
-
-
     private void tinhTongGiaTienSanPham(ArrayList<model_addToCart> arrListNewCart) {
 
         Log.d("ddd", "size" + arrListNewCart.size());
@@ -489,7 +487,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
         });
 
 
-
     }
 
     //giam so luong san pham: thai
@@ -529,8 +526,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     //thai: lay du lieu tu firebase
     private void layTuFirebase() {
-
-
 //        lấy sản phẩm từ giỏ hàng
         mData = database.getReference("newCarts").child(sharedPreferences.getString("IDGIOHANG", ""));
         mData.addChildEventListener(new ChildEventListener() {
@@ -608,6 +603,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(gio_Hang_Activity.this, Xac_Nhan_DH_Activity.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble("iT_tongGiaTien", TongTien);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

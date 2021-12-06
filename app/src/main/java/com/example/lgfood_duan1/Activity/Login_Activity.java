@@ -125,7 +125,7 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich){
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
@@ -140,6 +140,7 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("NAMEUSER",nameUser);
             editor.putString("ANHUSER",anhUser);
             editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
         }else {
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
@@ -152,6 +153,7 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("NAMEUSER",nameUser);
             editor.putString("ANHUSER",anhUser);
             editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
 
 
         }
@@ -181,7 +183,7 @@ public class Login_Activity extends AppCompatActivity {
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich());
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
                                 return;
                             }else{

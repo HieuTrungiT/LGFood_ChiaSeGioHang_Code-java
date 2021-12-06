@@ -282,7 +282,7 @@
                     android:layout_marginRight="15dp"
                     android:gravity="right"
                     android:padding="5dp"
-                    android:text="300.000đ"
+                    android:text="0vnđ"
                     android:textColor="#000"
                     android:textSize="23sp"
                     android:textStyle="bold" />
