@@ -1,6 +1,5 @@
 package com.example.lgfood_duan1.Activity;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -31,7 +30,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +41,6 @@ import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
-import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,6 +57,7 @@ import com.smarteist.autoimageslider.SliderView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+
 import java.util.UUID;
 
 public class trangChu_SanPham_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -136,7 +134,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
 
     SharedPreferences sharedPreferences;
-
+    private ArrayList<model_yeuThich> yeuThichArrayList;
+    public static boolean CHECK=false;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,13 +144,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         anhXa();
         batSuKien();
+
         getDataFirebaseCart();
+
+
         NavigationDrawer();
         getDataFirebase();
         showListProduc_Horizoltal();
         timKiem();
         showSlider();
-
+//        checkItemYeuThich();
     }
 
     //    BT: showSlider
@@ -587,31 +590,77 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
+        getFirebaseDataDanhSachYT();
+
         TrangChuSanPham_rscV_showSanPhamDoc.setLayoutManager(new GridLayoutManager(this, 2));
         TrangChuSanPham_rscV_showSanPhamDoc.setItemAnimator(new DefaultItemAnimator());
         //        Initilize
-        TrangChu_showDoc_adapter = new trangChu_showDoc_adapter(arrListSp, trangChu_SanPham_Activity.this, new trangChu_showDoc_adapter.IClickListener() {
+        TrangChu_showDoc_adapter = new trangChu_showDoc_adapter(arrListSp, trangChu_SanPham_Activity.this,yeuThichArrayList, new trangChu_showDoc_adapter.IClickListener() {
             @Override
             public void onClickShowItem(model_SanPham sanPham) {
                 showItemChiTietSanPham(sanPham);
             }
 
             @Override
-            public void onClickHeart(model_SanPham sanPham) {
+            public void onClickHeart(String sanPham) {
                 onClickHeartItem(sanPham);
             }
+
+            @Override
+            public void onClickDelete(String  idYeuThich) {
+                onClicktHeartItemDelete(idYeuThich);            }
         });
+
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
     }
     private void onClickHeartItem(model_SanPham sanPham) {
+
+
+    private void getFirebaseDataDanhSachYT(){
+        dataRef=database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH",""));
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    model_yeuThich yeuThich=ds.getValue(model_yeuThich.class);
+                    yeuThichArrayList.add(yeuThich);
+                }
+                TrangChu_showDoc_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void onClicktHeartItemDelete(String  idYeuThich) {
+
+        dataRef=database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich);
+        dataRef.removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
+                                Toast.makeText(getApplicationContext(), "xoa thanh cong", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void onClickHeartItem(String idSanPham) {
+
 
         String idYeuThich;
         UUID uuid=UUID.randomUUID();
         idYeuThich=String.valueOf(uuid);
 
-        model_yeuThich yeuThich=new model_yeuThich(sanPham.getIdSanPham(),idYeuThich);
+        model_yeuThich yeuThich=new model_yeuThich(idSanPham,idYeuThich,true);
+
         dataRef=database.getReference("danhSachSanPhamYeuThich");
         dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich).setValue(yeuThich);
+
+        yeuThichArrayList.add(yeuThich);
+        TrangChu_showDoc_adapter.notifyDataSetChanged();
+
+    }
 
     }
     //Trung: lấy dữ liệu sản phẩm trên firebase về
@@ -875,9 +924,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private void anhXa() {
 //        SharedPreferences
         sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        idSharePre = shareAcout.getString("IDUSRE", "");
+        idGioHangShare = shareAcout.getString("IDGIOHANG", "");
+       
 //        model
         arrListSanPham = new ArrayList<model_SanPham>();
         arrListCart = new ArrayList<model_Cart>();
+        model_cartArrayList = new ArrayList<>();
+        yeuThichArrayList=new ArrayList<>();
         //Firebase
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
@@ -932,11 +987,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         //        Button
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
-        shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        idSharePre = shareAcout.getString("IDUSRE", "");
-        idGioHangShare = shareAcout.getString("IDGIOHANG", "");
-        model_cartArrayList = new ArrayList<>();
-
+      
     }
 
 }

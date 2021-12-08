@@ -4,12 +4,15 @@ public class model_yeuThich {
     private String
     idSanPham,
     idYeuThich;
+    private boolean check=true;
     public model_yeuThich(){
 
     }
-    public model_yeuThich(String idSanPham, String idYeuThich) {
+
+    public model_yeuThich(String idSanPham, String idYeuThich, boolean check) {
         this.idSanPham = idSanPham;
         this.idYeuThich = idYeuThich;
+        this.check = check;
     }
 
     public String getIdSanPham() {
@@ -26,5 +29,13 @@ public class model_yeuThich {
 
     public void setIdYeuThich(String idYeuThich) {
         this.idYeuThich = idYeuThich;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 }
