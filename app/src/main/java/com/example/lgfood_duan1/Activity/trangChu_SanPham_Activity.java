@@ -17,10 +17,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +106,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private FrameLayout
             DatNhanh_FmLt_showChiTietSanPham,
             SanPham_flou_search;
-    private Button
+    private LinearLayout
             DatNhanh_btn_themSanPhamVaoGioHang;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
@@ -708,10 +710,14 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_nav_drawer.setCheckedItem(R.id.drawer_nav_login);
         /*           Phần quyền đăng nhập           */
 
-//        Menu menu = TrangChuSanPham_nav_drawer.getMenu();
-//        menu.findItem(R.id.drawer_nav_logout).setVisible(false);
+        Menu menu = TrangChuSanPham_nav_drawer.getMenu();
 //        menu.findItem(R.id.drawer_nav_profile).setVisible(false);
 
+        if (shareAcout.getString("IDUSRE","").isEmpty()){
+            menu.findItem(R.id.drawer_nav_logout).setVisible(false);
+        }else{
+            menu.findItem(R.id.drawer_nav_login).setVisible(false);
+        }
 
         TrangChuSanPham_img_showMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -725,14 +731,18 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
+            switch (item.getItemId()) {
             case R.id.drawer_nav_login:
 
                 break;
+
             case R.id.drawer_nav_logout:
+
                 SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
@@ -742,8 +752,14 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
 
             case R.id.drawer_nav_profile:
-                Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
-                startActivity(intent3);
+                if (shareAcout.getString("IDUSRE","").isEmpty()){
+                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
+                    startActivity(intent3);
+                }
+
                 break;
 
             case R.id.drawer_nav_rate:
@@ -788,13 +804,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
         TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
         TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
-
+        TextView datNhanh_tv_giaTienSanPham=dialog.findViewById(R.id.datNhanh_tv_giaTienSanPham);
         //tang giam so luong sp
         ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
         TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
         ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
 
-        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+        LinearLayout datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
         Glide.with(trangChu_SanPham_Activity.this)
                 .load(sanPham.getAnhSanPham())
@@ -808,6 +824,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 //        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
         datNhanh_tv_moTaSanPham.setText(sanPham.getMoTaSanPham());
 
+        datNhanh_tv_giaTienSanPham.setText(sanPham.getGiaBanSanPham()+"00");
         //giam so luong san pham
         datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -816,11 +833,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 if (i <= 1) {
                     i = 1;
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+                    datNhanh_tv_giaTienSanPham.setText(String.valueOf(i * sanPham.getGiaBanSanPham()+"00"));
                     return;
                 } else {
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-                    datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+                    datNhanh_tv_giaTienSanPham.setText(String.valueOf(i * sanPham.getGiaBanSanPham()+"00"));
                 }
 
 
@@ -832,7 +849,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             public void onClick(View v) {
                 i++;
                 datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-                datNhanh_btn_themSanPhamVaoGioHang.setText(String.valueOf(i * sanPham.getGiaBanSanPham()));
+                datNhanh_tv_giaTienSanPham.setText(String.valueOf(i * sanPham.getGiaBanSanPham()+"00"));
             }
         });
         //turn off dialog
@@ -885,8 +902,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                         } else {
                             model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
-                            dataRef.child(cart.getIdGioHang()).setValue(cart);
+                            dataRef.child(cart.getIdSanPham()).setValue(cart);
                         }
+                        dialog.setContentView(R.layout.activity_add_to_cart_anim);
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        },2300);
                     }
 
                     @Override

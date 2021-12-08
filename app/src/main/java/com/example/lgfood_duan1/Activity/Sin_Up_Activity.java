@@ -270,7 +270,10 @@ public class Sin_Up_Activity extends AppCompatActivity {
             signUp_edt_TenKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
         } else if (userName.length() < 6 || userName.length() > 50) {
             signUp_edt_teDangNhapKhachHang.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
-        } else if (!email.matches(emailPattern)) {
+        }else if (signUp_edt_teDangNhapKhachHang.getText().toString().contains(" ")){
+            signUp_edt_teDangNhapKhachHang.setError("Không được để khoảng trống!");
+        }
+        else if (!email.matches(emailPattern)) {
             SignUp_edt_gmail.setError("Sai định dạng Email");
         } else if (password.isEmpty() || password.length() < 6) {
             SignUp_edt_MatKhau.setError("Mật khẩu đang trống hoặc bé hơn 6 kí tự");

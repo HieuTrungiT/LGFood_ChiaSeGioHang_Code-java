@@ -88,12 +88,12 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         });
 
 ////      Show chi tiết sản phẩm
-//        holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mIClickListener.onClickShowItem(sanPham);
-//            }
-//        });
+        holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIClickListener.onClickShowItem(sanPham);
+            }
+        });
     }
 
     @Override

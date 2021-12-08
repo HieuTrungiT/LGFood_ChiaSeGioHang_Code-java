@@ -252,7 +252,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                         if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             mData = database.getReference("newCarts");
-                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                            String soLuong=modelCartArrayList.get(i).getSoLuong();
+                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(),Integer.valueOf(soLuong),sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
                         }
                     }
@@ -291,8 +292,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
             }
 
             @Override
-            public void onLongClickDelete(model_addToCart cart) {
-                onLongClickDeleteItem(cart);
+            public void onClickDelete(model_addToCart cart) {
+                onClickDeleteItem(cart);
             }
 
             @Override
@@ -323,13 +324,14 @@ public class gio_Hang_Activity extends AppCompatActivity {
         TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
         TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
         TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
+        TextView datNhanh_tv_giaTienSanPham=dialog.findViewById(R.id.datNhanh_tv_giaTienSanPham);
 
         //tang giam so luong sp
         ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
         TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
         ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
 
-        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+        LinearLayout datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
         Glide.with(gio_Hang_Activity.this)
                 .load(cart.getAnhSp())
@@ -366,7 +368,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 }
 
 
-                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
+                datNhanh_tv_giaTienSanPham.setText(arrGioHang.getSoLuong() + "00");
 
 
             }
@@ -387,7 +389,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
                 tinhTongGiaTienSanPham(cartArrayList);
 
-                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
+                datNhanh_tv_giaTienSanPham.setText(arrGioHang.getSoLuong() + "00");
             }
         });
         //turn off dialog
@@ -410,7 +412,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     }
 
-    private void onLongClickDeleteItem(model_addToCart cart) {
+    private void onClickDeleteItem(model_addToCart cart) {
 
         new AlertDialog.Builder(gio_Hang_Activity.this)
                 .setTitle(getString(R.string.app_name))
@@ -430,7 +432,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                         });
 
                         mData = database.getReference("GioHangs");
-                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).removeValue(new DatabaseReference.CompletionListener() {
+                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
 
@@ -440,7 +442,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 })
 
                 .setNegativeButton("Cancel", null)
+
                 .show();
+
     }
 
     //    tinh tong gia tien san pham
@@ -500,12 +504,12 @@ public class gio_Hang_Activity extends AppCompatActivity {
             i = 1;
 
             modelCartArrayList.setSoLuong(i + "");
-            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
             tinhTongGiaTienSanPham(cartArrayList);
             return;
         } else {
             modelCartArrayList.setSoLuong(i + "");
-            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
             tinhTongGiaTienSanPham(cartArrayList);
         }
 
@@ -520,7 +524,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         i++;
 
         modelCartArrayList.setSoLuong(i + "");
-        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
         tinhTongGiaTienSanPham(cartArrayList);
     }
 
