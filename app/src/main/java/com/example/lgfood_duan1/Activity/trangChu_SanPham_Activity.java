@@ -41,6 +41,7 @@ import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -590,7 +591,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
-        getFirebaseDataDanhSachYT();
+
 
         TrangChuSanPham_rscV_showSanPhamDoc.setLayoutManager(new GridLayoutManager(this, 2));
         TrangChuSanPham_rscV_showSanPhamDoc.setItemAnimator(new DefaultItemAnimator());
@@ -608,12 +609,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
             @Override
             public void onClickDelete(String  idYeuThich) {
-                onClicktHeartItemDelete(idYeuThich);            }
+                onClicktHeartItemDelete(idYeuThich);
+            }
         });
 
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
     }
     private void onClickHeartItem(model_SanPham sanPham) {
+
+    }
 
 
     private void getFirebaseDataDanhSachYT(){
@@ -662,7 +666,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
-    }
+
     //Trung: lấy dữ liệu sản phẩm trên firebase về
     private void getDataFirebase() {
         Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size() + "", Toast.LENGTH_SHORT).show();
