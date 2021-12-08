@@ -5,13 +5,13 @@ public class model_hoaDon {
     String idChiTietDonHang;
     String idKhachHang;
     double tongTien;
-    boolean TinhTrangDonHang;
+    int TinhTrangDonHang;
     String ngayTaoChiTietHoaDon;
 
     public model_hoaDon() {
     }
 
-    public model_hoaDon(String idHoaDon, String idChiTietDonHang, String idKhachHang, double tongTien, boolean tinhTrangDonHang, String ngayTaoChiTietHoaDon) {
+    public model_hoaDon(String idHoaDon, String idChiTietDonHang, String idKhachHang, double tongTien, int tinhTrangDonHang, String ngayTaoChiTietHoaDon) {
         this.idHoaDon = idHoaDon;
         this.idChiTietDonHang = idChiTietDonHang;
         this.idKhachHang = idKhachHang;
@@ -52,11 +52,11 @@ public class model_hoaDon {
         this.tongTien = tongTien;
     }
 
-    public boolean isTinhTrangDonHang() {
+    public int getTinhTrangDonHang() {
         return TinhTrangDonHang;
     }
 
-    public void setTinhTrangDonHang(boolean tinhTrangDonHang) {
+    public void setTinhTrangDonHang(int tinhTrangDonHang) {
         TinhTrangDonHang = tinhTrangDonHang;
     }
 

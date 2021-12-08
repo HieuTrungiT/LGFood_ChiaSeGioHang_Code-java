@@ -419,7 +419,6 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
 //                    set giá trị cho item sử lý bắt sự kiện
                         try {
-
                             ChiaSeGioHang_item_tv_key.setText("key:#" + arrListViTri.get(finalI).getKey());
                             Glide.with(ChiaSeGioHang_Activity.this).load(arrListViTri.get(finalI).getAnhUser())
                                     .into(ChiaSeGioHang_item_crimg_avata);

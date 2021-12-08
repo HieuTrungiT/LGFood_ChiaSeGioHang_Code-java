@@ -26,6 +26,8 @@
             android:exported="true" />
         <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
         <activity android:name=".Activity.trangChu_SanPham_Activity" />
+        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
+
         <activity android:name=".Activity.Login_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

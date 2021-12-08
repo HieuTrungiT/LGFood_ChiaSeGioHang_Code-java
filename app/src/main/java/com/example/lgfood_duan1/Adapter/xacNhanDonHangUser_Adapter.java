@@ -52,6 +52,7 @@ public class xacNhanDonHangUser_Adapter extends RecyclerView.Adapter<xacNhanDonH
                 arrGioHang = arrListGioHangs.get(i);
             }
         }
+
         holder.xuLi_txt_tenItem.setText(arrNewCart.getTenSp());
         holder.xuLi_txt_giaItem.setText(String.valueOf(arrNewCart.getGiaBanSp())+"00vnđ");
 //        holder.xuLi_txt_soLuong.setText(String.valueOf(yeuThichShow.getSoLuongTrongKho()));
