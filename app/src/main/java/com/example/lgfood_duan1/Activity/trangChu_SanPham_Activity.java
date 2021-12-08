@@ -567,7 +567,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChu_showNgang_adapter = new trangChu_showNgang_adapter(arrListSanPham, trangChu_SanPham_Activity.this, new trangChu_showNgang_adapter.IClickListener() {
             @Override
             public void onClickAdd(model_SanPham sanPham) {
-
             }
         });
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
