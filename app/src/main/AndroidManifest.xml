@@ -31,7 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.OTP" />
+        <activity android:name=".Activity.OTP" >
+
+        </activity>
         <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
         <activity android:name=".Activity.trangChu_SanPham_Activity"></activity>
         <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
