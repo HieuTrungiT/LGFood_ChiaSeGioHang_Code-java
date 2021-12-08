@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +26,9 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         this.arrListSanPham = arrListSanPham;
         this.context = context;
         this.mIClickListener = mIClickListener;
+    }
+
+    public trangChu_showNgang_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity trangChu_sanPham_activity) {
     }
 
     public interface IClickListener{
@@ -76,7 +78,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView
                 ItemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich,
                 ItemCuttomTrangChu_ngang_tv_xuatXuSanPham,

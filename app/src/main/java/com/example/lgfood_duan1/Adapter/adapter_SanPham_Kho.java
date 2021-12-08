@@ -1,4 +1,4 @@
-package com.example.lgfood_duan1.Model;
+package com.example.lgfood_duan1.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.lgfood_duan1.Activity.Xac_Nhan_DH_Activity;
+import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
 import com.example.lgfood_duan1.Activity.khoHang_Activity;
 
@@ -34,12 +34,12 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
    }
 
 
-    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
-        this.arrListSanPham = arrListSanPham;
-        this.context = context;
-    }
+//    public adapter_SanPham_Kho(List<model_SanPham> arrListSanPham, khoHang_Activity context) {
+//        this.arrListSanPham = arrListSanPham;
+//        this.context = context;
+//    }
 
-    public adapter_SanPham_Kho(ArrayList<model_SanPham> khoHang_activity, Xac_Nhan_DH_Activity item_custom2, IClickLinstenr arrayList) {
+    public adapter_SanPham_Kho(khoHang_Activity khoHang_activity, int item_custom2, ArrayList<model_SanPham> arrayList) {
 
     }
 
@@ -56,7 +56,6 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
 
         return new ViewHolder(itemView);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull  adapter_SanPham_Kho.ViewHolder holder, int position) {
@@ -97,17 +96,7 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
 
 
     }
-    public ArrayList<model_SanPham> getListCard() {
-        return null;
-    }
-    public Double getTotalFee() {
-        ArrayList<model_SanPham> listFood2 = getListCard();
-        double fee = 0;
-        for (int i = 0; i < listFood2.size(); i++) {
-            fee = fee + (listFood2.get(i).getGiamGiaSanPham() * listFood2.get(i).getSoLuongSanPham());
-        }
-        return fee;
-    }
+
     @Override
     public int getItemCount() {
         if (arrListSanPham  != null ){

@@ -11,13 +11,14 @@ public class model_Account {
     private String phoneNumber;
     private String idGioHang,
             idDanhSachYeuThich,
-            idDanhSachDonHang;
+            idDanhSachDonHang,
+            idViTri,idGioHangTam;
     private String anhKhachHang;
 
     public model_Account() {
     }
 
-    public model_Account(String id, String realName, String name, String password, String address, String email, String phoneNumber, String idGioHang, String idDanhSachYeuThich, String idDanhSachDonHang, String anhKhachHang) {
+    public model_Account(String id, String realName, String name, String password, String address, String email, String phoneNumber, String idGioHang, String idDanhSachYeuThich, String idDanhSachDonHang, String idViTri, String idGioHangTam, String anhKhachHang) {
         this.id = id;
         this.realName = realName;
         this.name = name;
@@ -28,6 +29,8 @@ public class model_Account {
         this.idGioHang = idGioHang;
         this.idDanhSachYeuThich = idDanhSachYeuThich;
         this.idDanhSachDonHang = idDanhSachDonHang;
+        this.idViTri = idViTri;
+        this.idGioHangTam = idGioHangTam;
         this.anhKhachHang = anhKhachHang;
     }
 
@@ -109,6 +112,22 @@ public class model_Account {
 
     public void setIdDanhSachDonHang(String idDanhSachDonHang) {
         this.idDanhSachDonHang = idDanhSachDonHang;
+    }
+
+    public String getIdViTri() {
+        return idViTri;
+    }
+
+    public void setIdViTri(String idViTri) {
+        this.idViTri = idViTri;
+    }
+
+    public String getIdGioHangTam() {
+        return idGioHangTam;
+    }
+
+    public void setIdGioHangTam(String idGioHangTam) {
+        this.idGioHangTam = idGioHangTam;
     }
 
     public String getAnhKhachHang() {

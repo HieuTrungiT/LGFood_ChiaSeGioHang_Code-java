@@ -117,7 +117,6 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
 
     private void getSharedPre() {
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-
         idSharePre = shareAcout.getString("IDUSRE", "");
     }
 
@@ -129,7 +128,7 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         getSharedPre();
         //         Gán giá trị trong firebase
 
-        database = FirebaseDatabase.getInstance("https://duan1lgfood-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         myRef = database.getReference().child("Accounts").child(idSharePre);
 
 

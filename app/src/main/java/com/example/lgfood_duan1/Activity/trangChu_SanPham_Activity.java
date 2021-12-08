@@ -43,6 +43,8 @@ import com.example.lgfood_duan1.Adapter.trangChu_showNgang_adapter;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_addToCart;
+import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -110,20 +112,21 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private SharedPreferences shareAcout;
     String idSharePre;
     String idGioHangShare;
-    //    sp Slider
-
+    //    sp Slider\
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
 
     //Firebase
-    private DatabaseReference dataRef,dataAccoutRef;
+    private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
     //    Model
+    ArrayList<model_Cart> model_cartArrayList;
     ArrayList<model_SanPham> arrListSanPham;
+    ArrayList<model_Cart> arrListCart;
     model_SanPham arrSanPham;
+    model_Cart arrCart;
     // adapter
     trangChu_showDoc_adapter TrangChu_showDoc_adapter;
-
     trangChu_showNgang_adapter TrangChu_showNgang_adapter;
 
     int timkiem = 0;
@@ -131,7 +134,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int i = 1;
     String idGioHang;
 
-    ArrayList<model_Cart> model_cartArrayList;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +144,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         anhXa();
         batSuKien();
+        getDataFirebaseCart();
         NavigationDrawer();
         getDataFirebase();
         showListProduc_Horizoltal();
@@ -148,7 +153,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
-//    BT: showSlider
+    //    BT: showSlider
     private void showSlider() {
         sliderView = findViewById(R.id.linearLayout2);
 
@@ -287,26 +292,26 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
                         overridePendingTransition(0, 0);
                         return;
                     case R.id.Like:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
                         overridePendingTransition(0, 0);
                         return;
                     case R.id.Home:
-                        startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
                         overridePendingTransition(0, 0);
                         return;
                     case R.id.Paid:
-                        startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
                         overridePendingTransition(0, 0);
 
                         return;
                     case R.id.Use:
-                        startActivity(new Intent(getApplicationContext(),thongTinTaiKhoan_Activity.class));
+                        startActivity(new Intent(getApplicationContext(), thongTinTaiKhoan_Activity.class));
                         overridePendingTransition(0, 0);
                         return;
                 }
@@ -579,31 +584,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_rscV_showSanPhamNgang.setAdapter(TrangChu_showNgang_adapter);
     }
 
-//    private void onCLickAddToCart(model_SanPham sanPham) {
-//        String ii ="mot";
-//        if (){
-//            dataRef=database.getReference("GioHangs");
-//            UUID uuid = UUID.randomUUID();
-//            String idChiTietSanPham = String.valueOf(uuid);
-//
-//
-//            model_Cart cart = new model_Cart(idChiTietSanPham, sanPham.getIdSanPham(),  "1");
-//
-//            dataRef.child(idGioHangShare).child(idChiTietSanPham).setValue(cart);
-//            model_cartArrayList.add(cart);
-//            for (int i = 0; i < model_cartArrayList.size(); i++) {
-//                if (sanPham.getIdSanPham() == model_cartArrayList.get(i).getIdSanPham()) {
-//                    model_cartArrayList.remove(model_cartArrayList.get(i));
-//                    ii.ge
-//                    break;
-//                }
-//            }
-//        }else{
-//            Toast.makeText(this, "san pham da dc them", Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//    }
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
@@ -616,13 +596,28 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 showItemChiTietSanPham(sanPham);
             }
+
+            @Override
+            public void onClickHeart(model_SanPham sanPham) {
+                onClickHeartItem(sanPham);
+            }
         });
         TrangChuSanPham_rscV_showSanPhamDoc.setAdapter(TrangChu_showDoc_adapter);
     }
+    private void onClickHeartItem(model_SanPham sanPham) {
 
+        String idYeuThich;
+        UUID uuid=UUID.randomUUID();
+        idYeuThich=String.valueOf(uuid);
+
+        model_yeuThich yeuThich=new model_yeuThich(sanPham.getIdSanPham(),idYeuThich);
+        dataRef=database.getReference("danhSachSanPhamYeuThich");
+        dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH","")).child(idYeuThich).setValue(yeuThich);
+
+    }
     //Trung: lấy dữ liệu sản phẩm trên firebase về
     private void getDataFirebase() {
-        Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size()+ "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(trangChu_SanPham_Activity.this, arrListSanPham.size() + "", Toast.LENGTH_SHORT).show();
 
         dataRef = database.getReference().child("khoHang");
         dataRef.addValueEventListener(new ValueEventListener() {
@@ -686,16 +681,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 break;
             case R.id.drawer_nav_logout:
-                SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+                SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
                 editor.commit();
-                Intent intent2 = new Intent(trangChu_SanPham_Activity.this,Login_Activity.class);
+                Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
                 startActivity(intent2);
                 break;
 
             case R.id.drawer_nav_profile:
-                Intent intent3 = new Intent(trangChu_SanPham_Activity.this,thongTinTaiKhoan_Activity.class);
+                Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
                 startActivity(intent3);
                 break;
 
@@ -710,6 +705,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onBackPressed() {
         if (TrangChuSanPham_drawerllout_main.isDrawerVisible(GravityCompat.START)) {
@@ -724,6 +720,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //thai:onClickItemSanPham
     private void showItemChiTietSanPham(model_SanPham sanPham) {
         anhXa();
+        getDataFirebaseCart();
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.layout_dat_nhanh);
@@ -800,19 +797,44 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             @Override
             public void onClick(View v) {
                 String idProduct = sanPham.getIdSanPham();
+                Log.d("eee", "idprduc" + idProduct);
                 dataRef = database.getReference("Accounts").child(idSharePre);
                 dataRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            model_Account account = snapshot.getValue(model_Account.class);
-                            idGioHang = String.valueOf(account.getIdGioHang());
-
+                        boolean check = false;
+                        String idCart = "";
+                        int viTri = 0;
+                        dataRef = database.getReference("newCarts");
+                        model_Account account = snapshot.getValue(model_Account.class);
+                        idGioHang = String.valueOf(account.getIdGioHang());
                         UUID uuid = UUID.randomUUID();
+                        String idProduct = sanPham.getIdSanPham();
                         String idChiTietSanPham = String.valueOf(uuid);
-                        model_Cart cart = new model_Cart(idChiTietSanPham, idProduct, i + "");
-                        dataRef = database.getReference("GioHangs");
-                        dataRef.child(idGioHang).child(idChiTietSanPham).setValue(cart);
+                        model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                        dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
+
+//                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
+
+                         dataRef = database.getReference("GioHangs").child(idGioHang);
+                        for (int j = 0; j < arrListCart.size(); j++) {
+                            if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
+                                check = true;
+                                idCart = arrListCart.get(j).getIdGioHang();
+                                viTri = j;
+                            }
+
+                        }
+
+
+                        if (check == true) {
+                            int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                            dataRef.child(idCart).child("soLuong").setValue(tong + "");
+
+                        } else {
+                            model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
+                            dataRef.child(cart.getIdGioHang()).setValue(cart);
+                        }
                     }
 
                     @Override
@@ -831,11 +853,32 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
+    private void getDataFirebaseCart() {
+        dataRef = database.getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG",""));
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                arrListCart.clear();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    arrCart = child.getValue(model_Cart.class);
+                    arrListCart.add(arrCart);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
     //     Ánh xạ
     private void anhXa() {
+//        SharedPreferences
+        sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
 //        model
         arrListSanPham = new ArrayList<model_SanPham>();
-
+        arrListCart = new ArrayList<model_Cart>();
         //Firebase
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
@@ -891,12 +934,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        idSharePre = shareAcout.getString("IDUSRE","");
-        idGioHangShare=shareAcout.getString("IDGIOHANG","");
+        idSharePre = shareAcout.getString("IDUSRE", "");
+        idGioHangShare = shareAcout.getString("IDGIOHANG", "");
         model_cartArrayList = new ArrayList<>();
 
     }
 
 }
-
 

@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".Activity.gio_Hang_Activity"
-    >
+    tools:context=".Activity.gio_Hang_Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="60dp"
         android:layout_gravity="center"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,36 +30,39 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="25dp"
             android:layout_width="0dp"
-            android:background="@drawable/border_black"
             android:layout_height="30dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_black"
             app:layout_constraintEnd_toStartOf="@+id/gioHang_tv_name"
             app:layout_constraintStart_toEndOf="@+id/gioHang_img_back"
             app:layout_constraintTop_toTopOf="parent">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="20dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                app:cardBackgroundColor="#33261B"
-                android:layout_height="match_parent">
+                app:cardBackgroundColor="#33261B">
+
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/icons8_marker_96"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icons8_marker_96" />
             </androidx.cardview.widget.CardView>
+
             <TextView
-                android:paddingLeft="2dp"
-                android:textSize="10sp"
                 android:id="@+id/gioHang_tv_diaChi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:textStyle="bold|italic"
+                android:paddingLeft="2dp"
                 android:text=""
                 android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:textSize="10sp"
+                android:textStyle="bold|italic" />
 
         </LinearLayout>
 
@@ -105,10 +107,11 @@
         app:layout_constraintTop_toBottomOf="@+id/view">
 
         <LinearLayout
-android:background="@color/white"
             android:id="@+id/linearLayout12"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="120dp"
+            android:background="@color/white"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -117,7 +120,9 @@ android:background="@color/white"
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="11dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical"
                 android:weightSum="2">
 
@@ -158,17 +163,17 @@ android:background="@color/white"
                         android:background="@drawable/border_share_cart">
 
                         <androidx.cardview.widget.CardView
-
-
-                            android:layout_width="41dp"
-                            android:layout_height="41dp"
-                            android:layout_marginLeft="1dp"
-                            android:layout_marginTop="2dp"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginTop="2.5dp"
+                            android:layout_marginBottom="2.5dp"
                             app:cardCornerRadius="12dp">
 
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:padding="7dp"
                                 android:src="@drawable/icons8_share_90" />
                         </androidx.cardview.widget.CardView>
 
@@ -194,31 +199,34 @@ android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 
-
                         android:text="Shopping Cart"
                         android:textColor="#F0A23c"
                         android:textSize="27sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/lf_orange" />
             </LinearLayout>
+
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gioHang_rv_showGioHang"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="130dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="130dp"
-            android:id="@+id/gioHang_rv_showGioHang"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
         </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -274,7 +282,7 @@ android:background="@color/white"
                     android:layout_marginRight="15dp"
                     android:gravity="right"
                     android:padding="5dp"
-                    android:text="300.000đ"
+                    android:text="0vnđ"
                     android:textColor="#000"
                     android:textSize="23sp"
                     android:textStyle="bold" />

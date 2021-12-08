@@ -42,7 +42,7 @@ public class Login_Activity extends AppCompatActivity {
 
     private SharedPreferences shareAcout;
 
-    String idSharePre,passSharePre,userSharePre,idShareGioHang;
+    String idSharePre,passSharePre,userSharePre,idShareGioHang,idGioHangTam;
     boolean rememberSharePre;
 
 
@@ -109,12 +109,7 @@ public class Login_Activity extends AppCompatActivity {
     private void checkSavePass(){
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = shareAcout.edit();
-
-        passSharePre = shareAcout.getString("PASSWORD","");
-        userSharePre = shareAcout.getString("USERNAME","");
         rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
-        idSharePre = shareAcout.getString("IDUSRE","");
-        idShareGioHang = shareAcout.getString("IDGIOHANG","");
         if(rememberSharePre == true){
             Intent intent= new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
             startActivity(intent);
@@ -130,7 +125,7 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status){
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
 
         SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor=pref.edit();
@@ -139,13 +134,27 @@ public class Login_Activity extends AppCompatActivity {
             editor.putString("PASSWORD",password);
             editor.putString("IDUSRE",idUser);
             editor.putString("IDGIOHANG",idGioHang);
-
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
         }else {
             editor.putString("USERNAME",user);
             editor.putString("PASSWORD",password);
             editor.putBoolean("REMEMBER",status);
             editor.putString("IDUSRE",idUser);
             editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+
 
         }
         editor.commit();
@@ -174,7 +183,7 @@ public class Login_Activity extends AppCompatActivity {
                                 startActivity(intent);
 
                         
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked());
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
                                 return;
                             }else{
