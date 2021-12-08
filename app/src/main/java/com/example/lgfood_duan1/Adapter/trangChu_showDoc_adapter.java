@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static com.example.lgfood_duan1.Activity.trangChu_SanPham_Activity.CHECK;
+
 // Trung
 public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_showDoc_adapter.ViewHolder> {
     private ArrayList<model_SanPham> arrListSanPham;
@@ -40,18 +43,21 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
     private ArrayList<model_yeuThich> yeuThichArrayList;
     //thai: onClickItem
     private IClickListener mIClickListener;
-    private boolean check=true;
-    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, IClickListener mIClickListener) {
+    private boolean check=false;
+
+    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, ArrayList<model_yeuThich> yeuThichArrayList, IClickListener mIClickListener) {
         this.arrListSanPham = arrListSanPham;
         this.context = context;
+        this.yeuThichArrayList = yeuThichArrayList;
         this.mIClickListener = mIClickListener;
-
     }
 
     public interface IClickListener{
         void onClickShowItem(model_SanPham sanPham);
 
-        void onClickHeart(model_SanPham sanPham);
+        void onClickHeart(String sanPham);
+
+        void onClickDelete(String idYeuThich);
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -72,54 +78,24 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         holder.ItemCuttomTrangChu_doc_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
         holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
         holder.ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich.setText("0");
-        dataRef=database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH",""));
-        dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()){
-                    model_yeuThich yeuThich=ds.getValue(model_yeuThich.class);
-                    yeuThichArrayList.add(yeuThich);
-                    for (int i=0;i<yeuThichArrayList.size();i++){
-                        if (sanPham.getIdSanPham().equals(yeuThichArrayList.get(i).getIdSanPham())){
-                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
 //     Thêm sản phẩm vào yêu thích sản phẩm
-        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
+        Toast.makeText(context, "1     "+yeuThichArrayList.size(), Toast.LENGTH_SHORT).show();
+
+            holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (check==true){
-                    mIClickListener.onClickHeart(sanPham);
-                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
-                    check=false;
-                    return;
-                }
-
-                if (check==false){
-                    Toast.makeText(context, "tuyet voi", Toast.LENGTH_SHORT).show();
-                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
-
-                    check=true;
-                    return;
-                }
+                mIClickListener.onClickHeart(sanPham.getIdSanPham());
             }
         });
 
-//      Show chi tiết sản phẩm
-        holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mIClickListener.onClickShowItem(sanPham);
-            }
-        });
+////      Show chi tiết sản phẩm
+//        holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mIClickListener.onClickShowItem(sanPham);
+//            }
+//        });
     }
 
     @Override
