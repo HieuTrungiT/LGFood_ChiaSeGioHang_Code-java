@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LGFood_duan1">
-        <activity android:name=".Activity.favorite_Activity"></activity>
+        <activity android:name=".Activity.Activity_SignInWithGoogle"></activity>
+        <activity android:name=".Activity.favorite_Activity" />
         <activity android:name=".Activity.chiaSeKetNoiGioHang_Activity" />
 
         <meta-data
@@ -23,18 +24,22 @@
         <activity android:name=".Activity.ChiaSeGioHang_Activity" />
         <activity
             android:name=".Activity.Sin_Up_Activity"
-            android:exported="true" />
-        <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
-        <activity android:name=".Activity.trangChu_SanPham_Activity" />
-        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
+            android:exported="true">
 
-        <activity android:name=".Activity.Login_Activity">
+        </activity>
+        <activity android:name=".Activity.OTP" >
+
+        </activity>
+        <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
+        <activity android:name=".Activity.trangChu_SanPham_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
+        <activity android:name=".Activity.Login_Activity"></activity>
         <activity android:name=".Activity.Nhap_SDT" />
         <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />

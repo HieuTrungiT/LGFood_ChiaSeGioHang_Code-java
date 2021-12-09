@@ -17,10 +17,12 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +46,11 @@ import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -94,7 +101,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private FrameLayout
             DatNhanh_FmLt_showChiTietSanPham,
             SanPham_flou_search;
-    private Button
+    private LinearLayout
             DatNhanh_btn_themSanPhamVaoGioHang;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
@@ -124,6 +131,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //biến số lượng và id giỏ hàng
     int i = 1;
     String idGioHang;
+    GoogleSignInClient mGoogleSignInClient;
 
 
     SharedPreferences sharedPreferences;
@@ -143,7 +151,19 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         timKiem();
         showSlider();
+        processrequest();
+
 //        checkItemYeuThich();
+    }
+    //thai
+    private void processrequest() {
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
     }
 
     //    BT: showSlider
@@ -281,39 +301,39 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
 //        bắt sự kiện chuyển trang navigation
-        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
-
-        bottomNavigationView.setSelectedItemId(R.id.Use);
-
-
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.cart:
-                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Like:
-                        startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Home:
-                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                    case R.id.Paid:
-                        startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
-                        overridePendingTransition(0, 0);
-
-                        return;
-                    case R.id.Use:
-                        startActivity(new Intent(getApplicationContext(), thongTinTaiKhoan_Activity.class));
-                        overridePendingTransition(0, 0);
-                        return;
-                }
-            }
-        });
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
+//
+//        bottomNavigationView.setSelectedItemId(R.id.Use);
+//
+//
+//        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+//            @Override
+//            public void onNavigationItemReselected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.cart:
+//                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+//                        overridePendingTransition(0, 0);
+//                        return;
+//                    case R.id.Like:
+//                        startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
+//                        overridePendingTransition(0, 0);
+//                        return;
+//                    case R.id.Home:
+//                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+//                        overridePendingTransition(0, 0);
+//                        return;
+//                    case R.id.Paid:
+//                        startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
+//                        overridePendingTransition(0, 0);
+//
+//                        return;
+//                    case R.id.Use:
+//                        startActivity(new Intent(getApplicationContext(), thongTinTaiKhoan_Activity.class));
+//                        overridePendingTransition(0, 0);
+//                        return;
+//                }
+//            }
+//        });
 //        bắt sự kiện tìm kiếm
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -662,13 +682,17 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         TrangChuSanPham_nav_drawer.setNavigationItemSelectedListener(trangChu_SanPham_Activity.this);
         TrangChuSanPham_nav_drawer.bringToFront();
-        TrangChuSanPham_nav_drawer.setCheckedItem(R.id.drawer_nav_login);
+        TrangChuSanPham_nav_drawer.setCheckedItem(R.id.drawer_nav_home);
         /*           Phần quyền đăng nhập           */
 
-//        Menu menu = TrangChuSanPham_nav_drawer.getMenu();
-//        menu.findItem(R.id.drawer_nav_logout).setVisible(false);
+        Menu menu = TrangChuSanPham_nav_drawer.getMenu();
 //        menu.findItem(R.id.drawer_nav_profile).setVisible(false);
 
+        if (shareAcout.getString("IDUSRE","").isEmpty()){
+            menu.findItem(R.id.drawer_nav_logout).setVisible(false);
+        }else{
+            menu.findItem(R.id.drawer_nav_login).setVisible(false);
+        }
 
         TrangChuSanPham_img_showMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -682,34 +706,74 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     }
 
+
+    //thai fix lai drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.drawer_nav_login:
+            switch (item.getItemId()) {
 
-                break;
-            case R.id.drawer_nav_logout:
-                SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.clear();
-                editor.commit();
-                Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
-                startActivity(intent2);
-                break;
+                //item chuc nang cua app
 
-            case R.id.drawer_nav_profile:
-                Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
-                startActivity(intent3);
-                break;
+                case R.id.drawer_nav_home:
+                    startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
+                    break;
 
-            case R.id.drawer_nav_rate:
+                case R.id.drawer_nav_like:
+                    startActivity(new Intent(getApplicationContext(),favorite_Activity.class));
+                    break;
 
-                break;
+                case R.id.drawer_nav_cart:
+                    startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                    break;
 
-            case R.id.drawer_nav_share:
+                case R.id.drawer_nav_gioHang:
+                    startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
+                    break;
 
-                break;
+                //item profile
+
+                case R.id.drawer_nav_login:
+                    startActivity(new Intent(getApplicationContext(),Login_Activity.class));
+                    break;
+                case R.id.drawer_nav_profile:
+                    if (shareAcout.getString("IDUSRE","").isEmpty()){
+                        Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
+                        startActivity(intent3);
+                    }
+
+                    break;
+
+                case R.id.drawer_nav_logout:
+
+                    SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.commit();
+                    mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+                            Toast.makeText(trangChu_SanPham_Activity.this, "SignOut", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    startActivity(new Intent(getApplicationContext(),Sin_Up_Activity.class));
+                    finish();
+                    Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent2);
+                    break;
+
+
+                //chuc nang khac
+                case R.id.drawer_nav_rate:
+
+                    break;
+
+                case R.id.drawer_nav_share:
+
+                    break;
         }
         TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
         return true;
@@ -745,13 +809,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
         TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
         TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
-
+        TextView datNhanh_tv_giaTienSanPham=dialog.findViewById(R.id.datNhanh_tv_giaTienSanPham);
         //tang giam so luong sp
         ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
         TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
         ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
 
-        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+        LinearLayout datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
         Glide.with(trangChu_SanPham_Activity.this)
                 .load(sanPham.getAnhSanPham())
@@ -764,7 +828,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         datNhanh_tv_soLuongSanPhamTrongKho.setText(String.valueOf(sanPham.getSoLuongSanPham()));
 //        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
         datNhanh_tv_moTaSanPham.setText(sanPham.getMoTaSanPham());
+
         datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + sanPham.getGiaBanSanPham() + "VNĐ");
+
         //giam so luong san pham
 
         datNhanh_img_btn_giamSoLuongSanPham.setOnClickListener(new View.OnClickListener() {
@@ -774,11 +840,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 if (i <= 1) {
                     i = 1;
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
+
                     datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + String.valueOf(i * sanPham.getGiaBanSanPham()) + "VNĐ");
                     return;
                 } else {
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
                     datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + String.valueOf(i * sanPham.getGiaBanSanPham()) + "00VNĐ");
+
                 }
 
 
@@ -791,6 +859,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 i++;
                 datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
                 datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + String.valueOf(i * sanPham.getGiaBanSanPham()) + "00VNĐ");
+
             }
         });
         //turn off dialog
@@ -843,8 +912,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                         } else {
                             model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
-                            dataRef.child(cart.getIdGioHang()).setValue(cart);
+                            dataRef.child(cart.getIdSanPham()).setValue(cart);
                         }
+                        dialog.setContentView(R.layout.activity_add_to_cart_anim);
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        },2300);
                     }
 
                     @Override
