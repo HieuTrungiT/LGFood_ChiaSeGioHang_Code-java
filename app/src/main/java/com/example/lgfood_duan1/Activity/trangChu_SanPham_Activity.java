@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -154,6 +155,66 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         processrequest();
 
 //        checkItemYeuThich();
+    }
+//    Trung thêm nhanh sản phẩm vào giỏ hàng
+    public void themNhanhSanPhamVaoGioHang(model_SanPham sanPham){
+        anhXa();
+        getDataFirebaseCart();
+        String idProduct = sanPham.getIdSanPham();
+        Log.d("eee", "idprduc" + idProduct);
+        dataRef = database.getReference("Accounts").child(idSharePre);
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean check = false;
+                String idCart = "";
+                int viTri = 0;
+                dataRef = database.getReference("newCarts");
+                model_Account account = snapshot.getValue(model_Account.class);
+                idGioHang = String.valueOf(account.getIdGioHang());
+                UUID uuid = UUID.randomUUID();
+                String idProduct = sanPham.getIdSanPham();
+                String idChiTietSanPham = String.valueOf(uuid);
+                model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
+
+//                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
+
+                dataRef = database.getReference("GioHangs").child(idGioHang);
+                for (int j = 0; j < arrListCart.size(); j++) {
+                    if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
+                        check = true;
+                        idCart = arrListCart.get(j).getIdGioHang();
+                        viTri = j;
+                    }
+
+                }
+
+
+                if (check == true) {
+                    int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                    dataRef.child(idCart).child("soLuong").setValue(tong + "");
+
+                } else {
+                    model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
+                    dataRef.child(cart.getIdGioHang()).setValue(cart);
+
+                }
+//                .setContentView(R.layout.activity_add_to_cart_anim);
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        dialog.dismiss();
+                    }
+                },2300);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     //thai
     private void processrequest() {
@@ -300,40 +361,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
-//        bắt sự kiện chuyển trang navigation
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.trangChuSanPham_bottomNavigation);
-//
-//        bottomNavigationView.setSelectedItemId(R.id.Use);
-//
-//
-//        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-//            @Override
-//            public void onNavigationItemReselected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.cart:
-//                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
-//                        overridePendingTransition(0, 0);
-//                        return;
-//                    case R.id.Like:
-//                        startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
-//                        overridePendingTransition(0, 0);
-//                        return;
-//                    case R.id.Home:
-//                        startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
-//                        overridePendingTransition(0, 0);
-//                        return;
-//                    case R.id.Paid:
-//                        startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
-//                        overridePendingTransition(0, 0);
-//
-//                        return;
-//                    case R.id.Use:
-//                        startActivity(new Intent(getApplicationContext(), thongTinTaiKhoan_Activity.class));
-//                        overridePendingTransition(0, 0);
-//                        return;
-//                }
-//            }
-//        });
 //        bắt sự kiện tìm kiếm
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -432,7 +459,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea);
-//                showListProduc_Vartical(kiemTraLoaiSanPham("Cà phê", arrListSanPham));
+                showListProduc_Vartical(kiemTraLoaiSanPham("Cà phê", arrListSanPham));
                 Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
 
                 TrangChuSanPham_tv_showLoai.setText("Loại: COFFE");
@@ -459,7 +486,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea);
-//                showListProduc_Vartical(kiemTraLoaiSanPham("Thảo mộc", arrListSanPham));
+                showListProduc_Vartical(kiemTraLoaiSanPham("Thảo mộc", arrListSanPham));
                 Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
                 TrangChuSanPham_tv_showLoai.setText("Loại: THẢO MỘC");
 
@@ -486,7 +513,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea);
-//                showListProduc_Vartical(kiemTraLoaiSanPham("Hạt đặc sản", arrListSanPham));
+                showListProduc_Vartical(kiemTraLoaiSanPham("Hạt đặc sản", arrListSanPham));
                 Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
 
                 TrangChuSanPham_tv_showLoai.setText("Loại: HẠT");
@@ -513,8 +540,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea);
-//                showListProduc_Vartical(kiemTraLoaiSanPham("Trái cây xấy dẻo", arrListSanPham));
+                showListProduc_Vartical(kiemTraLoaiSanPham("Trái cây xấy dẻo", arrListSanPham));
                 Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
+
 
                 TrangChuSanPham_tv_showLoai.setText("Loại: MỨC");
 
@@ -541,8 +569,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_cam2_thuonghieu);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea_white);
-//                showListProduc_Vartical(kiemTraLoaiSanPham("Trà túi lọc", arrListSanPham));
-                Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
+
+
+                showListProduc_Vartical(kiemTraLoaiSanPham("Trà túi lọc",arrListSanPham));                Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
                 TrangChuSanPham_tv_showLoai.setText("Loại: TEA");
             }
         });
@@ -567,7 +596,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 TrangChuSanPham_img_showLoaiTra.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea);
-//                showListProduc_Vartical(arrListSanPham);
+                showListProduc_Vartical(arrListSanPham);
                 Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
 
                 TrangChuSanPham_tv_showLoai.setText("Sản phẩm: ALL");
@@ -911,7 +940,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                         } else {
                             model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
-                            dataRef.child(cart.getIdSanPham()).setValue(cart);
+                            dataRef.child(cart.getIdGioHang()).setValue(cart);
                         }
                         dialog.setContentView(R.layout.activity_add_to_cart_anim);
                         Handler handler=new Handler();
@@ -1004,27 +1033,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_nav_drawer = findViewById(R.id.trangChuSanPham_nav_drawer);
         //  EditText
         TrangChuSanPham_edt_timKiemSanPham = findViewById(R.id.trangChuSanPham_edt_timKiemSanPham);
-        //       layout datnhanh
-        //        ImageView
-//        DatNhanh_img_showAnhSanPham = findViewById(R.id.datNhanh_img_showAnhSanPham);
-//        DatNhanh_img_btn_giamSoLuongSanPham = findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
-//        DatNhanh_img_btn_tangSoLuongSanPham = findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
-//
-//
-//        //        TextView
-//        DatNhanh_tv_showTenSanPham = findViewById(R.id.datNhanh_tv_showTenSanPham);
-//        DatNhanh_tv_giaSanPham = findViewById(R.id.datNhanh_tv_giaSanPham);
-//        DatNhanh_tv_giamGiaSanPham = findViewById(R.id.datNhanh_tv_giamGiaSanPham);
-//        DatNhanh_tv_ngaySanXuat = findViewById(R.id.datNhanh_tv_ngaySanXuat);
-//        DatNhanh_tv_soLuongSanPhamTrongKho = findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
-//        DatNhanh_tv_moTaSanPham = findViewById(R.id.datNhanh_tv_moTaSanPham);
-//        DatNhanh_tv_SoLuongSanpham = findViewById(R.id.datNhanh_tv_SoLuongSanpham);
-//        DatNhanh_tv_soLuongSanPhamYeuThichDaMua = findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
-        //        FrameLayout
+
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
         //        Button
-        DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
-
 
     }
 

@@ -143,7 +143,12 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
 //        });
 
 
-
+        holder.ItemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.themNhanhSanPhamVaoGioHang(sanPham);
+            }
+        });
 
         holder.ItemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich.setText("0");
         holder.ItemCuttomTrangChu_ngang_tv_xuatXuSanPham.setText(sanPham.getXuatXuSanPham());
