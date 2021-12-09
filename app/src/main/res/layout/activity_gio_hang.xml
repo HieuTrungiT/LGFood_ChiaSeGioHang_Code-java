@@ -283,7 +283,7 @@
                     android:gravity="right"
                     android:padding="5dp"
                     android:text="0vnđ"
-                    android:textColor="#000"
+                    android:textColor="@color/lf_orange"
                     android:textSize="23sp"
                     android:textStyle="bold" />
 

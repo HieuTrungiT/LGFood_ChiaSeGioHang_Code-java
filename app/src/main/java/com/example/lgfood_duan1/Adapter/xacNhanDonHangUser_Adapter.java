@@ -37,7 +37,7 @@ public class xacNhanDonHangUser_Adapter extends RecyclerView.Adapter<xacNhanDonH
     @NotNull
     @Override
     public xacNhanDonHangUser_Adapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_custom_favorite, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_custom_xacnhandathanguser, parent, false);
         return new xacNhanDonHangUser_Adapter.ViewHolder(view);
     }
 

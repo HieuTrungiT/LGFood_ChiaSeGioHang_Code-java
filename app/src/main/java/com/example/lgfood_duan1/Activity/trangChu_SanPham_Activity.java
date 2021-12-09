@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -69,6 +70,10 @@ import java.util.ArrayList;
 
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.lgfood_duan1.R.id.trangChuSanPham_img_logo;
+
 public class trangChu_SanPham_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout
@@ -104,6 +109,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             SanPham_flou_search;
     private LinearLayout
             DatNhanh_btn_themSanPhamVaoGioHang;
+    private CircleImageView TrangChuSanPham_img_logo;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
     private SharedPreferences shareAcout;
@@ -153,11 +159,17 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         timKiem();
         showSlider();
         processrequest();
-
+        getDataFirebaseAccout();
 //        checkItemYeuThich();
     }
-//    Trung thêm nhanh sản phẩm vào giỏ hàng
-    public void themNhanhSanPhamVaoGioHang(model_SanPham sanPham){
+
+    //    lấy thông tin user
+    private void getDataFirebaseAccout() {
+
+    }
+
+    //    Trung thêm nhanh sản phẩm vào giỏ hàng
+    public void themNhanhSanPhamVaoGioHang(model_SanPham sanPham) {
         anhXa();
         getDataFirebaseCart();
         String idProduct = sanPham.getIdSanPham();
@@ -201,13 +213,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 }
 //                .setContentView(R.layout.activity_add_to_cart_anim);
-                Handler handler=new Handler();
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
 //                        dialog.dismiss();
                     }
-                },2300);
+                }, 2300);
             }
 
             @Override
@@ -216,6 +228,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             }
         });
     }
+
     //thai
     private void processrequest() {
         GoogleSignInOptions gso = new GoogleSignInOptions
@@ -249,13 +262,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 String valueArr = (arrlSanPham.get(i).getTenSanPham());
                 String valueTimKiem = value;
                 if (valueArr.contains(valueTimKiem)) {
-
                     arrListSanPhamTimKiem.add(arrlSanPham.get(i));
                 }
             }
 
             TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/TÊN");
-
+            showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
     }
@@ -275,7 +287,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             }
 
             TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/GIÁ");
-
+            showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
     }
@@ -293,7 +305,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 }
             }
             TrangChuSanPham_tv_loai.setText("/" + arrListSanPhamTimKiem.size() + "SP/LOẠI");
-//            showListProduc_Vartical(arrListSanPhamTimKiem);
+            showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
     }
@@ -571,7 +583,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 TrangChuSanPham_img_showLoaiTra.setImageResource(R.drawable.ic_tea_white);
 
 
-                showListProduc_Vartical(kiemTraLoaiSanPham("Trà túi lọc",arrListSanPham));                Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
+                showListProduc_Vartical(kiemTraLoaiSanPham("Trà túi lọc", arrListSanPham));
+                Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
                 TrangChuSanPham_tv_showLoai.setText("Loại: TEA");
             }
         });
@@ -650,7 +663,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
 
     public void setNotifyitem(int viTri) {
-        TrangChu_showNgang_adapter.notifyItemChanged(viTri);
+        showListProduc_Horizoltal();
         TrangChu_showDoc_adapter.notifyItemChanged(viTri);
     }
 
@@ -717,11 +730,32 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         Menu menu = TrangChuSanPham_nav_drawer.getMenu();
 //        menu.findItem(R.id.drawer_nav_profile).setVisible(false);
 
-        if (shareAcout.getString("IDUSRE","").isEmpty()){
+        if (shareAcout.getString("IDUSRE", "").isEmpty()) {
             menu.findItem(R.id.drawer_nav_logout).setVisible(false);
-        }else{
+        } else {
             menu.findItem(R.id.drawer_nav_login).setVisible(false);
         }
+        dataRef = database.getReference("Accounts").child(idSharePre);
+        dataRef.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                CircleImageView trangChuSanPham_img_logo = (CircleImageView) TrangChuSanPham_nav_drawer.getHeaderView(0).findViewById(R.id.trangChuSanPham_img_logo);
+                trangChuSanPham_img_logo.setImageResource(R.drawable.man);
+                model_Account account = snapshot.getValue(model_Account.class);
+                if (!account.getAnhKhachHang().equals("")) {
+                    Glide.with(trangChu_SanPham_Activity.this)
+                            .load(account.getAnhKhachHang())
+                            .into(trangChuSanPham_img_logo);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
         TrangChuSanPham_img_showMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -740,69 +774,69 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            switch (item.getItemId()) {
+        switch (item.getItemId()) {
 
-                //item chuc nang cua app
+            //item chuc nang cua app
 
-                case R.id.drawer_nav_home:
-                    startActivity(new Intent(getApplicationContext(),trangChu_SanPham_Activity.class));
-                    break;
+            case R.id.drawer_nav_home:
+                startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+                break;
 
-                case R.id.drawer_nav_like:
-                    startActivity(new Intent(getApplicationContext(),favorite_Activity.class));
-                    break;
+            case R.id.drawer_nav_like:
+                startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
+                break;
 
-                case R.id.drawer_nav_cart:
-                    startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
-                    break;
+            case R.id.drawer_nav_cart:
+                startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
+                break;
 
-                case R.id.drawer_nav_gioHang:
-                    startActivity(new Intent(getApplicationContext(),gio_Hang_Activity.class));
-                    break;
+            case R.id.drawer_nav_gioHang:
+                startActivity(new Intent(getApplicationContext(), donHangUser_Activity.class));
+                break;
 
-                //item profile
+            //item profile
 
-                case R.id.drawer_nav_login:
-                    startActivity(new Intent(getApplicationContext(),Login_Activity.class));
-                    break;
-                case R.id.drawer_nav_profile:
-                    if (shareAcout.getString("IDUSRE","").isEmpty()){
-                        Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+            case R.id.drawer_nav_login:
+                startActivity(new Intent(getApplicationContext(), Login_Activity.class));
+                break;
+            case R.id.drawer_nav_profile:
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
 
-                    }else {
-                        Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
-                        startActivity(intent3);
+                } else {
+                    Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
+                    startActivity(intent3);
+                }
+
+                break;
+
+            case R.id.drawer_nav_logout:
+
+                SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+                mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        Toast.makeText(trangChu_SanPham_Activity.this, "SignOut", Toast.LENGTH_SHORT).show();
                     }
-
-                    break;
-
-                case R.id.drawer_nav_logout:
-
-                    SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.clear();
-                    editor.commit();
-                    mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                            Toast.makeText(trangChu_SanPham_Activity.this, "SignOut", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    startActivity(new Intent(getApplicationContext(),Sin_Up_Activity.class));
-                    finish();
-                    Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
-                    startActivity(intent2);
-                    break;
+                });
+                startActivity(new Intent(getApplicationContext(), Sin_Up_Activity.class));
+                finish();
+                Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                startActivity(intent2);
+                break;
 
 
-                //chuc nang khac
-                case R.id.drawer_nav_rate:
+            //chuc nang khac
+            case R.id.drawer_nav_rate:
 
-                    break;
+                break;
 
-                case R.id.drawer_nav_share:
+            case R.id.drawer_nav_share:
 
-                    break;
+                break;
         }
         TrangChuSanPham_drawerllout_main.closeDrawer(GravityCompat.START);
         return true;
@@ -857,7 +891,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 //        datNhanh_tv_soLuongSanPhamYeuThichDaMua.setText(Integer.valueOf(sanPham.getAnhSanPham()));
         datNhanh_tv_moTaSanPham.setText(sanPham.getMoTaSanPham());
 
-        datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + sanPham.getGiaBanSanPham() + "VNĐ");
+        datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + sanPham.getGiaBanSanPham() + "00VNĐ");
 
         //giam so luong san pham
 
@@ -868,8 +902,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 if (i <= 1) {
                     i = 1;
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
-
-                    datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + String.valueOf(i * sanPham.getGiaBanSanPham()) + "VNĐ");
+                    datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " + String.valueOf(i * sanPham.getGiaBanSanPham()) + "00VNĐ");
                     return;
                 } else {
                     datNhanh_tv_SoLuongSanpham.setText(String.valueOf(i));
@@ -943,13 +976,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                             dataRef.child(cart.getIdGioHang()).setValue(cart);
                         }
                         dialog.setContentView(R.layout.activity_add_to_cart_anim);
-                        Handler handler=new Handler();
+                        Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 dialog.dismiss();
                             }
-                        },2300);
+                        }, 2300);
                     }
 
                     @Override
@@ -1035,6 +1068,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_edt_timKiemSanPham = findViewById(R.id.trangChuSanPham_edt_timKiemSanPham);
 
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
+//        CircleImageView
+
+        TrangChuSanPham_img_logo = findViewById(trangChuSanPham_img_logo);
         //        Button
 
     }

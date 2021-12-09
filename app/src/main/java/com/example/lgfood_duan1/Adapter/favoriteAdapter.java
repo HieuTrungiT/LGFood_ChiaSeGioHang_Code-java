@@ -12,109 +12,100 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.lgfood_duan1.Activity.favorite_Activity;
+import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
+import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.Model.model_yeuThichShow;
 import com.example.lgfood_duan1.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-public class favoriteAdapter extends RecyclerView.Adapter<addToGioHangAdapter.myViewHolder> {
-    Context mContext;
-    ArrayList<model_yeuThichShow> yeuThichShowArrayList;
+public class favoriteAdapter extends RecyclerView.Adapter<favoriteAdapter.ViewHolder> {
+    favorite_Activity mContext;
+    ArrayList<model_yeuThich> arrListYeuThich;
+    ArrayList<model_SanPham> arrListSanPham;
 
-    private IClickListener mIClickListener;
-
-    public favoriteAdapter(){
-
-    }
-
-    public interface IClickListener{
-        void onCLickMinusItem(model_yeuThichShow yeuThichShow);
-
-        void onClickPlusItem(model_yeuThichShow yeuThichShow);
-
-        void onLongClickDelete(model_yeuThichShow yeuThichShow);
-
-        void onClickShowItem(model_yeuThichShow yeuThichShow);
-    }
-
-    public favoriteAdapter(Context mContext, ArrayList<model_yeuThichShow> yeuThichShowArrayList, IClickListener mIClickListener) {
+    public favoriteAdapter(favorite_Activity mContext, ArrayList<model_yeuThich> arrListYeuThich, ArrayList<model_SanPham> arrListSanPham) {
         this.mContext = mContext;
-        this.yeuThichShowArrayList = yeuThichShowArrayList;
-        this.mIClickListener = mIClickListener;
+        this.arrListYeuThich = arrListYeuThich;
+        this.arrListSanPham = arrListSanPham;
     }
+
 
     @NonNull
+    @NotNull
     @Override
-    public addToGioHangAdapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view= LayoutInflater.from(mContext).inflate(R.layout.item_custom_favorite,parent,false);
-
-        return new addToGioHangAdapter.myViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_custom_favorite, parent, false);
+        return new favoriteAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull addToGioHangAdapter.myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull favoriteAdapter.ViewHolder holder, int position) {
 
-        model_yeuThichShow yeuThichShow=yeuThichShowArrayList.get(position);
-
-        holder.xuLi_txt_tenItem.setText(yeuThichShow.getTenSp());
-        holder.xuLi_txt_giaItem.setText(String.valueOf(yeuThichShow.getGiaBanSp()));
+        model_SanPham arrSanPham = null;
+        model_yeuThich arrYeuThich = arrListYeuThich.get(position);
+        for (int i = 0; i < arrListSanPham.size(); i++) {
+            if (arrYeuThich.getIdSanPham().equals(arrListSanPham.get(i).getIdSanPham())) {
+                arrSanPham = arrListSanPham.get(i);
+                holder.xuLi_txt_tenItem.setText(arrSanPham.getTenSanPham());
+                holder.xuLi_txt_giaItem.setText(String.valueOf(arrSanPham.getGiaBanSanPham()) + "00vnđ");
 //        holder.xuLi_txt_soLuong.setText(String.valueOf(yeuThichShow.getSoLuongTrongKho()));
-        holder.xuLi_txt_xuatXuItem.setText(yeuThichShow.getXuatXuSp());
-        Glide.with(mContext)
-                .load(yeuThichShow.getAnhSp())
-                .into(holder.xuLi_img_anhItem);
-        holder.xuLi_img_anhItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mIClickListener.onClickShowItem(yeuThichShow);
+                holder.xuLi_txt_xuatXuItem.setText(arrSanPham.getXuatXuSanPham());
+                Glide.with(mContext)
+                        .load(arrSanPham.getAnhSanPham())
+                        .into(holder.xuLi_img_anhItem);
+//                bắt sự kiện xóa thích
+                holder.xuLi_img_Btn_yeuThich.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.xoaItemThich(arrYeuThich.getIdYeuThich(), position);
+                    }
+                });
+//                bắt sự kiện thêm nhanh sản phẩm vào giò hàng
+                model_SanPham finalArrSanPham = arrSanPham;
+                holder.xuLi_img_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.themSanPhamVaoGioHang(finalArrSanPham);
+                    }
+                });
+//                bắt sự kiện show chi tiết sản phẩm
+                holder.favorite_carview_showChitietSanPham.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.showDialogChiTietSanPham(finalArrSanPham);
+                    }
+                });
             }
-        });
-        holder.xuLi_cardView_formItem1.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                mIClickListener.onLongClickDelete(yeuThichShow);
-                return false;
-            }
-        });
-//        holder.xuLi_cardView_minus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mIClickListener.onCLickMinusItem(yeuThichShow);
-//            }
-//        });
-//        holder.xuLi_cardView_plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mIClickListener.onClickPlusItem(yeuThichShow);
-//            }
-//        });
+        }
 
 
     }
 
     @Override
     public int getItemCount() {
-        return yeuThichShowArrayList.size();
+        arrListYeuThich.size();
+        return arrListYeuThich.size();
     }
 
-    public static class myViewHolder extends RecyclerView.ViewHolder{
-        ImageView xuLi_img_anhItem;
-        TextView xuLi_txt_tenItem,xuLi_txt_xuatXuItem,xuLi_txt_giaItem,xuLi_txt_soLuong;
-        CardView xuLi_cardView_minus,xuLi_cardView_plus,xuLi_cardView_formItem1;
-        public myViewHolder(@NonNull View itemView) {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView xuLi_img_anhItem, xuLi_img_Btn_yeuThich, xuLi_img_btn_themSanPhamVaoGioHang;
+        TextView xuLi_txt_tenItem, xuLi_txt_xuatXuItem, xuLi_txt_giaItem;
+        CardView favorite_carview_showChitietSanPham;
+
+        public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            xuLi_img_anhItem=itemView.findViewById(R.id.xuLi_img_anhItem);
-            xuLi_txt_tenItem=itemView.findViewById(R.id.xuLi_txt_tenItem);
-            xuLi_txt_xuatXuItem=itemView.findViewById(R.id.xuLi_txt_xuatXuItem);
-            xuLi_txt_giaItem=itemView.findViewById(R.id.xuLi_txt_giaItem);
-//            xuLi_txt_soLuong=itemView.findViewById(R.id.xuLi_txt_soLuong);
-//            xuLi_cardView_minus=itemView.findViewById(R.id.xuLi_cardView_minus);
-//            xuLi_cardView_plus=itemView.findViewById(R.id.xuLi_cardView_plus);
-            xuLi_cardView_formItem1=itemView.findViewById(R.id.xuLi_cardView_formItem1);
-
-
+            xuLi_img_anhItem = itemView.findViewById(R.id.xuLi_img_anhItem2);
+            xuLi_txt_tenItem = itemView.findViewById(R.id.xuLi_txt_tenItem2);
+            xuLi_txt_xuatXuItem = itemView.findViewById(R.id.xuLi_txt_xuatXuItem2);
+            xuLi_txt_giaItem = itemView.findViewById(R.id.xuLi_txt_giaItem2);
+            xuLi_img_Btn_yeuThich = itemView.findViewById(R.id.xuLi_img_Btn_yeuThich);
+            xuLi_img_btn_themSanPhamVaoGioHang = itemView.findViewById(R.id.xuLi_img_btn_themSanPhamVaoGioHang);
+            favorite_carview_showChitietSanPham = itemView.findViewById(R.id.favorite_carview_showChitietSanPham);
         }
     }
 }
