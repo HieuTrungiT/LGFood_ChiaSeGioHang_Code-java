@@ -82,14 +82,14 @@ public class Sin_Up_Activity extends AppCompatActivity {
     model_Account model_account;
     FusedLocationProviderClient fusedLocationProviderClient;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +187,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                startActivity(new Intent(getApplicationContext(), Activity_SignInWithGoogle.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -297,9 +297,6 @@ public class Sin_Up_Activity extends AppCompatActivity {
         }
     }
 
-    private void normalLogin() {
-
-    }
 
     private void anhXa() {
 

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/signUp_lv_btn_submid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -140,7 +139,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_TenKH"
+                            android:id="@+id/google_edt_TenKH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -161,7 +160,7 @@
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_teDangNhapKhachHang"
+                            android:id="@+id/google_edt_teDangNhapKhachHang"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -182,7 +181,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/signUp_edt_tenDangNhap">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_gmailKH"
+                            android:id="@+id/google_edt_gmailKH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -206,7 +205,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/signUp_edt_gmail">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_matKhauKH"
+                            android:id="@+id/google_edt_matKhauKH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -229,7 +228,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/signUp_edt_matKhau">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_repeatMatKhau"
+                            android:id="@+id/google_edt_matKhauKHRepeat"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -251,7 +250,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/signUp_edt_NhapLaiMatKhau">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_DiaChiKhachHang"
+                            android:id="@+id/google_edt_DiaChiKhachHang"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -288,7 +287,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/signUp_edt_DiaChi">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_phoneNumber"
+                            android:id="@+id/google_edt_phoneNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
@@ -379,15 +378,16 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/signUp_lv_btn_submid"
+        android:id="@+id/google_lv_btn_submid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
+        android:layout_marginBottom="120dp"
         android:background="@drawable/broder_radius_cam_thuonghieu"
+
+
         android:gravity="center"
-
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -403,7 +403,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-<!--    <LinearLayout-->
+    <!--    <LinearLayout-->
 <!--        android:id="@+id/linearLayout5"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

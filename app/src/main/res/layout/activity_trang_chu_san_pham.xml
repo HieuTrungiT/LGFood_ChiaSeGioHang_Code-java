@@ -466,26 +466,26 @@
                 </LinearLayout>
             </ScrollView>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                tools:ignore="MissingClass">
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                tools:ignore="MissingClass">-->
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/trangChuSanPham_bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/nav_color"
-            android:background="@drawable/rounded"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/bottom_navigation">
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/trangChuSanPham_bottomNavigation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:itemIconTint="@color/nav_color"-->
+<!--            android:background="@drawable/rounded"-->
+<!--            app:itemTextColor="@color/black"-->
+<!--            app:menu="@menu/bottom_navigation">-->
 
 
-                </com.google.android.material.bottomnavigation.BottomNavigationView>
+<!--                </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
         </FrameLayout>
     </LinearLayout>
 

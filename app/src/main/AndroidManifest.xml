@@ -25,17 +25,19 @@
         <activity
             android:name=".Activity.Sin_Up_Activity"
             android:exported="true">
+
+        </activity>
+        <activity android:name=".Activity.OTP" >
+
+        </activity>
+        <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
+        <activity android:name=".Activity.trangChu_SanPham_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.OTP" >
-
-        </activity>
-        <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
-        <activity android:name=".Activity.trangChu_SanPham_Activity"></activity>
         <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
         <activity android:name=".Activity.Login_Activity"></activity>
         <activity android:name=".Activity.Nhap_SDT" />
