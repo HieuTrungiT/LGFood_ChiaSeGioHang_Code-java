@@ -252,8 +252,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                         if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             mData = database.getReference("newCarts");
-                            String soLuong=modelCartArrayList.get(i).getSoLuong();
-                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(),sanPham.getMoTaSanPham(),sanPham.getTenSanPham(),sanPham.getNgaySanXuatSanPham(),sanPham.getXuatXuSanPham(),sanPham.getLoaiSanPham(),sanPham.getTinhTrangSanPham(),sanPham.getAnhSanPham(),sanPham.getNgayNhapSanPham(),sanPham.getSoLuongSanPham(),Integer.valueOf(soLuong),sanPham.getGiaNhapSanPham(),sanPham.getGiaBanSanPham());
+                            String soLuong = modelCartArrayList.get(i).getSoLuong();
+                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), Integer.valueOf(soLuong), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
                         }
                     }
@@ -324,14 +324,13 @@ public class gio_Hang_Activity extends AppCompatActivity {
         TextView datNhanh_tv_soLuongSanPhamTrongKho = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamTrongKho);
         TextView datNhanh_tv_soLuongSanPhamYeuThichDaMua = dialog.findViewById(R.id.datNhanh_tv_soLuongSanPhamYeuThichDaMua);
         TextView datNhanh_tv_moTaSanPham = dialog.findViewById(R.id.datNhanh_tv_moTaSanPham);
-        TextView datNhanh_tv_giaTienSanPham=dialog.findViewById(R.id.datNhanh_tv_giaTienSanPham);
 
         //tang giam so luong sp
         ImageView datNhanh_img_btn_giamSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_giamSoLuongSanPham);
         TextView datNhanh_tv_SoLuongSanpham = dialog.findViewById(R.id.datNhanh_tv_SoLuongSanpham);
         ImageView datNhanh_img_btn_tangSoLuongSanPham = dialog.findViewById(R.id.datNhanh_img_btn_tangSoLuongSanPham);
 
-        LinearLayout datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+        Button datNhanh_btn_themSanPhamVaoGioHang = dialog.findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
         Glide.with(gio_Hang_Activity.this)
                 .load(cart.getAnhSp())
@@ -362,13 +361,15 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     arrGioHang.setSoLuong(i + "");
                     mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
                     tinhTongGiaTienSanPham(cartArrayList);
-                    return;
+
                 } else {
                     arrGioHang.setSoLuong(i + "");
                 }
-
-
-                datNhanh_tv_giaTienSanPham.setText(arrGioHang.getSoLuong() + "00");
+                double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
+                double tong = 0;
+                tong = i * gia;
+                datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " +tong +"00VNĐ");
+                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
 
 
             }
@@ -388,8 +389,11 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 arrGioHang.setSoLuong(i + "");
                 mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
                 tinhTongGiaTienSanPham(cartArrayList);
-
-                datNhanh_tv_giaTienSanPham.setText(arrGioHang.getSoLuong() + "00");
+                double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
+                double tong = 0;
+                tong = i * gia;
+                datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " +tong +"00VNĐ");
+                datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
             }
         });
         //turn off dialog

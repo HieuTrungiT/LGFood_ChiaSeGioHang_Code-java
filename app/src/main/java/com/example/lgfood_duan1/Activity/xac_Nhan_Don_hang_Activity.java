@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -153,7 +154,6 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
 
     // lấy dữ liệu từ hóa đơn tại idDanhSachHoaDon User cung cấp
     private void getDataFirebaseDonHang(ArrayList<model_Account> arrListAccountHoaDon) {
-        Toast.makeText(xac_Nhan_Don_hang_Activity.this, checkShowLoai + "", Toast.LENGTH_SHORT).show();
         arrListHoaDon.clear();
         for (int i = 0; i < arrListAccountHoaDon.size(); i++) {
             dataHoaDonRef = database.getReference("HoaDon").child(arrListAccountHoaDon.get(i).getIdDanhSachDonHang());
@@ -195,7 +195,14 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 checkShowLoai = false;
                 getDataFirebaseListAcount();
+
                 Adapter_suLyDonHangAdmin.notifyDataSetChanged();
+
+                XacNhanDonHang_tv_btn_donChuaXacNhan.setBackgroundResource(R.drawable.broder_radius_cam_thuonghieu);
+                XacNhanDonHang_tv_btn_donChuaXacNhan.setTextColor(Color.parseColor("#FFFFFF"));
+                XacNhanDonHang_tv_btn_donDaXacNhan.setBackgroundResource(R.color.lf_gray4);
+                XacNhanDonHang_tv_btn_donDaXacNhan.setTextColor(Color.parseColor("#F0A23C"));
+
             }
         });
         XacNhanDonHang_tv_btn_donDaXacNhan.setOnClickListener(new View.OnClickListener() {
@@ -205,7 +212,10 @@ public class xac_Nhan_Don_hang_Activity extends AppCompatActivity {
                 getDataFirebaseListAcount();
                 Adapter_suLyDonHangAdmin.notifyDataSetChanged();
 
-
+                XacNhanDonHang_tv_btn_donChuaXacNhan.setBackgroundResource(R.color.lf_gray4);
+                XacNhanDonHang_tv_btn_donChuaXacNhan.setTextColor(Color.parseColor("#F0A23C"));
+                XacNhanDonHang_tv_btn_donDaXacNhan.setBackgroundResource(R.drawable.broder_radius_cam_thuonghieu);
+                XacNhanDonHang_tv_btn_donDaXacNhan.setTextColor(Color.parseColor("#FFFFFF"));
             }
         });
 
