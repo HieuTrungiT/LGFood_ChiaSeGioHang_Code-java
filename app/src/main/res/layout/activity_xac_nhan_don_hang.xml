@@ -116,10 +116,10 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:background="@drawable/broder_radius_cam_thuonghieu"
                                         android:id="@+id/xacNhanDonHang_tv_btn_donChuaXacNhan"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
+                                        android:background="@drawable/broder_radius_cam_thuonghieu"
                                         android:gravity="center_vertical"
                                         android:paddingLeft="6dp"
                                         android:text="Đơn Chưa Xác nhận"

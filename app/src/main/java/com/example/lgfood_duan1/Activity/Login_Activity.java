@@ -168,8 +168,7 @@ public class Login_Activity extends AppCompatActivity {
         }else if (password.isEmpty()) {
             Login_edt_password.setError("Mật khẩu đang trống!");
         }else{
-            mData= database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            mData= database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Accounts");
             mData.addValueEventListener(new ValueEventListener() {
                 @Override
