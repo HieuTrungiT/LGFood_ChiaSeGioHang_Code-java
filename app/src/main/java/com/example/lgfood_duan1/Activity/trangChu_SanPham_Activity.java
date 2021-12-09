@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -738,7 +739,37 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     break;
                 case R.id.drawer_nav_profile:
                     if (shareAcout.getString("IDUSRE","").isEmpty()){
-                        Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                        final Dialog dialogLogin=new Dialog(trangChu_SanPham_Activity.this);
+                        dialogLogin.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialogLogin.setContentView(R.layout.item_dialog_chucnang_login);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            dialogLogin.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+                        }
+                        dialogLogin.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialogLogin.setCancelable(false); //Optional
+                        dialogLogin.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+                        Button Okay = dialogLogin.findViewById(R.id.btn_okay);
+                        Button Cancel = dialogLogin.findViewById(R.id.btn_cancel);
+
+                        Okay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Toast.makeText(trangChu_SanPham_Activity.this, "Okay", Toast.LENGTH_SHORT).show();
+                                dialogLogin.dismiss();
+                            }
+                        });
+
+                        Cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Toast.makeText(trangChu_SanPham_Activity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                                dialogLogin.dismiss();
+                            }
+                        });
+                        dialogLogin.show();
 
                     }else {
                         Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
@@ -874,6 +905,40 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         datNhanh_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sharedPreferences.getString("IDGIOHANG","").isEmpty()){
+                    dialog.dismiss();
+                    final Dialog dialogLogin=new Dialog(trangChu_SanPham_Activity.this);
+                    dialogLogin.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialogLogin.setContentView(R.layout.item_dialog_chucnang_login);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        dialogLogin.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+                    }
+                    dialogLogin.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialogLogin.setCancelable(false); //Optional
+                    dialogLogin.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+                    Button Okay = dialogLogin.findViewById(R.id.btn_okay);
+                    Button Cancel = dialogLogin.findViewById(R.id.btn_cancel);
+
+                    Okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Toast.makeText(trangChu_SanPham_Activity.this, "Okay", Toast.LENGTH_SHORT).show();
+                            dialogLogin.dismiss();
+                        }
+                    });
+
+                    Cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Toast.makeText(trangChu_SanPham_Activity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                            dialogLogin.dismiss();
+                        }
+                    });
+                    dialogLogin.show();
+                }
                 String idProduct = sanPham.getIdSanPham();
                 Log.d("eee", "idprduc" + idProduct);
                 dataRef = database.getReference("Accounts").child(idSharePre);
@@ -896,6 +961,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                         dataRef = database.getReference("GioHangs").child(idGioHang);
                         for (int j = 0; j < arrListCart.size(); j++) {
+
                             if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
                                 check = true;
                                 idCart = arrListCart.get(j).getIdGioHang();
@@ -1023,7 +1089,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         //        FrameLayout
         DatNhanh_FmLt_showChiTietSanPham = findViewById(R.id.datNhanh_FmLt_showChiTietSanPham);
         //        Button
-        DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
+//        DatNhanh_btn_themSanPhamVaoGioHang = findViewById(R.id.datNhanh_btn_themSanPhamVaoGioHang);
 
 
     }
