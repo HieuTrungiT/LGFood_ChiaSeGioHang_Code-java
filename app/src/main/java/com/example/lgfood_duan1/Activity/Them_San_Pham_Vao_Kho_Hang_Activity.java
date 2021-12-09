@@ -8,14 +8,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -108,7 +111,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             BdGiamGiaSanPham;
     double BdGiaNhapSanPham, BdGiaBanSanPham;
     String BdIdsanPham, BdMoTaSanPham, BdTenSanPham, BdNgaySanXuatSanPham, BdXuatXuSanPham, BdLoaiSanPham, BdTinhTrangSanPham, BdAnhSanPham, BdNgayNhapSanPham;
-
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,35 +230,17 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
     //Trung dialog sửa sản phẩm
     private void openDialogUpdate() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_cuttom_capnhatsanpham);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
-//        sử lý khi nhấn ra ngoài thì có thoát hay không
-        dialog.setCancelable(false);
-//        khai báo bắt sự kiện
-        TextView Dialog_them_tvBtn_khong = dialog.findViewById(R.id.dialog_them_tvBtn_khong);
-        TextView Dialog_them_tvBtn_dongY = dialog.findViewById(R.id.dialog_them_tvBtn_dongY);
-
-//        tắt dialog đi
-        Dialog_them_tvBtn_khong.setOnClickListener(new View.OnClickListener() {
+        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialog.findViewById(R.id.btn_okay);
+        Button Cancel = dialog.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Update");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Would you want to update this product?");
+        Okay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-
-            }
-        });
-        Dialog_them_tvBtn_dongY.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 dialog.dismiss();
                 if (!(full == null)) {
 //                    nếu như có ảnh được chọn
@@ -264,7 +249,13 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 //                    nếu như không có ảnh được chọn
                     suaSanPhamKho();
                 }
+            }
+        });
 
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -331,37 +322,27 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
 
     private void openDialogDelete() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_cuttom_xoasanpham);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
-//        sử lý khi nhấn ra ngoài thì có thoát hay không
-        dialog.setCancelable(false);
-//        khai báo bắt sự kiện
-        TextView Dialog_them_tvBtn_khong = dialog.findViewById(R.id.dialog_them_tvBtn_khong);
-        TextView Dialog_them_tvBtn_dongY = dialog.findViewById(R.id.dialog_them_tvBtn_dongY);
-
-//        tắt dialog đi
-        Dialog_them_tvBtn_khong.setOnClickListener(new View.OnClickListener() {
+        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialog.findViewById(R.id.btn_okay);
+        Button Cancel = dialog.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Delete");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Would you want to delete this product?");
+        Okay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                xoaSanPhamKho();
+                finish();
                 dialog.dismiss();
-
             }
         });
-        Dialog_them_tvBtn_dongY.setOnClickListener(new View.OnClickListener() {
+
+        Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 dialog.dismiss();
-                xoaSanPhamKho();
             }
         });
         dialog.show();
@@ -426,9 +407,31 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                             listSanPham = new model_SanPham(uuid.toString(), moTaSanPham, tenSanPham, ngaySanXuatSanPham, xuatXuSanPham, loaiSanPham, tinhTrangSanPham, uri.toString(), formatter.format(reaDate).toString(), soLuongSanPham, giamGiaSanPham, giaNhapSanPham, giaBanSanPham);
 
 //                        //        add giá trị
-                            myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
-                            Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+//
 
+                            ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                            TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                            Button Okay = dialog.findViewById(R.id.btn_okay);
+                            Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                            Okay.setText("Add");
+                            item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                            item_dialog_chucNang_txt_nameErro.setText("Would you want to add new product?");
+                            Okay.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
+                                    finish();
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            Cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
                         }
                     });
                 }
@@ -659,6 +662,17 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     }
 
     private void anhXa() {
+        //thai: diaLog
+        dialog=new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
         //    Firebase
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //    FirebaseStorage

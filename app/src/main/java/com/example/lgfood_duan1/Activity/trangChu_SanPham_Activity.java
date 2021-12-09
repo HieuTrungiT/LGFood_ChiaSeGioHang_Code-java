@@ -201,14 +201,21 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     dataRef.child(cart.getIdGioHang()).setValue(cart);
 
                 }
-//                .setContentView(R.layout.activity_add_to_cart_anim);
+                Dialog dialogItemNgang=new Dialog(trangChu_SanPham_Activity.this);
+                dialogItemNgang.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialogItemNgang.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialogItemNgang.setCancelable(false); //Optional
+                dialogItemNgang.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+                dialogItemNgang.setContentView(R.layout.activity_add_to_cart_anim);
+
                 Handler handler=new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        dialog.dismiss();
+                        dialogItemNgang.dismiss();
                     }
                 },2300);
+                dialogItemNgang.show();
             }
 
             @Override
@@ -1008,14 +1015,21 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                             model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
                             dataRef.child(cart.getIdGioHang()).setValue(cart);
                         }
-                        dialog.setContentView(R.layout.activity_add_to_cart_anim);
+                        Dialog diaLogDoc=new Dialog(trangChu_SanPham_Activity.this);
+                        diaLogDoc.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        diaLogDoc.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        diaLogDoc.setCancelable(false); //Optional
+                        diaLogDoc.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+                        diaLogDoc.setContentView(R.layout.activity_add_to_cart_anim);
+
                         Handler handler=new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                dialog.dismiss();
+                                diaLogDoc.dismiss();
                             }
                         },2300);
+                        diaLogDoc.show();
                     }
 
                     @Override

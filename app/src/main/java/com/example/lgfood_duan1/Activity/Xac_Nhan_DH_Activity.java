@@ -7,10 +7,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -191,8 +199,56 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
         Date reaDate = new Date(System.currentTimeMillis());
         arrHoaDon = new model_hoaDon(UUID.randomUUID().toString(), UUID.randomUUID().toString(), idUserSharePre, tongTien + 30.000, 0, formatter.format(reaDate).toString());
-        dataHoaDonRef.child(listAccount.getIdDanhSachDonHang()).child(arrHoaDon.getIdHoaDon()).setValue(arrHoaDon);
         luuThongTinChiTietSanPhamHoaDon(arrHoaDon);
+        Dialog dialog=new Dialog(Xac_Nhan_DH_Activity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialog.findViewById(R.id.btn_okay);
+        Button Cancel = dialog.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Order");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Would you want to order the products?");
+        Okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog diaLogDoc=new Dialog(Xac_Nhan_DH_Activity.this);
+                diaLogDoc.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                diaLogDoc.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                diaLogDoc.setCancelable(false); //Optional
+                diaLogDoc.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+                diaLogDoc.setContentView(R.layout.activity_add_to_cart_anim);
+
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        diaLogDoc.dismiss();
+                        startActivity(new Intent(Xac_Nhan_DH_Activity.this,trangChu_SanPham_Activity.class));
+                    }
+                },2300);
+                diaLogDoc.show();
+                dialog.dismiss();
+                dataHoaDonRef.child(listAccount.getIdDanhSachDonHang()).child(arrHoaDon.getIdHoaDon()).setValue(arrHoaDon);
+            }
+        });
+
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 //Trung lưu danh sách sản phẩm hóa đơn
     private void luuThongTinChiTietSanPhamHoaDon(model_hoaDon arrHoaDon) {

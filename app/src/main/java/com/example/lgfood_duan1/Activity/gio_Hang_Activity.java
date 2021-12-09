@@ -19,6 +19,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -418,36 +419,73 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     private void onClickDeleteItem(model_addToCart cart) {
 
-        new AlertDialog.Builder(gio_Hang_Activity.this)
-                .setTitle(getString(R.string.app_name))
-                .setMessage("Bạn chắc chắn muốn xóa item này không?")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+//        new AlertDialog.Builder(gio_Hang_Activity.this)
+//                .setTitle(getString(R.string.app_name))
+//                .setMessage("Bạn chắc chắn muốn xóa item này không?")
+//                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
                         mData = database.getReference("newCarts");
 
-                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                        final Dialog dialogXoaItem=new Dialog(gio_Hang_Activity.this);
+                        dialogXoaItem.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialogXoaItem.setContentView(R.layout.item_dialog_chucnang_login);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            dialogXoaItem.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+                        }
+                        dialogXoaItem.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialogXoaItem.setCancelable(false); //Optional
+                        dialogXoaItem.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+                        ImageView item_dialog_chucNang_img_imgErro=dialogXoaItem.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                        TextView item_dialog_chucNang_txt_nameErro=dialogXoaItem.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                        Button Okay = dialogXoaItem.findViewById(R.id.btn_okay);
+                        Button Cancel = dialogXoaItem.findViewById(R.id.btn_cancel);
+                        Okay.setText("Delete");
+                        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                        item_dialog_chucNang_txt_nameErro.setText("Would you want to delete this product?");
+
+                        Okay.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onComplete(DatabaseError error, DatabaseReference ref) {
+                            public void onClick(View v) {
 
-                                Toast.makeText(gio_Hang_Activity.this, "Delete item success", Toast.LENGTH_SHORT).show();
+                                mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(DatabaseError error, DatabaseReference ref) {
 
+                                        Toast.makeText(gio_Hang_Activity.this, "Delete item success", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+                                mData = database.getReference("GioHangs");
+                                mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
+
+                                    }
+                                });
+                                dialogXoaItem.dismiss();
                             }
                         });
 
-                        mData = database.getReference("GioHangs");
-                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                        Cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
+                            public void onClick(View v) {
 
+                                Toast.makeText(gio_Hang_Activity.this, "Cancel", Toast.LENGTH_SHORT).show();
+                                dialogXoaItem.dismiss();
                             }
                         });
-                    }
-                })
+                        dialogXoaItem.show();
 
-                .setNegativeButton("Cancel", null)
-
-                .show();
+//
+//                    }
+//                })
+//
+//                .setNegativeButton("Cancel", null)
+//
+//                .show();
 
     }
 
