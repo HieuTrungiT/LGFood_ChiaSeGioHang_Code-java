@@ -64,13 +64,13 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
         for (int i = 0; i < arrListGioHangs.size(); i++) {
             if (arrListGioHangs.get(i).getIdSanPham().equals(cartArrayList.get(position).getIdSp())) {
                 arrGioHangs = arrListGioHangs.get(i);
-            }
-        }
+                holder.xuLi_txt_soLuong.setText(String.valueOf(arrGioHangs.getSoLuong()));
+
 
         holder.xuLi_txt_tenItem.setText(arrAddTocart.getTenSp());
         holder.xuLi_txt_giaItem.setText(String.valueOf(arrAddTocart.getGiaBanSp()) + "00vnđ");
 
-        holder.xuLi_txt_soLuong.setText(String.valueOf(arrGioHangs.getSoLuong()));
+
 
         holder.xuLi_txt_xuatXuItem.setText(arrAddTocart.getXuatXuSp());
         Glide.with(mContext)
@@ -119,7 +119,8 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
 
             }
         });
-
+            }
+        }
 
     }
 
