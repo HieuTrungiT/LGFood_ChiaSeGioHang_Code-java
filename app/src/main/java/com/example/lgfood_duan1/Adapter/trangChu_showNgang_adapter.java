@@ -73,16 +73,22 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
                 }
 
                 model_yeuThich arrYeuThich = null;
-                if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
-                    for (int i = 0; i < arrListYeuThich.size(); i++) {
-                        if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
-                            arrYeuThich = arrListYeuThich.get(i);
-                            Log.d("ddd", arrYeuThich.getIdYeuThich() + "");
-                            holder.ItemCuttomTrangChu_ngang_img_btn_chonYeuThich.setImageResource(R.drawable.ic_love_red);
+                try {
 
+                    if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
+                        for (int i = 0; i < arrListYeuThich.size(); i++) {
+                            if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
+                                arrYeuThich = arrListYeuThich.get(i);
+                                Log.d("ddd", arrYeuThich.getIdYeuThich() + "");
+                                holder.ItemCuttomTrangChu_ngang_img_btn_chonYeuThich.setImageResource(R.drawable.ic_love_red);
+
+                            }
                         }
+
                     }
 
+                } catch (Exception e) {
+                    Toast.makeText(context, "Bạn chưa đăng nhập nên không thể thực hiện", Toast.LENGTH_SHORT).show();
                 }
 
             }
