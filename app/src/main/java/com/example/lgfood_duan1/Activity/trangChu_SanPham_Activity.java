@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputType;
@@ -118,7 +119,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //    sp Slider\
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.banner1, R.drawable.baner2};
-
+    Dialog dialog;
     //Firebase
     private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
@@ -811,8 +812,28 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
             case R.id.drawer_nav_profile:
                 if (shareAcout.getString("IDUSRE", "").isEmpty()) {
-                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                    TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Button Okay = dialog.findViewById(R.id.btn_okay);
+                    Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                    //setText Item
+                    Okay.setText("Đăng nhập");
+                    item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                    item_dialog_chucNang_txt_nameErro.setText("Bạn chưa đăng nhập vào ứng dụng này?");
+                    Okay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
 
+                    Cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
                 } else {
                     Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
                     startActivity(intent3);
@@ -821,21 +842,56 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
 
             case R.id.drawer_nav_logout:
-
-                SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.clear();
-                editor.commit();
-                mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                Button Okay = dialog.findViewById(R.id.btn_okay);
+                Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                //setText Item
+                Okay.setText("Đăng xuất");
+                item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn đăng xuất không?");
+                Okay.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        Toast.makeText(trangChu_SanPham_Activity.this, "SignOut", Toast.LENGTH_SHORT).show();
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        final Dialog dialog1 = new Dialog(trangChu_SanPham_Activity.this);
+                        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog1.setContentView(R.layout.item_login);
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.clear();
+                                editor.commit();
+                                mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    }
+                                });
+                                startActivity(new Intent(getApplicationContext(), Sin_Up_Activity.class));
+                                finish();
+                                Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                                startActivity(intent2);
+                                dialog1.dismiss();
+
+                            }
+                        },3000);
+                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialog1.show();
                     }
                 });
-                startActivity(new Intent(getApplicationContext(), Sin_Up_Activity.class));
-                finish();
-                Intent intent2 = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
-                startActivity(intent2);
+
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
+
                 break;
 
 
@@ -867,9 +923,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private void showItemChiTietSanPham(model_SanPham sanPham) {
         anhXa();
         getDataFirebaseCart();
-        final Dialog dialog = new Dialog(this);
+        dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_dat_nhanh);
+        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
 
         LinearLayout datNhanh_linear_turnOffDiaLog = dialog.findViewById(R.id.datNhanh_linear_turnOffDiaLog);
         //thong tin san pham
@@ -1034,6 +1097,16 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //     Ánh xạ
     private void anhXa() {
 //        SharedPreferences
+        dialog=new Dialog(trangChu_SanPham_Activity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
         sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         idSharePre = shareAcout.getString("IDUSRE", "");

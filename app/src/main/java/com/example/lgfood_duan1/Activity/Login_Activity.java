@@ -23,12 +23,26 @@ import android.widget.Toast;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 public class Login_Activity extends AppCompatActivity {
 
@@ -55,7 +69,11 @@ public class Login_Activity extends AppCompatActivity {
     DatabaseReference mData;
     FirebaseDatabase database;
     CheckBox checkBox;
-
+//thai login gg;
+private static final String TAG = "GoogleActivity";
+    private static final int RC_SIGN_IN = 9001;
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +81,7 @@ public class Login_Activity extends AppCompatActivity {
         anhXa();
         checkSavePass();
         batSuKien();
+        processrequest();
     }
 
 
@@ -88,12 +107,14 @@ public class Login_Activity extends AppCompatActivity {
         login_tv_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                processLogin();
             }
         });
         login_tv_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(Login_Activity.this, Nhap_SDT.class);
+                startActivity(intent);
             }
         });
 
@@ -164,6 +185,100 @@ public class Login_Activity extends AppCompatActivity {
         }
         editor.commit();
     }
+
+    //thai: khai báo client của google
+    private void processrequest() {
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+    }
+
+    //khi ấn nút login sẽ chạy vào hàm này
+    private void processLogin() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    //mở dialog tài khoản gg
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    //lay dữ liệu tài khoản
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            firebaseAuthWithGoogle(account.getIdToken());
+
+        } catch (ApiException e) {
+            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //xử lí đăng nhập
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                GoogleSignInAccount googleSignInAccount= GoogleSignIn.getLastSignedInAccount(Login_Activity.this);
+
+                                String hoVaTen=googleSignInAccount.getDisplayName();
+                                String gmail=googleSignInAccount.getEmail();
+                                String anhKH=String.valueOf(googleSignInAccount.getPhotoUrl());
+                                database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                                //    FirebaseStorage
+                                mData = database.getReference("Accounts");
+
+                                model_Account model_account = new model_Account(UUID.randomUUID().toString(), hoVaTen, gmail, "", "", gmail, "", UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(), anhKH);
+                                mData.child(model_account.getId()).setValue(model_account);
+
+                                rememberUser(model_account.getId(),model_account.getIdGioHang(),gmail,"",true,"",model_account.getIdViTri(),model_account.getIdGioHangTam(),hoVaTen,model_account.getAnhKhachHang(),model_account.getIdDanhSachYeuThich(),model_account.getIdDanhSachDonHang());
+
+                                final Dialog dialog = new Dialog(Login_Activity.this);
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setContentView(R.layout.item_login);
+                                Handler handler=new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+                                        startActivity(intent);
+                                    }
+                                },3000);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                dialog.show();
+                                startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+
+                            }
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            Toast.makeText(Login_Activity.this, "fail", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
 //thai login
     private void loginNormal() {
         String userName=Login_edt_username.getText().toString().trim();
@@ -181,7 +296,7 @@ public class Login_Activity extends AppCompatActivity {
                     for (DataSnapshot ds: snapshot.getChildren()){
                         model_Account account=ds.getValue(model_Account.class);
 
-                            if (userName.matches(account.getName()+"") && password.matches(account.getPassword()+"")){
+                            if (userName.equals(account.getName()+"") || password.equals(account.getPassword()+"")){
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 final Dialog dialog = new Dialog(Login_Activity.this);

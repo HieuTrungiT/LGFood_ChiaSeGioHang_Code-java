@@ -235,9 +235,9 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         Button Okay = dialog.findViewById(R.id.btn_okay);
         Button Cancel = dialog.findViewById(R.id.btn_cancel);
         //setText Item
-        Okay.setText("Update");
+        Okay.setText("Đồng ý");
         item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-        item_dialog_chucNang_txt_nameErro.setText("Would you want to update this product?");
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn sửa sản phẩm này không?");
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -327,9 +327,9 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         Button Okay = dialog.findViewById(R.id.btn_okay);
         Button Cancel = dialog.findViewById(R.id.btn_cancel);
         //setText Item
-        Okay.setText("Delete");
+        Okay.setText("Đồng ý");
         item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-        item_dialog_chucNang_txt_nameErro.setText("Would you want to delete this product?");
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn xóa sản phẩm này không?");
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -413,9 +413,9 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                             TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
                             Button Okay = dialog.findViewById(R.id.btn_okay);
                             Button Cancel = dialog.findViewById(R.id.btn_cancel);
-                            Okay.setText("Add");
+                            Okay.setText("Đồng ý");
                             item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-                            item_dialog_chucNang_txt_nameErro.setText("Would you want to add new product?");
+                            item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn thêm sản phẩm này không?");
                             Okay.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
