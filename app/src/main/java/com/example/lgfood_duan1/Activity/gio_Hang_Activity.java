@@ -252,7 +252,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
                         if (modelCartArrayList.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             mData = database.getReference("newCarts");
-                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                            String soLuong = modelCartArrayList.get(i).getSoLuong();
+                            modelAddToCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), Integer.valueOf(soLuong), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
                             mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(sanPham.getIdSanPham()).setValue(modelAddToCart);
                         }
                     }
@@ -291,8 +292,8 @@ public class gio_Hang_Activity extends AppCompatActivity {
             }
 
             @Override
-            public void onLongClickDelete(model_addToCart cart) {
-                onLongClickDeleteItem(cart);
+            public void onClickDelete(model_addToCart cart) {
+                onClickDeleteItem(cart);
             }
 
             @Override
@@ -360,12 +361,14 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     arrGioHang.setSoLuong(i + "");
                     mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
                     tinhTongGiaTienSanPham(cartArrayList);
-                    return;
+
                 } else {
                     arrGioHang.setSoLuong(i + "");
                 }
-
-
+                double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
+                double tong = 0;
+                tong = i * gia;
+                datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " +tong +"00VNĐ");
                 datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
 
 
@@ -386,7 +389,10 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 arrGioHang.setSoLuong(i + "");
                 mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHang.getIdGioHang()).child("soLuong").setValue(arrGioHang.getSoLuong());
                 tinhTongGiaTienSanPham(cartArrayList);
-
+                double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
+                double tong = 0;
+                tong = i * gia;
+                datNhanh_btn_themSanPhamVaoGioHang.setText("ADD TO CART " +tong +"00VNĐ");
                 datNhanh_tv_SoLuongSanpham.setText(arrGioHang.getSoLuong() + "");
             }
         });
@@ -410,7 +416,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     }
 
-    private void onLongClickDeleteItem(model_addToCart cart) {
+    private void onClickDeleteItem(model_addToCart cart) {
 
         new AlertDialog.Builder(gio_Hang_Activity.this)
                 .setTitle(getString(R.string.app_name))
@@ -430,7 +436,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
                         });
 
                         mData = database.getReference("GioHangs");
-                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).removeValue(new DatabaseReference.CompletionListener() {
+                        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
 
@@ -440,7 +446,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 })
 
                 .setNegativeButton("Cancel", null)
+
                 .show();
+
     }
 
     //    tinh tong gia tien san pham
@@ -500,12 +508,12 @@ public class gio_Hang_Activity extends AppCompatActivity {
             i = 1;
 
             modelCartArrayList.setSoLuong(i + "");
-            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
             tinhTongGiaTienSanPham(cartArrayList);
             return;
         } else {
             modelCartArrayList.setSoLuong(i + "");
-            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+            mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
             tinhTongGiaTienSanPham(cartArrayList);
         }
 
@@ -520,7 +528,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         i++;
 
         modelCartArrayList.setSoLuong(i + "");
-        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdGioHang()).setValue(modelCartArrayList);
+        mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(modelCartArrayList.getIdSanPham()).setValue(modelCartArrayList);
         tinhTongGiaTienSanPham(cartArrayList);
     }
 

@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -168,8 +173,7 @@ public class Login_Activity extends AppCompatActivity {
         }else if (password.isEmpty()) {
             Login_edt_password.setError("Mật khẩu đang trống!");
         }else{
-            mData= database
-                .getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            mData= database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Accounts");
             mData.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -179,10 +183,20 @@ public class Login_Activity extends AppCompatActivity {
 
                             if (userName.matches(account.getName()+"") && password.matches(account.getPassword()+"")){
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
-                                startActivity(intent);
 
-                        
+                                final Dialog dialog = new Dialog(Login_Activity.this);
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setContentView(R.layout.item_login);
+                                Handler handler=new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+                                        startActivity(intent);
+                                    }
+                                },3000);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                dialog.show();
                                 rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
                                 return;

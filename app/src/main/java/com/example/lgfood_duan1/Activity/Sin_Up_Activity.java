@@ -82,14 +82,14 @@ public class Sin_Up_Activity extends AppCompatActivity {
     model_Account model_account;
     FusedLocationProviderClient fusedLocationProviderClient;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +187,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                startActivity(new Intent(getApplicationContext(), Activity_SignInWithGoogle.class));
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -270,7 +270,10 @@ public class Sin_Up_Activity extends AppCompatActivity {
             signUp_edt_TenKH.setError("họ và tên khách hàng gồm 6 - 50 kí tự ");
         } else if (userName.length() < 6 || userName.length() > 50) {
             signUp_edt_teDangNhapKhachHang.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
-        } else if (!email.matches(emailPattern)) {
+        }else if (signUp_edt_teDangNhapKhachHang.getText().toString().contains(" ")){
+            signUp_edt_teDangNhapKhachHang.setError("Không được để khoảng trống!");
+        }
+        else if (!email.matches(emailPattern)) {
             SignUp_edt_gmail.setError("Sai định dạng Email");
         } else if (password.isEmpty() || password.length() < 6) {
             SignUp_edt_MatKhau.setError("Mật khẩu đang trống hoặc bé hơn 6 kí tự");
@@ -294,9 +297,6 @@ public class Sin_Up_Activity extends AppCompatActivity {
         }
     }
 
-    private void normalLogin() {
-
-    }
 
     private void anhXa() {
 

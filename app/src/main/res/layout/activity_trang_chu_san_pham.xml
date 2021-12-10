@@ -449,15 +449,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_marginBottom="55dp"
+                                android:layout_marginBottom="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintHorizontal_bias="0.473"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintVertical_bias="0.0" />
+
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -466,26 +467,26 @@
                 </LinearLayout>
             </ScrollView>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                tools:ignore="MissingClass">
+<!--            <FrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                tools:ignore="MissingClass">-->
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/trangChuSanPham_bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/nav_color"
-            android:background="@drawable/rounded"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/bottom_navigation">
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/trangChuSanPham_bottomNavigation"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:itemIconTint="@color/nav_color"-->
+<!--            android:background="@drawable/rounded"-->
+<!--            app:itemTextColor="@color/black"-->
+<!--            app:menu="@menu/bottom_navigation">-->
 
 
-                </com.google.android.material.bottomnavigation.BottomNavigationView>
+<!--                </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
-            </FrameLayout>
+<!--            </FrameLayout>-->
         </FrameLayout>
     </LinearLayout>
 

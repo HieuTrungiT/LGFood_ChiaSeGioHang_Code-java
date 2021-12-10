@@ -190,7 +190,7 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         // datetime hiện tại
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
         Date reaDate = new Date(System.currentTimeMillis());
-        arrHoaDon = new model_hoaDon(UUID.randomUUID().toString(), UUID.randomUUID().toString(), idUserSharePre, tongTien + 30.000, false, formatter.format(reaDate).toString());
+        arrHoaDon = new model_hoaDon(UUID.randomUUID().toString(), UUID.randomUUID().toString(), idUserSharePre, tongTien + 30.000, 0, formatter.format(reaDate).toString());
         dataHoaDonRef.child(listAccount.getIdDanhSachDonHang()).child(arrHoaDon.getIdHoaDon()).setValue(arrHoaDon);
         luuThongTinChiTietSanPhamHoaDon(arrHoaDon);
     }

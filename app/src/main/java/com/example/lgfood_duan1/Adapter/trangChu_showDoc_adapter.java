@@ -2,6 +2,7 @@ package com.example.lgfood_duan1.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +20,7 @@ import com.example.lgfood_duan1.Activity.trangChu_SanPham_Activity;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_yeuThich;
 import com.example.lgfood_duan1.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,65 +31,107 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import static com.example.lgfood_duan1.Activity.trangChu_SanPham_Activity.CHECK;
+
 // Trung
 public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_showDoc_adapter.ViewHolder> {
     private ArrayList<model_SanPham> arrListSanPham;
     private trangChu_SanPham_Activity context;
-    private DatabaseReference dataRef;
-    private FirebaseDatabase database;
-    private SharedPreferences sharedPreferences;
-    private ArrayList<model_yeuThich> yeuThichArrayList;
+    private ArrayList<model_yeuThich> arrListYeuThich;
+
     //thai: onClickItem
     private IClickListener mIClickListener;
+    //Firebase
+    private DatabaseReference dataRef;
+    private FirebaseDatabase database;
+    SharedPreferences sharedPreferences;
 
-    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, IClickListener mIClickListener) {
+    public trangChu_showDoc_adapter(ArrayList<model_SanPham> arrListSanPham, trangChu_SanPham_Activity context, ArrayList<model_yeuThich> arrListYeuThich, IClickListener mIClickListener) {
         this.arrListSanPham = arrListSanPham;
         this.context = context;
         this.mIClickListener = mIClickListener;
-
     }
 
-    public interface IClickListener{
+    public interface IClickListener {
         void onClickShowItem(model_SanPham sanPham);
 
-        void onClickHeart(model_SanPham sanPham);
+
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuttom_sanpham_trangchu_doc, parent, false);
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(trangChu_showDoc_adapter.ViewHolder holder, int position) {
-        model_SanPham sanPham=arrListSanPham.get(position);
-        Glide.with(context)
-                .load(arrListSanPham.get(position).getAnhSanPham())
-                .into(holder.ItemCuttomTrangChu_doc_imgShowAnhSanPham);
+        model_SanPham sanPham = arrListSanPham.get(position);
 
 
+        database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+        sharedPreferences = context.getSharedPreferences("USER_FILE", context.MODE_PRIVATE);
+        arrListYeuThich = new ArrayList<>();
+//         lấy danh sách yêu thích từ firebase về
 
-        holder.ItemCuttomTrangChu_doc_tv_xuatXu.setText(arrListSanPham.get(position).getXuatXuSanPham());
-        holder.ItemCuttomTrangChu_doc_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
-        holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
-        holder.ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich.setText("0");
-        dataRef=database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH",""));
+        dataRef = database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH", ""));
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for (DataSnapshot ds:snapshot.getChildren()){
-                    Toast.makeText(context, "chucmung3", Toast.LENGTH_SHORT).show();
-
-                    model_yeuThich yeuThich=ds.getValue(model_yeuThich.class);
-                    yeuThichArrayList.add(yeuThich);
-                    for (int i=0;i<yeuThichArrayList.size();i++){
-                        Toast.makeText(context, "chucmung2", Toast.LENGTH_SHORT).show();
-
-                        if (sanPham.getIdSanPham().equals(yeuThichArrayList.get(i).getIdSanPham())){
-                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.heart);
-
+                arrListYeuThich.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    model_yeuThich arrYeuThich = ds.getValue(model_yeuThich.class);
+                    arrListYeuThich.add(arrYeuThich);
+                }
+// khi đã có danh sách firebase bắt đầu kiểm tra coi trong danh sách sản phẩm có sản phẩm nào được chọn chưa
+                model_yeuThich arrYeuThich = null;
+                if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
+                    for (int i = 0; i < arrListYeuThich.size(); i++) {
+//                        nếu có rồi thì set vị trí arr yêu thích cho model
+                        if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
+                            holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
                         }
                     }
+                    //     Thêm sản phẩm vào yêu thích sản phẩm
+
+//                     bắt sự kiện thi tacsc động đến item tim
+                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int check = 0;
+                            int viTri = 0;
+//                code chuyển btn thành yêu thích
+                            try {
+//                                 kiểm tra nếu như trong danh sách yêu thích đã có 1 sản phẩm yêu thích giống vậy thì xóa đi
+//                                 nếu như đã có id sản phẩm trùng rồi thì xóa iton yêu thích
+                                for (int i = 0; i < arrListYeuThich.size(); i++) {
+                                    if (sanPham.getIdSanPham().equals(arrListYeuThich.get(i).getIdSanPham())) {
+                                        check++;
+                                        viTri = i;
+                                        context.onClicktHeartItemDelete(arrListYeuThich.get(i).getIdYeuThich(), position, true);
+                                        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
+                                        arrListYeuThich.remove(i);
+                                        context.setNotifyitem(position);
+                                    }
+                                }
+
+
+                                if (check == 0) {
+                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                                    context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
+//                                    context.setNotifyitem(viTri);
+                                }
+                            } catch (Exception e) {
+                                context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
+                                holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+//                                context.setNotifyitem(viTri);
+                            }
+
+                        }
+                    });
+//           String sss = arrListYeuThich.get(position).getIdYeuThich();
+//            Log.d("eee",sss+"");
                 }
             }
 
@@ -95,16 +140,96 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 
             }
         });
-//     Thêm sản phẩm vào yêu thích sản phẩm
-        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mIClickListener.onClickHeart(sanPham);
+//        dataRef.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//                Toast.makeText(context, "có thay đổi ", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+//                Toast.makeText(context, "có xóa ", Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
 
-            }
-        });
 
-//      Show chi tiết sản phẩm
+//        dataRef.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//                model_yeuThich arryeuThich = snapshot.getValue(model_yeuThich.class);
+//                for (int j = 0; j < arrListSanPham.size(); j++) {
+//                    if (arryeuThich.getIdSanPham().equals(arrListSanPham.get(j).getIdSanPham())) {
+//                        arrListYeuThich.add(arryeuThich);
+////                        context.setNotifyitem(j);
+//                        Toast.makeText(context, "có sửa đổi", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+//                model_yeuThich arryeuThich = snapshot.getValue(model_yeuThich.class);
+//                for (int i = 0; i < arrListYeuThich.size(); i++) {
+//                    if (arryeuThich.getIdYeuThich().equals(arrListYeuThich.get(i).getIdYeuThich())) {
+//                        for (int j = 0; j < arrListSanPham.size(); j++) {
+//                            if (arryeuThich.getIdSanPham().equals(arrListSanPham.get(j).getIdSanPham())) {
+//                                arrListYeuThich.remove(i);
+//                                context.setNotifyitem(j);
+//                                Toast.makeText(context, "có xóa", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+
+
+        Glide.with(context)
+                .load(arrListSanPham.get(position).getAnhSanPham())
+                .into(holder.ItemCuttomTrangChu_doc_imgShowAnhSanPham);
+
+
+        holder.ItemCuttomTrangChu_doc_tv_xuatXu.setText(arrListSanPham.get(position).getXuatXuSanPham());
+        holder.ItemCuttomTrangChu_doc_tv_tenSanPham.setText(arrListSanPham.get(position).getTenSanPham());
+        holder.ItemCuttomTrangChu_doc_tv_giaSanPham.setText(Double.parseDouble(arrListSanPham.get(position).getGiaBanSanPham() + "") + "00đ");
+        holder.ItemCuttomTrangChu_doc_tv_soLuongSanPhamMuaYeuThich.setText("0");
+
+
+////      Show chi tiết sản phẩm
         holder.ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,13 +242,15 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
     public int getItemCount() {
         if (arrListSanPham != null) {
             return arrListSanPham.size();
+
         }
         return 0;
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //        gán kiểu dữ liệu
-         ImageView
+        ImageView
                 ItemCuttomTrangChu_doc_img_btn_chonYeuThich,
                 ItemCuttomTrangChu_doc_imgShowAnhSanPham;
         LinearLayout ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham;
@@ -137,10 +264,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
         public ViewHolder(View itemView) {
             super(itemView);
 //            ánh xạ\
-//            ImgeView
-            database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
-            sharedPreferences=itemView.getContext().getSharedPreferences("USER_FILE",Context.MODE_PRIVATE);
-            yeuThichArrayList=new ArrayList<>();
+
             ItemCuttomTrangChu_doc_imgShowAnhSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_imgShowAnhSanPham);
             ItemCuttomTrangChu_doc_llout_btn_showChiTietSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_doc_llout_btn_showChiTietSanPham);
             ItemCuttomTrangChu_doc_img_btn_chonYeuThich = itemView.findViewById(R.id.itemCuttomTrangChu_doc_img_btn_chonYeuThich);
