@@ -193,14 +193,8 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
 
     // Trung lưu thong tin hóa đơn khi xác nhận
     private void luuThongTinHoaDon() {
-//        arrListHoaDon
-        dataHoaDonRef = database.getReference("HoaDon");
-        // datetime hiện tại
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
-        Date reaDate = new Date(System.currentTimeMillis());
-        arrHoaDon = new model_hoaDon(UUID.randomUUID().toString(), UUID.randomUUID().toString(), idUserSharePre, tongTien + 30.000, 0, formatter.format(reaDate).toString());
-        luuThongTinChiTietSanPhamHoaDon(arrHoaDon);
-        Dialog dialog=new Dialog(Xac_Nhan_DH_Activity.this);
+
+        Dialog dialog = new Dialog(Xac_Nhan_DH_Activity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.item_dialog_chucnang_login);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -210,8 +204,8 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         dialog.setCancelable(false); //Optional
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
 
-        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        ImageView item_dialog_chucNang_img_imgErro = dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro = dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
         Button Okay = dialog.findViewById(R.id.btn_okay);
         Button Cancel = dialog.findViewById(R.id.btn_cancel);
         //setText Item
@@ -221,21 +215,27 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog diaLogDoc=new Dialog(Xac_Nhan_DH_Activity.this);
+                Dialog diaLogDoc = new Dialog(Xac_Nhan_DH_Activity.this);
                 diaLogDoc.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 diaLogDoc.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 diaLogDoc.setCancelable(false); //Optional
                 diaLogDoc.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
                 diaLogDoc.setContentView(R.layout.activity_add_to_cart_anim);
-
-                Handler handler=new Handler();
+//        arrListHoaDon;
+                dataHoaDonRef = database.getReference("HoaDon");
+                // datetime hiện tại
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'lúc' HH:mm:ss z");
+                Date reaDate = new Date(System.currentTimeMillis());
+                arrHoaDon = new model_hoaDon(UUID.randomUUID().toString(), UUID.randomUUID().toString(), idUserSharePre, tongTien + 30.000, 0, formatter.format(reaDate).toString());
+                luuThongTinChiTietSanPhamHoaDon(arrHoaDon);
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         diaLogDoc.dismiss();
-                        startActivity(new Intent(Xac_Nhan_DH_Activity.this,trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(Xac_Nhan_DH_Activity.this, trangChu_SanPham_Activity.class));
                     }
-                },2300);
+                }, 2300);
                 diaLogDoc.show();
                 dialog.dismiss();
                 dataHoaDonRef.child(listAccount.getIdDanhSachDonHang()).child(arrHoaDon.getIdHoaDon()).setValue(arrHoaDon);
@@ -250,14 +250,15 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         });
         dialog.show();
     }
-//Trung lưu danh sách sản phẩm hóa đơn
+
+    //Trung lưu danh sách sản phẩm hóa đơn
     private void luuThongTinChiTietSanPhamHoaDon(model_hoaDon arrHoaDon) {
         //        arrListHoaDon
         dataCTSPHoaDonRef = database.getReference("ChiTietHoaDon");
         for (int i = 0; i < arrListGioHangs.size(); i++) {
             for (int j = 0; j < arrListNewCarts.size(); j++) {
                 if (arrListGioHangs.get(i).getIdSanPham().equals(arrListNewCarts.get(j).getIdSp())) {
-                    arrCTSPHoaDon = new model_chiTietSanPhamHoaDon(UUID.randomUUID().toString(), arrListGioHangs.get(i).getIdSanPham(), arrListGioHangs.get(i).getSoLuong(),arrListNewCarts.get(j).getGiaBanSp() );
+                    arrCTSPHoaDon = new model_chiTietSanPhamHoaDon(UUID.randomUUID().toString(), arrListGioHangs.get(i).getIdSanPham(), arrListGioHangs.get(i).getSoLuong(), arrListNewCarts.get(j).getGiaBanSp());
                     dataCTSPHoaDonRef.child(arrHoaDon.getIdChiTietDonHang()).child(arrCTSPHoaDon.getIdChiTietHoaDon()).setValue(arrCTSPHoaDon);
                 }
             }

@@ -119,6 +119,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     private FirebaseDatabase database;
     // adapter
     chiaSeGioHang_showDoc_adapter seGioHang_showDoc_adapter;
+    int lever = 20;
 
     @Override
     protected void onStart() {
@@ -408,10 +409,23 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
         getDataFirebaseViTri();
 
+        ChiaSeGioHang_img_phongTo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                googleMap.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
+        ChiaSeGioHang_img_thuNho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                googleMap.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+
         if (arrListViTri != null) {
             for (int i = 0; i < arrayList.size(); i++) {
                 int finalI = i;
-
 
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
@@ -444,7 +458,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                     //                MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i));
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arrayList.get(i), 20));
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arrayList.get(i), 25));
                     String nameUsser = arrListViTri.get(finalI).getNameUser().toUpperCase();
                     String key = arrListViTri.get(finalI).getKey();
                     MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i))
@@ -456,7 +470,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                             try {
 //                                nếu như có user thì gửi idgiohaang
                                 nhanDuLieuAdapterItem(arrListViTri.get(finalI).getIdGioHangTam());
-                            }catch (Exception e){
+                            } catch (Exception e) {
 //                                nếu như không có bắt lỗi tắt item và thông báo
                                 Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
                                 ChiaSeGioHang_item_crview.setAnimation(animation);
@@ -469,6 +483,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
                         }
                     });
+
                     googleMap.addMarker(markerOptions);
                 } catch (Exception e) {
                     Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();

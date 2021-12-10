@@ -11,7 +11,8 @@
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
-
+        app:itemIconPadding="10dp"
+        app:itemIconTint="@color/white"
         android:id="@+id/trangChuSanPham_nav_drawer"
         android:layout_width="150dp"
         android:layout_height="match_parent"
@@ -192,11 +193,11 @@
 
 
                     <ImageView
-                        android:id="@+id/trangChuSanPham_img_btn_thongBao"
+                        android:id="@+id/trangChuSanPham_img_btnGioHang"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/ic_thongbao"
+                        android:layout_margin="3dp"
+                        android:src="@drawable/ic_giohang2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView4"
                         app:layout_constraintTop_toTopOf="parent" />

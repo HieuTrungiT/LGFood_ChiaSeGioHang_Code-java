@@ -82,7 +82,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             TrangChuSanPham_nav_drawer;
     private ImageView
             TrangChuSanPham_img_showMenu,
-            TrangChuSanPham_img_btn_thongBao,
+            TrangChuSanPham_img_btnGioHang,
             TrangChuSanPham_img_btn_kieuLoaiSanPham,
             TrangChuSanPham_img_showLoaiCoffee,
             TrangChuSanPham_img_showLoaiThaoDuoc,
@@ -117,7 +117,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     String idGioHangShare;
     //    sp Slider\
     SliderView sliderView;
-    int[] images_slider = {R.drawable.img_panner, R.drawable.img_panner, R.drawable.img_panner};
+    int[] images_slider = {R.drawable.img_panner, R.drawable.banner1, R.drawable.baner2};
 
     //Firebase
     private DatabaseReference dataRef, dataAccoutRef;
@@ -290,6 +290,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
+
     }
 
     //Trung Tìm kiếm loại
@@ -308,6 +309,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             showListProduc_Vartical(arrListSanPhamTimKiem);
         }
 
+
     }
 
     //Trung Tìm kiếm sản phẩm
@@ -321,7 +323,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     String giaTriTimKiem = TrangChuSanPham_edt_timKiemSanPham.getText().toString();
                     if (giaTriTimKiem.isEmpty()) {
                         TrangChuSanPham_edt_timKiemSanPham.setText("");
-//                        showListProduc_Vartical(arrListSanPham);
+                        showListProduc_Vartical(arrListSanPham);
                         TrangChuSanPham_tv_loai.setText("/" + arrListSanPham.size() + "SP/TÊN");
 
                     } else {
@@ -338,7 +340,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     String giaTriTimKiem = TrangChuSanPham_edt_timKiemSanPham.getText().toString();
                     if (giaTriTimKiem.isEmpty()) {
                         TrangChuSanPham_edt_timKiemSanPham.setText("");
-//                        showListProduc_Vartical(arrListSanPham);
+                        showListProduc_Vartical(arrListSanPham);
                         Toast.makeText(trangChu_SanPham_Activity.this, arrListYeuThich + "", Toast.LENGTH_SHORT).show();
 
                         TrangChuSanPham_tv_loai.setText("/" + arrListSanPham.size() + "SP/GIÁ");
@@ -373,6 +375,14 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
+//        mở giỏ hàng
+        TrangChuSanPham_img_btnGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(trangChu_SanPham_Activity.this, gio_Hang_Activity.class);
+                startActivity(intent);
+            }
+        });
 //        bắt sự kiện tìm kiếm
         TrangChuSanPham_edt_timKiemSanPham.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -1011,6 +1021,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     arrCart = child.getValue(model_Cart.class);
                     arrListCart.add(arrCart);
                 }
+                TrangChuSanPham_tv_soLuongThongBao.setText(arrListCart.size() + "");
             }
 
             @Override
@@ -1037,7 +1048,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //      ImageView
         TrangChuSanPham_img_showMenu = findViewById(R.id.trangChuSanPham_img_showMenu);
-        TrangChuSanPham_img_btn_thongBao = findViewById(R.id.trangChuSanPham_img_btn_thongBao);
+        TrangChuSanPham_img_btnGioHang = findViewById(R.id.trangChuSanPham_img_btnGioHang);
         TrangChuSanPham_img_btn_kieuLoaiSanPham = findViewById(R.id.trangChuSanPham_img_btn_kieuLoaiSanPham);
         TrangChuSanPham_img_showLoaiCoffee = findViewById(R.id.trangChuSanPham_img_showLoaiCoffee);
         TrangChuSanPham_img_showLoaiThaoDuoc = findViewById(R.id.trangChuSanPham_img_showLoaiThaoDuoc);

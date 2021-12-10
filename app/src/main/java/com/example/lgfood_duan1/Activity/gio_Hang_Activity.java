@@ -109,6 +109,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
     protected void onStart() {
         dataRef = database.getReference("location").child(idViTri);
         dataRef.child("tinhTrang").setValue(false);
+        getLocation();
         super.onStart();
     }
 
@@ -451,7 +452,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
 //                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {
-        mData = database.getReference("newCarts");
 
         final Dialog dialogXoaItem = new Dialog(gio_Hang_Activity.this);
         dialogXoaItem.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -473,6 +473,7 @@ public class gio_Hang_Activity extends AppCompatActivity {
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mData = database.getReference("newCarts");
 
                 mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
                     @Override
@@ -484,12 +485,14 @@ public class gio_Hang_Activity extends AppCompatActivity {
                 });
 
                 mData = database.getReference("GioHangs");
-                mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(cart.getIdSp()).removeValue(new DatabaseReference.CompletionListener() {
+                mData.child(sharedPreferences.getString("IDGIOHANG", "")).child(arrGioHangs.getIdGioHang()).removeValue(new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
 
                     }
                 });
+
+                cartAdapter.notifyItemChanged(viTri);
                 dialogXoaItem.dismiss();
             }
         });

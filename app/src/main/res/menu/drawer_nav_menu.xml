@@ -17,6 +17,7 @@
                     <item
                         android:id="@+id/drawer_nav_cart"
                         android:title="Giỏ hàng"
+
                         android:icon="@drawable/ic_giohang_tim"
                         />
                     <item  android:id="@+id/drawer_nav_gioHang"

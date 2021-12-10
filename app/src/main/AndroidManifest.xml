@@ -30,14 +30,16 @@
         <activity android:name=".Activity.OTP" />
         <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
         <activity android:name=".Activity.trangChu_SanPham_Activity">
+
+        </activity>
+        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
+        <activity android:name=".Activity.Login_Activity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
-        <activity android:name=".Activity.Login_Activity" />
         <activity android:name=".Activity.Nhap_SDT" />
         <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />
