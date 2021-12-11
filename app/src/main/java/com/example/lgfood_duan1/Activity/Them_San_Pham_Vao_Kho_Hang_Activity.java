@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 
@@ -112,7 +113,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     double BdGiaNhapSanPham, BdGiaBanSanPham;
     String BdIdsanPham, BdMoTaSanPham, BdTenSanPham, BdNgaySanXuatSanPham, BdXuatXuSanPham, BdLoaiSanPham, BdTinhTrangSanPham, BdAnhSanPham, BdNgayNhapSanPham;
     Dialog dialog;
-
+    Dialog dialogLoading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,13 +243,24 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                if (!(full == null)) {
+
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!(full == null)) {
 //                    nếu như có ảnh được chọn
-                    luuSanPham_AnhUptate();
-                } else {
+                            luuSanPham_AnhUptate();
+                            finish();
+                        } else {
 //                    nếu như không có ảnh được chọn
-                    suaSanPhamKho();
-                }
+                            suaSanPhamKho();
+                            finish();
+                        }
+                        dialogLoading.dismiss();
+                    }
+                },3000);
+                dialogLoading.show();
             }
         });
 
@@ -333,8 +345,16 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xoaSanPhamKho();
-                finish();
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        xoaSanPhamKho();
+                        finish();
+                        dialogLoading.dismiss();
+                    }
+                },3000);
+                dialogLoading.show();
                 dialog.dismiss();
             }
         });
@@ -419,8 +439,16 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                             Okay.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
-                                    finish();
+                                    Handler handler=new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
+                                            finish();
+                                            dialogLoading.dismiss();
+                                        }
+                                    },3000);
+                                    dialogLoading.show();
                                     dialog.dismiss();
                                 }
                             });
@@ -672,6 +700,11 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(false); //Optional
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        dialogLoading = new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogLoading.setContentView(R.layout.item_login);
+        dialogLoading.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //    Firebase
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");

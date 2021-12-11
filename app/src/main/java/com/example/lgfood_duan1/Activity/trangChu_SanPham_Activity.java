@@ -120,6 +120,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.banner1, R.drawable.baner2};
     Dialog dialogLoading;
+    Dialog diaLog;
     //Firebase
     private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
@@ -145,6 +146,20 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     SharedPreferences sharedPreferences;
     public static boolean CHECK = false;
     String id;
+
+    @Override
+    protected void onStart() {
+
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                diaLog.dismiss();
+            }
+        },3000);
+        diaLog.show();
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,59 +190,116 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         getDataFirebaseCart();
         String idProduct = sanPham.getIdSanPham();
         Log.d("eee", "idprduc" + idProduct);
-        dataRef = database.getReference("Accounts").child(idSharePre);
-        dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean check = false;
-                String idCart = "";
-                int viTri = 0;
-                dataRef = database.getReference("newCarts");
-                model_Account account = snapshot.getValue(model_Account.class);
-                idGioHang = String.valueOf(account.getIdGioHang());
-                UUID uuid = UUID.randomUUID();
-                String idProduct = sanPham.getIdSanPham();
-                String idChiTietSanPham = String.valueOf(uuid);
-                model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
-                dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
+        if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
+            ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+            TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+            Button Okay = dialogLoading.findViewById(R.id.btn_okay);
+            Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
+            //setText Item
+            Okay.setText("Đăng nhập");
+            item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+            item_dialog_chucNang_txt_nameErro.setText("Bạn chưa đăng nhập vào ứng dụng này?");
+            Okay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                            Toast.makeText(context.getApplicationContext(), "ban chua login", Toast.LENGTH_SHORT).show();
+
+                    Handler handler=new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(getApplicationContext(), Login_Activity.class);
+                            startActivity(intent);
+                            diaLog.dismiss();
+                        }
+                    },3000);
+                    diaLog.show();
+                    dialogLoading.dismiss();
+                }
+            });
+
+            Cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogLoading.dismiss();
+                }
+            });
+            dialogLoading.show();
+        } else {
+            dataRef = database.getReference("Accounts").child(idSharePre);
+            dataRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    final Dialog dialogOnStar = new Dialog(trangChu_SanPham_Activity.this);
+                    dialogOnStar.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialogOnStar.setContentView(R.layout.item_login);
+                    Handler handler=new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialogAddNgang = new Dialog(trangChu_SanPham_Activity.this);
+                            dialogAddNgang.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialogAddNgang.setContentView(R.layout.item_login);
+                            dialogAddNgang.setContentView(R.layout.activity_add_to_cart_anim);
+                            dialogAddNgang.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    boolean check = false;
+                                    String idCart = "";
+                                    int viTri = 0;
+                                    dataRef = database.getReference("newCarts");
+                                    model_Account account = snapshot.getValue(model_Account.class);
+                                    idGioHang = String.valueOf(account.getIdGioHang());
+                                    UUID uuid = UUID.randomUUID();
+                                    String idProduct = sanPham.getIdSanPham();
+                                    String idChiTietSanPham = String.valueOf(uuid);
+                                    model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                                    dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
 
 //                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
 
-                dataRef = database.getReference("GioHangs").child(idGioHang);
-                for (int j = 0; j < arrListCart.size(); j++) {
-                    if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
-                        check = true;
-                        idCart = arrListCart.get(j).getIdGioHang();
-                        viTri = j;
-                    }
+                                    dataRef = database.getReference("GioHangs").child(idGioHang);
+                                    for (int j = 0; j < arrListCart.size(); j++) {
+                                        if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
+                                            check = true;
+                                            idCart = arrListCart.get(j).getIdGioHang();
+                                            viTri = j;
+                                        }
+
+                                    }
+
+
+                                    if (check == true) {
+                                        int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                                        dataRef.child(idCart).child("soLuong").setValue(tong + "");
+
+                                    } else {
+                                        model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
+                                        dataRef.child(cart.getIdGioHang()).setValue(cart);
+
+                                    }
+                                    dialogAddNgang.dismiss();
+                                }
+                            }, 2300);
+                            dialogAddNgang.show();
+                            dialogOnStar.dismiss();
+                        }
+                    },3000);
+                    dialogOnStar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialogOnStar.show();
 
                 }
 
-
-                if (check == true) {
-                    int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
-                    dataRef.child(idCart).child("soLuong").setValue(tong + "");
-
-                } else {
-                    model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
-                    dataRef.child(cart.getIdGioHang()).setValue(cart);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-//                .setContentView(R.layout.activity_add_to_cart_anim);
-//                Handler handler = new Handler();
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        dialog.dismiss();
-//                    }
-//                }, 2300);
-            }
+            });
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     //thai
@@ -1150,6 +1222,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialogLoading.setCancelable(false); //Optional
         dialogLoading.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        diaLog = new Dialog(trangChu_SanPham_Activity.this);
+        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        diaLog.setContentView(R.layout.item_login);
+        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
