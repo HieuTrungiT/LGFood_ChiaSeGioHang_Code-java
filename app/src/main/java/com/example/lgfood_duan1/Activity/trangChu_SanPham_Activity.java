@@ -857,7 +857,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     Okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(trangChu_SanPham_Activity.this, "ban chua login", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
                             startActivity(intent);
                             dialogLoading.dismiss();
