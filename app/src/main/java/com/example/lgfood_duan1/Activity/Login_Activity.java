@@ -262,6 +262,7 @@ private static final String TAG = "GoogleActivity";
                                     public void run() {
                                         Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
                                         startActivity(intent);
+
                                     }
                                 },3000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -296,8 +297,9 @@ private static final String TAG = "GoogleActivity";
                     for (DataSnapshot ds: snapshot.getChildren()){
                         model_Account account=ds.getValue(model_Account.class);
 
-                            if (userName.equals(account.getName()+"") || password.equals(account.getPassword()+"")){
+                            if (userName.equals(account.getName()+"") && password.equals(account.getPassword()+"")){
                                 Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
                                 final Dialog dialog = new Dialog(Login_Activity.this);
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -312,7 +314,6 @@ private static final String TAG = "GoogleActivity";
                                 },3000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
                                 return;
                             }else{

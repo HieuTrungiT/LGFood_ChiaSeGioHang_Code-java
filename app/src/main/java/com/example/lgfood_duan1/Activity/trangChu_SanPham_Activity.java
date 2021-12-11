@@ -119,7 +119,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //    sp Slider\
     SliderView sliderView;
     int[] images_slider = {R.drawable.img_panner, R.drawable.banner1, R.drawable.baner2};
-    Dialog dialog;
+    Dialog dialogLoading;
     //Firebase
     private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
@@ -214,13 +214,13 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
                 }
 //                .setContentView(R.layout.activity_add_to_cart_anim);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-//                        dialog.dismiss();
-                    }
-                }, 2300);
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        dialog.dismiss();
+//                    }
+//                }, 2300);
             }
 
             @Override
@@ -812,10 +812,10 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
             case R.id.drawer_nav_profile:
                 if (shareAcout.getString("IDUSRE", "").isEmpty()) {
-                    ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                    TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
-                    Button Okay = dialog.findViewById(R.id.btn_okay);
-                    Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                    ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                    TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Button Okay = dialogLoading.findViewById(R.id.btn_okay);
+                    Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
                     //setText Item
                     Okay.setText("Đăng nhập");
                     item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
@@ -823,17 +823,17 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     Okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
+                            dialogLoading.dismiss();
                         }
                     });
 
                     Cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
+                            dialogLoading.dismiss();
                         }
                     });
-                    dialog.show();
+                    dialogLoading.show();
                 } else {
                     Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
                     startActivity(intent3);
@@ -842,10 +842,10 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
 
             case R.id.drawer_nav_logout:
-                ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
-                Button Okay = dialog.findViewById(R.id.btn_okay);
-                Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                Button Okay = dialogLoading.findViewById(R.id.btn_okay);
+                Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
                 //setText Item
                 Okay.setText("Đăng xuất");
                 item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
@@ -853,7 +853,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 Okay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
                         final Dialog dialog1 = new Dialog(trangChu_SanPham_Activity.this);
                         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog1.setContentView(R.layout.item_login);
@@ -876,6 +875,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                                 startActivity(intent2);
                                 dialog1.dismiss();
 
+
                             }
                         },3000);
                         dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -886,10 +886,10 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 Cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.dismiss();
+                        dialogLoading.dismiss();
                     }
                 });
-                dialog.show();
+                dialogLoading.show();
 
 
                 break;
@@ -923,9 +923,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     private void showItemChiTietSanPham(model_SanPham sanPham) {
         anhXa();
         getDataFirebaseCart();
-        dialog = new Dialog(this);
+        Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        dialog.setContentView(R.layout.layout_dat_nhanh);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
@@ -1097,15 +1097,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //     Ánh xạ
     private void anhXa() {
 //        SharedPreferences
-        dialog=new Dialog(trangChu_SanPham_Activity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        dialogLoading=new Dialog(trangChu_SanPham_Activity.this);
+        dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogLoading.setContentView(R.layout.item_dialog_chucnang_login);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+            dialogLoading.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
         }
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(false); //Optional
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+        dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogLoading.setCancelable(false); //Optional
+        dialogLoading.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
 
         sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
