@@ -754,10 +754,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 CircleImageView trangChuSanPham_img_logo = (CircleImageView) TrangChuSanPham_nav_drawer.getHeaderView(0).findViewById(R.id.trangChuSanPham_img_logo);
                 trangChuSanPham_img_logo.setImageResource(R.drawable.man);
                 model_Account account = snapshot.getValue(model_Account.class);
-                if (!account.getAnhKhachHang().equals("")) {
-                    Glide.with(trangChu_SanPham_Activity.this)
-                            .load(account.getAnhKhachHang())
-                            .into(trangChuSanPham_img_logo);
+                try {
+                    if (!account.getAnhKhachHang().equals("")) {
+                        Glide.with(trangChu_SanPham_Activity.this)
+                                .load(account.getAnhKhachHang())
+                                .into(trangChuSanPham_img_logo);
+                    }
+
+                }catch (Exception e){
+                    Toast.makeText(trangChu_SanPham_Activity.this, "Bạn chưa đăng nhâp vui lòng đăng nhâpk", Toast.LENGTH_SHORT).show();
                 }
 
             }

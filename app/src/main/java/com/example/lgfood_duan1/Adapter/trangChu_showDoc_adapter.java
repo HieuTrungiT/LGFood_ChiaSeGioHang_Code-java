@@ -85,53 +85,59 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                     arrListYeuThich.add(arrYeuThich);
                 }
 // khi đã có danh sách firebase bắt đầu kiểm tra coi trong danh sách sản phẩm có sản phẩm nào được chọn chưa
-                model_yeuThich arrYeuThich = null;
-                if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
-                    for (int i = 0; i < arrListYeuThich.size(); i++) {
+
+                try {
+
+                    model_yeuThich arrYeuThich = null;
+                    if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
+                        for (int i = 0; i < arrListYeuThich.size(); i++) {
 //                        nếu có rồi thì set vị trí arr yêu thích cho model
-                        if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
-                            holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                            if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
+                                holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                            }
                         }
-                    }
-                    //     Thêm sản phẩm vào yêu thích sản phẩm
+                        //     Thêm sản phẩm vào yêu thích sản phẩm
 
 //                     bắt sự kiện thi tacsc động đến item tim
-                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int check = 0;
-                            int viTri = 0;
+                        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                int check = 0;
+                                int viTri = 0;
 //                code chuyển btn thành yêu thích
-                            try {
+                                try {
 //                                 kiểm tra nếu như trong danh sách yêu thích đã có 1 sản phẩm yêu thích giống vậy thì xóa đi
 //                                 nếu như đã có id sản phẩm trùng rồi thì xóa iton yêu thích
-                                for (int i = 0; i < arrListYeuThich.size(); i++) {
-                                    if (sanPham.getIdSanPham().equals(arrListYeuThich.get(i).getIdSanPham())) {
-                                        check++;
-                                        viTri = i;
-                                        context.onClicktHeartItemDelete(arrListYeuThich.get(i).getIdYeuThich(), position, true);
-                                        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
-                                        arrListYeuThich.remove(i);
-                                        context.setNotifyitem(position);
+                                    for (int i = 0; i < arrListYeuThich.size(); i++) {
+                                        if (sanPham.getIdSanPham().equals(arrListYeuThich.get(i).getIdSanPham())) {
+                                            check++;
+                                            viTri = i;
+                                            context.onClicktHeartItemDelete(arrListYeuThich.get(i).getIdYeuThich(), position, true);
+                                            holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
+                                            arrListYeuThich.remove(i);
+                                            context.setNotifyitem(position);
+                                        }
                                     }
-                                }
 
 
-                                if (check == 0) {
-                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
-                                    context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
+                                    if (check == 0) {
+                                        holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                                        context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
 //                                    context.setNotifyitem(viTri);
-                                }
-                            } catch (Exception e) {
-                                context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
-                                holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                                    }
+                                } catch (Exception e) {
+                                    context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
+                                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
 //                                context.setNotifyitem(viTri);
-                            }
+                                }
 
-                        }
-                    });
+                            }
+                        });
 //           String sss = arrListYeuThich.get(position).getIdYeuThich();
 //            Log.d("eee",sss+"");
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(context, "Bạn chưa đăng nhâp nên không thể dùng chức năng này", Toast.LENGTH_SHORT).show();
                 }
             }
 
