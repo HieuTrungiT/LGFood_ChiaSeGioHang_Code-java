@@ -84,7 +84,9 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                     model_yeuThich arrYeuThich = ds.getValue(model_yeuThich.class);
                     arrListYeuThich.add(arrYeuThich);
                 }
+
 // khi đã có danh sách firebase bắt đầu kiểm tra coi trong danh sách sản phẩm có sản phẩm nào được chọn chưa
+            try {
                 model_yeuThich arrYeuThich = null;
                 if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
                     for (int i = 0; i < arrListYeuThich.size(); i++) {
@@ -93,15 +95,23 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                             holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
                         }
                     }
-                    //     Thêm sản phẩm vào yêu thích sản phẩm
+                }
+            }catch (Exception e){
+
+            }
+
+                //     Thêm sản phẩm vào yêu thích sản phẩm
 
 //                     bắt sự kiện thi tacsc động đến item tim
-                    holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int check = 0;
-                            int viTri = 0;
+                holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int check = 0;
+                        int viTri = 0;
 //                code chuyển btn thành yêu thích
+                        if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
+                            Toast.makeText(context, "Bạn chưa đăng nhập!!!", Toast.LENGTH_SHORT).show();
+                        } else {
                             try {
 //                                 kiểm tra nếu như trong danh sách yêu thích đã có 1 sản phẩm yêu thích giống vậy thì xóa đi
 //                                 nếu như đã có id sản phẩm trùng rồi thì xóa iton yêu thích
@@ -128,11 +138,14 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 //                                context.setNotifyitem(viTri);
                             }
 
+
                         }
-                    });
+
+                    }
+                });
 //           String sss = arrListYeuThich.get(position).getIdYeuThich();
 //            Log.d("eee",sss+"");
-                }
+
             }
 
             @Override
@@ -140,6 +153,8 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
 
             }
         });
+
+
         Glide.with(context)
                 .load(arrListSanPham.get(position).getAnhSanPham())
                 .into(holder.ItemCuttomTrangChu_doc_imgShowAnhSanPham);

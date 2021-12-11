@@ -380,8 +380,14 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_btnGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trangChu_SanPham_Activity.this, gio_Hang_Activity.class);
-                startActivity(intent);
+                if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
+                    Toast.makeText(trangChu_SanPham_Activity.this, "Bạn chưa đăng nhập!!!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, gio_Hang_Activity.class);
+                    startActivity(intent);
+                }
             }
         });
 //        bắt sự kiện tìm kiếm
@@ -740,34 +746,44 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         Menu menu = TrangChuSanPham_nav_drawer.getMenu();
 //        menu.findItem(R.id.drawer_nav_profile).setVisible(false);
+//        try {
 
         if (shareAcout.getString("IDUSRE", "").isEmpty()) {
             menu.findItem(R.id.drawer_nav_logout).setVisible(false);
         } else {
             menu.findItem(R.id.drawer_nav_login).setVisible(false);
         }
-        dataRef = database.getReference("Accounts").child(idSharePre);
-        dataRef.addValueEventListener(new ValueEventListener() {
+        if (!shareAcout.equals("")) {
+            dataRef = database.getReference("Accounts").child(idSharePre);
+            dataRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    CircleImageView trangChuSanPham_img_logo = (CircleImageView) TrangChuSanPham_nav_drawer.getHeaderView(0).findViewById(R.id.trangChuSanPham_img_logo);
+                    trangChuSanPham_img_logo.setImageResource(R.drawable.man);
+                    model_Account account = snapshot.getValue(model_Account.class);
+                    try {
+                        if (!account.getAnhKhachHang().equals("")) {
+                            Glide.with(trangChu_SanPham_Activity.this)
+                                    .load(account.getAnhKhachHang())
+                                    .into(trangChuSanPham_img_logo);
+                        }
+                    } catch (Exception e) {
 
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                CircleImageView trangChuSanPham_img_logo = (CircleImageView) TrangChuSanPham_nav_drawer.getHeaderView(0).findViewById(R.id.trangChuSanPham_img_logo);
-                trangChuSanPham_img_logo.setImageResource(R.drawable.man);
-                model_Account account = snapshot.getValue(model_Account.class);
-                if (!account.getAnhKhachHang().equals("")) {
-                    Glide.with(trangChu_SanPham_Activity.this)
-                            .load(account.getAnhKhachHang())
-                            .into(trangChuSanPham_img_logo);
+                    }
+
+
                 }
 
-            }
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                }
+            });
+        }
+//        } catch (Exception e) {
 
-            }
-        });
-
+//
+//        }
         TrangChuSanPham_img_showMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -794,24 +810,42 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
 
             case R.id.drawer_nav_like:
-                startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getApplicationContext(), favorite_Activity.class));
+                }
                 break;
 
             case R.id.drawer_nav_cart:
-                startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getApplicationContext(), gio_Hang_Activity.class));
+                }
                 break;
 
             case R.id.drawer_nav_gioHang:
-                startActivity(new Intent(getApplicationContext(), donHangUser_Activity.class));
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getApplicationContext(), donHangUser_Activity.class));
+                }
+                //item profile
                 break;
-
-            //item profile
 
             case R.id.drawer_nav_login:
                 startActivity(new Intent(getApplicationContext(), Login_Activity.class));
                 break;
             case R.id.drawer_nav_profile:
                 if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+
                     ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
                     TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
                     Button Okay = dialogLoading.findViewById(R.id.btn_okay);
@@ -823,6 +857,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     Okay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Toast.makeText(this, "ban chua login", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                            startActivity(intent);
                             dialogLoading.dismiss();
                         }
                     });
@@ -834,6 +871,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         }
                     });
                     dialogLoading.show();
+
+                   
+
                 } else {
                     Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
                     startActivity(intent3);
@@ -1011,58 +1051,62 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             public void onClick(View v) {
                 String idProduct = sanPham.getIdSanPham();
                 Log.d("eee", "idprduc" + idProduct);
-                dataRef = database.getReference("Accounts").child(idSharePre);
-                dataRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        boolean check = false;
-                        String idCart = "";
-                        int viTri = 0;
-                        dataRef = database.getReference("newCarts");
-                        model_Account account = snapshot.getValue(model_Account.class);
-                        idGioHang = String.valueOf(account.getIdGioHang());
-                        UUID uuid = UUID.randomUUID();
-                        String idProduct = sanPham.getIdSanPham();
-                        String idChiTietSanPham = String.valueOf(uuid);
-                        model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
-                        dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
+                if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
+                    Toast.makeText(trangChu_SanPham_Activity.this, "Bạn chưa đăng nhập!!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dataRef = database.getReference("Accounts").child(idSharePre);
+                    dataRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            boolean check = false;
+                            String idCart = "";
+                            int viTri = 0;
+                            dataRef = database.getReference("newCarts");
+                            model_Account account = snapshot.getValue(model_Account.class);
+                            idGioHang = String.valueOf(account.getIdGioHang());
+                            UUID uuid = UUID.randomUUID();
+                            String idProduct = sanPham.getIdSanPham();
+                            String idChiTietSanPham = String.valueOf(uuid);
+                            model_addToCart newCart = new model_addToCart(sanPham.getIdSanPham(), sanPham.getMoTaSanPham(), sanPham.getTenSanPham(), sanPham.getNgaySanXuatSanPham(), sanPham.getXuatXuSanPham(), sanPham.getLoaiSanPham(), sanPham.getTinhTrangSanPham(), sanPham.getAnhSanPham(), sanPham.getNgayNhapSanPham(), sanPham.getSoLuongSanPham(), sanPham.getGiamGiaSanPham(), sanPham.getGiaNhapSanPham(), sanPham.getGiaBanSanPham());
+                            dataRef.child(idGioHang).child(sanPham.getIdSanPham()).setValue(newCart);
 
 //                       Trung  kiem tra trong gioHangs đã có sản phẩm chưa nếu có chỉ tăng số lượng không tăng cart mới
 
-                        dataRef = database.getReference("GioHangs").child(idGioHang);
-                        for (int j = 0; j < arrListCart.size(); j++) {
-                            if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
-                                check = true;
-                                idCart = arrListCart.get(j).getIdGioHang();
-                                viTri = j;
+                            dataRef = database.getReference("GioHangs").child(idGioHang);
+                            for (int j = 0; j < arrListCart.size(); j++) {
+                                if (arrListCart.get(j).getIdSanPham().equals(idProduct)) {
+                                    check = true;
+                                    idCart = arrListCart.get(j).getIdGioHang();
+                                    viTri = j;
+                                }
+
                             }
 
-                        }
 
+                            if (check == true) {
+                                int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                                dataRef.child(idCart).child("soLuong").setValue(tong + "");
 
-                        if (check == true) {
-                            int tong = i + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
-                            dataRef.child(idCart).child("soLuong").setValue(tong + "");
-
-                        } else {
-                            model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
-                            dataRef.child(cart.getIdGioHang()).setValue(cart);
-                        }
-                        dialog.setContentView(R.layout.activity_add_to_cart_anim);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialog.dismiss();
+                            } else {
+                                model_Cart cart = new model_Cart(UUID.randomUUID().toString(), idProduct, i + "");
+                                dataRef.child(cart.getIdGioHang()).setValue(cart);
                             }
-                        }, 2300);
-                    }
+                            dialog.setContentView(R.layout.activity_add_to_cart_anim);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialog.dismiss();
+                                }
+                            }, 2300);
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 
