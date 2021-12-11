@@ -38,7 +38,7 @@ public class xacNhanDonHangAdmin_Adapter extends RecyclerView.Adapter<xacNhanDon
     @NotNull
     @Override
     public xacNhanDonHangAdmin_Adapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_custom_favorite, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_custom_xacnhandathanguser, parent, false);
         return new xacNhanDonHangAdmin_Adapter.ViewHolder(view);
     }
 
@@ -53,7 +53,6 @@ public class xacNhanDonHangAdmin_Adapter extends RecyclerView.Adapter<xacNhanDon
                 arrSanPham = arrListSanPham.get(i);
             }
         }
-        holder.xuLi_img_btn.setVisibility(View.INVISIBLE);
         holder.xuLi_txt_tenItem.setText(arrSanPham.getTenSanPham());
         holder.xuLi_txt_giaItem.setText(String.valueOf(arrCTSPHoaDon.getGiaSanPham()) + "00vnđ");
         holder.xuLi_txt_xuatXuItem.setText(arrSanPham.getXuatXuSanPham());
@@ -75,14 +74,14 @@ public class xacNhanDonHangAdmin_Adapter extends RecyclerView.Adapter<xacNhanDon
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView xuLi_img_anhItem,
-                xuLi_img_btn;
+        ImageView xuLi_img_anhItem;
+
         TextView xuLi_txt_tenItem, xuLi_txt_xuatXuItem, xuLi_txt_giaItem, xuLi_txt_soLuongSanPham;
         CardView xuLi_cardView_formItem1;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            xuLi_img_btn = itemView.findViewById(R.id.xuLi_img_btn);
+
             xuLi_img_anhItem = itemView.findViewById(R.id.xuLi_img_anhItem);
             xuLi_txt_tenItem = itemView.findViewById(R.id.xuLi_txt_tenItem);
             xuLi_txt_xuatXuItem = itemView.findViewById(R.id.xuLi_txt_xuatXuItem);

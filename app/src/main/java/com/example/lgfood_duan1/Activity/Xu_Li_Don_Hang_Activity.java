@@ -139,9 +139,7 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
 
     //    lấy thoogn tin chi tiết từng sản phẩm
     private void getDataThongTinSanPhamTrongKho(ArrayList<model_chiTietSanPhamHoaDon> arrListCTSPHoaDons) {
-
         for (int i = 0; i < arrListCTSPHoaDons.size(); i++) {
-
             dataSanPhamRef = database.getReference("khoHang").child(arrListCTSPHoaDons.get(i).getIdSanPham());
             int finalI = i;
             dataSanPhamRef.addValueEventListener(new ValueEventListener() {
@@ -152,8 +150,6 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
                     if (arrListCTSPHoaDons.size() == arrListSanPham.size()) {
                         showListDanhSach(arrListCTSPHoaDons, arrListSanPham);
                     }
-
-
 
                 }
 

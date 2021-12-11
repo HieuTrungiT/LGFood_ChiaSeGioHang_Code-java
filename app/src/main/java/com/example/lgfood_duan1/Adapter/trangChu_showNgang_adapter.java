@@ -78,7 +78,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
                         if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
                             arrYeuThich = arrListYeuThich.get(i);
                             Log.d("ddd", arrYeuThich.getIdYeuThich() + "");
-                            holder.ItemCuttomTrangChu_ngang_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
+                            holder.ItemCuttomTrangChu_ngang_img_btn_chonYeuThich.setImageResource(R.drawable.ic_love_red);
 
                         }
                     }

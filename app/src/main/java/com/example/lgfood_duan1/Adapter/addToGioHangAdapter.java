@@ -32,13 +32,13 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
     }
 
     public interface IClickListener {
-        void onCLickMinusItem(model_Cart cart, model_addToCart newCart);
+        void onCLickMinusItem(model_Cart cart, int viTri);
 
-        void onClickPlusItem(model_Cart cart, model_addToCart newCart);
+        void onClickPlusItem(model_Cart cart, int viTri);
 
         void onClickShowItem(model_addToCart cart, model_Cart arrGioHangs, int viTri);
 
-        void onClickDelete(model_addToCart arrAddTocart);
+        void onClickDelete(model_addToCart arrAddTocart,int viTri,model_Cart arrGioHangs);
     }
 
     public addToGioHangAdapter(Context mContext, ArrayList<model_addToCart> cartArrayList, ArrayList<model_Cart> arrListGioHangs, IClickListener mIClickListener) {
@@ -86,7 +86,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
         holder.xuLi_img_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIClickListener.onClickDelete(arrAddTocart);
+                mIClickListener.onClickDelete(arrAddTocart,position,finalArrGioHangs);
             }
         });
         model_Cart finalArrGioHangs1 = arrGioHangs;
@@ -98,7 +98,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
                 if (holder.soLuong > 0) {
 
                     holder.xuLi_txt_soLuong.setText(String.valueOf(holder.soLuong));
-                    mIClickListener.onCLickMinusItem(finalArrGioHangs1, arrAddTocart);
+                    mIClickListener.onCLickMinusItem(finalArrGioHangs1, position);
                 } else {
                     holder.xuLi_cardView_minus.setAlpha((float) 0.2);
                     holder.xuLi_img_giaItem.setAlpha((float) 0.3);
@@ -115,7 +115,7 @@ public class addToGioHangAdapter extends RecyclerView.Adapter<addToGioHangAdapte
                 holder.soLuong = Integer.parseInt(finalArrGioHangs1.getSoLuong());
                 holder.soLuong = holder.soLuong + 1;
                 holder.xuLi_txt_soLuong.setText(String.valueOf(holder.soLuong));
-                mIClickListener.onClickPlusItem(finalArrGioHangs1, arrAddTocart);
+                mIClickListener.onClickPlusItem(finalArrGioHangs1, position);
 
             }
         });
