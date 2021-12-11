@@ -60,6 +60,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         model_SanPham sanPham = arrListSanPham.get(position);
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         sharedPreferences = context.getSharedPreferences("USER_FILE", context.MODE_PRIVATE);
+
         arrListYeuThich = new ArrayList<>();
         dataRef = database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH", ""));
 
@@ -71,10 +72,8 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
                     model_yeuThich arrYeuThich = ds.getValue(model_yeuThich.class);
                     arrListYeuThich.add(arrYeuThich);
                 }
-
-                model_yeuThich arrYeuThich = null;
                 try {
-
+                    model_yeuThich arrYeuThich = null;
                     if (arrListYeuThich != null || arrListYeuThich.size() != 0) {
                         for (int i = 0; i < arrListYeuThich.size(); i++) {
                             if (arrListYeuThich.get(i).getIdSanPham().equals(sanPham.getIdSanPham())) {
@@ -88,7 +87,7 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
                     }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Bạn chưa đăng nhập nên không thể thực hiện", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -100,59 +99,14 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         });
 
 
-//        dataRef.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//                model_yeuThich arryeuThich = snapshot.getValue(model_yeuThich.class);
-//                for (int j = 0; j < arrListSanPham.size(); j++) {
-//
-//                    if (arryeuThich.getIdSanPham().equals(arrListSanPham.get(j).getIdSanPham())) {
-//                        arrListYeuThich.add(arryeuThich);
-//                        context.setNotifyitem(position);
-//                        Toast.makeText(context, "có sửa đổi", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-//                model_yeuThich arryeuThich = snapshot.getValue(model_yeuThich.class);
-//                for (int i = 0; i < arrListYeuThich.size(); i++) {
-//                    if (arryeuThich.getIdYeuThich().equals(arrListYeuThich.get(i).getIdYeuThich())) {
-//                        for (int j = 0; j < arrListSanPham.size(); j++) {
-//                            if (arryeuThich.getIdSanPham().equals(arrListSanPham.get(j).getIdSanPham())) {
-//                                arrListYeuThich.remove(i);
-//                                context.setNotifyitem(j);
-//                                Toast.makeText(context, "có xóa", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-//
-//            }
-//        });
-
-
         holder.ItemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.themNhanhSanPhamVaoGioHang(sanPham);
+                if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
+                    Toast.makeText(context, "Bạn chưa đăng nhập!!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    context.themNhanhSanPhamVaoGioHang(sanPham);
+                }
             }
         });
 

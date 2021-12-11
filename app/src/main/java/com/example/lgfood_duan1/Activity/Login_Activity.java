@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,14 +45,14 @@ public class Login_Activity extends AppCompatActivity {
             Login_edt_password;
     private LinearLayout
             Login_llout_btn_submid;
-
+    private ImageView Login_tv_back;
     private SharedPreferences shareAcout;
 
-    String idSharePre,passSharePre,userSharePre,idShareGioHang,idGioHangTam;
+    String idSharePre, passSharePre, userSharePre, idShareGioHang, idGioHangTam;
     boolean rememberSharePre;
 
 
-//thai: login
+    //thai: login
     DatabaseReference mData;
     FirebaseDatabase database;
     CheckBox checkBox;
@@ -66,9 +67,15 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
-
-
     private void batSuKien() {
+//         quay lại trang chủ
+        Login_tv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
+                startActivity(intent);
+            }
+        });
 //        chuyển sang trang đăng kí tài khoản
         Login_tv_btn_SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,15 +118,15 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
-    private void checkSavePass(){
+    private void checkSavePass() {
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = shareAcout.edit();
-        rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
-        if(rememberSharePre == true){
-            Intent intent= new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+        rememberSharePre = shareAcout.getBoolean("REMEMBER", false);
+        if (rememberSharePre == true) {
+            Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
             startActivity(intent);
 
-        }else{
+        } else {
             editor.clear();
             editor.commit();
 
@@ -130,80 +137,81 @@ public class Login_Activity extends AppCompatActivity {
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
+    private void rememberUser(String idUser, String idGioHang, String user, String password, boolean status, String viTri, String idViTri, String idGioHangTam, String nameUser, String anhUser, String idDanhSachYeuThich, String idDanhSachDonHang) {
 
-        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
-        SharedPreferences.Editor editor=pref.edit();
-        if (!status){
-            editor.putString("USERNAME",user);
-            editor.putString("PASSWORD",password);
-            editor.putString("IDUSRE",idUser);
-            editor.putString("IDGIOHANG",idGioHang);
-            editor.putString("VITRI",viTri);
-            editor.putString("IDVITRI",idViTri);
-            editor.putString("IDGIOHANGTAM",idGioHangTam);
-            editor.putString("NAMEUSER",nameUser);
-            editor.putString("ANHUSER",anhUser);
-            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
-            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
-        }else {
-            editor.putString("USERNAME",user);
-            editor.putString("PASSWORD",password);
-            editor.putBoolean("REMEMBER",status);
-            editor.putString("IDUSRE",idUser);
-            editor.putString("IDGIOHANG",idGioHang);
-            editor.putString("VITRI",viTri);
-            editor.putString("IDVITRI",idViTri);
-            editor.putString("IDGIOHANGTAM",idGioHangTam);
-            editor.putString("NAMEUSER",nameUser);
-            editor.putString("ANHUSER",anhUser);
-            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
-            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        if (!status) {
+            editor.putString("USERNAME", user);
+            editor.putString("PASSWORD", password);
+            editor.putString("IDUSRE", idUser);
+            editor.putString("IDGIOHANG", idGioHang);
+            editor.putString("VITRI", viTri);
+            editor.putString("IDVITRI", idViTri);
+            editor.putString("IDGIOHANGTAM", idGioHangTam);
+            editor.putString("NAMEUSER", nameUser);
+            editor.putString("ANHUSER", anhUser);
+            editor.putString("IDDANHSACHYEUTHICH", idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG", idDanhSachDonHang);
+        } else {
+            editor.putString("USERNAME", user);
+            editor.putString("PASSWORD", password);
+            editor.putBoolean("REMEMBER", status);
+            editor.putString("IDUSRE", idUser);
+            editor.putString("IDGIOHANG", idGioHang);
+            editor.putString("VITRI", viTri);
+            editor.putString("IDVITRI", idViTri);
+            editor.putString("IDGIOHANGTAM", idGioHangTam);
+            editor.putString("NAMEUSER", nameUser);
+            editor.putString("ANHUSER", anhUser);
+            editor.putString("IDDANHSACHYEUTHICH", idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG", idDanhSachDonHang);
 
 
         }
         editor.commit();
     }
-//thai login
+
+    //thai login
     private void loginNormal() {
-        String userName=Login_edt_username.getText().toString().trim();
-        String password=Login_edt_password.getText().toString().trim();
-        if (userName.isEmpty()){
+        String userName = Login_edt_username.getText().toString().trim();
+        String password = Login_edt_password.getText().toString().trim();
+        if (userName.isEmpty()) {
             Login_edt_username.setError("Tên đăng nhập trống!");
-        }else if (password.isEmpty()) {
+        } else if (password.isEmpty()) {
             Login_edt_password.setError("Mật khẩu đang trống!");
-        }else{
-            mData= database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("Accounts");
+        } else {
+            mData = database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("Accounts");
             mData.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot ds: snapshot.getChildren()){
-                        model_Account account=ds.getValue(model_Account.class);
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        model_Account account = ds.getValue(model_Account.class);
 
-                            if (userName.matches(account.getName()+"") && password.matches(account.getPassword()+"")){
-                                Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        if (userName.matches(account.getName() + "") && password.matches(account.getPassword() + "")) {
+                            Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
-                                final Dialog dialog = new Dialog(Login_Activity.this);
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.item_login);
-                                Handler handler=new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
-                                        startActivity(intent);
-                                    }
-                                },3000);
-                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                dialog.show();
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
+                            final Dialog dialog = new Dialog(Login_Activity.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.item_login);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
+                                    startActivity(intent);
+                                }
+                            }, 3000);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.show();
+                            rememberUser(account.getId(), account.getIdGioHang(), userName, password, checkBox.isChecked(), account.getAddress(), account.getIdViTri(), account.getIdGioHangTam(), account.getRealName(), account.getAnhKhachHang(), account.getIdDanhSachYeuThich(), account.getIdDanhSachDonHang());
 
-                                return;
-                            }else{
-                                Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
-                            }
+                            return;
+                        } else {
+                            Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                         }
+                    }
 //                    }
                 }
 
@@ -212,7 +220,7 @@ public class Login_Activity extends AppCompatActivity {
 
                 }
             });
-                            }
+        }
 
     }
 
@@ -221,25 +229,27 @@ public class Login_Activity extends AppCompatActivity {
 
 
     private void anhXa() {
+//         ImageView
+        Login_tv_back = findViewById(R.id.login_tv_back);
 //        TextView
         Login_tv_btn_SignUp = findViewById(R.id.login_tv_btn_SignUp);
         Login_tv_btn_SignUpText = findViewById(R.id.login_tv_btn_SignUpText);
         Login_tv_username = findViewById(R.id.login_tv_username);
         Login_tv_password = findViewById(R.id.login_tv_password);
         login_tv_google = findViewById(R.id.login_tv_google);
-        login_tv_Phone= findViewById(R.id.login_tv_Phone);
+        login_tv_Phone = findViewById(R.id.login_tv_Phone);
 
 
 //        EditText
         Login_edt_username = findViewById(R.id.login_edt_username);
         Login_edt_password = findViewById(R.id.login_edt_password);
-        checkBox=findViewById(R.id.login_checkBox);
+        checkBox = findViewById(R.id.login_checkBox);
 //        LinearLayout
         Login_llout_btn_submid = findViewById(R.id.login_llout_btn_submid);
         //sharedPreference
-        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
-        Login_edt_username.setText(pref.getString("USERNAME",""));
-        Login_edt_password.setText(pref.getString("PASSWORD",""));
-        checkBox.setChecked(pref.getBoolean("REMEMBER",false));
-     }
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        Login_edt_username.setText(pref.getString("USERNAME", ""));
+        Login_edt_password.setText(pref.getString("PASSWORD", ""));
+        checkBox.setChecked(pref.getBoolean("REMEMBER", false));
+    }
 }

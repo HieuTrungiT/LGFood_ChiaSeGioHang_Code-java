@@ -36,10 +36,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
         <activity android:name=".Activity.Login_Activity" >
 
         </activity>
-        <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
         <activity android:name=".Activity.Nhap_SDT" />
         <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />
