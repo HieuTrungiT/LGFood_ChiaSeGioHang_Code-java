@@ -28,7 +28,8 @@ public class adapter_SanPham_Kho extends RecyclerView.Adapter<adapter_SanPham_Kh
 
 
 
-   public interface IClickLinstenr{
+
+    public interface IClickLinstenr{
        void onClickCHinhSuaItem (model_SanPham sanPham);
 
    }
