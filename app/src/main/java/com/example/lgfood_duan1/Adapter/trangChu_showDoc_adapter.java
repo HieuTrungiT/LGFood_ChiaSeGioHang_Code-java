@@ -130,12 +130,12 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                                 if (check == 0) {
                                     holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
                                     context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
-//                                    context.setNotifyitem(viTri);
+//                                    context.setNotifyitem(position);
                                 }
                             } catch (Exception e) {
                                 context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
                                 holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
-//                                context.setNotifyitem(viTri);
+
                             }
 
 

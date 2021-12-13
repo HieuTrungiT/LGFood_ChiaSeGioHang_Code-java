@@ -29,6 +29,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +57,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -95,8 +98,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             TrangChuSanPham_tv_soLuongThongBao,
             TrangChuSanPham_tv_btn_showTatCaLoaiSanpham,
             TrangChuSanPham_tv_showLoai,
-
-    TrangChuSanPham_tv_btn_timTen,
+            TrangChuSanPham_tv_btn_timTen,
             TrangChuSanPham_tv_btn_timGia,
             TrangChuSanPham_tv_btn_timLoai,
             TrangChuSanPham_tv_loai;
@@ -107,12 +109,19 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             TrangChuSanPham_rscV_showSanPhamDoc;
     private FrameLayout
             DatNhanh_FmLt_showChiTietSanPham,
-            SanPham_flou_search;
+            SanPham_flou_search,
+            TrangChuSanPham_Flout_btn_user,
+            TrangChuSanPham_Flout_btn_donHang;
     private LinearLayout
             DatNhanh_btn_themSanPhamVaoGioHang;
     private CircleImageView TrangChuSanPham_img_logo;
     private EditText
             TrangChuSanPham_edt_timKiemSanPham;
+
+    private FloatingActionButton
+            TrangChuSanPham_FloatBtn_nemu;
+
+
     private SharedPreferences shareAcout;
     String idSharePre;
     String idGioHangShare;
@@ -139,6 +148,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //biến số lượng và id giỏ hàng
     int i = 1;
     String idGioHang;
+    boolean checkMenu = false;
     GoogleSignInClient mGoogleSignInClient;
 
 
@@ -376,6 +386,56 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //    Bắt sự kiện thi thao tác
     private void batSuKien() {
+// bắt sự kiện chuyển trang thông tin cá nhân
+        TrangChuSanPham_Flout_btn_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(trangChu_SanPham_Activity.this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this,thongTinTaiKhoan_Activity.class);
+                    startActivity(intent);}
+            }
+        });
+//         bắt sự kiện chuyển trang đơn hàngủa tôi
+        TrangChuSanPham_Flout_btn_donHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (shareAcout.getString("IDUSRE", "").isEmpty()) {
+                    Toast.makeText(trangChu_SanPham_Activity.this, "ban chua login", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this, Login_Activity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(trangChu_SanPham_Activity.this,donHangUser_Activity.class);
+                    startActivity(intent);}
+            }
+        });
+
+// show menu FloatBtn
+        TrangChuSanPham_FloatBtn_nemu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkMenu == false) {
+                    Animation animationout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_bottom);
+
+                    checkMenu = true;
+                    TrangChuSanPham_Flout_btn_user.setVisibility(View.VISIBLE);
+                    TrangChuSanPham_Flout_btn_donHang.setVisibility(View.VISIBLE);
+                    TrangChuSanPham_Flout_btn_user.setAnimation(animationout);
+                    TrangChuSanPham_Flout_btn_donHang.setAnimation(animationout);
+                }else{
+                    Animation animationout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
+
+                    checkMenu = false;
+                    TrangChuSanPham_Flout_btn_user.setVisibility(View.INVISIBLE);
+                    TrangChuSanPham_Flout_btn_donHang.setVisibility(View.INVISIBLE);
+                    TrangChuSanPham_Flout_btn_user.setAnimation(animationout);
+                    TrangChuSanPham_Flout_btn_donHang.setAnimation(animationout);
+                }
+            }
+        });
 //        mở giỏ hàng
         TrangChuSanPham_img_btnGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -681,6 +741,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     public void setNotifyitem(int viTri) {
         showListProduc_Horizoltal();
+        TrangChu_showNgang_adapter.notifyDataSetChanged();
         TrangChu_showDoc_adapter.notifyItemChanged(viTri);
     }
 
@@ -846,8 +907,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             case R.id.drawer_nav_profile:
                 if (shareAcout.getString("IDUSRE", "").isEmpty()) {
 
-                    ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                    TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    ImageView item_dialog_chucNang_img_imgErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                    TextView item_dialog_chucNang_txt_nameErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
                     Button Okay = dialogLoading.findViewById(R.id.btn_okay);
                     Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
                     //setText Item
@@ -872,7 +933,6 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     });
                     dialogLoading.show();
 
-                   
 
                 } else {
                     Intent intent3 = new Intent(trangChu_SanPham_Activity.this, thongTinTaiKhoan_Activity.class);
@@ -882,8 +942,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                 break;
 
             case R.id.drawer_nav_logout:
-                ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                ImageView item_dialog_chucNang_img_imgErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                TextView item_dialog_chucNang_txt_nameErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
                 Button Okay = dialogLoading.findViewById(R.id.btn_okay);
                 Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
                 //setText Item
@@ -896,7 +956,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                         final Dialog dialog1 = new Dialog(trangChu_SanPham_Activity.this);
                         dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog1.setContentView(R.layout.item_login);
-                        Handler handler=new Handler();
+                        Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -917,7 +977,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
 
                             }
-                        },3000);
+                        }, 3000);
                         dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         dialog1.show();
                     }
@@ -960,7 +1020,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
 
     //thai:onClickItemSanPham
-    private void showItemChiTietSanPham(model_SanPham sanPham) {
+    public void showItemChiTietSanPham(model_SanPham sanPham) {
         anhXa();
         getDataFirebaseCart();
         Dialog dialog = new Dialog(this);
@@ -1141,7 +1201,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     //     Ánh xạ
     private void anhXa() {
 //        SharedPreferences
-        dialogLoading=new Dialog(trangChu_SanPham_Activity.this);
+        dialogLoading = new Dialog(trangChu_SanPham_Activity.this);
         dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogLoading.setContentView(R.layout.item_dialog_chucnang_login);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -1200,7 +1260,12 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
         TrangChuSanPham_img_logo = findViewById(trangChuSanPham_img_logo);
         //        Button
+//        FrameLayout
 
+        TrangChuSanPham_Flout_btn_user = findViewById(R.id.trangChuSanPham_Flout_btn_user);
+        TrangChuSanPham_Flout_btn_donHang = findViewById(R.id.trangChuSanPham_Flout_btn_donHang);
+//                FloatingActionButton
+        TrangChuSanPham_FloatBtn_nemu = findViewById(R.id.trangChuSanPham_FloatBtn_nemu);
     }
 
 }

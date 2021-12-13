@@ -16,12 +16,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Model.model_admin;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -60,20 +62,22 @@ public class Login_Activity extends AppCompatActivity {
             Login_llout_btn_submid;
 
     private SharedPreferences shareAcout;
-
-    String idSharePre,passSharePre,userSharePre,idShareGioHang,idGioHangTam;
+private ImageView Login_tv_back;
+    String idSharePre, passSharePre, userSharePre, idShareGioHang, idGioHangTam;
     boolean rememberSharePre;
 
 
-//thai: login
+    //thai: login
     DatabaseReference mData;
     FirebaseDatabase database;
     CheckBox checkBox;
-//thai login gg;
-private static final String TAG = "GoogleActivity";
+    //thai login gg;
+    private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    model_admin arrAdmin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +86,20 @@ private static final String TAG = "GoogleActivity";
         checkSavePass();
         batSuKien();
         processrequest();
+//
+
     }
 
 
-
-
     private void batSuKien() {
+//        chuyển trang ra trang chủ
+        Login_tv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
+                startActivity(intent);
+            }
+        });
 //        chuyển sang trang đăng kí tài khoản
         Login_tv_btn_SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,15 +144,15 @@ private static final String TAG = "GoogleActivity";
     }
 
 
-    private void checkSavePass(){
+    private void checkSavePass() {
         shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor editor = shareAcout.edit();
-        rememberSharePre = shareAcout.getBoolean("REMEMBER",false);
-        if(rememberSharePre == true){
-            Intent intent= new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+        rememberSharePre = shareAcout.getBoolean("REMEMBER", false);
+        if (rememberSharePre == true) {
+            Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
             startActivity(intent);
 
-        }else{
+        } else {
             editor.clear();
             editor.commit();
 
@@ -151,35 +163,35 @@ private static final String TAG = "GoogleActivity";
 
     //thai sharePreference
 
-    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
+    private void rememberUser(String idUser, String idGioHang, String user, String password, boolean status, String viTri, String idViTri, String idGioHangTam, String nameUser, String anhUser, String idDanhSachYeuThich, String idDanhSachDonHang) {
 
-        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
-        SharedPreferences.Editor editor=pref.edit();
-        if (!status){
-            editor.putString("USERNAME",user);
-            editor.putString("PASSWORD",password);
-            editor.putString("IDUSRE",idUser);
-            editor.putString("IDGIOHANG",idGioHang);
-            editor.putString("VITRI",viTri);
-            editor.putString("IDVITRI",idViTri);
-            editor.putString("IDGIOHANGTAM",idGioHangTam);
-            editor.putString("NAMEUSER",nameUser);
-            editor.putString("ANHUSER",anhUser);
-            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
-            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
-        }else {
-            editor.putString("USERNAME",user);
-            editor.putString("PASSWORD",password);
-            editor.putBoolean("REMEMBER",status);
-            editor.putString("IDUSRE",idUser);
-            editor.putString("IDGIOHANG",idGioHang);
-            editor.putString("VITRI",viTri);
-            editor.putString("IDVITRI",idViTri);
-            editor.putString("IDGIOHANGTAM",idGioHangTam);
-            editor.putString("NAMEUSER",nameUser);
-            editor.putString("ANHUSER",anhUser);
-            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
-            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        if (!status) {
+            editor.putString("USERNAME", user);
+            editor.putString("PASSWORD", password);
+            editor.putString("IDUSRE", idUser);
+            editor.putString("IDGIOHANG", idGioHang);
+            editor.putString("VITRI", viTri);
+            editor.putString("IDVITRI", idViTri);
+            editor.putString("IDGIOHANGTAM", idGioHangTam);
+            editor.putString("NAMEUSER", nameUser);
+            editor.putString("ANHUSER", anhUser);
+            editor.putString("IDDANHSACHYEUTHICH", idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG", idDanhSachDonHang);
+        } else {
+            editor.putString("USERNAME", user);
+            editor.putString("PASSWORD", password);
+            editor.putBoolean("REMEMBER", status);
+            editor.putString("IDUSRE", idUser);
+            editor.putString("IDGIOHANG", idGioHang);
+            editor.putString("VITRI", viTri);
+            editor.putString("IDVITRI", idViTri);
+            editor.putString("IDGIOHANGTAM", idGioHangTam);
+            editor.putString("NAMEUSER", nameUser);
+            editor.putString("ANHUSER", anhUser);
+            editor.putString("IDDANHSACHYEUTHICH", idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG", idDanhSachDonHang);
 
 
         }
@@ -239,32 +251,32 @@ private static final String TAG = "GoogleActivity";
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                GoogleSignInAccount googleSignInAccount= GoogleSignIn.getLastSignedInAccount(Login_Activity.this);
+                                GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(Login_Activity.this);
 
-                                String hoVaTen=googleSignInAccount.getDisplayName();
-                                String gmail=googleSignInAccount.getEmail();
-                                String anhKH=String.valueOf(googleSignInAccount.getPhotoUrl());
+                                String hoVaTen = googleSignInAccount.getDisplayName();
+                                String gmail = googleSignInAccount.getEmail();
+                                String anhKH = String.valueOf(googleSignInAccount.getPhotoUrl());
                                 database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
                                 //    FirebaseStorage
                                 mData = database.getReference("Accounts");
 
-                                model_Account model_account = new model_Account(UUID.randomUUID().toString(), hoVaTen, gmail, "", "", gmail, "", UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(), anhKH);
+                                model_Account model_account = new model_Account(UUID.randomUUID().toString(), hoVaTen, gmail, "", "", gmail, "", UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), anhKH);
                                 mData.child(model_account.getId()).setValue(model_account);
 
-                                rememberUser(model_account.getId(),model_account.getIdGioHang(),gmail,"",true,"",model_account.getIdViTri(),model_account.getIdGioHangTam(),hoVaTen,model_account.getAnhKhachHang(),model_account.getIdDanhSachYeuThich(),model_account.getIdDanhSachDonHang());
+                                rememberUser(model_account.getId(), model_account.getIdGioHang(), gmail, "", true, "", model_account.getIdViTri(), model_account.getIdGioHangTam(), hoVaTen, model_account.getAnhKhachHang(), model_account.getIdDanhSachYeuThich(), model_account.getIdDanhSachDonHang());
 
                                 final Dialog dialog = new Dialog(Login_Activity.this);
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 dialog.setContentView(R.layout.item_login);
-                                Handler handler=new Handler();
+                                Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
+                                        Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
                                         startActivity(intent);
 
                                     }
-                                },3000);
+                                }, 3000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
                                 startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
@@ -280,46 +292,47 @@ private static final String TAG = "GoogleActivity";
                     }
                 });
     }
-//thai login
+
+    //thai login
     private void loginNormal() {
-        String userName=Login_edt_username.getText().toString().trim();
-        String password=Login_edt_password.getText().toString().trim();
-        if (userName.isEmpty()){
+        String userName = Login_edt_username.getText().toString().trim();
+        String password = Login_edt_password.getText().toString().trim();
+        if (userName.isEmpty()) {
             Login_edt_username.setError("Tên đăng nhập trống!");
-        }else if (password.isEmpty()) {
+        } else if (password.isEmpty()) {
             Login_edt_password.setError("Mật khẩu đang trống!");
-        }else{
-            mData= database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("Accounts");
+        } else {
+            mData = database.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("Accounts");
             mData.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot ds: snapshot.getChildren()){
-                        model_Account account=ds.getValue(model_Account.class);
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        model_Account account = ds.getValue(model_Account.class);
 
-                            if (userName.equals(account.getName()+"") && password.equals(account.getPassword()+"")){
-                                Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                                rememberUser(account.getId(),account.getIdGioHang(),userName,password,checkBox.isChecked(),account.getAddress(),account.getIdViTri(),account.getIdGioHangTam(),account.getRealName(),account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
+                        if (userName.equals(account.getName() + "") && password.equals(account.getPassword() + "")) {
+                            Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            rememberUser(account.getId(), account.getIdGioHang(), userName, password, checkBox.isChecked(), account.getAddress(), account.getIdViTri(), account.getIdGioHangTam(), account.getRealName(), account.getAnhKhachHang(), account.getIdDanhSachYeuThich(), account.getIdDanhSachDonHang());
 
-                                final Dialog dialog = new Dialog(Login_Activity.this);
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.item_login);
-                                Handler handler=new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent=new Intent(Login_Activity.this,trangChu_SanPham_Activity.class);
-                                        startActivity(intent);
-                                    }
-                                },3000);
-                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                dialog.show();
+                            final Dialog dialog = new Dialog(Login_Activity.this);
+                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            dialog.setContentView(R.layout.item_login);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
+                                    startActivity(intent);
+                                }
+                            }, 3000);
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.show();
 
-                                return;
-                            }else{
-                                Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
-                            }
+                            return;
+                        } else {
+                            Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                         }
+                    }
 //                    }
                 }
 
@@ -328,7 +341,7 @@ private static final String TAG = "GoogleActivity";
 
                 }
             });
-                            }
+        }
 
     }
 
@@ -343,19 +356,20 @@ private static final String TAG = "GoogleActivity";
         Login_tv_username = findViewById(R.id.login_tv_username);
         Login_tv_password = findViewById(R.id.login_tv_password);
         login_tv_google = findViewById(R.id.login_tv_google);
-        login_tv_Phone= findViewById(R.id.login_tv_Phone);
+        login_tv_Phone = findViewById(R.id.login_tv_Phone);
 
-
+        Login_tv_back = findViewById(R.id.login_tv_back);
 //        EditText
         Login_edt_username = findViewById(R.id.login_edt_username);
         Login_edt_password = findViewById(R.id.login_edt_password);
-        checkBox=findViewById(R.id.login_checkBox);
+        checkBox = findViewById(R.id.login_checkBox);
 //        LinearLayout
         Login_llout_btn_submid = findViewById(R.id.login_llout_btn_submid);
         //sharedPreference
-        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
-        Login_edt_username.setText(pref.getString("USERNAME",""));
-        Login_edt_password.setText(pref.getString("PASSWORD",""));
-        checkBox.setChecked(pref.getBoolean("REMEMBER",false));
-     }
+        SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        Login_edt_username.setText(pref.getString("USERNAME", ""));
+        Login_edt_password.setText(pref.getString("PASSWORD", ""));
+        checkBox.setChecked(pref.getBoolean("REMEMBER", false));
+
+    }
 }

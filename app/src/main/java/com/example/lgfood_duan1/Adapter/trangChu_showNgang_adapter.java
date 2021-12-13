@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -120,7 +121,12 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
 
 
 //      Show chi tiết sản phẩm
-
+        holder.ItemCuttomTrangChu_ngang_carview_showItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.showItemChiTietSanPham(sanPham);
+            }
+        });
 
     }
 
@@ -143,11 +149,12 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
                 ItemCuttomTrangChu_ngang_img_showAnhSanPham,
                 ItemCuttomTrangChu_ngang_img_btn_chonYeuThich,
                 ItemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang;
-
+        CardView
+                ItemCuttomTrangChu_ngang_carview_showItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            ItemCuttomTrangChu_ngang_carview_showItem = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_carview_showItem);
             ItemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_tv_soLuongSanPhamMuaYeuThich);
             ItemCuttomTrangChu_ngang_tv_xuatXuSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_tv_xuatXuSanPham);
             ItemCuttomTrangChu_ngang_tv_tenSanPham = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_tv_tenSanPham);
@@ -157,5 +164,6 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
             ItemCuttomTrangChu_ngang_img_btn_chonYeuThich = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_img_btn_chonYeuThich);
             ItemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang = itemView.findViewById(R.id.itemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang);
         }
+
     }
 }
