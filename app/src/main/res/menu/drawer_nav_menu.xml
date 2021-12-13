@@ -42,6 +42,7 @@
                     android:title="Thông tin cá nhân"/>
 
                 <item
+
                     android:id="@+id/drawer_nav_logout"
                     android:title="Đăng xuất"/>
             </group>

@@ -113,7 +113,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
     // value
     boolean checkOnclick = true, checkShowForm = true;
-    String idGioHang, idViTri;
+    String idGioHang, idViTri,key;
     //Firebase
     private DatabaseReference dataRef, dataAccoutRef;
     private FirebaseDatabase database;
@@ -133,14 +133,13 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chia_se_gio_hang);
         anhXa();
-        client = LocationServices.getFusedLocationProviderClient(ChiaSeGioHang_Activity.this);
-        fetchLastLocation();
-        getDataFirebaseViTri();
-        batSuKien();
-
-
-//        chia sẻ giỏ hàng
         getSharedPre();
+
+        getDataFirebaseViTri();
+        fetchLastLocation();
+        addLocationMe();
+        batSuKien();
+//        chia sẻ giỏ hàng
         getDataGioHang();
         ChiaSeGioHang_img_btn_timKiemKey.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -155,12 +154,33 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
     }
 
+    //thêm 1 user me
+    private void addLocationMe() {
+        dataRef = database.getReference("location").child(idViTri);
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                arrViTri = snapshot.getValue(model_viTri.class);
+//                arrayList.add(new LatLng(arrViTri.getLatitude(), arrViTri.getLongitude()));
+                key = arrViTri.getKey();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     //   Trung lưu vị trí lên mảng
     private void setArrViTri(ArrayList<model_viTri> arrListViTris) {
+        arrayList.clear();
         for (int i = 0; i < arrListViTris.size(); i++) {
-
             arrayList.add(new LatLng(arrListViTris.get(i).getLatitude(), arrListViTris.get(i).getLongitude()));
         }
+
+
     }
 
     /******************** Trung Show thông tin ra kiểu dọc**********************/
@@ -177,7 +197,6 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     private void getDataFirebaseViTri() {
 
         dataRef = database.getReference("location");
-
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -191,11 +210,40 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                     }
                 }
                 setArrViTri(arrListViTri);
+
                 showListProduc_Vartical(arrListViTri);
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
+
+            }
+        });
+        dataRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                fetchLastLocation();
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
@@ -254,6 +302,9 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ChiaSeGioHang_Activity.this, chiaSeKetNoiGioHang_Activity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("iT_key",key);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -261,6 +312,10 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ChiaSeGioHang_Activity.this, chiaSeKetNoiGioHang_Activity.class);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("iT_key",key);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -271,18 +326,18 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                 ViewGroup.LayoutParams params = ChiaSeGioHang_llout_FormTop.getLayoutParams();
 
                 if (checkShowForm == false) {
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_top);
+                    ChiaSeGioHang_llout_FormTop.setAnimation(animation);
 
                     params.height = 0;
                     params.width = LinearLayout.LayoutParams.MATCH_PARENT;
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom);
-                    ChiaSeGioHang_llout_FormTop.setAnimation(animation);
                     ChiaSeGioHang_llout_FormTop.setLayoutParams(params);
 
                     checkShowForm = true;
                 } else {
                     params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
                     params.width = LinearLayout.LayoutParams.MATCH_PARENT;
-                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_bottom);
+                    Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_top);
                     ChiaSeGioHang_llout_FormTop.setAnimation(animation);
                     ChiaSeGioHang_llout_FormTop.setLayoutParams(params);
                     checkShowForm = false;
@@ -395,7 +450,6 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                     Toast.makeText(ChiaSeGioHang_Activity.this, currentLocation.getLatitude()
                             + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
-
                     ChiaSeGioHang_google_map.getMapAsync(ChiaSeGioHang_Activity.this);
 
                 }
@@ -407,6 +461,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     //Trung show gg map
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         getDataFirebaseViTri();
 
         ChiaSeGioHang_img_phongTo.setOnClickListener(new View.OnClickListener() {
@@ -459,10 +514,17 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arrayList.get(i), 25));
-                    String nameUsser = arrListViTri.get(finalI).getNameUser().toUpperCase();
-                    String key = arrListViTri.get(finalI).getKey();
-                    MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i))
-                            .title(nameUsser + "/key:#" + key);
+                    try {
+
+                        String nameUsser = arrListViTri.get(finalI).getNameUser().toUpperCase();
+                        String key = arrListViTri.get(finalI).getKey();
+                        MarkerOptions markerOptions = new MarkerOptions().position(arrayList.get(i))
+                                .title(nameUsser + "/key:#" + key);
+                        googleMap.addMarker(markerOptions);
+                    }catch (Exception e ){
+
+                    }
+
 //                    bắt sự kiện chia sẻ giỏ hàng
                     ChiaSeGioHang_item_llout_btn_chiaSeGioHang.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -477,16 +539,12 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                                 ChiaSeGioHang_item_img_btn_xoaItem.setAnimation(animation);
                                 ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.INVISIBLE);
                                 ChiaSeGioHang_item_crview.setVisibility(View.INVISIBLE);
-                                Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng", Toast.LENGTH_SHORT).show();
                             }
-
                         }
                     });
-
-                    googleMap.addMarker(markerOptions);
                 } catch (Exception e) {
-                    Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -513,6 +571,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
     // Trung ánh  xạ activity
     private void anhXa() {
+        client = LocationServices.getFusedLocationProviderClient(ChiaSeGioHang_Activity.this);
 //        Model
         arrayList = new ArrayList<LatLng>();
         arrListViTri = new ArrayList<>();

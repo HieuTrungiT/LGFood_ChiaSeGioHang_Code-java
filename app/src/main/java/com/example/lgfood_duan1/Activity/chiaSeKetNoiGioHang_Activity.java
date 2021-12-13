@@ -40,11 +40,13 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
             ChiaSeKetNoi_llout_btn_dungPhatTinHieu;
     private ImageView
             ChiaSeKetNoi_img_btn_back;
+    private TextView ChiaSeKetNoi_tv_key;
+
     //    firebase
     private DatabaseReference dataRef;
     private FirebaseDatabase database;
     //    value
-    private String idGioHang, idGioHangTam,idViTri;
+    private String idGioHang, idGioHangTam, idViTri;
     //    Sharepre
     private SharedPreferences shareAcout;
     //model arayliss
@@ -52,7 +54,6 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
     private model_Cart arrCart, arrCartTam;
     private ArrayList<model_viTri> arrListViTri;
     private ArrayList<model_Cart> arrListCart, arrayListCartTam;
-
 
     @Override
     protected void onStop() {
@@ -78,7 +79,6 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         getDataOnChangeGioHangTam();
 
     }
-
 
 
     // bắt sự kiện nếu giỏ hàng tạm có thay đổi
@@ -198,6 +198,13 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
 
 
     private void anhXa() {
+        Bundle bundle = getIntent().getExtras();
+        String key;
+        key = bundle.getString("iT_key", "");
+        //TextView
+        ChiaSeKetNoi_tv_key = findViewById(R.id.chiaSeKetNoi_tv_key);
+        ChiaSeKetNoi_tv_key.setText("#"+key);
+
         //        Model
         arrListCart = new ArrayList<>();
         arrayListCartTam = new ArrayList<>();
