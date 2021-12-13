@@ -1,10 +1,15 @@
 package com.example.lgfood_duan1.Adapter;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +20,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.lgfood_duan1.Activity.Login_Activity;
 import com.example.lgfood_duan1.Activity.trangChu_SanPham_Activity;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_yeuThich;
@@ -103,11 +109,9 @@ public class trangChu_showNgang_adapter extends RecyclerView.Adapter<trangChu_sh
         holder.ItemCuttomTrangChu_ngang_img_btn_themSanPhamVaoGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (sharedPreferences.getString("IDDANHSACHYEUTHICH", "").isEmpty()) {
-                    Toast.makeText(context, "Bạn chưa đăng nhập!!!", Toast.LENGTH_SHORT).show();
-                } else {
-                    context.themNhanhSanPhamVaoGioHang(sanPham);
-                }
+
+                context.themNhanhSanPhamVaoGioHang(sanPham);
+
             }
         });
 
