@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -125,17 +126,30 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         Dialog_them_tvBtn_dongY.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
-                dataRef = database.getReference("GioHangs").child(idGioHang);
-                dataRef.removeValue();
+                Dialog diaLog1 = new Dialog(chiaSeKetNoiGioHang_Activity.this);
+                diaLog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                diaLog1.setContentView(R.layout.item_login);
+                diaLog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        diaLog1.dismiss();
+                        Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+                        dataRef = database.getReference("GioHangs").child(idGioHang);
+                        dataRef.removeValue();
 //             thêm vào giỏ hàng chính
-                setDataChiaSeGioHang();
+                        setDataChiaSeGioHang();
 //                xóa giỏ hàng tạm
-                dataRef = database.getReference("gioHangTam").child(idGioHangTam);
-                dataRef.removeValue();
+                        dataRef = database.getReference("gioHangTam").child(idGioHangTam);
+                        dataRef.removeValue();
 
-                Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
-                startActivity(intent);
+                        Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
+                        startActivity(intent);
+                    }
+                },3000);
+                diaLog1.show();
+
                 dialog.dismiss();
             }
         });
