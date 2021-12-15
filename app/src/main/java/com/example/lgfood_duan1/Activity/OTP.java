@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -93,6 +94,40 @@ public class OTP extends AppCompatActivity {
             }
         });
 
+    }//thai: rememberUser
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
+
+        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        SharedPreferences.Editor editor=pref.edit();
+        if (!status){
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+        }else {
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putBoolean("REMEMBER",status);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+
+
+        }
+        editor.commit();
     }
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -139,6 +174,7 @@ public class OTP extends AppCompatActivity {
 
                                 model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
                                 node.child(account.getId()).setValue(account);
+                                rememberUser(account.getId(),account.getIdGioHang(),getGmail,getMatKhau,true,getDiaChi,account.getIdViTri(),account.getIdGioHangTam(),getRealName,account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
 
                                 Intent homeIntent = new Intent(OTP.this, MainActivity.class);

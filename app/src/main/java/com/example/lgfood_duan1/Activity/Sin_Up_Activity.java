@@ -5,16 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -174,7 +180,41 @@ public class Sin_Up_Activity extends AppCompatActivity {
             Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
         }
     }
+    //thai: rememberUser
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
 
+        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        SharedPreferences.Editor editor=pref.edit();
+        if (!status){
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+        }else {
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putBoolean("REMEMBER",status);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+
+
+        }
+        editor.commit();
+    }
     //xử lí đăng nhập
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -187,7 +227,35 @@ public class Sin_Up_Activity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
-                                startActivity(new Intent(getApplicationContext(), Activity_SignInWithGoogle.class));
+                                GoogleSignInAccount googleSignInAccount= GoogleSignIn.getLastSignedInAccount(Sin_Up_Activity.this);
+
+                                String hoVaTen=googleSignInAccount.getDisplayName();
+                                String gmail=googleSignInAccount.getEmail();
+                                String anhKH=String.valueOf(googleSignInAccount.getPhotoUrl());
+                                database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                                //    FirebaseStorage
+                                node = database.getReference("Accounts");
+
+                                model_account = new model_Account(UUID.randomUUID().toString(), hoVaTen, gmail, "", "", gmail, "", UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(), anhKH);
+                                node.child(model_account.getId()).setValue(model_account);
+
+                                rememberUser(model_account.getId(),model_account.getIdGioHang(),gmail,"",true,"",model_account.getIdViTri(),model_account.getIdGioHangTam(),hoVaTen,model_account.getAnhKhachHang(),model_account.getIdDanhSachYeuThich(),model_account.getIdDanhSachDonHang());
+
+                                final Dialog dialog = new Dialog(Sin_Up_Activity.this);
+                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                dialog.setContentView(R.layout.item_login);
+                                Handler handler=new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent(Sin_Up_Activity.this,trangChu_SanPham_Activity.class);
+                                        startActivity(intent);
+                                    }
+                                },3000);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                dialog.show();
+                                startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
+
                             }
                         } else {
                             // If sign in fails, display a message to the user.

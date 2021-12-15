@@ -107,9 +107,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        dataRef = database.getReference("location").child(idViTri);
-        dataRef.child("tinhTrang").setValue(false);
-        getLocation();
+//        dataRef = database.getReference("location").child(idViTri);
+//        dataRef.child("tinhTrang").setValue(false);
+
         super.onStart();
     }
 
@@ -118,8 +118,9 @@ public class gio_Hang_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
-        anhXa();
 
+        anhXa();
+        getLocation();
         //thai
         itemAddToCart();
         loadItemAddToCart();
