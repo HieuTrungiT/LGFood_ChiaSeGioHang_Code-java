@@ -858,7 +858,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     }
     //thai phân trang
     private void getDataFirebase() {
-//        arrListSanPhamPhanTrang=getmListPost();
+        arrListSanPhamPhanTrang=getmListPost();
         showListProduc_Vartical(arrListSanPhamPhanTrang);
         Toast.makeText(this, arrListSanPham.size()+"", Toast.LENGTH_SHORT).show();
         if (currentpage<totalPage){
