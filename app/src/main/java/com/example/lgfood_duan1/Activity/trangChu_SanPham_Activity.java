@@ -77,6 +77,7 @@ import java.util.UUID;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.lgfood_duan1.R.id.trangChuSanPham_img_logo;
+import static com.example.lgfood_duan1.R.id.trangChuSanPham_rscV_showSanPhamDoc;
 
 public class trangChu_SanPham_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -156,6 +157,15 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     SharedPreferences sharedPreferences;
     public static boolean CHECK = false;
     String id;
+    private boolean isLoading;
+    private boolean isLastPage;
+    private int totalPage=50;
+    private int currentpage=1;
+    GridLayoutManager gridLayoutManager;
+    int dem =-1;
+    int khoangDem=10;
+    ArrayList<model_SanPham> arrListSanPhamPhanTrang;
+
 
     @Override
     protected void onStart() {
@@ -180,7 +190,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         batSuKien();
         getDataFirebaseCart();
         NavigationDrawer();
-        getDataFirebase();
+        getDataRealtimeDatabase();
 
         timKiem();
         showSlider();
@@ -603,6 +613,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_showLoaiCoffee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#F9B864"));
 
@@ -630,6 +641,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_showLoaiThaoDuoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
+
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#F9B864"));
 
@@ -657,6 +670,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_showLoaiHat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
+
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#F9B864"));
 
@@ -684,6 +699,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_showLoaiMuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
+
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#F9B864"));
 
@@ -713,6 +730,8 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_img_showLoaiTra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
+
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_xanhduong_nhe);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#F9B864"));
 
@@ -741,6 +760,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onStart();
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setBackgroundResource(R.drawable.broder_radius_cam2_thuonghieu);
                 TrangChuSanPham_tv_btn_showTatCaLoaiSanpham.setTextColor(Color.parseColor("#EEF5FF"));
 
@@ -793,7 +813,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     /********************Show thông tin ra kiểu dọc**********************/
     private void showListProduc_Vartical(ArrayList<model_SanPham> arrListSp) {
-        TrangChuSanPham_rscV_showSanPhamDoc.setLayoutManager(new GridLayoutManager(this, 2));
+        TrangChuSanPham_rscV_showSanPhamDoc.setLayoutManager(gridLayoutManager);
         TrangChuSanPham_rscV_showSanPhamDoc.setItemAnimator(new DefaultItemAnimator());
         //        Initilize
 
@@ -836,10 +856,80 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
         dataRef.child(sharedPreferences.getString("IDDANHSACHYEUTHICH", "")).child(idYeuThich).setValue(yeuThich);
 
     }
-
-
-    //Trung: lấy dữ liệu sản phẩm trên firebase về
+    //thai phân trang
     private void getDataFirebase() {
+//        arrListSanPhamPhanTrang=getmListPost();
+        showListProduc_Vartical(arrListSanPhamPhanTrang);
+        Toast.makeText(this, arrListSanPham.size()+"", Toast.LENGTH_SHORT).show();
+        if (currentpage<totalPage){
+//            Adapter_SanPham_Kho.addFoodterLoading();
+            TrangChu_showDoc_adapter.addFoodterLoading();
+        }else {
+            isLastPage=true;
+        }
+        loadData();
+
+
+    }
+    private void loadData() {
+        TrangChuSanPham_rscV_showSanPhamDoc.addOnScrollListener(new paginationScrollListener(gridLayoutManager) {
+            @Override
+            public void loadMoreItem() {
+                isLoading=true;
+                currentpage+=1;
+                loadNextPage();
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+        });
+    }
+    private void loadNextPage() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<model_SanPham>list=getmListPost();
+
+                TrangChu_showDoc_adapter.removeFoodterLoading();
+                arrListSanPhamPhanTrang.addAll(list);
+                TrangChu_showDoc_adapter.notifyDataSetChanged();
+
+                isLoading=false;
+                if (khoangDem<totalPage){
+                    TrangChu_showDoc_adapter.addFoodterLoading();
+                    khoangDem=khoangDem+10;
+
+                }else {
+                    isLastPage=true;
+
+                }
+            }
+        },2000);
+    }
+    private ArrayList<model_SanPham> getmListPost(){
+        ArrayList<model_SanPham> list=new ArrayList<>();
+        if (arrListSanPham.size()>=khoangDem){
+            do {
+                dem ++;
+                if (dem<arrListSanPham.size()){
+
+                    list.add(arrListSanPham.get(dem));
+                }
+            }while(dem<= khoangDem);
+
+        }
+
+        return list;
+    }
+    //Trung: lấy dữ liệu sản phẩm trên firebase về
+    private void getDataRealtimeDatabase() {
 
         dataRef = database.getReference().child("khoHang");
         dataRef.addValueEventListener(new ValueEventListener() {
@@ -852,9 +942,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                     arrSanPham = child.getValue(model_SanPham.class);
                     arrListSanPham.add(arrSanPham);
                 }
-                showListProduc_Vartical(arrListSanPham);
+//                showListProduc_Vartical(arrListSanPham);
                 showListProduc_Horizoltal();
-
+                getDataFirebase();
             }
 
             @Override
@@ -1272,6 +1362,9 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //     Ánh xạ
     private void anhXa() {
+
+        gridLayoutManager=new GridLayoutManager(this,2);
+        arrListSanPhamPhanTrang=new ArrayList<>();
 //        SharedPreferences
         dialogLoading = new Dialog(trangChu_SanPham_Activity.this);
         dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
