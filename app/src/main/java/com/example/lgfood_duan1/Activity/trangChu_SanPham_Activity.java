@@ -176,7 +176,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
             public void run() {
                 diaLog.dismiss();
             }
-        },3000);
+        },1000);
         diaLog.show();
         super.onStart();
     }
@@ -232,7 +232,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                             startActivity(intent);
                             diaLog.dismiss();
                         }
-                    },3000);
+                    },1000);
                     diaLog.show();
                     dialogLoading.dismiss();
                 }
@@ -307,7 +307,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
                             dialogAddNgang.show();
                             dialogOnStar.dismiss();
                         }
-                    },3000);
+                    },1000);
                     dialogOnStar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialogOnStar.show();
 

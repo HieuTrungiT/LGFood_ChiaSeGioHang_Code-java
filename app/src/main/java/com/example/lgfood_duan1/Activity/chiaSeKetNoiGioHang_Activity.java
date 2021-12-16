@@ -8,12 +8,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,7 +58,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
     private model_Cart arrCart, arrCartTam;
     private ArrayList<model_viTri> arrListViTri;
     private ArrayList<model_Cart> arrListCart, arrayListCartTam;
-
+    Dialog dialog2;
     @Override
     protected void onStop() {
         dataRef = database.getReference("location").child(idViTri);
@@ -97,15 +100,15 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_cuttom_capnhatsanpham);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+//        Window window = dialog.getWindow();
+//        if (window == null) {
+//            return;
+//        }
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager.LayoutParams windowAttributes = dialog.getWindow().getAttributes();
         windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
+        dialog.getWindow().setAttributes(windowAttributes);
 //        sử lý khi nhấn ra ngoài thì có thoát hay không
         dialog.setCancelable(false);
 //        khai báo bắt sự kiện
@@ -134,20 +137,54 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        diaLog1.dismiss();
-                        Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
-                        dataRef = database.getReference("GioHangs").child(idGioHang);
-                        dataRef.removeValue();
-//             thêm vào giỏ hàng chính
-                        setDataChiaSeGioHang();
-//                xóa giỏ hàng tạm
-                        dataRef = database.getReference("gioHangTam").child(idGioHangTam);
-                        dataRef.removeValue();
+                        dialog.dismiss();
+                        ImageView item_dialog_chucNang_img_imgErro=dialog2.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                        TextView item_dialog_chucNang_txt_nameErro=dialog2.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                        Button Okay = dialog2.findViewById(R.id.btn_okay);
+                        Button Cancel = dialog2.findViewById(R.id.btn_cancel);
+                        Okay.setText("Đồng ý");
+                        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn giữ giỏ hàng cũ không?");
+                        Okay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+                                //             thêm vào giỏ hàng chính
+                                dataRef = database.getReference("GioHangs").child(idGioHang);
+                                setDataChiaSeGioHang();
+                                Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
+                                startActivity(intent);
+                                dialog2.dismiss();
+                                //                xóa giỏ hàng tạm
+                                dataRef = database.getReference("gioHangTam").child(idGioHangTam);
+                                dataRef.removeValue();
+                            }
+                        });
 
-                        Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
-                        startActivity(intent);
+                        Cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog2.dismiss();
+                                dataRef = database.getReference("GioHangs").child(idGioHang);
+                                dataRef.removeValue();
+                                setDataChiaSeGioHang();
+                                dataRef=database.getReference("newCarts").child(idGioHang);
+                                dataRef.removeValue();
+                                Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
+                                startActivity(intent);
+                                //                xóa giỏ hàng tạm
+                                dataRef = database.getReference("gioHangTam").child(idGioHangTam);
+                                dataRef.removeValue();
+                            }
+                        });
+
+                        dialog2.show();
+                        diaLog1.dismiss();
+
+
+
                     }
-                },3000);
+                },1000);
                 diaLog1.show();
 
                 dialog.dismiss();
@@ -212,6 +249,16 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
 
 
     private void anhXa() {
+        dialog2=new Dialog(chiaSeKetNoiGioHang_Activity.this);
+        dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog2.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog2.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog2.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog2.setCancelable(false); //Optional
+        dialog2.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
         Bundle bundle = getIntent().getExtras();
         String key;
         key = bundle.getString("iT_key", "");
