@@ -124,8 +124,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -140,13 +140,14 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_TenDangNhapKH"
+                            android:id="@+id/signUp_edt_TenKH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Tên khách hàng"
                             android:maxLines="1"
-                            android:textSize="18sp"
+                            android:textSize="12sp"
+
                             android:padding="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,14 +161,16 @@
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/signUp_edt_tenKhachHang"
+                            android:id="@+id/signUp_edt_teDangNhapKhachHang"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Tên đăng nhập"
                             android:maxLines="1"
                             android:padding="10dp"
-                            android:textSize="18sp" />
+                            android:textSize="12sp"
+
+                />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -185,6 +188,8 @@
                             android:layout_marginTop="10dp"
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Nhập gmail"
+                            android:textSize="12sp"
+
                             android:maxLines="1"
                             android:padding="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/signUp_edt_tenDangNhap"
@@ -207,6 +212,8 @@
                             android:background="@drawable/broder_stroke_cam"
                             android:gravity="center_vertical"
                             android:hint="Mật khẩu"
+                            android:textSize="12sp"
+
                             android:inputType="textPassword"
                             android:maxLines="1"
                             android:padding="10dp" />
@@ -228,6 +235,8 @@
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Mật khẩu"
                             android:inputType="textPassword"
+                            android:textSize="12sp"
+
                             android:maxLines="1"
                             android:padding="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -248,10 +257,12 @@
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Địa chỉ"
                             android:maxLines="1"
+                            android:textSize="12sp"
                             android:padding="10dp" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
+
 
                     <ImageView
                         android:id="@+id/singUp_Im_ViTri"
@@ -262,9 +273,10 @@
                         android:src="@drawable/gps"
                         app:layout_constraintBottom_toBottomOf="@+id/signUp_edt_DiaChi"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/signUp_edt_DiaChi"
-                        app:layout_constraintTop_toTopOf="@+id/signUp_edt_DiaChi" />
 
+                        app:layout_constraintStart_toEndOf="@+id/signUp_edt_DiaChi"
+                        app:layout_constraintTop_toTopOf="@+id/signUp_edt_DiaChi"
+                        app:layout_constraintVertical_bias="0.6" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/signUp_edt_SDT"
@@ -281,6 +293,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/broder_stroke_cam"
                             android:hint="Số điện thoại"
+                            android:textSize="12sp"
                             android:maxLines="1"
                             android:padding="10dp" />
                     </com.google.android.material.textfield.TextInputLayout>
