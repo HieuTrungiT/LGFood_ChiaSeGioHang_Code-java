@@ -148,7 +148,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
                         Okay.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
                                 //             thêm vào giỏ hàng chính
                                 dataRef = database.getReference("GioHangs").child(idGioHang);
                                 setDataChiaSeGioHang();

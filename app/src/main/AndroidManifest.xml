@@ -59,7 +59,7 @@
 
         <activity android:name=".Activity.MainActivity" />
         <service
-            android:name=".Notification.FirebaseMessagingService"
+            android:name=".Notification.mFirebaseMessagingService"
             android:exported="false"
             android:permission="TODO"
             tools:ignore="ExportedService">

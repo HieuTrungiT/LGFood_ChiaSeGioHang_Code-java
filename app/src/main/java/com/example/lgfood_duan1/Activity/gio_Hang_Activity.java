@@ -179,7 +179,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
                             uuid = UUID.randomUUID();
 
                             arrViTri = new model_viTri(uuid.toString(), idGioHangTam, viTri, addresses.get(0).getLatitude(), addresses.get(0).getLongitude(), false, formatter.format(reaDate), uuid.toString().substring(0, 6), anhUser, nameUser);
-                            Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude() + "", Toast.LENGTH_SHORT).show();
                             dataRef.setValue(arrViTri);
 
                         } catch (IOException e) {
@@ -349,7 +348,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
         datNhanh_tv_moTaSanPham.setText(cart.getMoTaSp());
 
         datNhanh_tv_SoLuongSanpham.setText(String.valueOf(arrGioHang.getSoLuong()));
-        Toast.makeText(this, arrGioHang.getSoLuong() + "", Toast.LENGTH_SHORT).show();
         i = Integer.parseInt(arrGioHang.getSoLuong());
         double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
         double tong = 0;
@@ -480,8 +478,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(DatabaseError error, DatabaseReference ref) {
 
-                        Toast.makeText(gio_Hang_Activity.this, "Delete item success", Toast.LENGTH_SHORT).show();
-
+                        Dialog diaLog = new Dialog(gio_Hang_Activity.this);
+                        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        diaLog.setContentView(R.layout.item_login);
+                        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                diaLog.dismiss();
+                            }
+                        },1000);
+                        diaLog.show();
                     }
                 });
 
@@ -502,7 +510,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(gio_Hang_Activity.this, "Cancel", Toast.LENGTH_SHORT).show();
                 dialogXoaItem.dismiss();
             }
         });

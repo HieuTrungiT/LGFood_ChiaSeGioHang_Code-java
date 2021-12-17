@@ -57,6 +57,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private ImageView
             ThemSuaXoaSanPham_img_showImgV,
@@ -124,7 +126,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     String BdIdsanPham, BdMoTaSanPham, BdTenSanPham, BdNgaySanXuatSanPham, BdXuatXuSanPham, BdLoaiSanPham, BdTinhTrangSanPham, BdAnhSanPham, BdNgayNhapSanPham;
     Dialog dialog;
     Dialog dialogLoading;
-
+    Dialog dialogChuaChonAnh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -324,7 +326,17 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Lưu ảnh thất bại", Toast.LENGTH_SHORT).show();
+
+                    TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Title.setText("Lưu ảnh thất bại");
+                    Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogChuaChonAnh.dismiss();
+                        }
+                    });
+                    dialogChuaChonAnh.show();
                 }
                 //     add file thành công
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -365,7 +377,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     //**** xóa sản phẩm
     private void xoaSanPhamKho() {
         myRef = database.getReference("khoHang");
-        Toast.makeText(this, BdIdsanPham+"", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, BdIdsanPham+"", Toast.LENGTH_SHORT).show();
         myRef.child(BdIdsanPham).removeValue();
         Intent intent = new Intent(Them_San_Pham_Vao_Kho_Hang_Activity.this, khoHang_Activity.class);
         startActivity(intent);
@@ -444,7 +456,16 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Lưu ảnh thất bại", Toast.LENGTH_SHORT).show();
+                    TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Title.setText("Lưu ảnh thất bại");
+                    Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogChuaChonAnh.dismiss();
+                        }
+                    });
+                    dialogChuaChonAnh.show();
                 }
                 //     add file thành công
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -595,7 +616,15 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             }
         } else {
             ThemSuaXoaSanPham_img_showImgV.setBackgroundResource(R.drawable.broder_stroke_red_error);
-            Toast.makeText(this, "Chưa có ảnh sản phẩm!!!", Toast.LENGTH_SHORT).show();
+
+            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogChuaChonAnh.dismiss();
+                }
+            });
+            dialogChuaChonAnh.show();
         }
         return false;
     }
@@ -736,6 +765,17 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
     private void anhXa() {
         //thai: diaLog
+        dialogChuaChonAnh=new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialogChuaChonAnh.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogChuaChonAnh.setContentView(R.layout.item_dialog_chucnang_chua_chon_anh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogChuaChonAnh.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogChuaChonAnh.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogChuaChonAnh.setCancelable(false); //Optional
+        dialogChuaChonAnh.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+
         dialog=new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.item_dialog_chucnang_login);
