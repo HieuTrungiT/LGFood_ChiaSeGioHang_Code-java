@@ -30,10 +30,11 @@
         <activity android:name=".Activity.ChiaSeGioHang_Activity" />
         <activity
             android:name=".Activity.Sin_Up_Activity"
-            android:exported="true" />
+            />
         <activity android:name=".Activity.OTP" />
         <activity android:name=".Activity.Them_San_Pham_Vao_Kho_Hang_Activity" />
-        <activity android:name=".Activity.trangChu_SanPham_Activity">
+        <activity android:name=".Activity.trangChu_SanPham_Activity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +46,9 @@
         <activity android:name=".Activity.Nhap_SDT" />
         <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />
-        <activity android:name=".Activity.khoHang_Activity" />
+        <activity android:name=".Activity.khoHang_Activity" >
+
+        </activity>
         <activity android:name=".Activity.thong_Tin_Gio_Hang_Activity" />
         <activity android:name=".Activity.Chinh_Sua_Thong_Tin_Accounts_Activity" />
         <activity android:name=".Activity.gio_Hang_Activity" />
