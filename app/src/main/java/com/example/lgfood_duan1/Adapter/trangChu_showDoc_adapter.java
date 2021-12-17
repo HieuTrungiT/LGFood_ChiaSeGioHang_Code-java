@@ -118,7 +118,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                                 for (int i = 0; i < arrListYeuThich.size(); i++) {
                                     if (sanPham.getIdSanPham().equals(arrListYeuThich.get(i).getIdSanPham())) {
                                         check++;
-                                        viTri = i;
+
                                         context.onClicktHeartItemDelete(arrListYeuThich.get(i).getIdYeuThich(), position, true);
                                         holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_white);
                                         arrListYeuThich.remove(i);
@@ -130,7 +130,7 @@ public class trangChu_showDoc_adapter extends RecyclerView.Adapter<trangChu_show
                                 if (check == 0) {
                                     holder.ItemCuttomTrangChu_doc_img_btn_chonYeuThich.setImageResource(R.drawable.ic_btn_love_red);
                                     context.onClickHeartItem(sanPham.getIdSanPham(), position, true);
-//                                    context.setNotifyitem(position);
+
                                 }
                             } catch (Exception e) {
                                 context.onClickHeartItem(sanPham.getIdSanPham(), position, true);

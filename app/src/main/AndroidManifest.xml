@@ -8,12 +8,16 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.LGFood_duan1">
-        <activity android:name=".Activity.chiTietDonhangUser_Activity"></activity>
+        <activity android:name=".Activity.quanLyDoanhThu_chiTietLoai_Activity"></activity>
+        <activity android:name=".Activity.quanLyDoanhThu_Activity" >
+
+        </activity>
+        <activity android:name=".Activity.chiTietDonhangUser_Activity" />
         <activity android:name=".Activity.donHangUser_Activity" />
         <activity android:name=".Activity.Activity_SignInWithGoogle" />
         <activity android:name=".Activity.favorite_Activity" />
@@ -37,9 +41,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.Xu_Li_Don_Hang_Activity" />
-        <activity android:name=".Activity.Login_Activity" >
-
-        </activity>
+        <activity android:name=".Activity.Login_Activity" />
         <activity android:name=".Activity.Nhap_SDT" />
         <activity android:name=".Activity.Xac_Nhan_DH_Activity" />
         <activity android:name=".Activity.xac_Nhan_Don_hang_Activity" />

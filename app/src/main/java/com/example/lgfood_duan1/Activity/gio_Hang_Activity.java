@@ -179,7 +179,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
                             uuid = UUID.randomUUID();
 
                             arrViTri = new model_viTri(uuid.toString(), idGioHangTam, viTri, addresses.get(0).getLatitude(), addresses.get(0).getLongitude(), false, formatter.format(reaDate), uuid.toString().substring(0, 6), anhUser, nameUser);
-                            Toast.makeText(gio_Hang_Activity.this, arrViTri.getLatitude() + "", Toast.LENGTH_SHORT).show();
                             dataRef.setValue(arrViTri);
 
                         } catch (IOException e) {
@@ -349,7 +348,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
         datNhanh_tv_moTaSanPham.setText(cart.getMoTaSp());
 
         datNhanh_tv_SoLuongSanpham.setText(String.valueOf(arrGioHang.getSoLuong()));
-        Toast.makeText(this, arrGioHang.getSoLuong() + "", Toast.LENGTH_SHORT).show();
         i = Integer.parseInt(arrGioHang.getSoLuong());
         double gia = Double.parseDouble(String.valueOf(cart.getGiaBanSp()));
         double tong = 0;

@@ -233,7 +233,7 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                     @Override
                     public void run() {
                         diaLogDoc.dismiss();
-                        startActivity(new Intent(Xac_Nhan_DH_Activity.this, trangChu_SanPham_Activity.class));
+                        startActivity(new Intent(Xac_Nhan_DH_Activity.this, gio_Hang_Activity.class));
                     }
                 }, 2300);
                 diaLogDoc.show();
