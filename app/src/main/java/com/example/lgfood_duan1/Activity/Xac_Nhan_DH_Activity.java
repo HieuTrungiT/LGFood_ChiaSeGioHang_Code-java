@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -209,9 +210,9 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         Button Okay = dialog.findViewById(R.id.btn_okay);
         Button Cancel = dialog.findViewById(R.id.btn_cancel);
         //setText Item
-        Okay.setText("Order");
+        Okay.setText("Đặt hàng");
         item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-        item_dialog_chucNang_txt_nameErro.setText("Would you want to order the products?");
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn dặt hàng không?");
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,6 +235,7 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                     public void run() {
                         diaLogDoc.dismiss();
                         startActivity(new Intent(Xac_Nhan_DH_Activity.this, trangChu_SanPham_Activity.class));
+
                     }
                 }, 2300);
                 diaLogDoc.show();

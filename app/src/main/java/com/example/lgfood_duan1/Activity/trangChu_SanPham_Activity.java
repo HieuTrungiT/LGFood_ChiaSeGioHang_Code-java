@@ -50,6 +50,7 @@ import com.example.lgfood_duan1.Model.model_Cart;
 import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.Model.model_yeuThich;
+import com.example.lgfood_duan1.Notification.mServiceKhoHang;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -169,7 +170,11 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     @Override
     protected void onStart() {
-
+        startService(new Intent(trangChu_SanPham_Activity.this, mServiceKhoHang.class));
+        diaLog = new Dialog(trangChu_SanPham_Activity.this);
+        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        diaLog.setContentView(R.layout.item_login);
+        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override

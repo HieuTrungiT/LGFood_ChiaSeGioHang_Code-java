@@ -6,10 +6,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -230,16 +235,30 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
         XuLi_btn_btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tinhTrangDon = XuLI_spn_xuLiDonHang.getSelectedItem().toString();
-                dataCTSPHoaDonRef = database.getReference("HoaDon").child(idDanhSachChiTietDonHang).child(idHoaDonIt).child("tinhTrangDonHang");
 
-                if (tinhTrangDon.equals("Chưa xác nhận")) {
-                    dataCTSPHoaDonRef.setValue(0);
-                } else if (tinhTrangDon.equals("Đang xử lý")) {
-                    dataCTSPHoaDonRef.setValue(1);
-                } else if (tinhTrangDon.equals("Đã xử lý")) {
-                    dataCTSPHoaDonRef.setValue(2);
-                }
+                Dialog diaLog;
+                diaLog = new Dialog(Xu_Li_Don_Hang_Activity.this);
+                diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                diaLog.setContentView(R.layout.item_login);
+                diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String tinhTrangDon = XuLI_spn_xuLiDonHang.getSelectedItem().toString();
+                        dataCTSPHoaDonRef = database.getReference("HoaDon").child(idDanhSachChiTietDonHang).child(idHoaDonIt).child("tinhTrangDonHang");
+
+                        if (tinhTrangDon.equals("Chưa xác nhận")) {
+                            dataCTSPHoaDonRef.setValue(0);
+                        } else if (tinhTrangDon.equals("Đang xử lý")) {
+                            dataCTSPHoaDonRef.setValue(1);
+                        } else if (tinhTrangDon.equals("Đã xử lý")) {
+                            dataCTSPHoaDonRef.setValue(2);
+                        }
+                        diaLog.dismiss();
+                    }
+                },1000);
+                diaLog.show();
 
             }
         });
