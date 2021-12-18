@@ -237,6 +237,30 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                     public void run() {
                         diaLogDoc.dismiss();
                         startActivity(new Intent(Xac_Nhan_DH_Activity.this, trangChu_SanPham_Activity.class));
+                        dataGioHangRef = database.getReference("GioHangs").child(listAccount.getIdGioHang());
+                        dataGioHangRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                if (arrListGioHangs != null) {
+                                    arrListGioHangs.clear();
+                                }
+                                for (DataSnapshot ds : snapshot.getChildren()) {
+                                    arrGioHang = ds.getValue(model_Cart.class);
+                                    arrListGioHangs.add(arrGioHang);
+
+                                }
+                                dataGioHangRef.removeValue();
+
+//                                dataGioHangRef=database.getReference("GioHangs");
+
+//                                getDataNewCart();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
 
                     }
                 }, 2300);

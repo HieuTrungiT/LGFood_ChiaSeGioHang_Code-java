@@ -290,7 +290,7 @@ private ImageView Login_tv_back;
                                         startActivity(intent);
 
                                     }
-                                }, 3000);
+                                }, 1000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
                                 startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
@@ -347,7 +347,7 @@ private ImageView Login_tv_back;
                                     Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             dialog.show();
 

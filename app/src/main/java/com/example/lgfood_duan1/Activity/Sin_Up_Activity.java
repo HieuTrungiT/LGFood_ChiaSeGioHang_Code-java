@@ -263,7 +263,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
                                         Intent intent=new Intent(Sin_Up_Activity.this,trangChu_SanPham_Activity.class);
                                         startActivity(intent);
                                     }
-                                },3000);
+                                },1000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
                                 startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
