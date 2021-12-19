@@ -166,12 +166,21 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
     int dem =-1;
     int khoangDem=10;
     ArrayList<model_SanPham> arrListSanPhamPhanTrang;
-
+    SharedPreferences sharedPreCheckNotifi;
 
     @Override
     protected void onStart() {
-        startService(new Intent(trangChu_SanPham_Activity.this, mServiceKhoHang.class));
+        boolean CheckNotifi=sharedPreCheckNotifi.getBoolean("CHECK",false);
+//        if (CheckNotifi==false){
+            startService(new Intent(trangChu_SanPham_Activity.this, mServiceKhoHang.class));
+//            CheckNotifi=true;
+//            SharedPreferences.Editor editor=sharedPreCheckNotifi.edit();
 //
+//            editor.putBoolean("CHECK",CheckNotifi);
+//            editor.commit();
+//        }
+//
+        Toast.makeText(this, "asdasdasda", Toast.LENGTH_SHORT).show();
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -1479,6 +1488,7 @@ public class trangChu_SanPham_Activity extends AppCompatActivity implements Navi
 
     //     Ánh xạ
     private void anhXa() {
+        sharedPreCheckNotifi=getSharedPreferences("CHECK_NOTIFI",MODE_PRIVATE);
 
         gridLayoutManager=new GridLayoutManager(this,2);
         arrListSanPhamPhanTrang=new ArrayList<>();

@@ -47,6 +47,7 @@ public class mServiceKhoHang extends Service {
     public mServiceKhoHang(){
 
     }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         modelHoaDonArrayList=new ArrayList<>();
@@ -67,6 +68,21 @@ public class mServiceKhoHang extends Service {
             notificationManager.createNotificationChannel(channel);
 
         }
+
+        Intent intent1=new Intent(mServiceKhoHang.this, donHangUser_Activity.class);
+                intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                PendingIntent pendingIntent1=PendingIntent.getActivity(mServiceKhoHang.this,0,intent,0);
+                PendingIntent pendingIntent1 = PendingIntent.getActivity(mServiceKhoHang.this, 1, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                NotificationCompat.Builder builder1= new NotificationCompat.Builder(mServiceKhoHang.this, NOTIFICATION_CHANNEL)
+                        .setSmallIcon(R.drawable.heart)
+                        .setContentTitle("Thông báo")
+                        .setContentText("Chào mừng đến với LG FARM")
+                        .setContentIntent(pendingIntent1)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                notificationManager1.notify(100, builder1.build());
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -76,6 +92,7 @@ public class mServiceKhoHang extends Service {
                 }
                 for (int i=0;i<modelHoaDonArrayList.size();i++){
                     tinhTrangHoaDonIt=Integer.valueOf(modelHoaDonArrayList.get(i).getTinhTrangDonHang());
+
                 }
 
             }
@@ -88,25 +105,47 @@ public class mServiceKhoHang extends Service {
         dataRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded( DataSnapshot snapshot,  String previousChildName) {
-                Intent intent1=new Intent(mServiceKhoHang.this, donHangUser_Activity.class);
-                intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                PendingIntent pendingIntent1=PendingIntent.getActivity(mServiceKhoHang.this,0,intent,0);
-                PendingIntent pendingIntent1 = PendingIntent.getActivity(mServiceKhoHang.this, 1, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                NotificationCompat.Builder builder1= new NotificationCompat.Builder(mServiceKhoHang.this, NOTIFICATION_CHANNEL)
-                        .setSmallIcon(R.drawable.heart)
-                        .setContentTitle("Thông báo")
-                        .setContentText(CONTENT)
-                        .setContentIntent(pendingIntent1)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                notificationManager1.notify(100, builder1.build());
+//                Intent intent1=new Intent(mServiceKhoHang.this, donHangUser_Activity.class);
+//                intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+////                PendingIntent pendingIntent1=PendingIntent.getActivity(mServiceKhoHang.this,0,intent,0);
+//                PendingIntent pendingIntent1 = PendingIntent.getActivity(mServiceKhoHang.this, 1, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                NotificationCompat.Builder builder1= new NotificationCompat.Builder(mServiceKhoHang.this, NOTIFICATION_CHANNEL)
+//                        .setSmallIcon(R.drawable.heart)
+//                        .setContentTitle("Thông báo")
+//                        .setContentText(CONTENT)
+//                        .setContentIntent(pendingIntent1)
+//                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+//                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//
+//                notificationManager1.notify(100, builder1.build());
             }
 
             @Override
             public void onChildChanged(DataSnapshot snapshot, String previousChildName) {
-                if (tinhTrangHoaDonIt==1){
+//                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    model_hoaDon hoaDon=snapshot.getValue(model_hoaDon.class);
+                    modelHoaDonArrayList.add(hoaDon);
+//                }
+                for (int i=0;i<modelHoaDonArrayList.size();i++){
+                    tinhTrangHoaDonIt=Integer.valueOf(modelHoaDonArrayList.get(i).getTinhTrangDonHang());
+
+                }
+                if (tinhTrangHoaDonIt==0){
+                    Intent intent1=new Intent(mServiceKhoHang.this, donHangUser_Activity.class);
+                    intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    PendingIntent pendingIntent1=PendingIntent.getActivity(mServiceKhoHang.this,0,intent,0);
+
+                    NotificationCompat.Builder builder1= new NotificationCompat.Builder(mServiceKhoHang.this, NOTIFICATION_CHANNEL)
+                            .setSmallIcon(R.drawable.heart)
+                            .setContentTitle("Thông báo")
+                            .setContentText(CONTENT)
+                            .setContentIntent(pendingIntent1)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                    notificationManager1.notify(100, builder1.build());
+                }else if (tinhTrangHoaDonIt==1){
                     Intent intent1=new Intent(mServiceKhoHang.this, donHangUser_Activity.class);
                     intent1.setFlags(intent1.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     PendingIntent pendingIntent1=PendingIntent.getActivity(mServiceKhoHang.this,0,intent,0);
@@ -156,6 +195,7 @@ public class mServiceKhoHang extends Service {
 
         return super.onStartCommand(intent, flags, startId);
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
