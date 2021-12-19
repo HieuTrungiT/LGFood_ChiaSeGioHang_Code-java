@@ -8,15 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,11 +30,6 @@ import com.example.lgfood_duan1.Model.model_SanPham;
 import com.example.lgfood_duan1.Model.model_chiTietSanPhamHoaDon;
 import com.example.lgfood_duan1.Model.model_hoaDon;
 import com.example.lgfood_duan1.R;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,8 +57,6 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
             XuLI_spn_xuLiDonHang;
     private RecyclerView
             XuLi_rscv_showDanSach;
-    Dialog dialogLoading;
-    Dialog diaLog;
     //Value
     String idUserIt, idHoaDonIt, idChiTietSanPhamHoaDonIt, idDanhSachChiTietDonHang;
     double tongGiaIt;
@@ -86,7 +76,6 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
     //Adapter
     xacNhanDonHangAdmin_Adapter adapter_XNDonHangAdmin;
     private ArrayList<String> listLSP;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,55 +236,32 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-                ImageView item_dialog_chucNang_img_imgErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                TextView item_dialog_chucNang_txt_nameErro = dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
-                Button Okay = dialogLoading.findViewById(R.id.btn_okay);
-                Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
-                //setText Item
-                Okay.setText("Xác nhận");
-                item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-                item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn xác nhận không?");
-                Okay.setOnClickListener(new View.OnClickListener() {
+                Dialog diaLog;
+                diaLog = new Dialog(Xu_Li_Don_Hang_Activity.this);
+                diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                diaLog.setContentView(R.layout.item_login);
+                diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
                     @Override
-                    public void onClick(View v) {
-                        final Dialog dialog1 = new Dialog(Xu_Li_Don_Hang_Activity.this);
-                        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog1.setContentView(R.layout.item_login);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                String tinhTrangDon = XuLI_spn_xuLiDonHang.getSelectedItem().toString();
-                                dataCTSPHoaDonRef = database.getReference("HoaDon").child(idDanhSachChiTietDonHang).child(idHoaDonIt).child("tinhTrangDonHang");
+                    public void run() {
+                        String tinhTrangDon = XuLI_spn_xuLiDonHang.getSelectedItem().toString();
+                        dataCTSPHoaDonRef = database.getReference("HoaDon").child(idDanhSachChiTietDonHang).child(idHoaDonIt).child("tinhTrangDonHang");
 
-                                if (tinhTrangDon.equals("Chưa xác nhận")) {
-                                    dataCTSPHoaDonRef.setValue(0);
-                                } else if (tinhTrangDon.equals("Đang xử lý")) {
-                                    dataCTSPHoaDonRef.setValue(1);
-                                } else if (tinhTrangDon.equals("Đã xử lý")) {
-                                    dataCTSPHoaDonRef.setValue(2);
-                                }
-                                Intent intent = new Intent(Xu_Li_Don_Hang_Activity.this, xac_Nhan_Don_hang_Activity.class);
-                                startActivity(intent);
-                                dialog1.dismiss();
-
-
-                            }
-                        }, 3000);
-                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog1.show();
+                        if (tinhTrangDon.equals("Chưa xác nhận")) {
+                            dataCTSPHoaDonRef.setValue(0);
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
+                        } else if (tinhTrangDon.equals("Đang xử lý")) {
+                            dataCTSPHoaDonRef.setValue(1);
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
+                        } else if (tinhTrangDon.equals("Đã xử lý")) {
+                            dataCTSPHoaDonRef.setValue(2);
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
+                        }
+                        diaLog.dismiss();
                     }
-                });
-                Cancel.setText("Hủy");
-                Cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogLoading.dismiss();
-                    }
-                });
-                dialogLoading.show();
-
+                },1000);
+                diaLog.show();
 
             }
         });
@@ -310,23 +276,6 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        //        SharedPreferences
-        dialogLoading = new Dialog(Xu_Li_Don_Hang_Activity.this);
-        dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogLoading.setContentView(R.layout.item_dialog_chucnang_login);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialogLoading.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
-        }
-        dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialogLoading.setCancelable(false); //Optional
-        dialogLoading.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
-
-        diaLog = new Dialog(Xu_Li_Don_Hang_Activity.this);
-        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        diaLog.setContentView(R.layout.item_login);
-        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
         arrListCTSPHoaDon = new ArrayList<>();
         arrListSanPham = new ArrayList<>();
 

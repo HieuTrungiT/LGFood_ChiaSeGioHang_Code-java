@@ -3,11 +3,16 @@ package com.example.lgfood_duan1.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Model.model_Account;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -190,27 +199,37 @@ public class Chinh_Sua_Thong_Tin_Accounts_Activity extends AppCompatActivity {
         } else if (address.length() < 6 || address.length() > 150) {
             SuaThongTinNguoiDung_edt_diaChi.setError("Địa Chỉ lớn hơn 6 và  không quá 100 kí tự");
         } else {
-            getData();
-            database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
-            node = database.getReference().child("Accounts");
-            node.child(idSharePre).child("realName").setValue(realName);
-            node.child(idSharePre).child("name").setValue(userName);
-            node.child(idSharePre).child("email").setValue(email);
-            node.child(idSharePre).child("phoneNumber").setValue(soDienThoai);
-            node.child(idSharePre).child("address").setValue(address);
-            node.child(idSharePre).child("password").setValue(newPassword);
+            final Dialog dialog1 = new Dialog(Chinh_Sua_Thong_Tin_Accounts_Activity.this);
+            dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog1.setContentView(R.layout.item_login);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getData();
+                    database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
+                    node = database.getReference().child("Accounts");
+                    node.child(idSharePre).child("realName").setValue(realName);
+                    node.child(idSharePre).child("name").setValue(userName);
+                    node.child(idSharePre).child("email").setValue(email);
+                    node.child(idSharePre).child("phoneNumber").setValue(soDienThoai);
+                    node.child(idSharePre).child("address").setValue(address);
+                    node.child(idSharePre).child("password").setValue(newPassword);
 
-            shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-            SharedPreferences.Editor editor = shareAcout.edit();
-            editor.putString("PASSWORD", newPassword);
-            editor.putString("USERNAME", "");
-            editor.putBoolean("REMEMBER", false);
-            editor.apply();
+                    shareAcout = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shareAcout.edit();
+                    editor.putString("PASSWORD", newPassword);
+                    editor.putString("USERNAME", "");
+                    editor.putBoolean("REMEMBER", false);
+                    editor.apply();
+                    Intent intent = new Intent(Chinh_Sua_Thong_Tin_Accounts_Activity.this, thongTinTaiKhoan_Activity.class);
+                    startActivity(intent);
+                    dialog1.dismiss();
+                }
+            }, 1000);
+            dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog1.show();
 
-
-            Intent intent = new Intent(Chinh_Sua_Thong_Tin_Accounts_Activity.this, thongTinTaiKhoan_Activity.class);
-            startActivity(intent);
-            Toast.makeText(this, "Sữa thành công", Toast.LENGTH_SHORT).show();
         }
 
     }

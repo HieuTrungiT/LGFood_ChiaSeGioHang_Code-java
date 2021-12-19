@@ -309,10 +309,21 @@ public class favorite_Activity extends AppCompatActivity {
 
     //    bắt sự kiện khi onlick xóa thích
     public void xoaItemThich(String idYeuThich, int viTri) {
-        dataRef = database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH", "")).child(idYeuThich);
-        dataRef.removeValue();
-        favoriteAdapter.notifyItemChanged(viTri);
-        Toast.makeText(this, "Đã xóa sản phẩm yêu thích!!!", Toast.LENGTH_SHORT).show();
+        Dialog diaLog = new Dialog(favorite_Activity.this);
+        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        diaLog.setContentView(R.layout.item_login);
+        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dataRef = database.getReference("danhSachSanPhamYeuThich").child(sharedPreferences.getString("IDDANHSACHYEUTHICH", "")).child(idYeuThich);
+                dataRef.removeValue();
+                favoriteAdapter.notifyItemChanged(viTri);
+                diaLog.dismiss();
+            }
+        },1000);
+        diaLog.show();
     }
 
     //bắt cắc sự kiện

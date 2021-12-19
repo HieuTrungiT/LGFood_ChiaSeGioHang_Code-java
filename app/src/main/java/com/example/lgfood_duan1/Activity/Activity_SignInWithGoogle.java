@@ -82,7 +82,6 @@ public class Activity_SignInWithGoogle extends AppCompatActivity {
             dataRef.child(account.getId()).setValue(account);
             Intent intent = new Intent(Activity_SignInWithGoogle.this, trangChu_SanPham_Activity.class);
             startActivity(intent);
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -91,7 +90,6 @@ public class Activity_SignInWithGoogle extends AppCompatActivity {
         google_edt_TenKH.setText(googleSignInAccount.getDisplayName());
         google_edt_teDangNhapKhachHang.setText(googleSignInAccount.getEmail());
         google_edt_gmailKH.setText(googleSignInAccount.getEmail());
-        Toast.makeText(this, ""+google_edt_matKhauKH  , Toast.LENGTH_SHORT).show();
     }
 
     private void batSuKien() {

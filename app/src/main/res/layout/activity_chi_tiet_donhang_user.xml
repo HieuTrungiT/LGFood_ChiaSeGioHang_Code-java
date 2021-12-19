@@ -67,6 +67,25 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Button
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/border_black"
+        android:id="@+id/donHangChiTiet_btn_huyDonHang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="Hủy đơn hàng"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:backgroundTint="@color/lf_red"
+        app:layout_constraintBottom_toBottomOf="@+id/donHangChiTiet_floatBtn_moGioHang"
+        app:layout_constraintEnd_toStartOf="@+id/donHangChiTiet_floatBtn_moGioHang"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/donHangChiTiet_floatBtn_moGioHang" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/donHangChiTiet_floatBtn_moGioHang"

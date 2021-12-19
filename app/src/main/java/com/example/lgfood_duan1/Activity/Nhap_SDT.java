@@ -78,7 +78,7 @@ public class Nhap_SDT extends AppCompatActivity {
 //                            startActivity(intent);
                                 dialog.dismiss();
                         }
-                    },3000);
+                    },1000);
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     dialog.show();
                     mGenerateBtn.setEnabled(false);

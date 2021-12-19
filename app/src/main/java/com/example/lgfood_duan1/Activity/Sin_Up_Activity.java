@@ -15,12 +15,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -87,7 +90,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
     ProgressDialog progressDialog;
     model_Account model_account;
     FusedLocationProviderClient fusedLocationProviderClient;
-
+    Dialog dialogChuaChonAnh;
 //    @Override
 //    public void onStart() {
 //        super.onStart();
@@ -177,7 +180,16 @@ public class Sin_Up_Activity extends AppCompatActivity {
             firebaseAuthWithGoogle(account.getIdToken());
 
         } catch (ApiException e) {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+            Title.setText("Đăng nhập thất bại!");
+            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogChuaChonAnh.dismiss();
+                }
+            });
+            dialogChuaChonAnh.show();
         }
     }
     //thai: rememberUser
@@ -251,7 +263,7 @@ public class Sin_Up_Activity extends AppCompatActivity {
                                         Intent intent=new Intent(Sin_Up_Activity.this,trangChu_SanPham_Activity.class);
                                         startActivity(intent);
                                     }
-                                },3000);
+                                },1000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
                                 startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
@@ -259,7 +271,17 @@ public class Sin_Up_Activity extends AppCompatActivity {
                             }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(Sin_Up_Activity.this, "fail", Toast.LENGTH_SHORT).show();
+                            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                            Title.setText("Đăng nhập thất bại!");
+                            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                            btnCancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialogChuaChonAnh.dismiss();
+                                }
+                            });
+                            dialogChuaChonAnh.show();
+
                         }
 
                         // ...
@@ -361,14 +383,22 @@ public class Sin_Up_Activity extends AppCompatActivity {
             node.child(model_account.getId()).setValue(model_account);
             Intent intent = new Intent(Sin_Up_Activity.this, Login_Activity.class);
             startActivity(intent);
-            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+
         }
     }
 
 
     private void anhXa() {
 
-
+        dialogChuaChonAnh=new Dialog(Sin_Up_Activity.this);
+        dialogChuaChonAnh.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogChuaChonAnh.setContentView(R.layout.item_dialog_chucnang_chua_chon_anh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogChuaChonAnh.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogChuaChonAnh.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogChuaChonAnh.setCancelable(false); //Optional
+        dialogChuaChonAnh.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
 //        TextView
         SignUp_tv_btn_Login = findViewById(R.id.signUp_tv_btn_Login);
         SignUp_tv_btn_loginText = findViewById(R.id.signUp_tv_btn_loginText);

@@ -3,6 +3,7 @@ package com.example.lgfood_duan1.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +28,6 @@ public class  donHangChiTietUser_Adapter extends RecyclerView.Adapter<donHangChi
     ArrayList<model_SanPham> arrListSanPham;
     ArrayList<model_chiTietSanPhamHoaDon> arrListCTSPHoaDon;
     model_Account arrAcout;
-
     public donHangChiTietUser_Adapter(chiTietDonhangUser_Activity mContext, ArrayList<model_SanPham> arrListSanPham, ArrayList<model_chiTietSanPhamHoaDon> arrListCTSPHoaDon, model_Account arrAcout) {
         this.mContext = mContext;
         this.arrListSanPham = arrListSanPham;

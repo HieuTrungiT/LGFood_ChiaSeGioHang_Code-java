@@ -9,11 +9,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -71,6 +74,7 @@ private ImageView Login_tv_back;
     DatabaseReference mData;
     FirebaseDatabase database;
     CheckBox checkBox;
+    Dialog dialogChuaChonAnh;
     //thai login gg;
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -235,7 +239,17 @@ private ImageView Login_tv_back;
             firebaseAuthWithGoogle(account.getIdToken());
 
         } catch (ApiException e) {
-            Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show();
+
+            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+            Title.setText("Đăng nhập thất bại!");
+            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogChuaChonAnh.dismiss();
+                }
+            });
+            dialogChuaChonAnh.show();
         }
     }
 
@@ -276,7 +290,7 @@ private ImageView Login_tv_back;
                                         startActivity(intent);
 
                                     }
-                                }, 3000);
+                                }, 1000);
                                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 dialog.show();
                                 startActivity(new Intent(getApplicationContext(), trangChu_SanPham_Activity.class));
@@ -285,7 +299,16 @@ private ImageView Login_tv_back;
                         } else {
                             // If sign in fails, display a message to the user.
 
-                            Toast.makeText(Login_Activity.this, "fail", Toast.LENGTH_SHORT).show();
+                            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                            Title.setText("Đăng nhập thất bại!");
+                            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                            btnCancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialogChuaChonAnh.dismiss();
+                                }
+                            });
+                            dialogChuaChonAnh.show();
                         }
 
                         // ...
@@ -311,7 +334,7 @@ private ImageView Login_tv_back;
                         model_Account account = ds.getValue(model_Account.class);
 
                         if (userName.equals(account.getName() + "") && password.equals(account.getPassword() + "")) {
-                            Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             rememberUser(account.getId(), account.getIdGioHang(), userName, password, checkBox.isChecked(), account.getAddress(), account.getIdViTri(), account.getIdGioHangTam(), account.getRealName(), account.getAnhKhachHang(), account.getIdDanhSachYeuThich(), account.getIdDanhSachDonHang());
 
                             final Dialog dialog = new Dialog(Login_Activity.this);
@@ -324,13 +347,22 @@ private ImageView Login_tv_back;
                                     Intent intent = new Intent(Login_Activity.this, trangChu_SanPham_Activity.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             dialog.show();
 
                             return;
                         } else {
-                            Toast.makeText(Login_Activity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+//                            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+//                            Title.setText("Đăng nhập thất bại!");
+//                            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+//                            btnCancel.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    dialogChuaChonAnh.dismiss();
+//                                }
+//                            });
+//                            dialogChuaChonAnh.show();
                         }
                     }
 //                    }
@@ -350,6 +382,16 @@ private ImageView Login_tv_back;
 
 
     private void anhXa() {
+        dialogChuaChonAnh=new Dialog(Login_Activity.this);
+        dialogChuaChonAnh.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogChuaChonAnh.setContentView(R.layout.item_dialog_chucnang_chua_chon_anh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogChuaChonAnh.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogChuaChonAnh.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogChuaChonAnh.setCancelable(false); //Optional
+        dialogChuaChonAnh.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
 //        TextView
         Login_tv_btn_SignUp = findViewById(R.id.login_tv_btn_SignUp);
         Login_tv_btn_SignUpText = findViewById(R.id.login_tv_btn_SignUpText);
