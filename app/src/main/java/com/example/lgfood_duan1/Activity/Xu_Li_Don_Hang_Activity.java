@@ -250,13 +250,13 @@ public class Xu_Li_Don_Hang_Activity extends AppCompatActivity {
 
                         if (tinhTrangDon.equals("Chưa xác nhận")) {
                             dataCTSPHoaDonRef.setValue(0);
-                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,Xac_Nhan_DH_Activity.class));
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
                         } else if (tinhTrangDon.equals("Đang xử lý")) {
                             dataCTSPHoaDonRef.setValue(1);
-                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,Xac_Nhan_DH_Activity.class));
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
                         } else if (tinhTrangDon.equals("Đã xử lý")) {
                             dataCTSPHoaDonRef.setValue(2);
-                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,Xac_Nhan_DH_Activity.class));
+                            startActivity(new Intent(Xu_Li_Don_Hang_Activity.this,xac_Nhan_Don_hang_Activity.class));
                         }
                         diaLog.dismiss();
                     }
