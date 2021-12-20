@@ -1,21 +1,32 @@
 package com.example.lgfood_duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,11 +37,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.lgfood_duan1.Model.model_SanPham;
+import com.example.lgfood_duan1.Notification.FcmNotificationsSender;
+import com.example.lgfood_duan1.Notification.mNotificationThemSanPhamMoi;
 import com.example.lgfood_duan1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,6 +56,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private ImageView
@@ -108,12 +124,15 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             BdGiamGiaSanPham;
     double BdGiaNhapSanPham, BdGiaBanSanPham;
     String BdIdsanPham, BdMoTaSanPham, BdTenSanPham, BdNgaySanXuatSanPham, BdXuatXuSanPham, BdLoaiSanPham, BdTinhTrangSanPham, BdAnhSanPham, BdNgayNhapSanPham;
-
+    Dialog dialog;
+    Dialog dialogLoading;
+    Dialog dialogChuaChonAnh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_san_pham_vao_kho_hang);
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         anhXa();
         batSuKien();
@@ -131,6 +150,32 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
         });
     }
 
+    private void sentNotificationKhiThemSanPham() {
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.logo);
+        Intent intent=new Intent(this, trangChu_SanPham_Activity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,0);
+
+        NotificationCompat.Builder notification=new NotificationCompat.Builder(this, mNotificationThemSanPhamMoi.CHANNEL_ID_THEM_SP_MOI)
+                .setContentTitle("LG FARM thêm sản phẩm mới")
+                .setContentText("nhấn vào đây để biết thêm chi tiết sản phẩm")
+//                .setStyle(new NotificationCompat.BigTextStyle().bigText(CONTENT_NOTIFICATION))
+                .setSmallIcon(R.drawable.logo)
+                .setContentIntent(pendingIntent)
+                .setLargeIcon(bitmap)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap).bigLargeIcon(null))
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (notificationManager!=null){
+            notificationManager.notify(getNotificationId(),notification.build());
+        }
+    }
+    private int getNotificationId(){
+        return (int) new Date().getTime();
+    }
     //    Trung nhận dữ liệu
     private void nhanDuLieuIntent() {
 
@@ -227,44 +272,43 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
     //Trung dialog sửa sản phẩm
     private void openDialogUpdate() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_cuttom_capnhatsanpham);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
-//        sử lý khi nhấn ra ngoài thì có thoát hay không
-        dialog.setCancelable(false);
-//        khai báo bắt sự kiện
-        TextView Dialog_them_tvBtn_khong = dialog.findViewById(R.id.dialog_them_tvBtn_khong);
-        TextView Dialog_them_tvBtn_dongY = dialog.findViewById(R.id.dialog_them_tvBtn_dongY);
-
-//        tắt dialog đi
-        Dialog_them_tvBtn_khong.setOnClickListener(new View.OnClickListener() {
+        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialog.findViewById(R.id.btn_okay);
+        Button Cancel = dialog.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Đồng ý");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn sửa sản phẩm này không?");
+        Okay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 dialog.dismiss();
 
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!(full == null)) {
+//                    nếu như có ảnh được chọn
+                            luuSanPham_AnhUptate();
+                            finish();
+                        } else {
+//                    nếu như không có ảnh được chọn
+                            suaSanPhamKho();
+                            finish();
+                        }
+                        dialogLoading.dismiss();
+                    }
+                },1000);
+                dialogLoading.show();
             }
         });
-        Dialog_them_tvBtn_dongY.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                if (!(full == null)) {
-//                    nếu như có ảnh được chọn
-                    luuSanPham_AnhUptate();
-                } else {
-//                    nếu như không có ảnh được chọn
-                    suaSanPhamKho();
-                }
 
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
         dialog.show();
@@ -282,7 +326,17 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Lưu ảnh thất bại", Toast.LENGTH_SHORT).show();
+
+                    TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Title.setText("Lưu ảnh thất bại");
+                    Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogChuaChonAnh.dismiss();
+                        }
+                    });
+                    dialogChuaChonAnh.show();
                 }
                 //     add file thành công
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -323,7 +377,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     //**** xóa sản phẩm
     private void xoaSanPhamKho() {
         myRef = database.getReference("khoHang");
-        Toast.makeText(this, BdIdsanPham+"", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, BdIdsanPham+"", Toast.LENGTH_SHORT).show();
         myRef.child(BdIdsanPham).removeValue();
         Intent intent = new Intent(Them_San_Pham_Vao_Kho_Hang_Activity.this, khoHang_Activity.class);
         startActivity(intent);
@@ -331,37 +385,35 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
 
 
     private void openDialogDelete() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_cuttom_xoasanpham);
-        Window window = dialog.getWindow();
-        if (window == null) {
-            return;
-        }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-        windowAttributes.gravity = Gravity.CENTER;
-        window.setAttributes(windowAttributes);
-//        sử lý khi nhấn ra ngoài thì có thoát hay không
-        dialog.setCancelable(false);
-//        khai báo bắt sự kiện
-        TextView Dialog_them_tvBtn_khong = dialog.findViewById(R.id.dialog_them_tvBtn_khong);
-        TextView Dialog_them_tvBtn_dongY = dialog.findViewById(R.id.dialog_them_tvBtn_dongY);
-
-//        tắt dialog đi
-        Dialog_them_tvBtn_khong.setOnClickListener(new View.OnClickListener() {
+        ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialog.findViewById(R.id.btn_okay);
+        Button Cancel = dialog.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Đồng ý");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn xóa sản phẩm này không?");
+        Okay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        xoaSanPhamKho();
+                        finish();
+                        dialogLoading.dismiss();
+                    }
+                },1000);
+                dialogLoading.show();
                 dialog.dismiss();
-
             }
         });
-        Dialog_them_tvBtn_dongY.setOnClickListener(new View.OnClickListener() {
+
+        Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 dialog.dismiss();
-                xoaSanPhamKho();
             }
         });
         dialog.show();
@@ -404,7 +456,16 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(Exception e) {
-                    Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Lưu ảnh thất bại", Toast.LENGTH_SHORT).show();
+                    TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Title.setText("Lưu ảnh thất bại");
+                    Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogChuaChonAnh.dismiss();
+                        }
+                    });
+                    dialogChuaChonAnh.show();
                 }
                 //     add file thành công
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -426,9 +487,45 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                             listSanPham = new model_SanPham(uuid.toString(), moTaSanPham, tenSanPham, ngaySanXuatSanPham, xuatXuSanPham, loaiSanPham, tinhTrangSanPham, uri.toString(), formatter.format(reaDate).toString(), soLuongSanPham, giamGiaSanPham, giaNhapSanPham, giaBanSanPham);
 
 //                        //        add giá trị
-                            myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
-                            Toast.makeText(Them_San_Pham_Vao_Kho_Hang_Activity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+//
 
+                            ImageView item_dialog_chucNang_img_imgErro=dialog.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                            TextView item_dialog_chucNang_txt_nameErro=dialog.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                            Button Okay = dialog.findViewById(R.id.btn_okay);
+                            Button Cancel = dialog.findViewById(R.id.btn_cancel);
+                            Okay.setText("Đồng ý");
+                            item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+                            item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn thêm sản phẩm này không?");
+                            Okay.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Handler handler=new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            myRef.child(listSanPham.getIdSanPham().toString()).setValue(listSanPham);
+//                                            sentNotificationKhiThemSanPham();
+                                            finish();
+                                            dialogLoading.dismiss();
+
+                                                FcmNotificationsSender notificationsSender=new FcmNotificationsSender("/topics/all","LG FARM thêm sản phẩm mới",listSanPham.getTenSanPham(),listSanPham.getAnhSanPham(),getApplicationContext(),Them_San_Pham_Vao_Kho_Hang_Activity.this);
+
+                                                notificationsSender.SendNotifications();
+
+                                        }
+                                    },1000);
+                                    dialogLoading.show();
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            Cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
                         }
                     });
                 }
@@ -519,7 +616,15 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
             }
         } else {
             ThemSuaXoaSanPham_img_showImgV.setBackgroundResource(R.drawable.broder_stroke_red_error);
-            Toast.makeText(this, "Chưa có ảnh sản phẩm!!!", Toast.LENGTH_SHORT).show();
+
+            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogChuaChonAnh.dismiss();
+                }
+            });
+            dialogChuaChonAnh.show();
         }
         return false;
     }
@@ -659,6 +764,33 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
     }
 
     private void anhXa() {
+        //thai: diaLog
+        dialogChuaChonAnh=new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialogChuaChonAnh.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogChuaChonAnh.setContentView(R.layout.item_dialog_chucnang_chua_chon_anh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogChuaChonAnh.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogChuaChonAnh.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogChuaChonAnh.setCancelable(false); //Optional
+        dialogChuaChonAnh.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+
+        dialog=new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false); //Optional
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        dialogLoading = new Dialog(Them_San_Pham_Vao_Kho_Hang_Activity.this);
+        dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogLoading.setContentView(R.layout.item_login);
+        dialogLoading.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         //    Firebase
         database = FirebaseDatabase.getInstance("https://duan-lgfood1-default-rtdb.asia-southeast1.firebasedatabase.app/");
         //    FirebaseStorage

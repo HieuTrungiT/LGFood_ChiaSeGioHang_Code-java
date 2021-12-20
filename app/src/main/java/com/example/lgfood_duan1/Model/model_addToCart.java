@@ -13,6 +13,7 @@ public class model_addToCart {
             ngayNhapSp;
 
     private int
+            soLuongTrongKho,
             soLuongSp,
             giamGiaSp;
 
@@ -20,11 +21,10 @@ public class model_addToCart {
             giaNhapSp,
             giaBanSp;
 
-    public model_addToCart(){
-
+    public model_addToCart() {
     }
 
-    public model_addToCart(String idSp, String moTaSp, String tenSp, String ngaySanXuatSp, String xuatXuSp, String loaiSp, String tinhTrangSp, String anhSp, String ngayNhapSp, int soLuongSp, int giamGiaSp, double giaNhapSp, double giaBanSp) {
+    public model_addToCart(String idSp, String moTaSp, String tenSp, String ngaySanXuatSp, String xuatXuSp, String loaiSp, String tinhTrangSp, String anhSp, String ngayNhapSp, int soLuongTrongKho, int soLuongSp, double giaNhapSp, double giaBanSp) {
         this.idSp = idSp;
         this.moTaSp = moTaSp;
         this.tenSp = tenSp;
@@ -34,6 +34,7 @@ public class model_addToCart {
         this.tinhTrangSp = tinhTrangSp;
         this.anhSp = anhSp;
         this.ngayNhapSp = ngayNhapSp;
+        this.soLuongTrongKho = soLuongTrongKho;
         this.soLuongSp = soLuongSp;
         this.giamGiaSp = giamGiaSp;
         this.giaNhapSp = giaNhapSp;
@@ -110,6 +111,14 @@ public class model_addToCart {
 
     public void setNgayNhapSp(String ngayNhapSp) {
         this.ngayNhapSp = ngayNhapSp;
+    }
+
+    public int getSoLuongTrongKho() {
+        return soLuongTrongKho;
+    }
+
+    public void setSoLuongTrongKho(int soLuongTrongKho) {
+        this.soLuongTrongKho = soLuongTrongKho;
     }
 
     public int getSoLuongSp() {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -93,6 +94,40 @@ public class OTP extends AppCompatActivity {
             }
         });
 
+    }//thai: rememberUser
+    private void rememberUser(String idUser,String idGioHang,String user,String password,boolean status,String viTri,String idViTri,String idGioHangTam,String nameUser,String anhUser,String idDanhSachYeuThich,String idDanhSachDonHang){
+
+        SharedPreferences pref=getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        SharedPreferences.Editor editor=pref.edit();
+        if (!status){
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+        }else {
+            editor.putString("USERNAME",user);
+            editor.putString("PASSWORD",password);
+            editor.putBoolean("REMEMBER",status);
+            editor.putString("IDUSRE",idUser);
+            editor.putString("IDGIOHANG",idGioHang);
+            editor.putString("VITRI",viTri);
+            editor.putString("IDVITRI",idViTri);
+            editor.putString("IDGIOHANGTAM",idGioHangTam);
+            editor.putString("NAMEUSER",nameUser);
+            editor.putString("ANHUSER",anhUser);
+            editor.putString("IDDANHSACHYEUTHICH",idDanhSachYeuThich);
+            editor.putString("IDDANHSACHDONHANG",idDanhSachDonHang);
+
+
+        }
+        editor.commit();
     }
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
@@ -104,8 +139,6 @@ public class OTP extends AppCompatActivity {
 
 
 
-                        if (task.isSuccessful()) {
-                            sendUserToHome();
 
                             String getTenTK = TenTK.getText().toString().trim();
                             String getMatKhau = MatKhau.getText().toString().trim();
@@ -120,7 +153,9 @@ public class OTP extends AppCompatActivity {
                             else if (getTenTK.length()<6 || getTenTK.length()>50)
                             {
                                 TenTK.setError("Tên đăng nhập gồm 6 - 50 kí tự ");
-                            }else if (!getGmail.matches(emailPattern))
+                            }else if (TenTK.getText().toString().contains(" ")){
+                                TenTK.setError("Không được có khoảng trống");
+                            } else if (!getGmail.matches(emailPattern))
                             {
                                 Gmail.setError("Sai định dạng Email");
                             }else if (getMatKhau.isEmpty() || getMatKhau.length()<6)
@@ -133,25 +168,30 @@ public class OTP extends AppCompatActivity {
                             }
                             else{
                                 //    FirebaseStorage
+//                                if (task.isSuccessful()) {
 
-                                model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
+                                    sendUserToHome();
+
+                                model_Account account = new model_Account(UUID.randomUUID().toString(),getRealName,getTenTK,getMatKhau,getDiaChi,getGmail,SDT,UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),UUID.randomUUID().toString(),"");
                                 node.child(account.getId()).setValue(account);
+                                rememberUser(account.getId(),account.getIdGioHang(),getGmail,getMatKhau,true,getDiaChi,account.getIdViTri(),account.getIdGioHangTam(),getRealName,account.getAnhKhachHang(),account.getIdDanhSachYeuThich(),account.getIdDanhSachDonHang());
 
 
                                 Intent homeIntent = new Intent(OTP.this, MainActivity.class);
 
                                 startActivity(homeIntent);
+//                            } else {
+                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                    mOtpFeedback.setVisibility(View.VISIBLE);
+                                    mOtpFeedback.setText("There was an error verifying OTP");
+//                                }
+                            }
                             }
                             // add lên retimedatabase
 
 
 
-                        } else {
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                mOtpFeedback.setVisibility(View.VISIBLE);
-                                mOtpFeedback.setText("There was an error verifying OTP");
-                            }
-                        }
+
                         mOtpProgress.setVisibility(View.INVISIBLE);
                         mVerifyBtn.setEnabled(true);
                     }

@@ -3,9 +3,14 @@ package com.example.lgfood_duan1.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -17,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,11 +31,11 @@ public class Nhap_SDT extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
 
-    private EditText mCountryCode;
+    private CountryCodePicker mCountryCode;
     private EditText mPhoneNumber;
 
     private Button mGenerateBtn;
-    private ProgressBar mLoginProgress;
+//    private ProgressBar mLoginProgress;
 
     private TextView mLoginFeedbackText;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -43,24 +49,38 @@ public class Nhap_SDT extends AppCompatActivity {
         mCountryCode = findViewById(R.id.edtSDk);
         mPhoneNumber = findViewById(R.id.edtSDTDK);
         mGenerateBtn = findViewById(R.id.btnOTP_DK);
-        mLoginProgress = findViewById(R.id.login_progress_bar);
+//        mLoginProgress = findViewById(R.id.login_progress_bar);
         mLoginFeedbackText = findViewById(R.id.login_form_feedback);
 
         mGenerateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String country_code = mCountryCode.getText().toString();
+//                String country_code = mCountryCode.getText().toString();
                 String phone_number = mPhoneNumber.getText().toString();
 
 
 
-                String complete_phone_number = "+" + country_code + phone_number;
+                String complete_phone_number = "+" + mCountryCode + phone_number;
 
-                if(country_code.isEmpty() || phone_number.isEmpty()){
+                if(phone_number.isEmpty()){
                     mLoginFeedbackText.setText("Vui lòng điền vào biểu mẫu để tiếp tục.");
                     mLoginFeedbackText.setVisibility(View.VISIBLE);
                 } else {
-                    mLoginProgress.setVisibility(View.VISIBLE);
+
+                    final Dialog dialog = new Dialog(Nhap_SDT.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.item_login);
+                    Handler handler=new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+//                            Intent intent=new Intent(Sin_Up_Activity.this,trangChu_SanPham_Activity.class);
+//                            startActivity(intent);
+                                dialog.dismiss();
+                        }
+                    },1000);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
                     mGenerateBtn.setEnabled(false);
 
 
@@ -85,7 +105,7 @@ public class Nhap_SDT extends AppCompatActivity {
             public void onVerificationFailed(FirebaseException e) {
                 mLoginFeedbackText.setText("Mã xác nhận thất bại. Vui lòng thử lại.");
                 mLoginFeedbackText.setVisibility(View.VISIBLE);
-                mLoginProgress.setVisibility(View.INVISIBLE);
+//                mLoginProgress.setVisibility(View.INVISIBLE);
                 mGenerateBtn.setEnabled(true);
             }
 
