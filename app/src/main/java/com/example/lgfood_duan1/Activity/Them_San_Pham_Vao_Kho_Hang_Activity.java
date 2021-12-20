@@ -259,7 +259,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                         }
                         dialogLoading.dismiss();
                     }
-                },3000);
+                },1000);
                 dialogLoading.show();
             }
         });
@@ -353,7 +353,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                         finish();
                         dialogLoading.dismiss();
                     }
-                },3000);
+                },1000);
                 dialogLoading.show();
                 dialog.dismiss();
             }
@@ -447,7 +447,7 @@ public class Them_San_Pham_Vao_Kho_Hang_Activity extends AppCompatActivity imple
                                             finish();
                                             dialogLoading.dismiss();
                                         }
-                                    },3000);
+                                    },1000);
                                     dialogLoading.show();
                                     dialog.dismiss();
                                 }
