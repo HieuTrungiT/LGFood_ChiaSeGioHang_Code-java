@@ -59,6 +59,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
     private ArrayList<model_viTri> arrListViTri;
     private ArrayList<model_Cart> arrListCart, arrayListCartTam;
     Dialog dialog2;
+
     @Override
     protected void onStop() {
         dataRef = database.getReference("location").child(idViTri);
@@ -133,25 +134,25 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
                 diaLog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 diaLog1.setContentView(R.layout.item_login);
                 diaLog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                Handler handler=new Handler();
+                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         dialog.dismiss();
-                        ImageView item_dialog_chucNang_img_imgErro=dialog2.findViewById(R.id.item_dialog_chucNang_img_imgErro);
-                        TextView item_dialog_chucNang_txt_nameErro=dialog2.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                        ImageView item_dialog_chucNang_img_imgErro = dialog2.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+                        TextView item_dialog_chucNang_txt_nameErro = dialog2.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
                         Button Okay = dialog2.findViewById(R.id.btn_okay);
                         Button Cancel = dialog2.findViewById(R.id.btn_cancel);
-                        Okay.setText("Đồng ý");
+                        Okay.setText("Có");
+                        Cancel.setText("Không");
                         item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
                         item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn giữ giỏ hàng cũ không?");
                         Okay.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(chiaSeKetNoiGioHang_Activity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
                                 //             thêm vào giỏ hàng chính
-                                dataRef = database.getReference("GioHangs").child(idGioHang);
-                                setDataChiaSeGioHang();
+                                setDataChiaSeGioHangKhongXoa();
                                 Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
                                 startActivity(intent);
                                 dialog2.dismiss();
@@ -165,16 +166,12 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 dialog2.dismiss();
-                                dataRef = database.getReference("GioHangs").child(idGioHang);
-                                dataRef.removeValue();
+
                                 setDataChiaSeGioHang();
-                                dataRef=database.getReference("newCarts").child(idGioHang);
-                                dataRef.removeValue();
                                 Intent intent = new Intent(chiaSeKetNoiGioHang_Activity.this, gio_Hang_Activity.class);
                                 startActivity(intent);
                                 //                xóa giỏ hàng tạm
-                                dataRef = database.getReference("gioHangTam").child(idGioHangTam);
-                                dataRef.removeValue();
+
                             }
                         });
 
@@ -182,9 +179,8 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
                         diaLog1.dismiss();
 
 
-
                     }
-                },1000);
+                }, 1000);
                 diaLog1.show();
 
                 dialog.dismiss();
@@ -193,13 +189,77 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         dialog.show();
     }
 
-    // khi đồng ý thì bắt đầu add sản phẩm từ giỏ hàng tạm được chia sẻ qua giỏ hàng chính khi xong thì xóa giỏ hàng tạm đi
     private void setDataChiaSeGioHang() {
+        dataRef = database.getReference("GioHangs").child(shareAcout.getString("IDGIOHANG", ""));
+        dataRef.removeValue();
+        dataRef = database.getReference("newCarts").child(shareAcout.getString("IDGIOHANG", ""));
+        dataRef.removeValue();
         dataRef = database.getReference("GioHangs");
         for (int i = 0; i < arrayListCartTam.size(); i++) {
             arrCart = new model_Cart(UUID.randomUUID().toString(), arrayListCartTam.get(i).getIdSanPham(), arrayListCartTam.get(i).getSoLuong());
             dataRef.child(idGioHang).child(arrCart.getIdGioHang()).setValue(arrCart);
         }
+        arrayListCartTam.clear();
+        dataRef = database.getReference("gioHangTam").child(idGioHangTam);
+        dataRef.removeValue();
+    }
+
+
+
+    // khi đồng ý thì bắt đầu add sản phẩm từ giỏ hàng tạm được chia sẻ qua giỏ hàng chính khi xong thì xóa giỏ hàng tạm đi
+    private void setDataChiaSeGioHangKhongXoa() {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        dataRef = database.getReference("GioHangs").child(sharedPreferences.getString("IDGIOHANG", ""));
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                arrListCart.clear();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    arrCart = child.getValue(model_Cart.class);
+                    arrListCart.add(arrCart);
+                }
+
+//         chekc naaeeys như sản phẩm tại giỏ hàng tạm i == id sản phẩm giỏ hàng thì tăng số lượng
+
+                for (int i = 0; i < arrayListCartTam.size(); i++) {
+                    boolean check = false;
+                    String idCart = "";
+                    int viTri = 0;
+                    if (arrListCart != null) {
+                        for (int j = 0; j < arrListCart.size(); j++) {
+
+                            if (arrListCart.get(j).getIdSanPham().equals(arrayListCartTam.get(i).getIdSanPham())) {
+                                check = true;
+                                idCart = arrListCart.get(j).getIdGioHang();
+                                viTri = j;
+                            }
+
+                        }
+                    }
+                    if (check == true) {
+                        int tong = Integer.parseInt(arrayListCartTam.get(i).getSoLuong()) + Integer.parseInt(arrListCart.get(viTri).getSoLuong());
+                        dataRef = database.getReference("GioHangs");
+                        dataRef.child(idGioHang).child(idCart).child("soLuong").setValue(tong + "");
+
+                    } else {
+                        arrCart = new model_Cart(UUID.randomUUID().toString(), arrayListCartTam.get(i).getIdSanPham(), arrayListCartTam.get(i).getSoLuong());
+                        dataRef = database.getReference("GioHangs");
+                        dataRef.child(idGioHang).child(arrCart.getIdGioHang()).setValue(arrCart);
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     //bắt sự kiện nếu như giỏ hàng tạm của user có thay đổi thì bắt sự kiện có sản phẩm được chia sẻ
@@ -249,7 +309,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
 
 
     private void anhXa() {
-        dialog2=new Dialog(chiaSeKetNoiGioHang_Activity.this);
+        dialog2 = new Dialog(chiaSeKetNoiGioHang_Activity.this);
         dialog2.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog2.setContentView(R.layout.item_dialog_chucnang_login);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -264,7 +324,7 @@ public class chiaSeKetNoiGioHang_Activity extends AppCompatActivity {
         key = bundle.getString("iT_key", "");
         //TextView
         ChiaSeKetNoi_tv_key = findViewById(R.id.chiaSeKetNoi_tv_key);
-        ChiaSeKetNoi_tv_key.setText("#"+key);
+        ChiaSeKetNoi_tv_key.setText("#" + key);
 
         //        Model
         arrListCart = new ArrayList<>();

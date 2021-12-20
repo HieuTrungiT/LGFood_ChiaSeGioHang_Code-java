@@ -10,17 +10,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -120,7 +124,7 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
     // adapter
     chiaSeGioHang_showDoc_adapter seGioHang_showDoc_adapter;
     int lever = 20;
-
+    Dialog dialogChuaChonAnh;
     @Override
     protected void onStart() {
         dataRef = database.getReference("location").child(idViTri);
@@ -447,8 +451,8 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(ChiaSeGioHang_Activity.this, currentLocation.getLatitude()
-                            + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ChiaSeGioHang_Activity.this, currentLocation.getLatitude()
+//                            + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
                     ChiaSeGioHang_google_map.getMapAsync(ChiaSeGioHang_Activity.this);
 
@@ -500,8 +504,18 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                             ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.VISIBLE);
                             ChiaSeGioHang_item_crview.setVisibility(View.VISIBLE);
                         } catch (Exception e) {
-                            Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
 
+                            TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                            Title.setText("User này đã dừng!");
+                            Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                            btnCancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialogChuaChonAnh.dismiss();
+                                }
+                            });
+                            dialogChuaChonAnh.show();
                         }
 
 
@@ -539,13 +553,32 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
                                 ChiaSeGioHang_item_img_btn_xoaItem.setAnimation(animation);
                                 ChiaSeGioHang_item_img_btn_xoaItem.setVisibility(View.INVISIBLE);
                                 ChiaSeGioHang_item_crview.setVisibility(View.INVISIBLE);
-                                Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng", Toast.LENGTH_SHORT).show();
+                                TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                                Title.setText("User này đã dừng!");
+                                Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                                btnCancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialogChuaChonAnh.dismiss();
+                                    }
+                                });
+                                dialogChuaChonAnh.show();
                             }
                         }
                     });
                 } catch (Exception e) {
 //                    Toast.makeText(ChiaSeGioHang_Activity.this, "User này đã dừng!!", Toast.LENGTH_SHORT).show();
-
+                    TextView Title=dialogChuaChonAnh.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+                    Title.setText("User này đã dừng!");
+                    Button btnCancel=dialogChuaChonAnh.findViewById(R.id.btn_cancel);
+                    btnCancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogChuaChonAnh.dismiss();
+                        }
+                    });
+                    dialogChuaChonAnh.show();
                 }
 
             }
@@ -571,6 +604,16 @@ public class ChiaSeGioHang_Activity extends AppCompatActivity implements OnMapRe
 
     // Trung ánh  xạ activity
     private void anhXa() {
+        dialogChuaChonAnh=new Dialog(ChiaSeGioHang_Activity.this);
+        dialogChuaChonAnh.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogChuaChonAnh.setContentView(R.layout.item_dialog_chucnang_chua_chon_anh);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogChuaChonAnh.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogChuaChonAnh.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogChuaChonAnh.setCancelable(false); //Optional
+        dialogChuaChonAnh.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
         client = LocationServices.getFusedLocationProviderClient(ChiaSeGioHang_Activity.this);
 //        Model
         arrayList = new ArrayList<LatLng>();

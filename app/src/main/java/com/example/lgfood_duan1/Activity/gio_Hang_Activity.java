@@ -478,8 +478,18 @@ public class gio_Hang_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(DatabaseError error, DatabaseReference ref) {
 
-                        Toast.makeText(gio_Hang_Activity.this, "Delete item success", Toast.LENGTH_SHORT).show();
-
+                        Dialog diaLog = new Dialog(gio_Hang_Activity.this);
+                        diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        diaLog.setContentView(R.layout.item_login);
+                        diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                diaLog.dismiss();
+                            }
+                        },1000);
+                        diaLog.show();
                     }
                 });
 
@@ -500,7 +510,6 @@ public class gio_Hang_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(gio_Hang_Activity.this, "Cancel", Toast.LENGTH_SHORT).show();
                 dialogXoaItem.dismiss();
             }
         });

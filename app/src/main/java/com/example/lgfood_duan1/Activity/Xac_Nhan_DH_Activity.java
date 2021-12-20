@@ -15,6 +15,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -30,6 +31,8 @@ import com.example.lgfood_duan1.Model.model_addToCart;
 import com.example.lgfood_duan1.Model.model_chiTietSanPhamHoaDon;
 import com.example.lgfood_duan1.Model.model_hoaDon;
 import com.example.lgfood_duan1.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -209,9 +212,9 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
         Button Okay = dialog.findViewById(R.id.btn_okay);
         Button Cancel = dialog.findViewById(R.id.btn_cancel);
         //setText Item
-        Okay.setText("Order");
+        Okay.setText("Đặt hàng");
         item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
-        item_dialog_chucNang_txt_nameErro.setText("Would you want to order the products?");
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn dặt hàng không?");
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -233,7 +236,32 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
                     @Override
                     public void run() {
                         diaLogDoc.dismiss();
-                        startActivity(new Intent(Xac_Nhan_DH_Activity.this, gio_Hang_Activity.class));
+                        startActivity(new Intent(Xac_Nhan_DH_Activity.this, trangChu_SanPham_Activity.class));
+                        dataGioHangRef = database.getReference("GioHangs").child(listAccount.getIdGioHang());
+                        dataGioHangRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                if (arrListGioHangs != null) {
+                                    arrListGioHangs.clear();
+                                }
+                                for (DataSnapshot ds : snapshot.getChildren()) {
+                                    arrGioHang = ds.getValue(model_Cart.class);
+                                    arrListGioHangs.add(arrGioHang);
+
+                                }
+                                dataGioHangRef.removeValue();
+
+//                                dataGioHangRef=database.getReference("GioHangs");
+
+//                                getDataNewCart();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
+
                     }
                 }, 2300);
                 diaLogDoc.show();
@@ -254,16 +282,27 @@ public class Xac_Nhan_DH_Activity extends AppCompatActivity {
     //Trung lưu danh sách sản phẩm hóa đơn
     private void luuThongTinChiTietSanPhamHoaDon(model_hoaDon arrHoaDon) {
         //        arrListHoaDon
-        dataCTSPHoaDonRef = database.getReference("ChiTietHoaDon");
-        for (int i = 0; i < arrListGioHangs.size(); i++) {
-            for (int j = 0; j < arrListNewCarts.size(); j++) {
-                if (arrListGioHangs.get(i).getIdSanPham().equals(arrListNewCarts.get(j).getIdSp())) {
-                    arrCTSPHoaDon = new model_chiTietSanPhamHoaDon(UUID.randomUUID().toString(), arrListGioHangs.get(i).getIdSanPham(), arrListGioHangs.get(i).getSoLuong(), arrListNewCarts.get(j).getGiaBanSp());
-                    dataCTSPHoaDonRef.child(arrHoaDon.getIdChiTietDonHang()).child(arrCTSPHoaDon.getIdChiTietHoaDon()).setValue(arrCTSPHoaDon);
+        final Dialog dialog1 = new Dialog(Xac_Nhan_DH_Activity.this);
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setContentView(R.layout.item_login);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dataCTSPHoaDonRef = database.getReference("ChiTietHoaDon");
+                for (int i = 0; i < arrListGioHangs.size(); i++) {
+                    for (int j = 0; j < arrListNewCarts.size(); j++) {
+                        if (arrListGioHangs.get(i).getIdSanPham().equals(arrListNewCarts.get(j).getIdSp())) {
+                            arrCTSPHoaDon = new model_chiTietSanPhamHoaDon(UUID.randomUUID().toString(), arrListGioHangs.get(i).getIdSanPham(), arrListGioHangs.get(i).getSoLuong(), arrListNewCarts.get(j).getGiaBanSp());
+                            dataCTSPHoaDonRef.child(arrHoaDon.getIdChiTietDonHang()).child(arrCTSPHoaDon.getIdChiTietHoaDon()).setValue(arrCTSPHoaDon);
+                        }
+                    }
                 }
+                dialog1.dismiss();
             }
-        }
-        Toast.makeText(this, "lưu hóa đơn thành công", Toast.LENGTH_SHORT).show();
+        }, 1000);
+        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog1.show();
     }
 
 

@@ -5,12 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lgfood_duan1.Adapter.donHangChiTietUser_Adapter;
 import com.example.lgfood_duan1.Adapter.donHangUser_Adapter;
@@ -44,7 +53,7 @@ public class chiTietDonhangUser_Activity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     // model
     FirebaseDatabase database;
-    DatabaseReference dataRef, dataSanPhamRef, dataCTSPHoaDonRef;
+    DatabaseReference dataRef, dataSanPhamRef, dataCTSPHoaDonRef,dataRefHoaDon;
     private ArrayList<model_hoaDon> arrListHoaDon;
     private model_Account arrAcout;
     donHangChiTietUser_Adapter AdapterDonHangChiTiet;
@@ -57,6 +66,7 @@ public class chiTietDonhangUser_Activity extends AppCompatActivity {
     String idUserIt, idHoaDonIt, idChiTietSanPhamHoaDonIt, idDanhSachChiTietDonHang;
     double tongGiaIt;
     int tinhTrangHoaDonIt;
+    Button donHangChiTiet_btn_huyDonHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +94,64 @@ public class chiTietDonhangUser_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        donHangChiTiet_btn_huyDonHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                huyDonHangFuntion();
+            }
+        });
+    }
+
+    private void huyDonHangFuntion() {
+        getDataIntent();
+        Dialog dialogLoading = new Dialog(chiTietDonhangUser_Activity.this);
+        dialogLoading.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogLoading.setContentView(R.layout.item_dialog_chucnang_login);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogLoading.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_background));
+        }
+        dialogLoading.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialogLoading.setCancelable(false); //Optional
+        dialogLoading.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation; //Setting the animations to dialog
+
+        ImageView item_dialog_chucNang_img_imgErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_img_imgErro);
+        TextView item_dialog_chucNang_txt_nameErro=dialogLoading.findViewById(R.id.item_dialog_chucNang_txt_nameErro);
+        Button Okay = dialogLoading.findViewById(R.id.btn_okay);
+        Button Cancel = dialogLoading.findViewById(R.id.btn_cancel);
+        //setText Item
+        Okay.setText("Đồng ý");
+        item_dialog_chucNang_img_imgErro.setImageResource(R.drawable.question);
+        item_dialog_chucNang_txt_nameErro.setText("Bạn có muốn xóa đơn hàng này?");
+        Okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog diaLog = new Dialog(chiTietDonhangUser_Activity.this);
+                diaLog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                diaLog.setContentView(R.layout.item_login);
+                diaLog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dataRefHoaDon=database.getReference("HoaDon").child(sharedPreferences.getString("IDDANHSACHDONHANG",""));
+                        dataRefHoaDon.child(idHoaDonIt).removeValue();
+                        startActivity(new Intent(chiTietDonhangUser_Activity.this,donHangUser_Activity.class));
+
+                        diaLog.dismiss();
+                    }
+                },1000);
+                diaLog.show();
+            }
+        });
+
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogLoading.dismiss();
+            }
+        });
+        dialogLoading.show();
+
     }
 
     //     lấy giá trị từ Danh Sách chi tiết hóa đơn Firebase
@@ -158,14 +226,17 @@ public class chiTietDonhangUser_Activity extends AppCompatActivity {
             DonHangChiTiet_txt_tinhTrang_itemChuaXacNhan.setVisibility(View.VISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDangXuLy.setVisibility(View.INVISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDaXuLy .setVisibility(View.INVISIBLE);
+            donHangChiTiet_btn_huyDonHang.setVisibility(View.VISIBLE);
         }else if (tinhTrangHoaDonIt == 1){
             DonHangChiTiet_txt_tinhTrang_itemChuaXacNhan.setVisibility(View.INVISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDangXuLy.setVisibility(View.VISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDaXuLy .setVisibility(View.INVISIBLE);
+            donHangChiTiet_btn_huyDonHang.setVisibility(View.INVISIBLE);
         }else{
             DonHangChiTiet_txt_tinhTrang_itemChuaXacNhan.setVisibility(View.INVISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDangXuLy.setVisibility(View.INVISIBLE);
             DonHangChiTiet_txt_tinhTrang_itemDaXuLy .setVisibility(View.VISIBLE);
+            donHangChiTiet_btn_huyDonHang.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -209,6 +280,7 @@ public class chiTietDonhangUser_Activity extends AppCompatActivity {
         DonHangChiTiet_rscv_showDanhSachDonHang = findViewById(R.id.donHangChiTiet_rscv_showDanhSachDonHang);
 //        FloatingActionButton
         DonHangChiTiet_floatBtn_moGioHang = findViewById(R.id.donHangChiTiet_floatBtn_moGioHang);
+        donHangChiTiet_btn_huyDonHang=findViewById(R.id.donHangChiTiet_btn_huyDonHang);
 
     }
 }
